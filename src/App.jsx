@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import AllPlaylists from './AllPlaylists';
 
 
 function App() {
@@ -29,23 +30,13 @@ axios
 })
 }
 
-console.log(data.items.map((x) => console.log(x.name)))
-
   return (
     <div className="App">
       <header className="App-header">
         <h1>Spotify playlist generator</h1>
         <a href={AUTH_URL}><button>Use your own playlist</button></a>
         <button onClick={() => getPlaylists()}>Use a public playlist</button>
-{data && <>
-  {data.items.map((playlist) => 
-  <div>
-    <img src={playlist.images[0].url}></img>
-  <p>{playlist.name}</p>
-  </div>
-  )}
-</>}
-
+{data && <AllPlaylists data={data} />}
       </header>
     </div>
   );
