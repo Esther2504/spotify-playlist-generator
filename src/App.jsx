@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -11,19 +10,6 @@ function App() {
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private`
 
-// useEffect(() => {
-//   var authOptions = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type' : 'application/x-www-form-urlencoded'
-//     },
-//     body: 'grant_type=client_credentials&client_id=' + process.env.REACT_APP_CLIENT_ID + '&client_secret=' + process.env.REACT_APP_CLIENT_SECRET
-//   };
-
-// fetch('https://accounts.spotify.com/api/token', authOptions)
-// .then(res => res.json())
-// .then(data => setAccessToken(data.access_token))
-// }, [])
 
 const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
@@ -43,12 +29,23 @@ axios
 })
 }
 
+console.log(data.items.map((x) => console.log(x.name)))
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Spotify playlist generator</h1>
         <a href={AUTH_URL}><button>Use your own playlist</button></a>
         <button onClick={() => getPlaylists()}>Use a public playlist</button>
+{data && <>
+  {data.items.map((playlist) => 
+  <div>
+    <img src={playlist.images[0].url}></img>
+  <p>{playlist.name}</p>
+  </div>
+  )}
+</>}
+
       </header>
     </div>
   );
