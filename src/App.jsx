@@ -33,10 +33,13 @@ axios
   return (
     <div className="App">
       <header className="App-header">
+        {!data ?
+        <>
         <h1>Spotify playlist generator</h1>
         <a href={AUTH_URL}><button>Use your own playlist</button></a>
         <button onClick={() => getPlaylists()}>Use a public playlist</button>
-{data && <AllPlaylists data={data} />}
+        </>
+        : <AllPlaylists data={data} />}
       </header>
     </div>
   );
