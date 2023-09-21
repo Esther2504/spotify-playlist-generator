@@ -39,7 +39,7 @@ axios
         <a href={AUTH_URL}><button>Use your own playlist</button></a>
         <button onClick={() => getPlaylists()}>Use a public playlist</button>
         </>
-        : <AllPlaylists data={data} accessToken={accessToken} />}
+        : <AllPlaylists data={data} accessToken={getAccessToken} />}
       </header>
     </div>
   );

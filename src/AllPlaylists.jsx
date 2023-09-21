@@ -3,23 +3,23 @@ import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
 
 export default function AllPlaylists({ data, accessToken }) {
-  const [playlist, setPlaylist] = useState()
+  const [playlistid, setPlaylistid] = useState()
 
   console.log(data)
 
   function choosePlaylist(playlist) {
-    console.log(playlist.href)
-    setPlaylist(playlist.href)
+    console.log(playlist.id)
+    setPlaylistid(playlist.id)
   }
 
   return (
     <>
-      {!playlist ?
+      {!playlistid ?
         <Container>
           <h1>Choose a playlist</h1>
           <PlaylistContainer>
             {data.items.map((playlist) =>
-              <Playlist onClick={() => choosePlaylist(playlist.tracks)}>
+              <Playlist onClick={() => choosePlaylist(playlist)}>
                 <Image src={playlist.images[0].url}></Image>
                 <p>{playlist.name}</p>
               </Playlist>
@@ -29,7 +29,7 @@ export default function AllPlaylists({ data, accessToken }) {
           <input></input>
         </Container>
         :
-        <PlaylistOptions playlist={playlist} accessToken={accessToken} />
+        <PlaylistOptions playlistid={playlistid} accessToken={accessToken} />
       }
     </>
   )
