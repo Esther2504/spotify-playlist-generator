@@ -1,36 +1,37 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import PlaylistOptions from './PlaylistOptions'
 
-export default function AllPlaylists({ data }) {
-const [playlist, setPlaylist] = useState()
+export default function AllPlaylists({ data, accessToken }) {
+  const [playlist, setPlaylist] = useState()
 
   console.log(data)
 
   function choosePlaylist(playlist) {
-console.log(playlist.href)
-setPlaylist(playlist.href)
+    console.log(playlist.href)
+    setPlaylist(playlist.href)
   }
 
   return (
     <>
-    {!playlist ?
-      <Container>
-      <h1>Choose a playlist</h1>
-      <PlaylistContainer>
-        {data.items.map((playlist) =>
-          <Playlist onClick={() => choosePlaylist(playlist.tracks)}>
-            <Image src={playlist.images[0].url}></Image>
-            <p>{playlist.name}</p>
-          </Playlist>
-        )}
-      </PlaylistContainer>
-      <h2>Or use a public playlist</h2>
-      <input></input>
-    </Container>
-      :
-      null
-    }
-   </>
+      {!playlist ?
+        <Container>
+          <h1>Choose a playlist</h1>
+          <PlaylistContainer>
+            {data.items.map((playlist) =>
+              <Playlist onClick={() => choosePlaylist(playlist.tracks)}>
+                <Image src={playlist.images[0].url}></Image>
+                <p>{playlist.name}</p>
+              </Playlist>
+            )}
+          </PlaylistContainer>
+          <h2>Or use a public playlist</h2>
+          <input></input>
+        </Container>
+        :
+        <PlaylistOptions playlist={playlist} accessToken={accessToken} />
+      }
+    </>
   )
 }
 
