@@ -38,19 +38,19 @@ export default function Playlist({ playlistid, accessToken }) {
           <div />
           <div>
             <P onClick={() => setSongType("happiest")}>...happiest songs</P>
-            <P>...saddest songs</P>
-            <P>...energetic songs</P>
-            <P>...instrumental songs</P>
-            <P>...live songs</P>
-            <P>...songs in major key</P>
-            <P>...songs in minor key</P>
-            <P>...most danceable songs</P>
-            <P>...fastest songs</P>
-            <P>...slowest songs</P>
+            <P onClick={() => setSongType("saddest")}>...saddest songs</P>
+            <P onClick={() => setSongType("energetic")}>...energetic songs</P>
+            <P onClick={() => setSongType("instrumental")}>...instrumental songs</P>
+            <P onClick={() => setSongType("live")}>...live songs</P>
+            <P onClick={() => setSongType("major")}>...songs in major key</P>
+            <P onClick={() => setSongType("minor")}>...songs in minor key</P>
+            <P onClick={() => setSongType("danceable")}>...most danceable songs</P>
+            <P onClick={() => setSongType("fastest")}>...fastest songs</P>
+            <P onClick={() => setSongType("slowest")}>...slowest songs</P>
           </div>
         </Container>
         :
-        <NewPlaylist tracks={tracks} />
+        <NewPlaylist tracks={tracks.items} songType={songType} accessToken={accessToken} />
       }
 
       {/* {tracks ? <>
