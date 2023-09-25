@@ -37,7 +37,7 @@ console.log(getAccessToken)
   return (
     <div className="App">
       <header className="App-header">
-        {!data && !getAccessToken ?
+        {!data ?
         <>
         <h1>Spotify playlist generator</h1>
         <a href={AUTH_URL}><button onClick={() => getPlaylists()}>Use your own playlist</button></a>
