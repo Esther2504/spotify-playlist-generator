@@ -20,7 +20,7 @@ export default function AllPlaylists({ data, accessToken }) {
           <PlaylistContainer>
             {data.items.map((playlist) =>
               <Playlist onClick={() => choosePlaylist(playlist)}>
-                <Image src={playlist.images[0].url}></Image>
+                {/* <Image src={playlist.images[0].url}></Image> */}
                 <p>{playlist.name}</p>
               </Playlist>
             )}

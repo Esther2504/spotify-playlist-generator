@@ -4,6 +4,7 @@ import axios from 'axios'
 export default function NewPlaylist({ tracks, songType, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
+  const [userID, setUserID] = useState()
 
   // console.log(tracks.forEach(element => console.log(element.track.id)))
 
@@ -27,7 +28,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
 
   }
 
-  if (audioDetails) {
+  if (audioDetails && newPlaylistIds.length < audioDetails.length) {
     for (let i = 0; i < audioDetails.length; i++) {
       if (audioDetails[i].danceability > 0.5) {
         newPlaylistIds.push(audioDetails[i].id)
@@ -35,6 +36,73 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       }
     }
   }
+
+  axios
+    .get(`https://api.spotify.com/v1/me`, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    })
+    .then((res) => {
+      console.log(res.data)
+      setUserID(res.data.id)
+    })
+    .catch((err) => {
+      console.log(err.response)
+    })
+
+  if (userID && newPlaylistIds) {
+    // axios
+    // .post(`${userID}/playlists`, 
+    // {
+    //   data: {
+    //     name: "Most danceable songs from ...",
+    //     description: "New playlist description",
+    //     public: true
+    //   }
+    // },
+    // {
+    //   headers: {
+    //     Authorization: "Bearer " + accessToken,
+    //     'Content-Type': 'application/json',
+    //   },
+    // }
+    // )
+    // .then(response => {
+    //   console.log('Playlist created:', response.data);
+    // })
+    // .catch(function (error) {
+    //   console.log(error.toJSON());
+    // })
+    // .then((res) => {
+    //   console.log(res.data)
+
+    // })
+    // .catch((err) => {
+    //   console.log(err.response)
+    // })
+    const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
+
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const data = {
+      name: 'New Playlist',
+      description: 'New playlist description',
+      public: false,
+    };
+
+    axios.post(url, data, { headers })
+      .then(response => {
+        console.log('Playlist created:', response.data);
+      })
+      .catch(error => {
+        console.error('Error creating playlist:', error);
+      });
+  }
+
 
   return (
     <div>
