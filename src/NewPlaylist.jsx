@@ -5,6 +5,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
+  const [newPlaylist, setNewPlaylist] = useState()
 
   // console.log(tracks.forEach(element => console.log(element.track.id)))
 
@@ -51,7 +52,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       console.log(err.response)
     })
 
-  if (userID && newPlaylistIds) {
+  if (userID && newPlaylistIds && !newPlaylist) {
     // axios
     // .post(`${userID}/playlists`, 
     // {
@@ -94,14 +95,17 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       public: false,
     };
 
+    if (!newPlaylist) {
     axios.post(url, data, { headers })
       .then(response => {
         console.log('Playlist created:', response.data);
+        setNewPlaylist(response.data.id)
       })
       .catch(error => {
         console.error('Error creating playlist:', error);
       });
   }
+}
 
 
   return (
