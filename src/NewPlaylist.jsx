@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function NewPlaylist({ tracks, songType, accessToken }) {
@@ -6,6 +6,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
   const [newPlaylist, setNewPlaylist] = useState()
+  const [finished, setFinished] = useState(false)
 
   // console.log(tracks.forEach(element => console.log(element.track.id)))
 
@@ -36,6 +37,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
         console.log(newPlaylistIds)
       }
     }
+    setFinished(true)
   }
 
   axios
@@ -52,36 +54,8 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       console.log(err.response)
     })
 
+    useEffect(() => {
   if (userID && newPlaylistIds && !newPlaylist) {
-    // axios
-    // .post(`${userID}/playlists`, 
-    // {
-    //   data: {
-    //     name: "Most danceable songs from ...",
-    //     description: "New playlist description",
-    //     public: true
-    //   }
-    // },
-    // {
-    //   headers: {
-    //     Authorization: "Bearer " + accessToken,
-    //     'Content-Type': 'application/json',
-    //   },
-    // }
-    // )
-    // .then(response => {
-    //   console.log('Playlist created:', response.data);
-    // })
-    // .catch(function (error) {
-    //   console.log(error.toJSON());
-    // })
-    // .then((res) => {
-    //   console.log(res.data)
-
-    // })
-    // .catch((err) => {
-    //   console.log(err.response)
-    // })
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
@@ -106,6 +80,8 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       });
   }
 }
+    }, [finished])
+
 
 
   return (
