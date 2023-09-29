@@ -87,10 +87,12 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
 
 
   if (newPlaylist) {
-    let uniqueuris = [...new Set(newPlaylistIds)].toString();
+    let uniqueuris = [...new Set(newPlaylistIds)];
 
     console.log(uniqueuris)
     console.log(newPlaylist)
+
+    // uris need fixing
 
     const url = `https://api.spotify.com/v1/playlists/${newPlaylist}/tracks`;
 
@@ -100,20 +102,21 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
     };
 
     const data = {
-      "uris": [
-        `${uniqueuris}`
-      ],
-      "position": 0
+      uris: [uniqueuris],
+      position: 0
     };
 
-    axios.post(url, data, { headers })
-      .then(response => {
-        console.log(response.data);
 
-      })
-      .catch(error => {
-        console.error(error);
-      });
+
+console.log(url, data, { headers })
+
+axios.post(url, data, { headers })
+.then(response => {
+  console.log('Track added to the playlist:', response.data);
+})
+.catch(error => {
+  console.error('Error adding track to the playlist:', error);
+});
   }
 
 
