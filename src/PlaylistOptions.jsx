@@ -39,8 +39,9 @@ export default function Playlist({ playlistid, accessToken }) {
           <div>
             <P onClick={() => setSongType("happiest")}>...happiest songs</P>
             <P onClick={() => setSongType("saddest")}>...saddest songs</P>
+            <P onClick={() => setSongType("acccoustic")}>...accoustic songs</P>
             <P onClick={() => setSongType("energetic")}>...energetic songs</P>
-            <P onClick={() => setSongType("instrumental")}>...instrumental songs</P>
+            {/* <P onClick={() => setSongType("instrumental")}>...instrumental songs</P> */}
             <P onClick={() => setSongType("live")}>...live songs</P>
             <P onClick={() => setSongType("major")}>...songs in major key</P>
             <P onClick={() => setSongType("minor")}>...songs in minor key</P>

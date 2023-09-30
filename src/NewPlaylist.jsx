@@ -30,31 +30,96 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       })
 
   }
-
   if (audioDetails && newPlaylistIds.length < audioDetails.length) {
-    for (let i = 0; i < audioDetails.length; i++) {
-      if (audioDetails[i].danceability > 0.85) {
-        newPlaylistIds.push(audioDetails[i].uri)
-        // console.log(newPlaylistIds)
+  switch (songType) {
+    case "happiest":
+      for (let i = 0; i < audioDetails.length; i++) {
+        if (audioDetails[i].valence > 0.6) {
+          newPlaylistIds.push(audioDetails[i].uri)
+        }
       }
-    }
-    setFinished(true)
+    break;
+    case "saddest":
+      for (let i = 0; i < audioDetails.length; i++) {
+        if (audioDetails[i].valence < 0.4) {
+          newPlaylistIds.push(audioDetails[i].uri)
+        }
+      }
+    break;
+    case "accoustic":
+      for (let i = 0; i < audioDetails.length; i++) {
+        if (audioDetails[i].acousticness > 0.85) {
+          newPlaylistIds.push(audioDetails[i].uri)
+        }
+      }
+    break;
+    case "danceable":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].danceability > 0.65) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "energetic":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].energy > 0.8) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "live":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].liveness > 0.8) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "major":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].mode == 1) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "minor":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].mode == 0) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "fastest":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].tempo > 120) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
+    break;
+    case "slowest":
+        for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i].tempo < 90) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+        }
   }
+  setFinished(true)
+}
+  
 
   useEffect(() => {
-  axios
-    .get(`https://api.spotify.com/v1/me`, {
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
-    })
-    .then((res) => {
-      console.log(res.data)
-      setUserID(res.data.id)
-    })
-    .catch((err) => {
-      console.log(err.response)
-    })
+    axios
+      .get(`https://api.spotify.com/v1/me`, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        setUserID(res.data.id)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
   }, [])
 
   useEffect(() => {
@@ -86,15 +151,8 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
   }, [finished])
 
 
-  if (newPlaylist) {
+  useEffect(() => {
     let uniqueuris = [...new Set(newPlaylistIds)];
-
-    console.log(uniqueuris)
-    console.log(newPlaylist)
-
-    // uris need fixing
-
-    const url = `${newPlaylist}?uris=${uniqueuris}`;
 
     const requestHeaders = {
       'Authorization': `Bearer ${accessToken}`,
@@ -102,9 +160,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
     };
 
     const requestData = {
-      uris: 
-        uniqueuris
-      ,
+      uris: uniqueuris,
       position: 0
     };
 
@@ -119,26 +175,26 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       .then(response => {
 
         console.log(response.data);
+        setPlaylistCreated(true)
       })
       .catch(error => {
- 
+
         console.error(error);
       });
 
-  
-  }
+  }, [newPlaylist])
+
+// Remove duplicates
+
+  return (
+    <div>
+      {!playlistCreated ?
+        <p>Loading...</p>
+        :
+        <p>done!</p>
+      }
 
 
-
-return (
-  <div>
-{!playlistCreated ?
-  <p>Loading...</p>
-:
-<p>done!</p>
-}
-
-
-  </div>
-)
+    </div>
+  )
 }
