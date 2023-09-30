@@ -35,7 +35,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
     for (let i = 0; i < audioDetails.length; i++) {
       if (audioDetails[i].danceability > 0.85) {
         newPlaylistIds.push(audioDetails[i].uri)
-        console.log(newPlaylistIds)
+        // console.log(newPlaylistIds)
       }
     }
     setFinished(true)
@@ -76,7 +76,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
         axios.post(url, data, { headers })
           .then(response => {
             console.log('Playlist created:', response.data);
-            setNewPlaylist(response.data.id)
+            setNewPlaylist(response.data.tracks.href)
           })
           .catch(error => {
             console.error('Error creating playlist:', error);
@@ -94,29 +94,38 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
 
     // uris need fixing
 
-    const url = `https://api.spotify.com/v1/playlists/${newPlaylist}/tracks`;
+    const url = `${newPlaylist}?uris=${uniqueuris}`;
 
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
+    const requestHeaders = {
+      'Authorization': `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     };
 
-    const data = {
-      uris: [uniqueuris],
+    const requestData = {
+      uris: 
+        uniqueuris
+      ,
       position: 0
     };
 
+    console.log(requestData)
 
 
-console.log(url, data, { headers })
+    console.log(`${newPlaylist}`)
 
-axios.post(url, data, { headers })
-.then(response => {
-  console.log('Track added to the playlist:', response.data);
-})
-.catch(error => {
-  console.error('Error adding track to the playlist:', error);
-});
+    axios.post(newPlaylist, requestData, {
+      headers: requestHeaders
+    })
+      .then(response => {
+
+        console.log(response.data);
+      })
+      .catch(error => {
+ 
+        console.error(error);
+      });
+
+  
   }
 
 
