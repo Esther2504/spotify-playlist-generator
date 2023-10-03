@@ -20,7 +20,7 @@ export default function AllPlaylists({ data, accessToken }) {
           <PlaylistContainer>
             {data.items.map((playlist) =>
               <Playlist onClick={() => choosePlaylist(playlist)}>
-                {/* <Image src={playlist.images[0].url}></Image> */}
+                {/* <img src={playlist.images[0].url}></img> */}
                 <p>{playlist.name}</p>
               </Playlist>
             )}
@@ -44,11 +44,12 @@ align-items: center;
 `
 
 const PlaylistContainer = styled.div`
-
 display: flex;
 justify-items: space-around;
 flex-wrap: wrap;
 gap: 30px;
+width: 1200px;
+max-width: 100%;
 `
 
 const Playlist = styled.div`
@@ -56,6 +57,7 @@ width: 150px;
 background-color: #148255;
 padding: 20px;
 font-size: 1rem;
+cursor: pointer;
 `
 
 const Image = styled.img`
