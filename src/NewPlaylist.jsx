@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import PlaylistCreated from './PlaylistCreated'
 
 export default function NewPlaylist({ tracks, songType, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
@@ -8,6 +9,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
   const [newPlaylist, setNewPlaylist] = useState()
   const [finished, setFinished] = useState(false)
   const [playlistCreated, setPlaylistCreated] = useState(false)
+  const [newPlaylistID, setNewPlayListID] = useState()
 
   // console.log(tracks.forEach(element => console.log(element.track.id)))
 
@@ -175,6 +177,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       .then(response => {
 
         console.log(response.data);
+        setNewPlayListID(response.data.id)
         setPlaylistCreated(true)
       })
       .catch(error => {
@@ -191,7 +194,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       {!playlistCreated ?
         <p>Loading...</p>
         :
-        <p>done!</p>
+        <PlaylistCreated newPlaylistID={newPlaylistID} />
       }
 
 
