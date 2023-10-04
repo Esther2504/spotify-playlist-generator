@@ -5,14 +5,23 @@ import EmptyPlaylist from './images/EmptyPlaylist.PNG'
 
 export default function AllPlaylists({ data, accessToken }) {
   const [playlistid, setPlaylistid] = useState()
+  const [publicplaylist, setPublicplaylist] = useState()
 
   console.log(data)
-
- data.items.map((playlist) => console.log(playlist))
 
   function choosePlaylist(playlist) {
     console.log(playlist.id)
     setPlaylistid(playlist.id)
+  }
+
+
+  function getPlaylistID() {
+    console.log(publicplaylist)
+
+    let publicplaylisturl = publicplaylist.split("?si")[0].split("/")
+    let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
+
+    setPlaylistid(publicplaylistid)
   }
 
   return (
@@ -24,16 +33,17 @@ export default function AllPlaylists({ data, accessToken }) {
             {data.items.map((playlist) =>
               <Playlist onClick={() => choosePlaylist(playlist)}>
                 {playlist.images[0] ?
-                <img src={playlist.images[0].url} />
-              : 
-              <img src={EmptyPlaylist} />
-              }
+                  <img src={playlist.images[0].url} />
+                  :
+                  <img src={EmptyPlaylist} />
+                }
                 <p>{playlist.name}</p>
               </Playlist>
             )}
           </PlaylistContainer>
           <h2>Or use a public playlist</h2>
-          <input></input>
+          <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
+          <button onClick={() => getPlaylistID()}>Go</button>
         </Container>
         :
         <PlaylistOptions playlistid={playlistid} accessToken={accessToken} />
