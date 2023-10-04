@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
+import EmptyPlaylist from './images/EmptyPlaylist.PNG'
 
 export default function AllPlaylists({ data, accessToken }) {
   const [playlistid, setPlaylistid] = useState()
 
   console.log(data)
+
+ data.items.map((playlist) => console.log(playlist))
 
   function choosePlaylist(playlist) {
     console.log(playlist.id)
@@ -20,7 +23,11 @@ export default function AllPlaylists({ data, accessToken }) {
           <PlaylistContainer>
             {data.items.map((playlist) =>
               <Playlist onClick={() => choosePlaylist(playlist)}>
-                {/* <img src={playlist.images[0].url}></img> */}
+                {playlist.images[0] ?
+                <img src={playlist.images[0].url} />
+              : 
+              <img src={EmptyPlaylist} />
+              }
                 <p>{playlist.name}</p>
               </Playlist>
             )}
@@ -58,6 +65,11 @@ background-color: #148255;
 padding: 20px;
 font-size: 1rem;
 cursor: pointer;
+overflow: hidden;
+
+img {
+width: 130px;
+}
 `
 
 const Image = styled.img`
