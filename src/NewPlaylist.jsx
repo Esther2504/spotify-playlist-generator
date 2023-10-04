@@ -143,6 +143,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
         axios.post(url, data, { headers })
           .then(response => {
             console.log('Playlist created:', response.data);
+            setNewPlayListID(response.data.id)
             setNewPlaylist(response.data.tracks.href)
           })
           .catch(error => {
@@ -177,7 +178,7 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       .then(response => {
 
         console.log(response.data);
-        setNewPlayListID(response.data.id)
+        
         setPlaylistCreated(true)
       })
       .catch(error => {

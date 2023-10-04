@@ -1,6 +1,8 @@
 import React from 'react'
 
 export default function PlaylistCreated({newPlaylistID}) {
+
+    console.log(newPlaylistID)
   return (
     <div>
 
