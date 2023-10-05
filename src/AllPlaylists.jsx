@@ -5,6 +5,7 @@ import EmptyPlaylist from './images/EmptyPlaylist.PNG'
 
 export default function AllPlaylists({ data, accessToken }) {
   const [playlistid, setPlaylistid] = useState()
+  const [playlistName, setPlaylistName] = useState()
   const [publicplaylist, setPublicplaylist] = useState()
 
   console.log(data)
@@ -12,6 +13,7 @@ export default function AllPlaylists({ data, accessToken }) {
   function choosePlaylist(playlist) {
     console.log(playlist.id)
     setPlaylistid(playlist.id)
+    setPlaylistName(playlist.name)
   }
 
 
@@ -46,7 +48,7 @@ export default function AllPlaylists({ data, accessToken }) {
           <button onClick={() => getPlaylistID()}>Go</button>
         </Container>
         :
-        <PlaylistOptions playlistid={playlistid} accessToken={accessToken} />
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} accessToken={accessToken} />
       }
     </>
   )

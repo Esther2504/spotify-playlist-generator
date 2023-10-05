@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PlaylistCreated from './PlaylistCreated'
 
-export default function NewPlaylist({ tracks, songType, accessToken }) {
+export default function NewPlaylist({ tracks, songType, playlistName, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
@@ -134,8 +134,8 @@ export default function NewPlaylist({ tracks, songType, accessToken }) {
       };
 
       const data = {
-        name: 'New Playlist',
-        description: 'New playlist description',
+        name: `${songType} songs from '${playlistName}'`,
+        description: `Playlist containing the ${songType} songs from ${playlistName}`,
         public: false,
       };
 

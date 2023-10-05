@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import NewPlaylist from './NewPlaylist'
 
-export default function Playlist({ playlistid, accessToken }) {
+export default function Playlist({ playlistid, playlistName, accessToken }) {
   const [tracks, setTracks] = useState()
   const [songType, setSongType] = useState()
 
@@ -51,7 +51,7 @@ export default function Playlist({ playlistid, accessToken }) {
           </div>
         </Container>
         :
-        <NewPlaylist tracks={tracks.items} songType={songType} accessToken={accessToken} />
+        <NewPlaylist tracks={tracks.items} songType={songType} playlistName={playlistName} accessToken={accessToken} />
       }
 
       {/* {tracks ? <>
