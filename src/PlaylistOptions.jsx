@@ -37,17 +37,17 @@ export default function Playlist({ playlistid, playlistName, accessToken }) {
           <div />
           <div />
           <div>
-            <P onClick={() => setSongType("happiest")}>...happiest songs</P>
-            <P onClick={() => setSongType("saddest")}>...saddest songs</P>
-            <P onClick={() => setSongType("acccoustic")}>...accoustic songs</P>
-            <P onClick={() => setSongType("energetic")}>...energetic songs</P>
+            <P onClick={() => setSongType("Happiest")}>...happiest songs</P>
+            <P onClick={() => setSongType("Saddest")}>...saddest songs</P>
+            <P onClick={() => setSongType("Acccoustic")}>...accoustic songs</P>
+            <P onClick={() => setSongType("Energetic")}>...energetic songs</P>
             {/* <P onClick={() => setSongType("instrumental")}>...instrumental songs</P> */}
-            <P onClick={() => setSongType("live")}>...live songs</P>
-            <P onClick={() => setSongType("major")}>...songs in major key</P>
-            <P onClick={() => setSongType("minor")}>...songs in minor key</P>
-            <P onClick={() => setSongType("danceable")}>...most danceable songs</P>
-            <P onClick={() => setSongType("fastest")}>...fastest songs</P>
-            <P onClick={() => setSongType("slowest")}>...slowest songs</P>
+            <P onClick={() => setSongType("Live")}>...live songs</P>
+            <P onClick={() => setSongType("Major")}>...songs in major key</P>
+            <P onClick={() => setSongType("Minor")}>...songs in minor key</P>
+            <P onClick={() => setSongType("Danceable")}>...most danceable songs</P>
+            <P onClick={() => setSongType("Fastest")}>...fastest songs</P>
+            <P onClick={() => setSongType("Slowest")}>...slowest songs</P>
           </div>
         </Container>
         :

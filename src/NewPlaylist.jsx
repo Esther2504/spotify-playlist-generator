@@ -32,72 +32,75 @@ export default function NewPlaylist({ tracks, songType, playlistName, accessToke
       })
 
   }
+
+let genre = songType.toLowerCase()
+
   if (audioDetails && newPlaylistIds.length < audioDetails.length) {
   switch (songType) {
-    case "happiest":
+    case "Happiest":
       for (let i = 0; i < audioDetails.length; i++) {
         if (audioDetails[i].valence > 0.6) {
           newPlaylistIds.push(audioDetails[i].uri)
         }
       }
     break;
-    case "saddest":
+    case "Saddest":
       for (let i = 0; i < audioDetails.length; i++) {
         if (audioDetails[i].valence < 0.4) {
           newPlaylistIds.push(audioDetails[i].uri)
         }
       }
     break;
-    case "accoustic":
+    case "Accoustic":
       for (let i = 0; i < audioDetails.length; i++) {
         if (audioDetails[i].acousticness > 0.85) {
           newPlaylistIds.push(audioDetails[i].uri)
         }
       }
     break;
-    case "danceable":
+    case "Danceable":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].danceability > 0.65) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "energetic":
+    case "Energetic":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].energy > 0.8) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "live":
+    case "Live":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].liveness > 0.8) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "major":
+    case "Major":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].mode == 1) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "minor":
+    case "Minor":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].mode == 0) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "fastest":
+    case "Fastest":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].tempo > 120) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
     break;
-    case "slowest":
+    case "Slowest":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].tempo < 90) {
             newPlaylistIds.push(audioDetails[i].uri)
@@ -135,7 +138,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, accessToke
 
       const data = {
         name: `${songType} songs from '${playlistName}'`,
-        description: `Playlist containing the ${songType} songs from ${playlistName}`,
+        description: `Playlist containing the ${genre} songs from '${playlistName}'`,
         public: false,
       };
 
