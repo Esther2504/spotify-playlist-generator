@@ -1,17 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function PlaylistCreated({newPlaylistID}) {
+export default function PlaylistCreated({ newPlaylistID }) {
 
-    console.log(newPlaylistID)
+  console.log(newPlaylistID)
   return (
     <Container>
       <div>
-<h1>Your playlist was created!</h1>
-<p>We've already saved it to your Spotify. Want to create another playlist?</p>
-<button>Create playlist</button>
-</div>
-<iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="652" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <h1>Your playlist was created!</h1>
+        <p>We've already saved it to your Spotify. Want to create another playlist?</p>
+        <button>Create playlist</button>
+      </div>
+      <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="652" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </Container>
   )
 }
