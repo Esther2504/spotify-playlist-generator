@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from './images/EmptyPlaylist.PNG'
 
-export default function AllPlaylists({ data, accessToken, playlistid, setPlaylistid, playlistName, setPlaylistName, currentStep, setCurrentStep }) {
-  // const [playlistid, setPlaylistid] = useState()
-  // const [playlistName, setPlaylistName] = useState()
+export default function AllPlaylists({ data, accessToken, currentStep, setCurrentStep }) {
+  const [playlistid, setPlaylistid] = useState()
+  const [playlistName, setPlaylistName] = useState()
   const [publicplaylist, setPublicplaylist] = useState()
 
   console.log(data)
@@ -30,7 +30,7 @@ export default function AllPlaylists({ data, accessToken, playlistid, setPlaylis
 
   return (
     <>
-      {/* {!playlistid ? */}
+      {!playlistid ?
         <Container>
           <h1>Choose a playlist</h1>
           <PlaylistContainer>
@@ -49,9 +49,8 @@ export default function AllPlaylists({ data, accessToken, playlistid, setPlaylis
           <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
           <button onClick={() => getPlaylistID()}>Go</button>
         </Container>
-        {/* // :
-        // <PlaylistOptions playlistid={playlistid} playlistName={playlistName} accessToken={accessToken} /> */}
-      {/* } */}
+        :
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} accessToken={accessToken} /> }
     </>
   )
 }
