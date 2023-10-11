@@ -11,6 +11,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   const [finished, setFinished] = useState(false)
   const [playlistCreated, setPlaylistCreated] = useState(false)
   const [newPlaylistID, setNewPlayListID] = useState()
+  const [noSongs, setNoSongs] = useState(false)
 
   let trackids = []
   tracks.forEach(element => trackids.push(element.track.id))
@@ -93,8 +94,15 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           }
         }
     }
-    setFinished(true)
+    console.log(newPlaylistIds.length)
+    if (newPlaylistIds.length > 0) {
+      setFinished(true)
+    } else {
+      setNoSongs(true)
+    }
   }
+
+// to do: prevent songs from being added multiple times
 
   useEffect(() => {
     getUser(accessToken, setUserID)
@@ -114,6 +122,8 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
     <div>
       {!playlistCreated ?
         <p>Loading...</p>
+        : noSongs ?
+        <p>No songs</p>
         :
         <PlaylistCreated newPlaylistID={newPlaylistID} data={data} accessToken={accessToken} />
       }

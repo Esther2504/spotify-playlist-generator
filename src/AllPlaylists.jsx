@@ -73,7 +73,7 @@ max-width: 100%;
 `
 
 const Playlist = styled.div`
-width: 150px;
+width: 200px;
 background-color: #148255;
 padding: 20px;
 font-size: 1rem;
@@ -108,6 +108,7 @@ input {
   width: 80%;
   height: 30px;
   border: none;
+  padding: 8px;
 }
 
 button {
