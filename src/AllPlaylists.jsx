@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from './images/EmptyPlaylist.PNG'
 
-export default function AllPlaylists({ data, accessToken, currentStep, setCurrentStep }) {
+export default function AllPlaylists({ data, accessToken }) {
   const [playlistid, setPlaylistid] = useState()
   const [playlistName, setPlaylistName] = useState()
   const [publicplaylist, setPublicplaylist] = useState()
@@ -14,8 +14,6 @@ export default function AllPlaylists({ data, accessToken, currentStep, setCurren
     console.log(playlist.id)
     setPlaylistid(playlist.id)
     setPlaylistName(playlist.name)
-
-    setCurrentStep(currentStep + 1)
   }
 
 
@@ -45,12 +43,14 @@ export default function AllPlaylists({ data, accessToken, currentStep, setCurren
               </Playlist>
             )}
           </PlaylistContainer>
-          <h2>Or use a public playlist</h2>
+          <PublicPlaylist>
+          <h3>Or use a public playlist</h3>
           <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
           <button onClick={() => getPlaylistID()}>Go</button>
+          </PublicPlaylist>
         </Container>
         :
-        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} /> }
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} setPlaylistName={setPlaylistName} /> }
     </>
   )
 }
@@ -65,7 +65,7 @@ align-items: center;
 
 const PlaylistContainer = styled.div`
 display: flex;
-justify-items: space-around;
+justify-items: space-evenly;
 flex-wrap: wrap;
 gap: 30px;
 width: 1200px;
@@ -87,4 +87,33 @@ width: 130px;
 
 const Image = styled.img`
 width: 120px;
+`
+
+const PublicPlaylist = styled.div`
+width: 500px;
+display: flex;
+flex-direction: column;
+align-items: center;
+background: #148255;
+margin: 40px;
+padding: 20px;
+gap: 10px;
+
+h3 {
+ margin: 0;
+ font-size: 1.2rem;
+}
+
+input {
+  width: 80%;
+  height: 30px;
+  border: none;
+}
+
+button {
+  width: 80%;
+  height: 30px;
+  border: none;
+  background: #fff;
+}
 `

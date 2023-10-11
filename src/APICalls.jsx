@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function getPlaylists(getAccessToken, setData, data, setCurrentStep, currentStep, accessToken) {
+export function getPlaylists(getAccessToken, setData, data, accessToken) {
 
     axios
         .get('https://api.spotify.com/v1/me/playlists/', {
@@ -11,24 +11,23 @@ export function getPlaylists(getAccessToken, setData, data, setCurrentStep, curr
         .then((res) => {
             setData(res.data)
             console.log(data)
-            setCurrentStep(currentStep + 1)
         })
         .catch((err) => {
             console.log(err.response)
         })
 }
 
-export function getTracks(playlistid, playlistName, accessToken, setTracks, songType, currentStep, setCurrentStep) {
+export function getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType) {
     axios
-        .get(`https://api.spotify.com/v1/playlists/${playlistid}/tracks`, {
+        .get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
             headers: {
                 Authorization: "Bearer " + accessToken,
             },
         })
         .then((res) => {
             console.log(res.data)
-            setTracks(res.data)
-            setCurrentStep(currentStep + 1)
+            setTracks(res.data.tracks)
+            setPlaylistName(res.data.name)
         })
         .catch((err) => {
             console.log(err.response)
