@@ -3,7 +3,7 @@ import axios from 'axios'
 import PlaylistCreated from './PlaylistCreated'
 import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
 
-export default function NewPlaylist({ tracks, songType, playlistName, accessToken }) {
+export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
@@ -115,7 +115,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, accessToke
       {!playlistCreated ?
         <p>Loading...</p>
         :
-        <PlaylistCreated newPlaylistID={newPlaylistID} />
+        <PlaylistCreated newPlaylistID={newPlaylistID} data={data} accessToken={accessToken} />
       }
     </div>
   )

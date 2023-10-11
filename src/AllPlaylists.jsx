@@ -50,7 +50,7 @@ export default function AllPlaylists({ data, accessToken, currentStep, setCurren
           <button onClick={() => getPlaylistID()}>Go</button>
         </Container>
         :
-        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} accessToken={accessToken} /> }
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} /> }
     </>
   )
 }

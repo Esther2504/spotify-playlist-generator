@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import AllPlaylists from './AllPlaylists'
 
-export default function PlaylistCreated({ newPlaylistID }) {
+export default function PlaylistCreated({ newPlaylistID, data, accessToken }) {
+  const [createNew, setCreateNew] = useState(false)
 
   console.log(newPlaylistID)
   return (
-    <Container>
+    <>
+    {!createNew ?
+      <Container>
       <div>
         <h1>Your playlist was created!</h1>
         <p>We've already saved it to your Spotify. Want to create another playlist?</p>
-        <button>Create playlist</button>
+        <button onClick={() => setCreateNew(true)}>Create new playlist</button>
       </div>
       <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="652" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </Container>
+      : <AllPlaylists data={data} accessToken={accessToken} />
+    }
+    </>
   )
 }
 
