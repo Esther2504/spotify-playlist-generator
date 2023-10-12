@@ -22,13 +22,20 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 
   let genre = songType.toLowerCase()
 
-  if (audioDetails && newPlaylistIds.length < audioDetails.length) {
+
+  useEffect(() => {
+
+    if (audioDetails) {
+
     switch (songType) {
       case "Happiest":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].valence > 0.6) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
+        if (newPlaylistIds.length < 1) {
+          setNoSongs(true)
         }
         break;
       case "Saddest":
@@ -94,13 +101,16 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           }
         }
     }
-    console.log(newPlaylistIds.length)
+
     if (newPlaylistIds.length > 0) {
       setFinished(true)
     } else {
       setNoSongs(true)
     }
-  }
+
+    console.log(noSongs)
+    }
+}, [audioDetails])
 
 // to do: prevent songs from being added multiple times
 
@@ -120,7 +130,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 
   return (
     <div>
-      {!playlistCreated ?
+      {!playlistCreated && !noSongs ?
         <p>Loading...</p>
         : noSongs ?
         <p>No songs</p>
