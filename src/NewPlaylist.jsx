@@ -30,18 +30,25 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
     switch (songType) {
       case "Happiest":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].valence > 0.6) {
+          if (audioDetails[i].valence > 0.4 && audioDetails[i].energy > 0.4 && audioDetails[i].tempo > 95 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
         }
         if (newPlaylistIds.length < 1) {
           setNoSongs(true)
+        } else {
+          setNoSongs(false)
         }
         break;
       case "Saddest":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].valence < 0.4) {
             newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
           }
         }
         break;
@@ -50,12 +57,22 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           if (audioDetails[i].acousticness > 0.85) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
+          }
         }
         break;
       case "Danceable":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].danceability > 0.65) {
             newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
           }
         }
         break;
@@ -64,12 +81,22 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           if (audioDetails[i].energy > 0.8) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
+          }
         }
         break;
       case "Live":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].liveness > 0.8) {
             newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
           }
         }
         break;
@@ -78,12 +105,22 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           if (audioDetails[i].mode == 1) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
+          }
         }
         break;
       case "Minor":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].mode == 0) {
             newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
           }
         }
         break;
@@ -92,12 +129,22 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
           if (audioDetails[i].tempo > 120) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
+          }
         }
         break;
       case "Slowest":
         for (let i = 0; i < audioDetails.length; i++) {
           if (audioDetails[i].tempo < 90) {
             newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
           }
         }
     }
@@ -119,7 +166,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   }, [])
 
   useEffect(() => {
-    if (userID && newPlaylistIds && !newPlaylist) {
+    if (userID && newPlaylistIds && !newPlaylist && !noSongs) {
       createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist)
     }
   }, [finished])
