@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PlaylistCreated from './PlaylistCreated'
 import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
+import NoSuitableSongs from './NoSuitableSongs'
 
 export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken }) {
   const [audioDetails, setaudioDetails] = useState()
@@ -180,7 +181,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
       {!playlistCreated && !noSongs ?
         <p>Loading...</p>
         : noSongs ?
-        <p>No songs</p>
+        <NoSuitableSongs data={data} accessToken={accessToken} />
         :
         <PlaylistCreated newPlaylistID={newPlaylistID} data={data} accessToken={accessToken} />
       }
