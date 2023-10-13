@@ -42,7 +42,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Saddest":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].valence < 0.4) {
+          if (audioDetails[i].valence < 0.4 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -54,7 +54,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Accoustic":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].acousticness > 0.85) {
+          if (audioDetails[i].acousticness > 0.85 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -66,7 +66,8 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Danceable":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].danceability > 0.65) {
+          console.log(audioDetails[i].energy)
+          if (audioDetails[i].danceability > 0.6 && audioDetails[i].energy > 0.6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -78,7 +79,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Energetic":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].energy > 0.8) {
+          if (audioDetails[i].energy > 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -90,7 +91,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Live":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].liveness > 0.8) {
+          if (audioDetails[i].liveness > 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -102,7 +103,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Major":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].mode == 1) {
+          if (audioDetails[i].mode == 1 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -114,7 +115,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Minor":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].mode == 0) {
+          if (audioDetails[i].mode == 0 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -126,7 +127,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Fastest":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].tempo > 120) {
+          if (audioDetails[i].tempo > 120 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -138,7 +139,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Slowest":
         for (let i = 0; i < audioDetails.length; i++) {
-          if (audioDetails[i].tempo < 90) {
+          if (audioDetails[i].tempo < 90 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
           if (newPlaylistIds.length < 1) {
@@ -159,7 +160,6 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
     }
 }, [audioDetails])
 
-// to do: prevent songs from being added multiple times
 
   useEffect(() => {
     getUser(accessToken, setUserID)
