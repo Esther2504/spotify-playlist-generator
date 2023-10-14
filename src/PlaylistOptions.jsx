@@ -31,7 +31,7 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
           <div>
             <P onClick={() => setSongType("Happiest")}>...happiest songs</P>
             <P onClick={() => setSongType("Saddest")}>...saddest songs</P>
-            <P onClick={() => setSongType("Acccoustic")}>...accoustic songs</P>
+            <P onClick={() => setSongType("Accoustic")}>...accoustic songs</P>
             <P onClick={() => setSongType("Energetic")}>...energetic songs</P>
             {/* <P onClick={() => setSongType("instrumental")}>...instrumental songs</P> */}
             <P onClick={() => setSongType("Live")}>...live songs</P>
