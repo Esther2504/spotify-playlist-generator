@@ -26,9 +26,7 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
       {!songType ?
         <Container>
           <h1>Create a new playlist with the...</h1>
-          <div />
-          <div />
-          <div>
+          <Options>
             <P onClick={() => setSongType("Happiest")}>...happiest songs</P>
             <P onClick={() => setSongType("Saddest")}>...saddest songs</P>
             <P onClick={() => setSongType("Accoustic")}>...accoustic songs</P>
@@ -40,7 +38,7 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
             <P onClick={() => setSongType("Danceable")}>...most danceable songs</P>
             <P onClick={() => setSongType("Fastest")}>...fastest songs</P>
             <P onClick={() => setSongType("Slowest")}>...slowest songs</P>
-          </div>
+          </Options>
         </Container>
          :
         <NewPlaylist tracks={tracks.items} songType={songType} playlistName={playlistName} data={data} accessToken={accessToken} />
@@ -52,11 +50,16 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
 const Container = styled.div`
 width: 90%;
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 2fr 1fr;
+`
+
+const Options = styled.div`
+margin-top: 150px;
 `
 
 const P = styled.p`
 cursor: pointer;
+text-align: left;
 
 &:hover {
   color: #148255;

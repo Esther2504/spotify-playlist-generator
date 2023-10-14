@@ -116,5 +116,6 @@ button {
   height: 30px;
   border: none;
   background: #fff;
+  cursor: pointer;
 }
 `
