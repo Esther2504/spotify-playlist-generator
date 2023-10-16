@@ -3,7 +3,7 @@ import axios from "axios";
 export function getPlaylists(getAccessToken, setData, data, accessToken) {
 
     axios
-        .get('https://api.spotify.com/v1/me/playlists/', {
+        .get('https://api.spotify.com/v1/me/playlists?limit=50', {
             headers: {
                 Authorization: "Bearer " + getAccessToken,
             },
