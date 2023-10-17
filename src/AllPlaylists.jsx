@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from './images/EmptyPlaylist.PNG'
@@ -36,16 +36,25 @@ if (p == 'next' && lastSlide < data.items.length) {
     setFirstSlide(firstSlide + 10)
     setLastSlide(lastSlide + 10)
     setHidePrev(false)
-    if (lastSlide >= data.items.length) {
-      setHideNext(true)
-    }
+
   } else if (p == 'prev' && firstSlide != '0') {
     setFirstSlide(firstSlide - 10)
     setLastSlide(lastSlide - 10)
   }
 }
 
-
+useEffect(() => {
+  if (lastSlide >= data.items.length) {
+    setHideNext(true)
+  } else if (firstSlide == 0) {
+    setHidePrev(true)
+  } else {
+    setHideNext(false)
+    setHidePrev(false)
+  }
+  
+}, [firstSlide, lastSlide])
+console.log(lastSlide + 'e' + data.items.length)
 
   return (
     <>
@@ -65,6 +74,7 @@ if (p == 'next' && lastSlide < data.items.length) {
             )}
            
           </PlaylistContainer>
+          <ButtonContainer>
           {!hidePrev ?
           <button onClick={() => setSlide('prev')}>Previous</button>
           : null
@@ -73,7 +83,7 @@ if (p == 'next' && lastSlide < data.items.length) {
           <button onClick={() => setSlide('next')}>Next</button>
           : null
         }
-          
+          </ButtonContainer>
           
           <PublicPlaylist>
           <h3>Or use a public playlist</h3>
@@ -97,7 +107,7 @@ align-items: center;
 
 const PlaylistContainer = styled.div`
 display: flex;
-justify-items: space-evenly;
+justify-items: center;
 flex-wrap: wrap;
 gap: 20px;
 width: 1200px;
@@ -115,6 +125,22 @@ overflow: hidden;
 
 img {
 width: 130px;
+}
+`
+const ButtonContainer = styled.div`
+width: 1200px;
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+
+button {
+  background: #148255;
+  border: none;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 `
 
