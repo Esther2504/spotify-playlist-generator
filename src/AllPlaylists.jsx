@@ -77,18 +77,18 @@ console.log(lastSlide + 'e' + data.items.length)
           <ButtonContainer>
           {!hidePrev ?
           <button onClick={() => setSlide('prev')}>Previous</button>
-          : null
+          : <div></div>
         }
                   {!hideNext ?
           <button onClick={() => setSlide('next')}>Next</button>
-          : null
+          : <div></div>
         }
           </ButtonContainer>
           
           <PublicPlaylist>
           <h3>Or use a public playlist</h3>
           <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
-          <button onClick={() => getPlaylistID()}>Go</button>
+          <button onClick={() => getPlaylistID()}>Continue</button>
           </PublicPlaylist>
         </Container>
         :
@@ -107,10 +107,9 @@ align-items: center;
 
 const PlaylistContainer = styled.div`
 display: flex;
-justify-items: center;
 flex-wrap: wrap;
 gap: 20px;
-width: 1200px;
+width: 1080px;
 max-width: 100%;
 `
 
@@ -119,16 +118,19 @@ width: 200px;
 height: 250px;
 background-color: #148255;
 padding: 20px;
-font-size: 1rem;
+font-size: 0.9rem;
 cursor: pointer;
 overflow: hidden;
 
+
 img {
 width: 130px;
+border: 1px solid white;
 }
+
 `
 const ButtonContainer = styled.div`
-width: 1200px;
+width: 1080px;
 display: flex;
 justify-content: space-between;
 margin-top: 20px;
@@ -157,6 +159,7 @@ background: #148255;
 margin: 40px;
 padding: 20px 5px;
 gap: 10px;
+border: 1px solid white;
 
 h3 {
  margin: 0;
@@ -176,5 +179,7 @@ button {
   border: none;
   background: #fff;
   cursor: pointer;
+  font-weight: 600;
+  color: #33333;
 }
 `

@@ -45,18 +45,10 @@ function App() {
   return (
     <div className="App">
       <nav>
-        {/* <ul>
-<li>Create playlist</li>
-        </ul> */}
       </nav>
       <header className="App-header">
       {!data ?
        <StartPage AUTH_URL={AUTH_URL} />
-
-        //  {/* {(currentStep === 1 && !data) && <StartPage AUTH_URL={AUTH_URL} />}
-        //  {currentStep === 2 && <AllPlaylists data={data} accessToken={getAccessToken} currentStep={currentStep} setCurrentStep={setCurrentStep} playlistid={playlistid} setPlaylistid={setPlaylistid} playlistName={playlistName} setPlaylistName={setPlaylistName} />}
-        //  {currentStep === 3 && <PlaylistOptions accessToken={accessToken} currentStep={currentStep} setCurrentStep={setCurrentStep} />}
-        //  {currentStep === 4 && <NewPlaylist accessToken={accessToken} currentStep={currentStep} setCurrentStep={setCurrentStep} tracks={tracks} songType={songType} playlistName={playlistName} />} */}
          : <AllPlaylists data={data} accessToken={getAccessToken} />}
       </header>
     </div>
