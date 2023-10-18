@@ -19,6 +19,7 @@ display: flex;
 width: 1000px;
 max-width: 100%;
 margin: 0 auto;
+padding: 40px;
 `
 
 const Text = styled.div`
@@ -34,7 +35,7 @@ button {
   color: #fff;
   padding: 15px 30px;
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 `

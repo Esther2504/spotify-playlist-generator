@@ -127,7 +127,15 @@ img {
 width: 130px;
 border: 1px solid white;
 }
-
+ p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+  margin: 10px auto;
+ }
 `
 const ButtonContainer = styled.div`
 width: 1080px;
@@ -159,7 +167,7 @@ background: #148255;
 margin: 40px;
 padding: 20px 5px;
 gap: 10px;
-border: 1px solid white;
+// border: 1px solid white;
 
 h3 {
  margin: 0;

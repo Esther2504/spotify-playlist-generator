@@ -51,6 +51,10 @@ const Container = styled.div`
 width: 90%;
 display: grid;
 grid-template-columns: 2fr 1fr;
+
+h1 {
+  color: #148255;
+}
 `
 
 const Options = styled.div`
