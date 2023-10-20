@@ -151,6 +151,19 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
             setNoSongs(false)
           }
         }
+        break;
+      case "Loudest":
+        for (let i = 0; i < audioDetails.length; i++) {
+          console.log(audioDetails[i].loudness)
+          if (audioDetails[i].loudness > -6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+            newPlaylistIds.push(audioDetails[i].uri)
+          }
+          if (newPlaylistIds.length < 1) {
+            setNoSongs(true)
+          } else {
+            setNoSongs(false)
+          }
+        }
     }
 
     if (newPlaylistIds.length > 0) {

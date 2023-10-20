@@ -12,10 +12,10 @@ export default function PlaylistCreated({ newPlaylistID, data, accessToken }) {
       <Container>
       <TextContainer>
         <h1>Your playlist was created!</h1>
-        <p>Want to create another playlist?</p>
+        <p>We already saved the playlist to your Spotify. Want to create another playlist?</p>
         <button onClick={() => setCreateNew(true)}>Create new playlist</button>
       </TextContainer>
-      <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="752" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="752" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </Container>
       : <AllPlaylists data={data} accessToken={accessToken} />
     }

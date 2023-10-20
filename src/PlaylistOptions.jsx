@@ -14,12 +14,6 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
     getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType)
   }
 
-  console.log(songType)
-
-  console.log(playlistName)
-
-
-
 
   return (
     <>
@@ -31,13 +25,14 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
             <P onClick={() => setSongType("Saddest")}>...saddest songs</P>
             <P onClick={() => setSongType("Accoustic")}>...accoustic songs</P>
             <P onClick={() => setSongType("Energetic")}>...energetic songs</P>
-            {/* <P onClick={() => setSongType("instrumental")}>...instrumental songs</P> */}
-            <P onClick={() => setSongType("Live")}>...live songs</P>
+            <P onClick={() => setSongType("instrumental")}>...instrumental songs</P>
+            <P onClick={() => setSongType("Live")}>...live performed songs</P>
             <P onClick={() => setSongType("Major")}>...songs in major key</P>
             <P onClick={() => setSongType("Minor")}>...songs in minor key</P>
             <P onClick={() => setSongType("Danceable")}>...most danceable songs</P>
             <P onClick={() => setSongType("Fastest")}>...fastest songs</P>
             <P onClick={() => setSongType("Slowest")}>...slowest songs</P>
+            <P onClick={() => setSongType("Loudest")}>...loudest songs</P>
           </Options>
         </Container>
          :
@@ -53,7 +48,7 @@ display: grid;
 grid-template-columns: 2fr 1fr;
 
 h1 {
-  color: #148255;
+  // color: #148255;
 }
 `
 

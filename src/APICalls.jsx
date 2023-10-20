@@ -59,7 +59,6 @@ export function getUser(accessToken, setUserID) {
             },
         })
         .then((res) => {
-            console.log(res.data)
             setUserID(res.data.id)
         })
         .catch((err) => {

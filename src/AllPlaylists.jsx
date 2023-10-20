@@ -24,10 +24,14 @@ export default function AllPlaylists({ data, accessToken }) {
   function getPlaylistID() {
     console.log(publicplaylist)
 
-    let publicplaylisturl = publicplaylist.split("?si")[0].split("/")
-    let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
+    if (publicplaylist) {
+      let publicplaylisturl = publicplaylist.split("?si")[0].split("/")
+      let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
+  
+      setPlaylistid(publicplaylistid)
+    }
 
-    setPlaylistid(publicplaylistid)
+
   }
 
   function setSlide(p) {
@@ -54,7 +58,6 @@ useEffect(() => {
   }
   
 }, [firstSlide, lastSlide])
-console.log(lastSlide + 'e' + data.items.length)
 
   return (
     <>
@@ -86,7 +89,7 @@ console.log(lastSlide + 'e' + data.items.length)
           </ButtonContainer>
           
           <PublicPlaylist>
-          <h3>Or use a public playlist</h3>
+          <h3>Or enter the link of a playlist</h3>
           <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
           <button onClick={() => getPlaylistID()}>Continue</button>
           </PublicPlaylist>
