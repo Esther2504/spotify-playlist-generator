@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from './images/EmptyPlaylist.PNG'
+import { getTracks } from './APICalls'
 
 export default function AllPlaylists({ data, accessToken }) {
   const [playlistid, setPlaylistid] = useState()
@@ -11,6 +12,8 @@ export default function AllPlaylists({ data, accessToken }) {
   const [lastSlide, setLastSlide] = useState(10)
   const [hidePrev, setHidePrev] = useState(true)
   const [hideNext, setHideNext] = useState(false)
+  const [tracks, setTracks] = useState()
+  const [error, setError] = useState(false)
 
   console.log(data)
 
@@ -27,41 +30,48 @@ export default function AllPlaylists({ data, accessToken }) {
     if (publicplaylist) {
       let publicplaylisturl = publicplaylist.split("?si")[0].split("/")
       let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
-  
+
       setPlaylistid(publicplaylistid)
     }
 
 
   }
 
+  if (playlistid && !tracks) {
+    getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
+  }
+
+
   function setSlide(p) {
 
-if (p == 'next' && lastSlide < data.items.length) {
-    setFirstSlide(firstSlide + 10)
-    setLastSlide(lastSlide + 10)
-    setHidePrev(false)
+    if (p == 'next' && lastSlide < data.items.length) {
+      setFirstSlide(firstSlide + 10)
+      setLastSlide(lastSlide + 10)
+      setHidePrev(false)
 
-  } else if (p == 'prev' && firstSlide != '0') {
-    setFirstSlide(firstSlide - 10)
-    setLastSlide(lastSlide - 10)
+    } else if (p == 'prev' && firstSlide != '0') {
+      setFirstSlide(firstSlide - 10)
+      setLastSlide(lastSlide - 10)
+    }
   }
-}
 
-useEffect(() => {
-  if (lastSlide >= data.items.length) {
-    setHideNext(true)
-  } else if (firstSlide == 0) {
-    setHidePrev(true)
-  } else {
-    setHideNext(false)
-    setHidePrev(false)
-  }
-  
-}, [firstSlide, lastSlide])
+  useEffect(() => {
+    if (lastSlide >= data.items.length) {
+      setHideNext(true)
+    } else if (firstSlide == 0) {
+      setHidePrev(true)
+    } else {
+      setHideNext(false)
+      setHidePrev(false)
+    }
+
+  }, [firstSlide, lastSlide])
+
+console.log(error)
 
   return (
     <>
-      {!playlistid ?
+      {!playlistid && !tracks || error ?
         <Container>
           <h1>Choose one of your saved playlists</h1>
           <PlaylistContainer>
@@ -75,27 +85,25 @@ useEffect(() => {
                 <p>{playlist.name}</p>
               </Playlist>
             )}
-           
           </PlaylistContainer>
           <ButtonContainer>
-          {!hidePrev ?
-          <button onClick={() => setSlide('prev')}>Previous</button>
-          : <div></div>
-        }
-                  {!hideNext ?
-          <button onClick={() => setSlide('next')}>Next</button>
-          : <div></div>
-        }
+            {!hidePrev ?
+              <button onClick={() => setSlide('prev')}>Previous</button>
+              : <div></div>
+            }
+            {!hideNext ?
+              <button onClick={() => setSlide('next')}>Next</button>
+              : <div></div>
+            }
           </ButtonContainer>
-          
           <PublicPlaylist>
-          <h3>Or enter the link of a playlist</h3>
-          <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
-          <button onClick={() => getPlaylistID()}>Continue</button>
+            <h3>Or enter the link of a playlist</h3>
+            <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
+            <button onClick={() => getPlaylistID()}>Continue</button>
           </PublicPlaylist>
         </Container>
         :
-        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} setPlaylistName={setPlaylistName} /> }
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} setPlaylistName={setPlaylistName} tracks={tracks} />}
     </>
   )
 }

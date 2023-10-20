@@ -4,15 +4,15 @@ import axios from 'axios'
 import NewPlaylist from './NewPlaylist'
 import { getTracks } from './APICalls'
 
-export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken }) {
-  const [tracks, setTracks] = useState()
+export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken, tracks }) {
+  // const [tracks, setTracks] = useState()
   const [songType, setSongType] = useState()
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private`
 
-  if (playlistid && !tracks) {
-    getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType)
-  }
+  // if (playlistid && !tracks) {
+  //   getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType)
+  // }
 
 
   return (

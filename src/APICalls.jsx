@@ -17,7 +17,7 @@ export function getPlaylists(getAccessToken, setData, data, accessToken) {
         })
 }
 
-export function getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType) {
+export function getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
     axios
         .get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
             headers: {
@@ -31,6 +31,7 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
         })
         .catch((err) => {
             console.log(err.response)
+            setError(true)
         })
 
 }
