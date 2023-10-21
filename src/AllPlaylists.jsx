@@ -15,44 +15,33 @@ export default function AllPlaylists({ data, accessToken }) {
   const [tracks, setTracks] = useState()
   const [error, setError] = useState(false)
 
-  console.log(data)
-
   function choosePlaylist(playlist) {
     console.log(playlist.id)
     setPlaylistid(playlist.id)
     setPlaylistName(playlist.name)
   }
 
-
   function getPlaylistID() {
-    console.log(publicplaylist)
-
     if (publicplaylist) {
       let publicplaylisturl = publicplaylist.split("?si")[0].split("/")
       let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
-
       setPlaylistid(publicplaylistid)
     }
-
-
   }
-
-  if (playlistid && !tracks) {
-    getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
-  }
-
 
   function setSlide(p) {
-
     if (p == 'next' && lastSlide < data.items.length) {
       setFirstSlide(firstSlide + 10)
       setLastSlide(lastSlide + 10)
       setHidePrev(false)
-
     } else if (p == 'prev' && firstSlide != '0') {
       setFirstSlide(firstSlide - 10)
       setLastSlide(lastSlide - 10)
     }
+  }
+
+  if (playlistid && !tracks) {
+    getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
   }
 
   useEffect(() => {
@@ -64,42 +53,34 @@ export default function AllPlaylists({ data, accessToken }) {
       setHideNext(false)
       setHidePrev(false)
     }
-
   }, [firstSlide, lastSlide])
-
-console.log(error)
 
   return (
     <>
       {!playlistid && !tracks || error ?
         <Container>
-          <h1>Choose one of your saved playlists</h1>
+          <H1>Choose one of your saved playlists</H1>
           <PlaylistContainer>
             {data.items.slice(firstSlide, lastSlide).map((playlist) =>
               <Playlist onClick={() => choosePlaylist(playlist)}>
                 {playlist.images[0] ?
-                  <img src={playlist.images[0].url} />
+                  <Image src={playlist.images[0].url} />
                   :
-                  <img src={EmptyPlaylist} />
+                  <Image src={EmptyPlaylist} />
                 }
-                <p>{playlist.name}</p>
+                <P>{playlist.name}</P>
               </Playlist>
             )}
           </PlaylistContainer>
           <ButtonContainer>
-            {!hidePrev ?
-              <button onClick={() => setSlide('prev')}>Previous</button>
-              : <div></div>
-            }
-            {!hideNext ?
-              <button onClick={() => setSlide('next')}>Next</button>
-              : <div></div>
-            }
+              <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
+              <div/>
+              <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
           </ButtonContainer>
           <PublicPlaylist>
-            <h3>Or enter the link of a playlist</h3>
-            <input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></input>
-            <button onClick={() => getPlaylistID()}>Continue</button>
+            <H3>Or enter the link of a playlist</H3>
+            <Input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></Input>
+            <SubmitButton onClick={() => getPlaylistID()}>Continue</SubmitButton>
           </PublicPlaylist>
         </Container>
         :
@@ -114,16 +95,72 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+margin: 0 auto;
 `
-
 const PlaylistContainer = styled.div`
 display: flex;
 flex-wrap: wrap;
 gap: 20px;
 width: 1080px;
-max-width: 100%;
-`
+max-width: 90%;
+justify-content: space-evenly;
 
+display: grid; 
+grid-template-columns: repeat(5, 1fr);
+justify-content: space-evenly;
+
+@media screen and (max-width: 1100px) {
+  grid-template-columns: repeat(4, 1fr);
+  width: auto;
+}
+
+@media screen and (max-width: 900px) {
+  grid-template-columns: repeat(3, 1fr);
+  width: auto;
+}
+
+@media screen and (max-width: 680px) {
+  grid-template-columns: repeat(2, 1fr);
+  width: auto;
+}
+`
+const ButtonContainer = styled.div`
+width: 1080px;
+max-width: 100%;
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+// display: grid;
+@media screen and (max-width: 1100px) {
+  width: 860px;
+}
+
+@media screen and (max-width: 900px) {
+  width: 640px;
+}
+
+@media screen and (max-width: 680px) {
+  width: 420px;
+}
+
+@media screen and (max-width: 450px) {
+  width: 260px;
+}
+`
+const H1 = styled.h1``
+const H3 = styled.h3`
+margin: 0;
+font-size: 1.2rem;
+`
+const P = styled.p`
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 130px;
+margin: 10px auto;
+`
 const Playlist = styled.div`
 width: 200px;
 height: 250px;
@@ -133,42 +170,48 @@ font-size: 0.9rem;
 cursor: pointer;
 overflow: hidden;
 
-
-img {
+@media screen and (max-width: 450px) {
+  width: 120px;
+  height: 185px;
+  padding: 10px 5px;
+}
+`
+const Image = styled.img`
 width: 130px;
 border: 1px solid white;
-}
- p {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 130px;
-  margin: 10px auto;
- }
-`
-const ButtonContainer = styled.div`
-width: 1080px;
-display: flex;
-justify-content: space-between;
-margin-top: 20px;
 
-button {
-  background: #148255;
-  border: none;
-  color: #fff;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
+@media screen and (max-width: 450px) {
+  width: 100px;
 }
 `
+const Button = styled.button`
+background: #148255;
+border: none;
+color: #fff;
+padding: 15px 30px;
+font-size: 1.2rem;
+font-weight: 600;
+cursor: pointer;
+width: 130px;
 
-const Image = styled.img`
-width: 120px;
+@media screen and (max-width: 450px) {
+  width: 120px;
+}
+
+${({ hidePrev }) => hidePrev && `
+visibility: hidden;
+  `}
+
+  ${({ hideNext }) => hideNext && `
+visibility: hidden;
+  `}
 `
-
+const Input = styled.input`
+width: 85%;
+height: 30px;
+border: none;
+padding: 8px;
+`
 const PublicPlaylist = styled.div`
 width: 500px;
 display: flex;
@@ -178,27 +221,21 @@ background: #148255;
 margin: 40px;
 padding: 20px 5px;
 gap: 10px;
-// border: 1px solid white;
 
-h3 {
- margin: 0;
- font-size: 1.2rem;
+@media screen and (max-width: 680px) {
+  width: 420px;
 }
 
-input {
-  width: 85%;
-  height: 30px;
-  border: none;
-  padding: 8px;
+@media screen and (max-width: 450px) {
+  width: 260px;
 }
-
-button {
-  width: 85%;
-  height: 30px;
-  border: none;
-  background: #fff;
-  cursor: pointer;
-  font-weight: 600;
-  color: #33333;
-}
+`
+const SubmitButton = styled.button`
+width: 85%;
+height: 30px;
+border: none;
+background: #fff;
+cursor: pointer;
+font-weight: 600;
+color: #33333;
 `
