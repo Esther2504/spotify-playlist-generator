@@ -16,7 +16,6 @@ export default function AllPlaylists({ data, accessToken }) {
   const [error, setError] = useState(false)
 
   function choosePlaylist(playlist) {
-    console.log(playlist.id)
     setPlaylistid(playlist.id)
     setPlaylistName(playlist.name)
   }
@@ -55,9 +54,11 @@ export default function AllPlaylists({ data, accessToken }) {
     }
   }, [firstSlide, lastSlide])
 
+
+
   return (
     <>
-      {!playlistid && !tracks || error ?
+      {!playlistid && !tracks || !tracks ?
         <Container>
           <H1>Choose one of your saved playlists</H1>
           <PlaylistContainer>
@@ -73,13 +74,12 @@ export default function AllPlaylists({ data, accessToken }) {
             )}
           </PlaylistContainer>
           <ButtonContainer>
-              <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
-              <div/>
-              <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
+            <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
+            <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
           </ButtonContainer>
           <PublicPlaylist>
             <H3>Or enter the link of a playlist</H3>
-            <Input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)}></Input>
+            <Input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)} onKeyDown={() => getPlaylistID()}></Input>
             <SubmitButton onClick={() => getPlaylistID()}>Continue</SubmitButton>
           </PublicPlaylist>
         </Container>
@@ -124,13 +124,27 @@ justify-content: space-evenly;
   width: auto;
 }
 `
+const H1 = styled.h1``
+const H3 = styled.h3`
+margin: 0;
+font-size: 1.2rem;
+`
+const P = styled.p`
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 130px;
+margin: 10px auto;
+`
 const ButtonContainer = styled.div`
 width: 1080px;
 max-width: 100%;
 display: flex;
 justify-content: space-between;
 margin-top: 20px;
-// display: grid;
+
 @media screen and (max-width: 1100px) {
   width: 860px;
 }
@@ -146,20 +160,6 @@ margin-top: 20px;
 @media screen and (max-width: 450px) {
   width: 260px;
 }
-`
-const H1 = styled.h1``
-const H3 = styled.h3`
-margin: 0;
-font-size: 1.2rem;
-`
-const P = styled.p`
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
-text-overflow: ellipsis;
-max-width: 130px;
-margin: 10px auto;
 `
 const Playlist = styled.div`
 width: 200px;
@@ -199,18 +199,12 @@ width: 130px;
 }
 
 ${({ hidePrev }) => hidePrev && `
-visibility: hidden;
+    visibility: hidden;
   `}
 
   ${({ hideNext }) => hideNext && `
-visibility: hidden;
+    visibility: hidden;
   `}
-`
-const Input = styled.input`
-width: 85%;
-height: 30px;
-border: none;
-padding: 8px;
 `
 const PublicPlaylist = styled.div`
 width: 500px;
@@ -229,6 +223,12 @@ gap: 10px;
 @media screen and (max-width: 450px) {
   width: 260px;
 }
+`
+const Input = styled.input`
+width: 85%;
+height: 30px;
+border: none;
+padding: 8px;
 `
 const SubmitButton = styled.button`
 width: 85%;
