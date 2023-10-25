@@ -16,6 +16,7 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
 
   // gaat nog fout bij playlists met podcasts
 
+  console.log(tracks)
 
   return (
     <>

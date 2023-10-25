@@ -31,9 +31,28 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
         })
         .catch((err) => {
             console.log(err.response)
-            setError(true)
+            getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
+            // setError(true)
         })
 
+}
+
+function getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
+    axios
+    .get(`https://api.spotify.com/v1/albums/${playlistid}`, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    })
+    .then((res) => {
+        console.log(res.data)
+        setTracks(res.data.tracks)
+        setPlaylistName(res.data.name)
+    })
+    .catch((err) => {
+        console.log(err.response)
+        setError(true)
+    })
 }
 
 export function getAudioFeatures(trackids, accessToken, setaudioDetails) {

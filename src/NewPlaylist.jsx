@@ -14,15 +14,17 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   const [newPlaylistID, setNewPlayListID] = useState()
   const [noSongs, setNoSongs] = useState(false)
 
-  let trackids = []
   console.log(tracks)
+  let trackids = []
   tracks.forEach(element => {
-    if (element.track) {
-      trackids.push(element.track.id)
+    if (element.track || element.type == "track") {
+      if (element.track) {
+        trackids.push(element.track.id)
+      } else {
+        trackids.push(element.id)
+      }
     }
-    
   })
-console.log(trackids)
 
   if (songType && trackids && !audioDetails) {
     console.log(trackids)
