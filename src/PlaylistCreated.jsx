@@ -8,17 +8,17 @@ export default function PlaylistCreated({ newPlaylistID, data, accessToken }) {
   console.log(newPlaylistID)
   return (
     <>
-    {!createNew ?
-      <Container>
-      <TextContainer>
-        <h1>Your playlist was created!</h1>
-        <p>We already saved the playlist to your Spotify. Want to create another playlist?</p>
-        <button onClick={() => setCreateNew(true)}>Create new playlist</button>
-      </TextContainer>
-      <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="100%" height="752" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </Container>
-      : <AllPlaylists data={data} accessToken={accessToken} />
-    }
+      {!createNew ?
+        <Container>
+          <TextContainer>
+            <h1>Your playlist was created!</h1>
+            <p>We already saved the playlist to your Spotify. Want to create another playlist?</p>
+            <button onClick={() => setCreateNew(true)}>Create new playlist</button>
+          </TextContainer>
+          <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="300" height="752" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </Container>
+        : <AllPlaylists data={data} accessToken={accessToken} />
+      }
     </>
   )
 }
@@ -27,7 +27,9 @@ const Container = styled.div`
 display: flex;
 text-align: left;
 gap: 60px;
-margin: 0 100px;
+width: 90%;
+max-width: 100%;
+margin: 0 auto;
 
 iframe {
   width: 700px;
@@ -36,10 +38,16 @@ iframe {
 
 @media screen and (max-width: 1100px) {
   flex-direction: column;
+
+  iframe {
+    width: 500px;
+  }
 }
 `
 
 const TextContainer = styled.div`
+max-width: 100%;
+
 button {
   background: #148255;
   border: none;
@@ -51,7 +59,6 @@ button {
 }
 
 @media screen and (max-width: 1100px) {
-  width: 700px;
   max-width: 100%;
 }
 `
