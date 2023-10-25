@@ -15,9 +15,17 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   const [noSongs, setNoSongs] = useState(false)
 
   let trackids = []
-  tracks.forEach(element => trackids.push(element.track.id))
+  console.log(tracks)
+  tracks.forEach(element => {
+    if (element.track) {
+      trackids.push(element.track.id)
+    }
+    
+  })
+console.log(trackids)
 
   if (songType && trackids && !audioDetails) {
+    console.log(trackids)
     getAudioFeatures(trackids, accessToken, setaudioDetails)
   }
 
@@ -31,9 +39,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
     switch (songType) {
       case "Happiest":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].valence > 0.4 && audioDetails[i].energy > 0.4 && audioDetails[i].tempo > 95 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
         }
         if (newPlaylistIds.length < 1) {
           setNoSongs(true)
@@ -43,9 +53,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Saddest":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].valence < 0.4 && audioDetails[i].energy < 0.65 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -55,10 +67,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Accoustic":
         for (let i = 0; i < audioDetails.length; i++) {
-          console.log(audioDetails[i].acousticness)
+          if (audioDetails[i]) {
           if (audioDetails[i].acousticness > 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -68,10 +81,12 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Danceable":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           console.log(audioDetails[i].energy)
           if (audioDetails[i].danceability > 0.6 && audioDetails[i].energy > 0.6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -81,9 +96,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Energetic":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].energy > 0.7 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -93,9 +110,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Live":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].liveness > 0.6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -105,9 +124,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Major":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].mode == 1 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -117,9 +138,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Minor":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].mode == 0 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -129,9 +152,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Fastest":
         for (let i = 0; i < audioDetails.length; i++) {
+          if (audioDetails[i]) {
           if (audioDetails[i].tempo > 120 && audioDetails[i].energy > 0.6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -141,10 +166,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Slowest":
         for (let i = 0; i < audioDetails.length; i++) {
-          console.log(audioDetails[i].tempo)
+          if (audioDetails[i]) {
           if (audioDetails[i].tempo < 105 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {
@@ -154,10 +180,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         break;
       case "Loudest":
         for (let i = 0; i < audioDetails.length; i++) {
-          console.log(audioDetails[i].loudness)
+          if (audioDetails[i]) {
           if (audioDetails[i].loudness > -6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
             newPlaylistIds.push(audioDetails[i].uri)
           }
+        }
           if (newPlaylistIds.length < 1) {
             setNoSongs(true)
           } else {

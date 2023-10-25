@@ -14,6 +14,8 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
   //   getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, songType)
   // }
 
+  // gaat nog fout bij playlists met podcasts
+
 
   return (
     <>

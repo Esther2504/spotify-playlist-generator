@@ -37,6 +37,7 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
 }
 
 export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
+    console.log(trackids)
     axios
         .get(`https://api.spotify.com/v1/audio-features?ids=${trackids}`, {
             headers: {
@@ -45,7 +46,10 @@ export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
         })
         .then((res) => {
             console.log(res.data)
-            setaudioDetails(res.data.audio_features)
+            if (res.data.audio_features) {
+                setaudioDetails(res.data.audio_features)
+            }
+            
         })
         .catch((err) => {
             console.log(err.response)
