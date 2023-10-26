@@ -54,8 +54,6 @@ export default function AllPlaylists({ data, accessToken }) {
     }
   }, [firstSlide, lastSlide])
 
-
-
   return (
     <>
       {!playlistid && !tracks || !tracks ?
@@ -78,8 +76,8 @@ export default function AllPlaylists({ data, accessToken }) {
             <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
           </ButtonContainer>
           <PublicPlaylist>
-            <H3>Or enter the link of a playlist</H3>
-            <Input placeholder='Enter Playlist URL' onChange={(e) => setPublicplaylist(e.target.value)} onKeyDown={() => getPlaylistID()}></Input>
+            <H3>Or enter the link of a playlist/album</H3>
+            <Input placeholder='Enter URL' onChange={(e) => setPublicplaylist(e.target.value)} onKeyDown={() => getPlaylistID()}></Input>
             <SubmitButton onClick={() => getPlaylistID()}>Continue</SubmitButton>
           </PublicPlaylist>
         </Container>
@@ -98,16 +96,13 @@ align-items: center;
 margin: 0 auto;
 `
 const PlaylistContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
 width: 1080px;
 max-width: 90%;
 justify-content: space-evenly;
-
 display: grid; 
 grid-template-columns: repeat(5, 1fr);
 justify-content: space-evenly;
+gap: 20px;
 
 @media screen and (max-width: 1100px) {
   grid-template-columns: repeat(4, 1fr);
@@ -212,7 +207,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background: #148255;
-margin: 40px;
+margin: 20px;
 padding: 20px 5px;
 gap: 10px;
 

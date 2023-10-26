@@ -5,7 +5,6 @@ import AllPlaylists from './AllPlaylists'
 export default function PlaylistCreated({ newPlaylistID, data, accessToken }) {
   const [createNew, setCreateNew] = useState(false)
 
-  console.log(newPlaylistID)
   return (
     <>
       {!createNew ?

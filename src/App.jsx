@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import axios from 'axios';
 import AllPlaylists from './AllPlaylists';
-import styled from 'styled-components';
 import StartPage from './StartPage';
 import { getPlaylists } from './APICalls';
-import PlaylistOptions from './PlaylistOptions';
-import NewPlaylist from './NewPlaylist';
 
 function App() {
   const [data, setData] = useState()
@@ -20,7 +16,6 @@ function App() {
   const goToNextStep = () => {
     setCurrentStep(currentStep + 1);
   };
-
 
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
@@ -36,12 +31,10 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-      </nav>
       <header className="App-header">
-      {!data ?
-       <StartPage AUTH_URL={AUTH_URL} />
-         : <AllPlaylists data={data} accessToken={getAccessToken} />}
+        {!data ?
+          <StartPage AUTH_URL={AUTH_URL} />
+          : <AllPlaylists data={data} accessToken={getAccessToken} />}
       </header>
     </div>
   );
