@@ -10,11 +10,11 @@ export default function PlaylistCreated({ newPlaylistID, data, accessToken }) {
       {!createNew ?
         <Container>
           <TextContainer>
-            <h1>Your playlist was created!</h1>
-            <p>We already saved the playlist to your Spotify. Want to create another playlist?</p>
-            <button onClick={() => setCreateNew(true)}>Create new playlist</button>
+            <H1>Your playlist was created!</H1>
+            <P>We already saved the playlist to your Spotify. Want to create another playlist?</P>
+            <Button onClick={() => setCreateNew(true)}>Create new playlist</Button>
           </TextContainer>
-          <iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="300" height="752" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <Iframe src={`https://open.spotify.com/embed/playlist/${newPlaylistID}`} width="300" height="752" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></Iframe>
         </Container>
         : <AllPlaylists data={data} accessToken={accessToken} />
       }
@@ -30,24 +30,20 @@ width: 90%;
 max-width: 100%;
 margin: 0 auto;
 
-iframe {
-  width: 700px;
-  max-width: 100%;
-}
-
 @media screen and (max-width: 1100px) {
   flex-direction: column;
-
-  iframe {
-    width: 500px;
-  }
 }
 `
 
 const TextContainer = styled.div`
 max-width: 100%;
 
-button {
+@media screen and (max-width: 1100px) {
+  max-width: 100%;
+}
+`
+
+const Button = styled.button`
   background: #148255;
   border: none;
   color: #fff;
@@ -55,9 +51,16 @@ button {
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
-}
-
-@media screen and (max-width: 1100px) {
-  max-width: 100%;
-}
 `
+
+const Iframe = styled.iframe`
+  width: 700px;
+  max-width: 100%;
+
+  @media screen and (max-width: 1100px) {
+    width: 500px;
+  }
+`
+
+const H1 = styled.h1``
+const P = styled.p``

@@ -13,8 +13,8 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
         <Container>
           <h1>Create a new playlist with the...</h1>
           <Options>
-            <P onClick={() => setSongType("Happiest")}>...songs with a positive sound</P>
-            <P onClick={() => setSongType("Saddest")}>...songs with a negative sound</P>
+            <P onClick={() => setSongType("Positive")}>...positive songs</P>
+            <P onClick={() => setSongType("Sad")}>...sad songs</P>
             <P onClick={() => setSongType("Accoustic")}>...accoustic songs</P>
             <P onClick={() => setSongType("Energetic")}>...energetic songs</P>
             <P onClick={() => setSongType("instrumental")}>...instrumental songs</P>
