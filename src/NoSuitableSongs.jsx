@@ -9,9 +9,9 @@ export default function NoSuitableSongs({ data, accessToken }) {
     <>
       {!createNew ?
         <Container>
-          <H1>We couldn't find any fitting songs in your playlist</H1>
+          <H1>We couldn't find any fitting songs in this playlist</H1>
           <P>Want to try another playlist?</P>
-          <Button onClick={() => setCreateNew(true)}>Another playlist</Button>
+          <Button onClick={() => setCreateNew(true)}>Choose a playlist</Button>
         </Container>
         : <AllPlaylists data={data} accessToken={accessToken} />
       }
@@ -25,6 +25,7 @@ max-width: 100%;
 display: flex;
 text-align: left;
 gap: 30px;
+flex-direction: column;
 `
 const H1 = styled.h1``
 const P = styled.p``
@@ -37,4 +38,5 @@ padding: 15px 30px;
 font-size: 1.2rem;
 font-weight: 600;
 cursor: pointer;
+width: 250px;
 `
