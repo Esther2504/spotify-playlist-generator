@@ -163,7 +163,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Slowest":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].tempo < 105 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].tempo < 90 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }
