@@ -78,7 +78,6 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Danceable":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              console.log(audioDetails[i].energy)
               if (audioDetails[i].danceability > 0.6 && audioDetails[i].energy > 0.6 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
@@ -163,7 +162,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Slowest":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].tempo < 90 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].tempo < 105 && audioDetails[i].energy < 0.65 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }
