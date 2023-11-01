@@ -7,10 +7,10 @@ export default function StartPage({ AUTH_URL }) {
       <Text>
         <H1>
           <Span>Spotify</Span>
-          <BR />playlist
-          <BR />regenerator
+          <BR />Playlist
+          <BR />Mixer
         </H1>
-        <P>Create new playlists from already existing playlists that fit your mood and needs</P>
+        <P>Create new playlists from existing playlists based on mood and genre preferences</P>
         <A href={AUTH_URL}>
           <Button>Connect your Spotify</Button>
         </A>
