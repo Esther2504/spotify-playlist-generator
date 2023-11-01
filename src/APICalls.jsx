@@ -9,10 +9,8 @@ export function getPlaylists(getAccessToken, setData, data, accessToken) {
         })
         .then((res) => {
             setData(res.data)
-            console.log(data)
         })
         .catch((err) => {
-            console.log(err.response)
         })
 }
 
@@ -24,38 +22,32 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
             },
         })
         .then((res) => {
-            console.log(res.data)
             setTracks(res.data.tracks)
             setPlaylistName(res.data.name)
         })
         .catch((err) => {
-            console.log(err.response)
             getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
-            // setError(true)
         })
 
 }
 
 function getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
     axios
-    .get(`https://api.spotify.com/v1/albums/${playlistid}`, {
-        headers: {
-            Authorization: "Bearer " + accessToken,
-        },
-    })
-    .then((res) => {
-        console.log(res.data)
-        setTracks(res.data.tracks)
-        setPlaylistName(res.data.name)
-    })
-    .catch((err) => {
-        console.log(err.response)
-        setError(true)
-    })
+        .get(`https://api.spotify.com/v1/albums/${playlistid}`, {
+            headers: {
+                Authorization: "Bearer " + accessToken,
+            },
+        })
+        .then((res) => {
+            setTracks(res.data.tracks)
+            setPlaylistName(res.data.name)
+        })
+        .catch((err) => {
+            setError(true)
+        })
 }
 
 export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
-    console.log(trackids)
     axios
         .get(`https://api.spotify.com/v1/audio-features?ids=${trackids}`, {
             headers: {
@@ -63,14 +55,12 @@ export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
             },
         })
         .then((res) => {
-            console.log(res.data)
             if (res.data.audio_features) {
                 setaudioDetails(res.data.audio_features)
             }
-            
+
         })
         .catch((err) => {
-            console.log(err.response)
         })
 }
 
@@ -85,7 +75,6 @@ export function getUser(accessToken, setUserID) {
             setUserID(res.data.id)
         })
         .catch((err) => {
-            console.log(err.response)
         })
 }
 
@@ -106,12 +95,10 @@ export function createPlaylist(userID, accessToken, songType, playlistName, genr
     if (!newPlaylist) {
         axios.post(url, data, { headers })
             .then(response => {
-                console.log('Playlist created:', response.data);
                 setNewPlayListID(response.data.id)
                 setNewPlaylist(response.data.tracks.href)
             })
             .catch(error => {
-                console.error('Error creating playlist:', error);
             });
     }
 }
@@ -129,22 +116,13 @@ export function addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setP
         position: 0
     };
 
-    console.log(requestData)
-
-
-    console.log(`${newPlaylist}`)
-
     axios.post(newPlaylist, requestData, {
         headers: requestHeaders
     })
         .then(response => {
-
-            console.log(response.data);
-
             setPlaylistCreated(true)
         })
         .catch(error => {
 
-            console.error(error);
         });
 }

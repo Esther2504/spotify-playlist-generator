@@ -13,10 +13,6 @@ function App() {
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
-  const goToNextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
       setAccessToken(getAccessToken)
@@ -39,7 +35,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
