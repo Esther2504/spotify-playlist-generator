@@ -28,7 +28,7 @@ text-align: left;
 gap: 60px;
 width: 90%;
 max-width: 100%;
-margin: 0 auto;
+margin: 50px auto;
 
 @media screen and (max-width: 1100px) {
   flex-direction: column;
