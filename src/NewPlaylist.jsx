@@ -51,7 +51,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Sad":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].valence < 0.4 && audioDetails[i].energy < 0.65 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].valence < 0.5 && audioDetails[i].energy < 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }
@@ -239,25 +239,25 @@ const Round = styled.div`
   height: 15px;
   border-radius: 90px;
   background: white;
-  animation: spinner 1.7s cubic-bezier(.38,.55,.8,.38) infinite;
+  animation: spinner 0.7s cubic-bezier(.38,.55,.8,.38) infinite;
   position: absolute;
   top: 0;
   left: 0;
 
 &:nth-child(2) {
-  animation: spinner 1.8s cubic-bezier(.38,.55,.8,.38) infinite;
+  animation: spinner 0.8s cubic-bezier(.38,.55,.8,.38) infinite;
 }
 
 &:nth-child(3) {
-  animation: spinner 1.9s cubic-bezier(.38,.55,.8,.38) infinite;
+  animation: spinner 0.9s cubic-bezier(.38,.55,.8,.38) infinite;
 }
 
 &:nth-child(4) {
-  animation: spinner 2s cubic-bezier(.38,.55,.8,.38) infinite;
+  animation: spinner 1s cubic-bezier(.38,.55,.8,.38) infinite;
 }
 
 &:nth-child(5) {
-  animation: spinner 2.1s cubic-bezier(.38,.55,.8,.38) infinite;
+  animation: spinner 1.1s cubic-bezier(.38,.55,.8,.38) infinite;
 }
 
 @keyframes spinner {
