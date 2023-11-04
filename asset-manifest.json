@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/spotify-playlist-generator/static/css/main.b65f8d08.css",
-    "main.js": "/spotify-playlist-generator/static/js/main.0007143d.js",
+    "main.js": "/spotify-playlist-generator/static/js/main.534cb7ae.js",
     "static/media/EmptyPlaylist.PNG": "/spotify-playlist-generator/static/media/EmptyPlaylist.2f9072ac2c5b9d20ac6d.PNG",
     "index.html": "/spotify-playlist-generator/index.html",
     "main.b65f8d08.css.map": "/spotify-playlist-generator/static/css/main.b65f8d08.css.map",
-    "main.0007143d.js.map": "/spotify-playlist-generator/static/js/main.0007143d.js.map"
+    "main.534cb7ae.js.map": "/spotify-playlist-generator/static/js/main.534cb7ae.js.map"
   },
   "entrypoints": [
     "static/css/main.b65f8d08.css",
-    "static/js/main.0007143d.js"
+    "static/js/main.534cb7ae.js"
   ]
 }
