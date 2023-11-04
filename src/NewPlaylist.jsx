@@ -34,7 +34,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   useEffect(() => {
     if (audioDetails) {
       switch (songType) {
-        case "Positive":
+        case "Happy":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
               if (audioDetails[i].valence > 0.4 && audioDetails[i].energy > 0.4 && audioDetails[i].tempo > 95 && !newPlaylistIds.includes(audioDetails[i].uri)) {
@@ -51,7 +51,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Sad":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].valence < 0.5 && audioDetails[i].energy < 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].valence < 0.4 && audioDetails[i].energy < 0.8 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }
