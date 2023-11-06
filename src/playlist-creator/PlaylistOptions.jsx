@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import NewPlaylist from './NewPlaylist'
+import NewPlaylist from './NewPlaylist.jsx'
 
 export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken, tracks }) {
   const [songType, setSongType] = useState()

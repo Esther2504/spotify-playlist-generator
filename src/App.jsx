@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import AllPlaylists from './AllPlaylists';
-import StartPage from './StartPage';
-import { getPlaylists } from './APICalls';
+import AllPlaylists from './playlist-creator/AllPlaylists';
+import StartPage from './playlist-creator/StartPage';
+import { getPlaylists } from './playlist-creator/APICalls';
 
 function App() {
   const [data, setData] = useState()

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PlaylistOptions from './PlaylistOptions'
-import EmptyPlaylist from './images/EmptyPlaylist.PNG'
+import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 import { getTracks } from './APICalls'
 
 export default function AllPlaylists({ data, accessToken }) {
