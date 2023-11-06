@@ -3,6 +3,7 @@ import './App.css';
 import AllPlaylists from './playlist-creator/AllPlaylists';
 import StartPage from './playlist-creator/StartPage';
 import { getPlaylists } from './playlist-creator/APICalls';
+import Start from './song-suggestions/Start';
 
 function App() {
   const [data, setData] = useState()
@@ -27,9 +28,13 @@ function App() {
 
   return (
     <div className="App">
+      <nav>
+        <a>Song suggestion tool</a>
+      </nav>
       <header className="App-header">
         {!data ?
-          <StartPage AUTH_URL={AUTH_URL} />
+          // <StartPage AUTH_URL={AUTH_URL} />
+          <Start/>
           : <AllPlaylists data={data} accessToken={getAccessToken} />}
       </header>
     </div>
