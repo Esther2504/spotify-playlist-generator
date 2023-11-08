@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { getGenres } from './APICalls'
+import styled from 'styled-components'
 
 export default function Start() {
-  const [genres, setGenres] = useState()
+  const [genres, setGenres] = useState([])
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
   useEffect(() => {
-
     if (getAccessToken) {
       getGenres(getAccessToken, setGenres)
     }
-    
-    console.log(genres)
   }, [getAccessToken])
 
   return (
@@ -25,11 +23,35 @@ export default function Start() {
         <button>Get started</button>
       </a>
       <form>
-        <p>What are your favorite genres?</p>
-        <input type="checkbox" /><label></label>
-
+        <label>
+        <p>Who are your favorite artists?</p>
+        <input type="text"></input>
+        </label>
+        <label>
+          <p>What are your favorite songs?</p>
+          <input type="text"></input>
+        </label>
+        {genres ?
+          <>
+            <p>What are your favorite genres?</p>
+            <Genres>
+              {genres.map((genre) => <label><input type="checkbox" value={genre} />{genre}<br /></label>)}
+            </Genres>
+          </>
+          : null
+        }
+        <label>
+          <p>How many recommendations do you want?</p>
+          <input type="number" min="1" max="100"></input>
+        </label>
       </form>
     </div>
   )
 }
 
+const Genres = styled.div`
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+text-align: left;
+font-size: 1rem;
+`
