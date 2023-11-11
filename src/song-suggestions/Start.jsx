@@ -41,6 +41,13 @@ export default function Start() {
         <label>
           <p>What are your favorite songs?</p>
           <input type="text" onChange={(e) => songSuggestions(e.target.value)}></input>
+          {suggestions && song.length > 2 ? 
+          <>
+          {suggestions.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+          </>
+          
+        : null  
+        }
         </label>
         {genres ?
           <>

@@ -13,7 +13,7 @@ export function getGenres(getAccessToken, getGenres) {
                 console.log(err)
             });
 }
-export function searchSong(getAccessToken, song) {
+export function searchSong(getAccessToken, song, setSuggestions) {
         axios.get('https://api.spotify.com/v1/search', {
             params: {
                 q: song,
@@ -27,6 +27,7 @@ export function searchSong(getAccessToken, song) {
         })
             .then(res => {
                 console.log(res.data)
+                setSuggestions(res.data.tracks.items)
             })
             .catch(err => {
                 console.log(err)
