@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getGenres } from './APICalls'
+import { getGenres, searchSong } from './APICalls'
 import styled from 'styled-components'
 
 export default function Start() {
   const [genres, setGenres] = useState([])
+  const [song, setSong] = useState([])
+  const [suggestions, setSuggestions] = useState()
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -14,6 +16,15 @@ export default function Start() {
       getGenres(getAccessToken, setGenres)
     }
   }, [getAccessToken])
+
+ function songSuggestions(value) {
+  setSong(value)
+  if (value.length > 2) {
+    searchSong(getAccessToken, song, setSuggestions)
+  }
+  
+  console.log(suggestions)
+ }
 
   return (
     <div>
@@ -29,7 +40,7 @@ export default function Start() {
         </label>
         <label>
           <p>What are your favorite songs?</p>
-          <input type="text"></input>
+          <input type="text" onChange={(e) => songSuggestions(e.target.value)}></input>
         </label>
         {genres ?
           <>
