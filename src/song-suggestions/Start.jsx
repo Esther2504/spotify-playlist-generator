@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { getGenres, searchSong } from './APICalls'
+import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 
 export default function Start() {
   const [genres, setGenres] = useState([])
   const [song, setSong] = useState([])
-  const [suggestions, setSuggestions] = useState()
+  const [artist, setArtist] = useState([])
+  const [artistSuggestions, setArtistSuggestions] = useState()
+  const [songSuggestions, setSongSuggestions] = useState()
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -17,13 +19,22 @@ export default function Start() {
     }
   }, [getAccessToken])
 
- function songSuggestions(value) {
+ function getSongSuggestions(value) {
   setSong(value)
   if (value.length > 2) {
-    searchSong(getAccessToken, song, setSuggestions)
+    searchSong(getAccessToken, song, setSongSuggestions)
   }
   
-  console.log(suggestions)
+  console.log(songSuggestions)
+ }
+
+ function getArtistSuggestions(value) {
+  setArtist(value)
+  if (value.length > 2) {
+    searchArtist(getAccessToken, artist, setArtistSuggestions)
+  }
+  
+  console.log(artistSuggestions)
  }
 
   return (
@@ -36,14 +47,21 @@ export default function Start() {
       <form>
         <label>
         <p>Who are your favorite artists?</p>
-        <input type="text"></input>
+        <input type="text" onChange={(e) => getArtistSuggestions(e.target.value)}></input>
+        {artistSuggestions && artist.length > 2 ? 
+          <>
+          {artistSuggestions.map((suggestion) => <p><img src={suggestion.images[0].url} />{suggestion.name}</p>)}
+          </>
+          
+        : null  
+        }
         </label>
         <label>
           <p>What are your favorite songs?</p>
-          <input type="text" onChange={(e) => songSuggestions(e.target.value)}></input>
-          {suggestions && song.length > 2 ? 
+          <input type="text" onChange={(e) => getSongSuggestions(e.target.value)}></input>
+          {songSuggestions && song.length > 2 ? 
           <>
-          {suggestions.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+          {songSuggestions.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
           </>
           
         : null  

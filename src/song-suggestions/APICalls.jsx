@@ -1,35 +1,55 @@
 import axios from "axios";
 export function getGenres(getAccessToken, getGenres) {
-        axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
-            headers: {
-                Authorization: "Bearer " + getAccessToken,
-            },
+    axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
+        headers: {
+            Authorization: "Bearer " + getAccessToken,
+        },
+    })
+        .then(res => {
+            console.log(res.data.genres)
+            getGenres(res.data.genres)
         })
-            .then(res => {
-                console.log(res.data.genres)
-         getGenres(res.data.genres)
-            })
-            .catch(err => {
-                console.log(err)
-            });
+        .catch(err => {
+            console.log(err)
+        });
 }
-export function searchSong(getAccessToken, song, setSuggestions) {
-        axios.get('https://api.spotify.com/v1/search', {
-            params: {
-                q: song,
-                type: "track",
-                limit: 5
-              },
-            headers: {
-                Authorization: "Bearer " + getAccessToken,
-            },
-            
+export function searchArtist(getAccessToken, artist, setArtistSuggestions) {
+    axios.get('https://api.spotify.com/v1/search', {
+        params: {
+            q: artist,
+            type: "artist",
+            limit: 5
+        },
+        headers: {
+            Authorization: "Bearer " + getAccessToken,
+        },
+
+    })
+        .then(res => {
+            console.log(res.data)
+            setArtistSuggestions(res.data.artists.items)
         })
-            .then(res => {
-                console.log(res.data)
-                setSuggestions(res.data.tracks.items)
-            })
-            .catch(err => {
-                console.log(err)
-            });
+        .catch(err => {
+            console.log(err)
+        });
+}
+export function searchSong(getAccessToken, song, setSongSuggestions) {
+    axios.get('https://api.spotify.com/v1/search', {
+        params: {
+            q: song,
+            type: "track",
+            limit: 5
+        },
+        headers: {
+            Authorization: "Bearer " + getAccessToken,
+        },
+
+    })
+        .then(res => {
+            console.log(res.data)
+            setSongSuggestions(res.data.tracks.items)
+        })
+        .catch(err => {
+            console.log(err)
+        });
 }
