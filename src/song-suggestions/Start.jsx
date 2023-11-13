@@ -8,6 +8,7 @@ export default function Start() {
   const [artist, setArtist] = useState([])
   const [artistSuggestions, setArtistSuggestions] = useState()
   const [songSuggestions, setSongSuggestions] = useState()
+  const [chosenSongs, setChosenSongs] = useState([])
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -37,6 +38,8 @@ export default function Start() {
   console.log(artistSuggestions)
  }
 
+ console.log(chosenSongs)
+
   return (
     <div>
       <h1>Song suggestion tool</h1>
@@ -61,11 +64,21 @@ export default function Start() {
           <input type="text" onChange={(e) => getSongSuggestions(e.target.value)}></input>
           {songSuggestions && song.length > 2 ? 
           <>
-          {songSuggestions.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+          {songSuggestions.map((suggestion) => <p onClick={(e) => setChosenSongs([...chosenSongs, suggestion])}>{suggestion.name} - {suggestion.artists[0].name}</p>)}
           </>
           
         : null  
         }
+        <div>
+          <p>Chosen songs:</p>
+          {chosenSongs ? 
+          <>
+          {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+          </>
+          
+        : null  
+        }
+        </div>
         </label>
         {genres ?
           <>
