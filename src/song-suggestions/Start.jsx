@@ -50,23 +50,21 @@ export default function Start() {
       <form>
         <label>
         <p>Who are your favorite artists?</p>
-        <input type="text" onChange={(e) => getArtistSuggestions(e.target.value)}></input>
+        <TextInput type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
         {artistSuggestions && artist.length > 2 ? 
-          <>
+          <Suggestions>
           {artistSuggestions.map((suggestion) => <p><img src={suggestion.images[0].url} />{suggestion.name}</p>)}
-          </>
-          
+          </Suggestions>
         : null  
         }
         </label>
         <label>
           <p>What are your favorite songs?</p>
-          <input type="text" onChange={(e) => getSongSuggestions(e.target.value)}></input>
+          <TextInput type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
           {songSuggestions && song.length > 2 ? 
-          <>
-          {songSuggestions.map((suggestion) => <p onClick={(e) => setChosenSongs([...chosenSongs, suggestion])}>{suggestion.name} - {suggestion.artists[0].name}</p>)}
-          </>
-          
+          <Suggestions>
+          {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenSongs([...chosenSongs, suggestion])}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+          </Suggestions>
         : null  
         }
         <div>
@@ -103,4 +101,27 @@ display: grid;
 grid-template-columns: repeat(7, 1fr);
 text-align: left;
 font-size: 1rem;
+`
+
+const TextInput = styled.input`
+width: 500px;
+height: 40px;
+font-size: 1rem;
+border: 2px solid #148255;
+border-radius: 10px 10px 0 0;
+padding: 0 10px;
+outline: none;
+`
+
+const Suggestions = styled.div`
+border: 2px solid #148255;
+width: 500px;
+margin: 0 auto;
+padding: 0 10px;
+text-align: left;
+font-size: 0.8rem;
+`
+
+const Suggestion = styled.p`
+cursor: pointer;
 `
