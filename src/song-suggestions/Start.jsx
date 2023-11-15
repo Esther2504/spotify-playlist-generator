@@ -9,6 +9,7 @@ export default function Start() {
   const [artistSuggestions, setArtistSuggestions] = useState()
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState([])
+  const [chosenArtists, setChosenArtists] = useState([])
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -53,10 +54,20 @@ export default function Start() {
         <TextInput type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
         {artistSuggestions && artist.length > 2 ? 
           <Suggestions>
-          {artistSuggestions.map((suggestion) => <p><img src={suggestion.images[0].url} />{suggestion.name}</p>)}
+          {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
           </Suggestions>
         : null  
         }
+                <div>
+          <p>Chosen artists:</p>
+          {chosenArtists ? 
+          <>
+          {chosenArtists.map((suggestion) => <p>{suggestion.name}</p>)}
+          </>
+          
+        : null  
+        }
+        </div>
         </label>
         <label>
           <p>What are your favorite songs?</p>
@@ -124,4 +135,11 @@ font-size: 0.8rem;
 
 const Suggestion = styled.p`
 cursor: pointer;
+display: flex;
+align-items: center;
+`
+
+const ArtistImg = styled.img`
+width: 50px;
+margin-right: 5px;
 `
