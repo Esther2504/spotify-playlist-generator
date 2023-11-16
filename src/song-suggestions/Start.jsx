@@ -46,7 +46,7 @@ export default function Start() {
       <h1>Song suggestion tool</h1>
       <p>Get suggestions based on your favorite songs, artists, genres</p>
       <a href={AUTH_URL}>
-        <button>Get started</button>
+        <Button>Get started</Button>
       </a>
       <form>
         <label>
@@ -62,7 +62,7 @@ export default function Start() {
           <p>Chosen artists:</p>
           {chosenArtists ? 
           <>
-          {chosenArtists.map((suggestion) => <p>{suggestion.name}</p>)}
+          {chosenArtists.map((suggestion) => <p><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</p>)}
           </>
           
         : null  
@@ -93,7 +93,7 @@ export default function Start() {
           <>
             <p>What are your favorite genres?</p>
             <Genres>
-              {genres.map((genre) => <label><input type="checkbox" value={genre} />{genre}<br /></label>)}
+              {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
             </Genres>
           </>
           : null
@@ -106,6 +106,15 @@ export default function Start() {
     </div>
   )
 }
+
+const Button = styled.button`
+background: #148255;
+border: none;
+color: #fff;
+padding: 15px 30px;
+font-size: 1.5rem;
+cursor: pointer;
+`
 
 const Genres = styled.div`
 display: grid;
@@ -130,7 +139,7 @@ width: 500px;
 margin: 0 auto;
 padding: 0 10px;
 text-align: left;
-font-size: 0.8rem;
+font-size: 0.9rem;
 `
 
 const Suggestion = styled.p`
@@ -142,4 +151,12 @@ align-items: center;
 const ArtistImg = styled.img`
 width: 50px;
 margin-right: 5px;
+`
+
+const Checkbox = styled.input`
+
+`
+
+const Label = styled.label`
+cursor: pointer;
 `
