@@ -43,11 +43,15 @@ export default function Start() {
 
   return (
     <div>
+      {!genres.length > 0 ?
+      <>
       <h1>Song suggestion tool</h1>
       <p>Get suggestions based on your favorite songs, artists, genres</p>
       <a href={AUTH_URL}>
         <Button>Get started</Button>
       </a>
+      </>
+          : null}
       <form>
         <label>
         <p>Who are your favorite artists?</p>
@@ -74,7 +78,7 @@ export default function Start() {
           <TextInput type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
           {songSuggestions && song.length > 2 ? 
           <Suggestions>
-          {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenSongs([...chosenSongs, suggestion])}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+          {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setChosenSongs([...chosenSongs, suggestion]); setSong([])}}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
           </Suggestions>
         : null  
         }
@@ -140,6 +144,7 @@ margin: 0 auto;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
+border-radius: 0 0 10px 10px;
 `
 
 const Suggestion = styled.p`
