@@ -3,6 +3,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 
 export default function Start() {
+  const [step, setStep] = useState(1)
   const [genres, setGenres] = useState([])
   const [song, setSong] = useState([])
   const [artist, setArtist] = useState([])
@@ -18,94 +19,100 @@ export default function Start() {
   useEffect(() => {
     if (getAccessToken) {
       getGenres(getAccessToken, setGenres)
+      setStep(2)
     }
   }, [getAccessToken])
 
- function getSongSuggestions(value) {
-  setSong(value)
-  if (value.length > 2) {
-    searchSong(getAccessToken, song, setSongSuggestions)
-  }
-  
-  console.log(songSuggestions)
- }
+  function getSongSuggestions(value) {
+    setSong(value)
+    if (value.length > 2) {
+      searchSong(getAccessToken, song, setSongSuggestions)
+    }
 
- function getArtistSuggestions(value) {
-  setArtist(value)
-  if (value.length > 2) {
-    searchArtist(getAccessToken, artist, setArtistSuggestions)
+    console.log(songSuggestions)
   }
-  
-  console.log(artistSuggestions)
- }
 
- console.log(chosenSongs)
+  function getArtistSuggestions(value) {
+    setArtist(value)
+    if (value.length > 2) {
+      searchArtist(getAccessToken, artist, setArtistSuggestions)
+    }
+
+    console.log(artistSuggestions)
+  }
+
+  console.log(chosenSongs)
 
   return (
     <div>
-      {!genres.length > 0 ?
-      <>
-      <h1>Song suggestion tool</h1>
-      <p>Get suggestions based on your favorite songs, artists, genres</p>
-      <a href={AUTH_URL}>
-        <Button>Get started</Button>
-      </a>
-      </>
-          : null}
       <form>
-        <label>
-        <p>Who are your favorite artists?</p>
-        <TextInput type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
-        {artistSuggestions && artist.length > 2 ? 
-          <Suggestions>
-          {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
-          </Suggestions>
-        : null  
-        }
+        {step == 1 ?
+          <>
+            <h1>Song suggestion tool</h1>
+            <p>Get suggestions based on your favorite songs, artists, genres</p>
+            <a href={AUTH_URL}>
+              <Button>Get started</Button>
+            </a>
+          </>
+          : step == 2 ?
+            <label>
+              <p>Who are your favorite artists?</p>
+              <TextInput type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
+              {artistSuggestions && artist.length > 2 ?
+                <Suggestions>
+                  {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+                </Suggestions>
+                : null
+              }
+              <div>
+                <p>Chosen artists:</p>
+                {chosenArtists ?
+                  <>
+                    {chosenArtists.map((suggestion) => <p><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</p>)}
+                  </>
+
+                  : null
+                }
+              </div>
+              <SmallButton>Next step</SmallButton>
+            </label>
+            : step == 3 ?
+              <label>
+                <p>What are your favorite songs?</p>
+                <TextInput type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
+                {songSuggestions && song.length > 2 ?
+                  <Suggestions>
+                    {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+                  </Suggestions>
+                  : null
+                }
                 <div>
-          <p>Chosen artists:</p>
-          {chosenArtists ? 
-          <>
-          {chosenArtists.map((suggestion) => <p><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</p>)}
-          </>
-          
-        : null  
-        }
-        </div>
-        </label>
-        <label>
-          <p>What are your favorite songs?</p>
-          <TextInput type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
-          {songSuggestions && song.length > 2 ? 
-          <Suggestions>
-          {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setChosenSongs([...chosenSongs, suggestion]); setSong([])}}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
-          </Suggestions>
-        : null  
-        }
-        <div>
-          <p>Chosen songs:</p>
-          {chosenSongs ? 
-          <>
-          {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
-          </>
-          
-        : null  
-        }
-        </div>
-        </label>
-        {genres ?
-          <>
-            <p>What are your favorite genres?</p>
-            <Genres>
-              {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
-            </Genres>
-          </>
-          : null
-        }
-        <label>
-          <p>How many recommendations do you want?</p>
-          <input type="number" min="1" max="100"></input>
-        </label>
+                  <p>Chosen songs:</p>
+                  {chosenSongs ?
+                    <>
+                      {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+                    </>
+                    : null}
+
+                </div>
+              </label>
+              : step == 4 ?
+                <>
+                  {genres ?
+                    <>
+                      <p>What are your favorite genres?</p>
+                      <Genres>
+                        {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
+                      </Genres>
+                    </>
+                    : null}
+                </>
+                : step == 5 ?
+                  <label>
+                    <p>How many recommendations do you want?</p>
+                    <input type="number" min="1" max="100"></input>
+                  </label>
+                  : null}
       </form>
     </div>
   )
@@ -117,6 +124,14 @@ border: none;
 color: #fff;
 padding: 15px 30px;
 font-size: 1.5rem;
+cursor: pointer;
+`
+const SmallButton = styled.button`
+background: #148255;
+border: none;
+color: #fff;
+padding: 15px;
+font-size: 1rem;
 cursor: pointer;
 `
 
