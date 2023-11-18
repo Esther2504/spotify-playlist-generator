@@ -11,10 +11,13 @@ export default function Start() {
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState([])
   const [chosenArtists, setChosenArtists] = useState([])
+  const [border, setBorder] = useState("10px")
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
+
+  console.log(AUTH_URL)
 
   useEffect(() => {
     if (getAccessToken) {
@@ -56,8 +59,8 @@ export default function Start() {
           </>
           : step == 2 ?
             <label>
-              <p>Who are your favorite artists?</p>
-              <TextInput type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
+              <h2>Who are your favorite artists?</h2>
+              <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
               {artistSuggestions && artist.length > 2 ?
                 <Suggestions>
                   {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
@@ -74,12 +77,12 @@ export default function Start() {
                   : null
                 }
               </div>
-              <SmallButton>Next step</SmallButton>
+              <SmallButton onClick={() => setStep(3)}>Next step</SmallButton>
             </label>
             : step == 3 ?
               <label>
                 <p>What are your favorite songs?</p>
-                <TextInput type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
+                <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
                 {songSuggestions && song.length > 2 ?
                   <Suggestions>
                     {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
@@ -95,6 +98,7 @@ export default function Start() {
                     : null}
 
                 </div>
+                <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
               </label>
               : step == 4 ?
                 <>
@@ -104,6 +108,7 @@ export default function Start() {
                       <Genres>
                         {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
                       </Genres>
+                      <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
                     </>
                     : null}
                 </>
@@ -111,6 +116,7 @@ export default function Start() {
                   <label>
                     <p>How many recommendations do you want?</p>
                     <input type="number" min="1" max="100"></input>
+                    <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
                   </label>
                   : null}
       </form>
@@ -147,7 +153,7 @@ width: 500px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
-border-radius: 10px 10px 0 0;
+border-radius: ${props => props.border};
 padding: 0 10px;
 outline: none;
 `
