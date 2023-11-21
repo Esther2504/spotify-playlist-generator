@@ -21,6 +21,8 @@ export default function Start({AUTH_URL}) {
 
   console.log(AUTH_URL)
 
+console.log(step)
+
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
       setAccessToken(getAccessToken)
@@ -56,9 +58,10 @@ export default function Start({AUTH_URL}) {
 
   return (
     <div>
-      <form>
         {step == 1 ?
+        <>
           <StartPage AUTH_URL={AUTH_URL} />
+          </>
           : step == 2 ?
             <label>
               <h2>Who are your favorite artists?</h2>
@@ -121,7 +124,6 @@ export default function Start({AUTH_URL}) {
                     <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
                   </label>
                   : null}
-      </form>
     </div>
   )
 }

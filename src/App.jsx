@@ -32,10 +32,10 @@ function App() {
         <a>Song suggestion tool</a>
       </nav>
       <header className="App-header">
-        {!data ?
-          <StartPage AUTH_URL={AUTH_URL} />
-          //  <Start AUTH_URL={AUTH_URL} />
-         : <AllPlaylists data={data} accessToken={getAccessToken} />}
+        {/* {!data ? */}
+          {/* // <StartPage AUTH_URL={AUTH_URL} /> */}
+           <Start AUTH_URL={AUTH_URL} />
+         {/* : <AllPlaylists data={data} accessToken={getAccessToken} />} */}
       </header>
     </div>
   );
