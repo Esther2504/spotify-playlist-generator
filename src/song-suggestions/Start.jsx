@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
+import StartPage from '../song-suggestions/StartPage'
 
-export default function Start() {
+export default function Start({AUTH_URL}) {
   const [step, setStep] = useState(1)
   const [genres, setGenres] = useState([])
   const [song, setSong] = useState([])
@@ -12,12 +13,19 @@ export default function Start() {
   const [chosenSongs, setChosenSongs] = useState([])
   const [chosenArtists, setChosenArtists] = useState([])
   const [border, setBorder] = useState("10px")
+  const [accessToken, setAccessToken] = useState()
 
-  const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
+  // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
   console.log(AUTH_URL)
+
+  useEffect(() => {
+    if (window.location.hash.includes("access_token")) {
+      setAccessToken(getAccessToken)
+    }
+  }, [window.location])
 
   useEffect(() => {
     if (getAccessToken) {
@@ -50,13 +58,7 @@ export default function Start() {
     <div>
       <form>
         {step == 1 ?
-          <>
-            <h1>Song suggestion tool</h1>
-            <p>Get suggestions based on your favorite songs, artists, genres</p>
-            <a href={AUTH_URL}>
-              <Button>Get started</Button>
-            </a>
-          </>
+          <StartPage AUTH_URL={AUTH_URL} />
           : step == 2 ?
             <label>
               <h2>Who are your favorite artists?</h2>
