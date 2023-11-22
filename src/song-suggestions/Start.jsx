@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
+import Artists from './Artists'
 
-export default function Start({AUTH_URL}) {
+export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
   const [genres, setGenres] = useState([])
   const [song, setSong] = useState([])
@@ -21,7 +22,7 @@ export default function Start({AUTH_URL}) {
 
   console.log(AUTH_URL)
 
-console.log(step)
+  console.log(step)
 
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
@@ -58,72 +59,52 @@ console.log(step)
 
   return (
     <div>
-        {step == 1 ?
+      {step == 1 ?
         <>
           <StartPage AUTH_URL={AUTH_URL} />
-          </>
-          : step == 2 ?
+        </>
+        : step == 2 ?
+          <Artists song={song} artist={artist} getArtistSuggestions={getArtistSuggestions} artistSuggestions={artistSuggestions} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          : step == 3 ?
             <label>
-              <h2>Who are your favorite artists?</h2>
-              <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
-              {artistSuggestions && artist.length > 2 ?
+              <p>What are your favorite songs?</p>
+              <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
+              {songSuggestions && song.length > 2 ?
                 <Suggestions>
-                  {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+                  {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
                 </Suggestions>
                 : null
               }
               <div>
-                <p>Chosen artists:</p>
-                {chosenArtists ?
+                <p>Chosen songs:</p>
+                {chosenSongs ?
                   <>
-                    {chosenArtists.map((suggestion) => <p><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</p>)}
+                    {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
                   </>
-
-                  : null
-                }
-              </div>
-              <SmallButton onClick={() => setStep(3)}>Next step</SmallButton>
-            </label>
-            : step == 3 ?
-              <label>
-                <p>What are your favorite songs?</p>
-                <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
-                {songSuggestions && song.length > 2 ?
-                  <Suggestions>
-                    {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
-                  </Suggestions>
-                  : null
-                }
-                <div>
-                  <p>Chosen songs:</p>
-                  {chosenSongs ?
-                    <>
-                      {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
-                    </>
-                    : null}
-
-                </div>
-                <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
-              </label>
-              : step == 4 ?
-                <>
-                  {genres ?
-                    <>
-                      <p>What are your favorite genres?</p>
-                      <Genres>
-                        {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
-                      </Genres>
-                      <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
-                    </>
-                    : null}
-                </>
-                : step == 5 ?
-                  <label>
-                    <p>How many recommendations do you want?</p>
-                    <input type="number" min="1" max="100"></input>
-                    <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
-                  </label>
                   : null}
+
+              </div>
+              <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
+            </label>
+            : step == 4 ?
+              <>
+                {genres ?
+                  <>
+                    <p>What are your favorite genres?</p>
+                    <Genres>
+                      {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
+                    </Genres>
+                    <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
+                  </>
+                  : null}
+              </>
+              : step == 5 ?
+                <label>
+                  <p>How many recommendations do you want?</p>
+                  <input type="number" min="1" max="100"></input>
+                  <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
+                </label>
+                : null}
     </div>
   )
 }
