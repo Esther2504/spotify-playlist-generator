@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Artists({song, artist, getArtistSuggestions, artistSuggestions, chosenArtists, setChosenArtists, setStep}) {
+export default function FaveArtists({song, artist, getArtistSuggestions, artistSuggestions, chosenArtists, setChosenArtists, setStep}) {
   return (
-    <label>
+    <>
+    <Container>
+    <Label>     
     <h2>Who are your favorite artists?</h2>
     <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
     {artistSuggestions && artist.length > 2 ?
@@ -12,29 +14,32 @@ export default function Artists({song, artist, getArtistSuggestions, artistSugge
       </Suggestions>
       : null
     }
-    <div>
+      </Label>
+    <ArtistContainer>
       <p>Chosen artists:</p>
       {chosenArtists ?
-        <>
-          {chosenArtists.map((suggestion) => <p><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</p>)}
-        </>
-
+        <Artists>
+          {chosenArtists.map((suggestion) => <Artist><ArtistName><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</ArtistName><span>x</span></Artist>)}
+        </Artists>
         : null
       }
-    </div>
+    </ArtistContainer>
+    </Container>
     <SmallButton onClick={() => setStep(3)}>Next step</SmallButton>
-  </label>
+    </>
   )
 }
 
-const Button = styled.button`
-background: #148255;
-border: none;
-color: #fff;
-padding: 15px 30px;
-font-size: 1.5rem;
-cursor: pointer;
+const Container = styled.div`
+display: flex;
+gap: 50px;
+width: 1500px;
 `
+
+const ArtistContainer = styled.div`
+text-align: left;
+`
+
 const SmallButton = styled.button`
 background: #148255;
 border: none;
@@ -42,6 +47,7 @@ color: #fff;
 padding: 15px;
 font-size: 1rem;
 cursor: pointer;
+margin-top: 20px;
 `
 
 const Genres = styled.div`
@@ -49,6 +55,11 @@ display: grid;
 grid-template-columns: repeat(7, 1fr);
 text-align: left;
 font-size: 1rem;
+`
+
+const ArtistName = styled.div`
+display: flex;
+align-items: center;
 `
 
 const TextInput = styled.input`
@@ -64,7 +75,6 @@ outline: none;
 const Suggestions = styled.div`
 border: 2px solid #148255;
 width: 500px;
-margin: 0 auto;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
@@ -77,15 +87,26 @@ display: flex;
 align-items: center;
 `
 
-const ArtistImg = styled.img`
-width: 50px;
-margin-right: 5px;
+const Artists = styled.div`
+display: flex;
+flex-direction: column;
 `
 
-const Checkbox = styled.input`
+const Artist = styled.p`
+width: 400px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
 
+const ArtistImg = styled.img`
+width: 50px;
+margin-right: 15px;
 `
 
 const Label = styled.label`
-cursor: pointer;
+display: flex;
+flex-direction: column;
+justify-content: start;
+height: 500px;
 `

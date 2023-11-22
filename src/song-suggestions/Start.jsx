@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
-import Artists from './Artists'
+import FaveArtists from './Artists'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -64,7 +64,7 @@ export default function Start({ AUTH_URL }) {
           <StartPage AUTH_URL={AUTH_URL} />
         </>
         : step == 2 ?
-          <Artists song={song} artist={artist} getArtistSuggestions={getArtistSuggestions} artistSuggestions={artistSuggestions} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          <FaveArtists song={song} artist={artist} getArtistSuggestions={getArtistSuggestions} artistSuggestions={artistSuggestions} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
             <label>
               <p>What are your favorite songs?</p>
