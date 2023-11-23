@@ -20,9 +20,6 @@ export default function Start({ AUTH_URL }) {
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
-  console.log(AUTH_URL)
-
-  console.log(step)
 
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
