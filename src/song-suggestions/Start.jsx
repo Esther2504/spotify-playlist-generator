@@ -8,8 +8,7 @@ export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
   const [genres, setGenres] = useState([])
   const [song, setSong] = useState([])
-  const [artist, setArtist] = useState([])
-  const [artistSuggestions, setArtistSuggestions] = useState()
+
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState([])
   const [chosenArtists, setChosenArtists] = useState([])
@@ -19,7 +18,6 @@ export default function Start({ AUTH_URL }) {
   // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
-
 
   useEffect(() => {
     if (window.location.hash.includes("access_token")) {
@@ -39,20 +37,7 @@ export default function Start({ AUTH_URL }) {
     if (value.length > 2) {
       searchSong(getAccessToken, song, setSongSuggestions)
     }
-
-    console.log(songSuggestions)
   }
-
-  function getArtistSuggestions(value) {
-    setArtist(value)
-    if (value.length > 2) {
-      searchArtist(getAccessToken, artist, setArtistSuggestions)
-    }
-
-    console.log(artistSuggestions)
-  }
-
-  console.log(chosenSongs)
 
   return (
     <div>
@@ -61,7 +46,7 @@ export default function Start({ AUTH_URL }) {
           <StartPage AUTH_URL={AUTH_URL} />
         </>
         : step == 2 ?
-          <FaveArtists song={song} artist={artist} getArtistSuggestions={getArtistSuggestions} artistSuggestions={artistSuggestions} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          <FaveArtists getAccessToken={getAccessToken} song={song} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
             <label>
               <p>What are your favorite songs?</p>
