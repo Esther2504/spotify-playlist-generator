@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 export default function FaveArtists({song, artist, getArtistSuggestions, artistSuggestions, chosenArtists, setChosenArtists, setStep}) {
 
+function setArtists(suggestion) {
+  if (chosenArtists.length < 10 && !chosenArtists.includes(suggestion)) {
+    setChosenArtists([...chosenArtists, suggestion])
+  } 
+}
+
   return (
     <>
     <Container>
@@ -11,7 +17,7 @@ export default function FaveArtists({song, artist, getArtistSuggestions, artistS
     <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
     {artistSuggestions && artist.length > 2 ?
       <Suggestions>
-        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setChosenArtists([...chosenArtists, suggestion])}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setArtists(suggestion)}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
       </Suggestions>
       : null
     }
