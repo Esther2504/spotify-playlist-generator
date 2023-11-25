@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 
 export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep}) {
-  const [border, setBorder] = useState("10px")
+  const [border, setBorder] = useState()
   const [artist, setArtist] = useState([])
   const [artistSuggestions, setArtistSuggestions] = useState()
 
@@ -21,12 +21,13 @@ function setArtists(suggestion) {
 }
 
 useEffect(() => {
-if (song.length > 2) {
-  setBorder("10px")
+  console.log(artist.length)
+if (artist.length > 2) {
+  setBorder(true)
 } else {
-  setBorder("10px 10px 0 0")
+  setBorder(false)
 }
-}, [])
+}, [artist])
 
   return (
     <>
@@ -87,7 +88,8 @@ width: 500px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
-border-radius: ${props => props.border};
+border-width: ${props => props.border ? "0" : "2px"};
+border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
 padding: 0 10px;
 outline: none;
 `
@@ -99,6 +101,7 @@ padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
 border-radius: 0 0 10px 10px;
+border-top: none;
 `
 
 const Suggestion = styled.p`
