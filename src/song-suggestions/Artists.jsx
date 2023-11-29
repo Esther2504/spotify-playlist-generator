@@ -21,7 +21,6 @@ function setArtists(suggestion) {
 }
 
 useEffect(() => {
-  console.log(artist.length)
 if (artist.length > 2) {
   setBorder(true)
 } else {

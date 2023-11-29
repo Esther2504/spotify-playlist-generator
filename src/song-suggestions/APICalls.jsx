@@ -48,6 +48,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         .then(res => {
             console.log(res.data)
             setSongSuggestions(res.data.tracks.items)
+            console.log(res.data.tracks.items)
         })
         .catch(err => {
             console.log(err)

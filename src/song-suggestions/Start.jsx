@@ -3,7 +3,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
-import Songs from './Songs'
+import FaveSongs from './Songs'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -49,7 +49,7 @@ export default function Start({ AUTH_URL }) {
         : step == 2 ?
           <FaveArtists getAccessToken={getAccessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
-          <Songs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
+          <FaveSongs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
             // <label>
             //   <p>What are your favorite songs?</p>
             //   <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
