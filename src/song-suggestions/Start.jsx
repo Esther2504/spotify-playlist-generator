@@ -3,6 +3,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
+import Songs from './Songs'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -46,28 +47,29 @@ export default function Start({ AUTH_URL }) {
           <StartPage AUTH_URL={AUTH_URL} />
         </>
         : step == 2 ?
-          <FaveArtists getAccessToken={getAccessToken} song={song} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          <FaveArtists getAccessToken={getAccessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
-            <label>
-              <p>What are your favorite songs?</p>
-              <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
-              {songSuggestions && song.length > 2 ?
-                <Suggestions>
-                  {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
-                </Suggestions>
-                : null
-              }
-              <div>
-                <p>Chosen songs:</p>
-                {chosenSongs ?
-                  <>
-                    {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
-                  </>
-                  : null}
+          <Songs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
+            // <label>
+            //   <p>What are your favorite songs?</p>
+            //   <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
+            //   {songSuggestions && song.length > 2 ?
+            //     <Suggestions>
+            //       {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+            //     </Suggestions>
+            //     : null
+            //   }
+            //   <div>
+            //     <p>Chosen songs:</p>
+            //     {chosenSongs ?
+            //       <>
+            //         {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
+            //       </>
+            //       : null}
 
-              </div>
-              <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
-            </label>
+            //   </div>
+            //   <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
+            // </label>
             : step == 4 ?
               <>
                 {genres ?
