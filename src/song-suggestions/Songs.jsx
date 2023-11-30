@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGenres, searchSong, searchArtist } from './APICalls'
+import cross from '../images/cross.svg'
 
 export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, setStep}) {
   const [border, setBorder] = useState()
@@ -46,7 +47,7 @@ if (song.length > 2) {
     <ArtistContainer>
       {chosenSongs.length > 0 ?
         <Songs>
-          {chosenSongs.map((suggestion) => <Song><SongName><AlbumImg src={suggestion.album.images[0].url} />{suggestion.name}<br/>{suggestion.artists[0].name}</SongName><SVG onClick={(e) => setChosenSongs(chosenSongs.filter(item => item !== suggestion))} viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnsSketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cross</title> <defs> </defs> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" sketchType="MSPage"> <g id="Icon-Set-Filled" sketchType="MSLayerGroup" transform="translate(-469.000000, -1041.000000)" fill="#ffffff"> <path d="M487.148,1053.48 L492.813,1047.82 C494.376,1046.26 494.376,1043.72 492.813,1042.16 C491.248,1040.59 488.712,1040.59 487.148,1042.16 L481.484,1047.82 L475.82,1042.16 C474.257,1040.59 471.721,1040.59 470.156,1042.16 C468.593,1043.72 468.593,1046.26 470.156,1047.82 L475.82,1053.48 L470.156,1059.15 C468.593,1060.71 468.593,1063.25 470.156,1064.81 C471.721,1066.38 474.257,1066.38 475.82,1064.81 L481.484,1059.15 L487.148,1064.81 C488.712,1066.38 491.248,1066.38 492.813,1064.81 C494.376,1063.25 494.376,1060.71 492.813,1059.15 L487.148,1053.48" id="cross" sketchType="MSShapeGroup"> </path> </g> </g> </g></SVG></Song>)}
+          {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item !== suggestion))} /></Song>)}
         </Songs>
         : <p>Your chosen songs will appear here. You can also continue without choosing a song, just click on next step.</p>
       }
@@ -82,7 +83,8 @@ margin-top: 20px;
 
 const SongName = styled.div`
 display: flex;
-align-items: center;
+flex-direction: column;
+align-items: flex-start;
 font-size: 1rem;
 `
 
@@ -122,10 +124,11 @@ flex-wrap: wrap;
 
 const Song = styled.p`
 width: 400px;
-display: flex;
-justify-content: space-between;
+display: grid;
+grid-template-columns: 50px 250px 50px;
 align-items: center;
 margin: 10px 50px 10px 0;
+gap: 15px;
 `
 
 const AlbumImg = styled.img`
@@ -141,7 +144,7 @@ justify-content: start;
 height: 500px;
 `
 
-const SVG = styled.svg`
+const Image = styled.img`
 width: 15px;
 cursor: pointer;
 `
