@@ -34,20 +34,21 @@ if (artist.length > 2) {
         <h2>Who are your favorite artists?</h2>
     <Container>
     <Label>     
-    <TextInput border={border} type="text" onChange={(e) => getArtistSuggestions(e.target.value)} />
+    <TextInput border={border} type="text" value={artist} onChange={(e) => getArtistSuggestions(e.target.value)} />
     {artistSuggestions && artist.length > 2 ?
       <Suggestions>
-        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => setArtists(suggestion)}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
       </Suggestions>
       : null
     }
+    
       </Label>
     <ArtistContainer>
       {chosenArtists.length > 0 ?
         <Artists>
           {chosenArtists.map((suggestion) => <Artist><ArtistName><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists(chosenArtists.filter(item => item !== suggestion))} /></Artist>)}
         </Artists>
-        : <p>Your chosen artists will appear here. You can also continue without choosing an artist, just click on next step.</p>
+        : <P>Your chosen artists will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }
     </ArtistContainer>
     </Container>
@@ -142,4 +143,8 @@ height: 500px;
 const Image = styled.img`
 width: 15px;
 cursor: pointer;
+`
+
+const P = styled.p`
+margin-top: 0;
 `

@@ -36,10 +36,10 @@ if (song.length > 2) {
     <h2>What are your favorite songs?</h2>
     <Container>
     <Label>     
-    <TextInput border={border} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
+    <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
     {songSuggestions && song.length > 2 ?
       <Suggestions>
-        {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => setSongs(suggestion)}><AlbumImg src={suggestion.album.images[0].url} />{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+        {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setSongs(suggestion); setSong("")}}><AlbumImg src={suggestion.album.images[0].url} />{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
       </Suggestions>
       : null
     }
@@ -49,7 +49,7 @@ if (song.length > 2) {
         <Songs>
           {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item !== suggestion))} /></Song>)}
         </Songs>
-        : <p>Your chosen songs will appear here. You can also continue without choosing a song, just click on next step.</p>
+        : <P>Your chosen songs will appear here. You can also continue without choosing a song, just click on next step.</P>
       }
     </ArtistContainer>
     </Container>
@@ -147,4 +147,9 @@ height: 500px;
 const Image = styled.img`
 width: 15px;
 cursor: pointer;
+`
+
+
+const P = styled.p`
+margin-top: 0;
 `
