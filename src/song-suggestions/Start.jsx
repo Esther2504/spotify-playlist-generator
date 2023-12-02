@@ -49,7 +49,7 @@ export default function Start({ AUTH_URL }) {
         : step == 2 ?
           <FaveArtists getAccessToken={getAccessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
-          <FaveSongs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
+            <FaveSongs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
             // <label>
             //   <p>What are your favorite songs?</p>
             //   <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
@@ -71,17 +71,7 @@ export default function Start({ AUTH_URL }) {
             //   <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
             // </label>
             : step == 4 ?
-              <>
-                {genres ?
-                  <>
-                    <p>What are your favorite genres?</p>
-                    <Genres>
-                      {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} />{genre}<br /></Label>)}
-                    </Genres>
-                    <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
-                  </>
-                  : null}
-              </>
+              <Genres genres={genres} setStep={setStep} />
               : step == 5 ?
                 <label>
                   <p>How many recommendations do you want?</p>
