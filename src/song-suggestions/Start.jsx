@@ -4,10 +4,11 @@ import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
 import FaveSongs from './Songs'
+import Genres from './Genres'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
-  const [genres, setGenres] = useState([])
+  // const [genres, setGenres] = useState()
   const [song, setSong] = useState([])
 
   const [songSuggestions, setSongSuggestions] = useState()
@@ -28,7 +29,7 @@ export default function Start({ AUTH_URL }) {
 
   useEffect(() => {
     if (getAccessToken) {
-      getGenres(getAccessToken, setGenres)
+      // getGenres(getAccessToken, setGenres)
       setStep(2)
     }
   }, [getAccessToken])
@@ -71,7 +72,7 @@ export default function Start({ AUTH_URL }) {
             //   <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
             // </label>
             : step == 4 ?
-              <Genres genres={genres} setStep={setStep} />
+              <Genres getAccessToken={getAccessToken} setStep={setStep} />
               : step == 5 ?
                 <label>
                   <p>How many recommendations do you want?</p>
@@ -100,12 +101,12 @@ font-size: 1rem;
 cursor: pointer;
 `
 
-const Genres = styled.div`
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-text-align: left;
-font-size: 1rem;
-`
+// const Genres = styled.div`
+// display: grid;
+// grid-template-columns: repeat(7, 1fr);
+// text-align: left;
+// font-size: 1rem;
+// `
 
 const TextInput = styled.input`
 width: 500px;

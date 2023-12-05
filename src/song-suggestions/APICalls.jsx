@@ -1,13 +1,13 @@
 import axios from "axios";
-export function getGenres(getAccessToken, getGenres) {
+export function getGenres(getAccessToken, setGenres) {
     axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         headers: {
             Authorization: "Bearer " + getAccessToken,
         },
     })
         .then(res => {
-            console.log(res.data.genres)
-            getGenres(res.data.genres)
+           console.log(res.data.genres)
+            setGenres(res.data.genres)
         })
         .catch(err => {
             console.log(err)

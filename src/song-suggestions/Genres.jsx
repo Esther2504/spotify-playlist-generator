@@ -1,27 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getGenres } from './APICalls'
 import styled from 'styled-components'
 
-export default function Genres({genres, setStep}) {
+export default function Genres({getAccessToken, setStep}) {
 const [faveGenres, setFaveGenres] = useState([])
+const [genres, setGenres] = useState()
 
 function setGenre(value) {
-if (!faveGenres.includes(value)) {
-    faveGenres.filter(item => item !== value)
-} else {
-    setFaveGenres([...faveGenres, value])
+// if (!faveGenres.includes(value)) {
+//     faveGenres.filter(item => item !== value)
+// } else {
+//     setFaveGenres([...faveGenres, value])
+// }
 }
+
+console.log(genres)
+
+useEffect(() => {
+  getGenres(getAccessToken, setGenres)
+}, [])
+
+
+if (genres) {
+{genres.map((genre) => console.log(genre))}
 }
 
   return (
     <>
+    {genres ? 
+    <>
         <p>What are your favorite genres?</p>
-        <Genres>
+        <Genres>      
           {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target.value)} />{genre}<br /></Label>)}
         </Genres>
-        {/* <SmallButton onClick={() => setStep(5)}>Next step</SmallButton> */}
+        </>
+         : null
+        }
+
+        <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
   </>
   )
 }
+
+const Checkbox = styled.input`
+
+`
+
+const Label = styled.label`
+cursor: pointer;
+`
 
 const SmallButton = styled.button`
 background: #148255;
