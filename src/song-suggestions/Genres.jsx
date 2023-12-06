@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { getGenres } from './APICalls'
 import styled from 'styled-components'
 
-export default function Genres({getAccessToken, setStep}) {
-const [faveGenres, setFaveGenres] = useState([])
+export default function Genres({chosenGenres, setChosenGenres, getAccessToken, setStep}) {
 const [genres, setGenres] = useState()
 
 function setGenre(value) {
-if (faveGenres.includes(value)) {
-    setFaveGenres(faveGenres.filter((item) => item !== value))
+if (chosenGenres.includes(value)) {
+    setChosenGenres(chosenGenres.filter((item) => item !== value))
 } else {
-    setFaveGenres([...faveGenres, value])
+    setChosenGenres([...chosenGenres, value])
 }
 }
 
@@ -20,19 +19,15 @@ useEffect(() => {
   }
 }, [])
 
-
   return (
     <>
+    <p>What are your favorite genres?</p>
     {genres ? 
-    <>
-        <p>What are your favorite genres?</p>
         <GenresContainer>      
           {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target.value)} />{genre}<br /></Label>)}
         </GenresContainer>
-        </>
          : null
         }
-
         <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
   </>
   )
@@ -43,6 +38,7 @@ display: grid;
 grid-template-columns: repeat(7, 1fr);
 text-align: left;
 font-size: 1rem;
+margin: 2rem 0;
 `
 
 const Checkbox = styled.input`

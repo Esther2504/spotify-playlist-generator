@@ -41,7 +41,6 @@ if (artist.length > 2) {
       </Suggestions>
       : null
     }
-    
       </Label>
     <ArtistContainer>
       {chosenArtists.length > 0 ?

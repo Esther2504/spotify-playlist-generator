@@ -5,6 +5,7 @@ import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
 import FaveSongs from './Songs'
 import Genres from './Genres'
+import RecomAmount from './RecomAmount'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -14,6 +15,8 @@ export default function Start({ AUTH_URL }) {
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState([])
   const [chosenArtists, setChosenArtists] = useState([])
+  const [chosenGenres, setChosenGenres] = useState([])
+  const [amount, setAmount] = useState(20)
   const [border, setBorder] = useState("10px")
   const [accessToken, setAccessToken] = useState()
 
@@ -72,13 +75,9 @@ export default function Start({ AUTH_URL }) {
             //   <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
             // </label>
             : step == 4 ?
-              <Genres getAccessToken={getAccessToken} setStep={setStep} />
+              <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={getAccessToken} setStep={setStep} />
               : step == 5 ?
-                <label>
-                  <p>How many recommendations do you want?</p>
-                  <input type="number" min="1" max="100"></input>
-                  <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
-                </label>
+                <RecomAmount amount={amount} setAmount={setAmount} setStep={setStep} />
                 : null}
     </div>
   )
