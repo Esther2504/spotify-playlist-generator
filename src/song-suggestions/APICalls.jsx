@@ -6,7 +6,7 @@ export function getGenres(getAccessToken, setGenres) {
         },
     })
         .then(res => {
-           console.log(res.data.genres)
+           console.log(res.data)
             setGenres(res.data.genres)
         })
         .catch(err => {

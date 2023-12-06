@@ -4,7 +4,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import cross from '../images/cross.svg'
 
 export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep}) {
-  const [border, setBorder] = useState()
+  const [border, setBorder] = useState(false)
   const [artist, setArtist] = useState([])
   const [artistSuggestions, setArtistSuggestions] = useState()
 

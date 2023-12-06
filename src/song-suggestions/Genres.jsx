@@ -7,32 +7,28 @@ const [faveGenres, setFaveGenres] = useState([])
 const [genres, setGenres] = useState()
 
 function setGenre(value) {
-// if (!faveGenres.includes(value)) {
-//     faveGenres.filter(item => item !== value)
-// } else {
-//     setFaveGenres([...faveGenres, value])
-// }
+if (faveGenres.includes(value)) {
+    setFaveGenres(faveGenres.filter((item) => item !== value))
+} else {
+    setFaveGenres([...faveGenres, value])
 }
-
-console.log(genres)
+}
 
 useEffect(() => {
-  getGenres(getAccessToken, setGenres)
+  if (!genres) {
+    getGenres(getAccessToken, setGenres)
+  }
 }, [])
 
-
-if (genres) {
-{genres.map((genre) => console.log(genre))}
-}
 
   return (
     <>
     {genres ? 
     <>
         <p>What are your favorite genres?</p>
-        <Genres>      
+        <GenresContainer>      
           {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target.value)} />{genre}<br /></Label>)}
-        </Genres>
+        </GenresContainer>
         </>
          : null
         }
@@ -41,6 +37,13 @@ if (genres) {
   </>
   )
 }
+
+const GenresContainer = styled.div`
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+text-align: left;
+font-size: 1rem;
+`
 
 const Checkbox = styled.input`
 
