@@ -47,7 +47,7 @@ if (song.length > 2) {
     <ArtistContainer>
       {chosenSongs.length > 0 ?
         <Songs>
-          {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item !== suggestion))} /></Song>)}
+          {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item.id !== suggestion.id))} /></Song>)}
         </Songs>
         : <P>Your chosen songs will appear here. You can also continue without choosing a song, just click on next step.</P>
       }

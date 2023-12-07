@@ -45,11 +45,22 @@ export default function Start({ AUTH_URL }) {
     }
   }
 
+  let artistsseeds = (chosenArtists.map((artist) => artist.id)).toString()
+  let tracksseeds = (chosenSongs.map((song) => song.id)).toString()
+
   useEffect(() => {
     if (step == 6) {
-      createPlaylist(getAccessToken, chosenArtists, chosenSongs, chosenGenres, amount)
+      createPlaylist(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount)
     }
   }, [step])
+
+  console.log(chosenArtists)
+  console.log(chosenSongs)
+  console.log(chosenGenres)
+
+
+console.log(artistsseeds)
+console.log(tracksseeds)
 
   return (
     <div>

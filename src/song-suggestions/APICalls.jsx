@@ -56,13 +56,14 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         });
 }
 
-export function createPlaylist(getAccessToken, chosenArtists, chosenSongs, chosenGenres, amount) {
+export function createPlaylist(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount) {
+    console.log(artistseeds)
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
-            limit: 5,
-            seed_artists: chosenArtists,
+            limit: amount,
+            seed_artists: artistseeds,
             seed_genres: chosenGenres,
-            seed_tracks: chosenSongs
+            seed_tracks: tracksseeds
         },
         headers: {
             Authorization: "Bearer " + getAccessToken,
