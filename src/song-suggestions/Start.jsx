@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { getGenres, searchSong, searchArtist } from './APICalls'
+import { getGenres, searchSong, searchArtist, createPlaylist } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
 import FaveSongs from './Songs'
 import Genres from './Genres'
 import RecomAmount from './RecomAmount'
+import Loading from './Loading'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -44,6 +45,12 @@ export default function Start({ AUTH_URL }) {
     }
   }
 
+  useEffect(() => {
+    if (step == 6) {
+      createPlaylist(getAccessToken, chosenArtists, chosenSongs, chosenGenres, amount)
+    }
+  }, [step])
+
   return (
     <div>
       {step == 1 ?
@@ -78,7 +85,10 @@ export default function Start({ AUTH_URL }) {
               <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={getAccessToken} setStep={setStep} />
               : step == 5 ?
                 <RecomAmount amount={amount} setAmount={setAmount} setStep={setStep} />
-                : null}
+                : step == 6 ?
+                  <Loading /> :
+                  null
+      }
     </div>
   )
 }

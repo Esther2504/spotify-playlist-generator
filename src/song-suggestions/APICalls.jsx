@@ -33,6 +33,7 @@ export function searchArtist(getAccessToken, artist, setArtistSuggestions) {
             console.log(err)
         });
 }
+
 export function searchSong(getAccessToken, song, setSongSuggestions) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
@@ -49,6 +50,28 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
             console.log(res.data)
             setSongSuggestions(res.data.tracks.items)
             console.log(res.data.tracks.items)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
+
+export function createPlaylist(getAccessToken, chosenArtists, chosenSongs, chosenGenres, amount) {
+    axios.get('https://api.spotify.com/v1/recommendations', {
+        params: {
+            limit: 5,
+            seed_artists: chosenArtists,
+            seed_genres: chosenGenres,
+            seed_tracks: chosenSongs
+        },
+        headers: {
+            Authorization: "Bearer " + getAccessToken,
+        },
+
+    })
+        .then(res => {
+            console.log(res.config.url)
+            console.log(res.data)
         })
         .catch(err => {
             console.log(err)
