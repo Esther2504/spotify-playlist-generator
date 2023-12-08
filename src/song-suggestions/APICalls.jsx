@@ -94,7 +94,7 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, cho
         });
 }
 
-export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist) {
+export function createPlaylist(userID, accessToken) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
@@ -103,18 +103,15 @@ export function createPlaylist(userID, accessToken, songType, playlistName, genr
     };
 
     const data = {
-        name: `${songType} songs from '${playlistName}'`,
-        description: `Playlist containing the ${genre} songs from '${playlistName}'`,
+        name: `Song recommendations`,
+        description: ``,
         public: false,
     };
 
-    if (!newPlaylist) {
         axios.post(url, data, { headers })
             .then(response => {
-                setNewPlayListID(response.data.id)
-                setNewPlaylist(response.data.tracks.href)
+        
             })
             .catch(error => {
             });
     }
-}

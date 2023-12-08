@@ -7,6 +7,7 @@ import FaveSongs from './Songs'
 import Genres from './Genres'
 import RecomAmount from './RecomAmount'
 import Loading from './Loading'
+import PlaylistNameDescription from './PlaylistName'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -21,6 +22,8 @@ export default function Start({ AUTH_URL }) {
   const [border, setBorder] = useState("10px")
   const [accessToken, setAccessToken] = useState()
   const [userID, setUserID] = useState()
+  const [PlaylistName, setPlaylistName] = useState()
+  const [PlaylistDescription, setPlaylistDescription] = useState()
 
   // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -102,7 +105,10 @@ console.log(tracksseeds)
               : step == 5 ?
                 <RecomAmount amount={amount} setAmount={setAmount} setStep={setStep} />
                 : step == 6 ?
-                  <Loading /> :
+                   <PlaylistNameDescription setPlaylistName={setPlaylistName} setPlaylistDescription={setPlaylistDescription} setStep={setStep} />
+                   : step == 7 ?
+                   <Loading />
+                  :
                   null
       }
     </div>
