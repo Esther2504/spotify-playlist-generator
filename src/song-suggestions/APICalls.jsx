@@ -1,4 +1,19 @@
 import axios from "axios";
+
+export function getUser(accessToken, setUserID) {
+    axios
+        .get(`https://api.spotify.com/v1/me`, {
+            headers: {
+                Authorization: "Bearer " + accessToken,
+            },
+        })
+        .then((res) => {
+            setUserID(res.data.id)
+        })
+        .catch((err) => {
+        })
+}
+
 export function getGenres(getAccessToken, setGenres) {
     axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         headers: {
@@ -56,7 +71,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         });
 }
 
-export function createPlaylist(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount) {
+export function getRecommendations(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount) {
     console.log(artistseeds)
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
@@ -77,4 +92,29 @@ export function createPlaylist(getAccessToken, artistseeds, tracksseeds, chosenG
         .catch(err => {
             console.log(err)
         });
+}
+
+export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist) {
+    const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
+
+    const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+    };
+
+    const data = {
+        name: `${songType} songs from '${playlistName}'`,
+        description: `Playlist containing the ${genre} songs from '${playlistName}'`,
+        public: false,
+    };
+
+    if (!newPlaylist) {
+        axios.post(url, data, { headers })
+            .then(response => {
+                setNewPlayListID(response.data.id)
+                setNewPlaylist(response.data.tracks.href)
+            })
+            .catch(error => {
+            });
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getGenres, searchSong, searchArtist, createPlaylist } from './APICalls'
+import { getUser, getGenres, searchSong, searchArtist, getRecommendations } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
@@ -20,6 +20,7 @@ export default function Start({ AUTH_URL }) {
   const [amount, setAmount] = useState(20)
   const [border, setBorder] = useState("10px")
   const [accessToken, setAccessToken] = useState()
+  const [userID, setUserID] = useState()
 
   // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -50,13 +51,17 @@ export default function Start({ AUTH_URL }) {
 
   useEffect(() => {
     if (step == 6) {
-      createPlaylist(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount)
+      getRecommendations(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount)
+      getUser(accessToken, setUserID)
+      console.log(userID)
     }
   }, [step])
 
   console.log(chosenArtists)
   console.log(chosenSongs)
   console.log(chosenGenres)
+
+  console.log(userID)
 
 
 console.log(artistsseeds)
