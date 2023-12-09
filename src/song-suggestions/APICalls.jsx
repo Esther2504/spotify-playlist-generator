@@ -21,7 +21,7 @@ export function getGenres(getAccessToken, setGenres) {
         },
     })
         .then(res => {
-           console.log(res.data)
+            console.log(res.data)
             setGenres(res.data.genres)
         })
         .catch(err => {
@@ -94,24 +94,49 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, cho
         });
 }
 
-export function createPlaylist(userID, accessToken) {
+export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, songSuggestions, newPlaylistID, setNewPlayListID) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken}`,
         'Content-Type': 'application/json',
     };
 
     const data = {
-        name: `Song recommendations`,
-        description: ``,
+        name: `${PlaylistName}`,
+        description: `${PlaylistDescription}`,
         public: false,
     };
 
-        axios.post(url, data, { headers })
-            .then(response => {
-        
-            })
-            .catch(error => {
-            });
-    }
+    axios.post(url, data, { headers })
+        .then(res => {
+            console.log(res)
+            setNewPlayListID(res.data.id)
+            addTracks(getAccessToken, songSuggestions, newPlaylistID)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
+
+export function addTracks(getAccessToken, songSuggestions, newPlaylistID) {
+    const requestHeaders = {
+        'Authorization': `Bearer ${getAccessToken}`,
+        'Content-Type': 'application/json',
+    };
+
+    const requestData = {
+        uris: songSuggestions,
+        position: 0
+    };
+
+    axios.post(newPlaylistID, requestData, {
+        headers: requestHeaders
+    })
+        .then(response => {
+           
+        })
+        .catch(error => {
+
+        });
+}

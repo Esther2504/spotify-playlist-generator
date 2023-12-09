@@ -5,8 +5,8 @@ export default function PlaylistNameDescription({setPlaylistName, setPlaylistDes
     return (
         <Container>
             <h2>Give your playlist a name and description</h2>
-            <TextInput type="text" placeholder="Name" maxLength="100" />
-            <TextArea placeholder="Description" maxLength="300" />
+            <TextInput type="text" placeholder="Name" maxLength="100" onChange={(e) => setPlaylistName(e.target.value)} />
+            <TextArea placeholder="Description" maxLength="300" onChange={(e) => setPlaylistDescription(e.target.value)} />
             <SmallButton onClick={() => setStep(7)}>Get recommendations</SmallButton>
         </Container>
     )
