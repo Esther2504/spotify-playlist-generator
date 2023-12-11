@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getUser, getGenres, searchSong, searchArtist, getRecommendations, createPlaylist } from './APICalls'
+import { getUser, getGenres, searchSong, searchArtist, getRecommendations, createPlaylist, addTracks } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
@@ -24,7 +24,8 @@ export default function Start({ AUTH_URL }) {
   const [userID, setUserID] = useState()
   const [PlaylistName, setPlaylistName] = useState()
   const [PlaylistDescription, setPlaylistDescription] = useState()
-  const [newPlaylistID, setNewPlayListID] = useState()
+  const [newPlaylist, setNewPlayList] = useState()
+  const [recommendations, setRecommendations] = useState()
 
   // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -55,13 +56,13 @@ export default function Start({ AUTH_URL }) {
 
   useEffect(() => {
     if (step == 6) {
-      getRecommendations(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount);
+      getRecommendations(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount, recommendations, setRecommendations);
       getUser(accessToken, setUserID);
       
       
       console.log(userID)
     } else if (step == 7) {
-        createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, songSuggestions, newPlaylistID, setNewPlayListID)
+        createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }
   }, [step])
 
@@ -74,6 +75,12 @@ export default function Start({ AUTH_URL }) {
 
   console.log(artistsseeds)
   console.log(tracksseeds)
+
+  useEffect(() => {
+    if (newPlaylist) {
+      addTracks(getAccessToken, recommendations, newPlaylist)
+    }
+  }, [newPlaylist])
 
   return (
     <div>

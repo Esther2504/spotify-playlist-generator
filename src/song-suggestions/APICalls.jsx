@@ -71,7 +71,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         });
 }
 
-export function getRecommendations(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount) {
+export function getRecommendations(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount, recommendations, setRecommendations) {
     console.log(artistseeds)
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
@@ -88,13 +88,15 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, cho
         .then(res => {
             console.log(res.config.url)
             console.log(res.data)
+            res.data.tracks.map((track) => setRecommendations(...recommendations, track.uri))
+            
         })
         .catch(err => {
             console.log(err)
         });
 }
 
-export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, songSuggestions, newPlaylistID, setNewPlayListID) {
+export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
@@ -111,32 +113,35 @@ export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDes
     axios.post(url, data, { headers })
         .then(res => {
             console.log(res)
-            setNewPlayListID(res.data.id)
-            addTracks(getAccessToken, songSuggestions, newPlaylistID)
+            setNewPlayList(res.data)
+            
         })
         .catch(err => {
             console.log(err)
         });
 }
 
-export function addTracks(getAccessToken, songSuggestions, newPlaylistID) {
+export function addTracks(getAccessToken, recommendations, newPlaylist) {
     const requestHeaders = {
         'Authorization': `Bearer ${getAccessToken}`,
         'Content-Type': 'application/json',
     };
 
     const requestData = {
-        uris: songSuggestions,
+        uris: recommendations,
         position: 0
     };
 
-    axios.post(newPlaylistID, requestData, {
+    console.log(recommendations)
+    console.log(newPlaylist)
+
+    axios.post(newPlaylist.tracks.href, requestData, {
         headers: requestHeaders
     })
-        .then(response => {
-           
+        .then(res => {
+           console.log(res)
         })
-        .catch(error => {
+        .catch(err => {
 
         });
 }
