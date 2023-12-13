@@ -8,6 +8,7 @@ import Genres from './Genres'
 import RecomAmount from './RecomAmount'
 import Loading from './Loading'
 import PlaylistNameDescription from './PlaylistName'
+import Playlist from './Playlist'
 
 export default function Start({ AUTH_URL }) {
   const [step, setStep] = useState(1)
@@ -63,14 +64,25 @@ export default function Start({ AUTH_URL }) {
       console.log(userID)
     } else if (step == 7) {
         createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
+
+       
     }
   }, [step])
 
-  console.log(recommendations)
+  // useEffect(() => {
+  //   if (newPlaylist) {
+     
+  //     if (newPlaylist.tracks.items.length > 1) {
+  //       setStep(8)
+  //     }
+  //   }
+  // }, [])
+
+
 
   useEffect(() => {
     if (newPlaylist) {
-      addTracks(getAccessToken, recommendations, newPlaylist)
+      addTracks(getAccessToken, recommendations, newPlaylist, setStep)
     }
   }, [newPlaylist])
 
@@ -84,26 +96,6 @@ export default function Start({ AUTH_URL }) {
           <FaveArtists getAccessToken={getAccessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
             <FaveSongs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
-            // <label>
-            //   <p>What are your favorite songs?</p>
-            //   <TextInput border={song.length > 2 ? "10px 10px 0 0" : "10px"} type="text" onChange={(e) => getSongSuggestions(e.target.value)} />
-            //   {songSuggestions && song.length > 2 ?
-            //     <Suggestions>
-            //       {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => { setChosenSongs([...chosenSongs, suggestion]); setSong([]) }}>{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
-            //     </Suggestions>
-            //     : null
-            //   }
-            //   <div>
-            //     <p>Chosen songs:</p>
-            //     {chosenSongs ?
-            //       <>
-            //         {chosenSongs.map((suggestion) => <p>{suggestion.name} - {suggestion.artists[0].name}</p>)}
-            //       </>
-            //       : null}
-
-            //   </div>
-            //   <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
-            // </label>
             : step == 4 ?
               <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={getAccessToken} setStep={setStep} />
               : step == 5 ?
@@ -113,7 +105,7 @@ export default function Start({ AUTH_URL }) {
                   : step == 7 ?
                     <Loading />
                     :
-                    null
+                    <Playlist newPlaylist={newPlaylist} />
       }
     </div>
   )

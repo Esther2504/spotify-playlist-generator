@@ -122,7 +122,7 @@ export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDes
         });
 }
 
-export function addTracks(getAccessToken, recommendations, newPlaylist) {
+export function addTracks(getAccessToken, recommendations, newPlaylist, setStep) {
     let uniqueuris = [...new Set(recommendations)];
 
     const headers = {
@@ -147,6 +147,7 @@ export function addTracks(getAccessToken, recommendations, newPlaylist) {
     axios.post(href, requestData, { headers })
         .then(res => {
            console.log(res)
+           setStep(8)
         })
         .catch(err => {
 
