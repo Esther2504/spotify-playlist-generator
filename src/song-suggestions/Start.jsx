@@ -25,7 +25,7 @@ export default function Start({ AUTH_URL }) {
   const [PlaylistName, setPlaylistName] = useState()
   const [PlaylistDescription, setPlaylistDescription] = useState()
   const [newPlaylist, setNewPlayList] = useState()
-  const [recommendations, setRecommendations] = useState()
+  const [recommendations, setRecommendations] = useState([])
 
   // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -66,15 +66,7 @@ export default function Start({ AUTH_URL }) {
     }
   }, [step])
 
-  console.log(chosenArtists)
-  console.log(chosenSongs)
-  console.log(chosenGenres)
-
-  console.log(userID)
-
-
-  console.log(artistsseeds)
-  console.log(tracksseeds)
+  console.log(recommendations)
 
   useEffect(() => {
     if (newPlaylist) {

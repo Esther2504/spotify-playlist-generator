@@ -88,8 +88,9 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, cho
         .then(res => {
             console.log(res.config.url)
             console.log(res.data)
-            res.data.tracks.map((track) => setRecommendations(...recommendations, track.uri))
-            
+            res.data.tracks.forEach((track) => recommendations.push(track.uri))
+            res.data.tracks.forEach((track) => console.log(track.uri))
+            console.log(recommendations)
         })
         .catch(err => {
             console.log(err)
@@ -122,22 +123,28 @@ export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDes
 }
 
 export function addTracks(getAccessToken, recommendations, newPlaylist) {
-    const requestHeaders = {
+    let uniqueuris = [...new Set(recommendations)];
+
+    const headers = {
         'Authorization': `Bearer ${getAccessToken}`,
         'Content-Type': 'application/json',
     };
 
     const requestData = {
-        uris: recommendations,
+        uris: uniqueuris,
         position: 0
     };
 
-    console.log(recommendations)
+    console.log(uniqueuris)
     console.log(newPlaylist)
 
-    axios.post(newPlaylist.tracks.href, requestData, {
-        headers: requestHeaders
-    })
+    let href = newPlaylist.tracks.href
+
+    console.log(href)
+
+    console.log(href, requestData, { headers })
+
+    axios.post(href, requestData, { headers })
         .then(res => {
            console.log(res)
         })
