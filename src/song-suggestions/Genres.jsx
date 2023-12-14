@@ -5,11 +5,11 @@ import styled from 'styled-components'
 export default function Genres({chosenGenres, setChosenGenres, getAccessToken, setStep}) {
 const [genres, setGenres] = useState()
 
-function setGenre(value) {
-if (chosenGenres.includes(value)) {
-    setChosenGenres(chosenGenres.filter((item) => item !== value))
+function setGenre(target) {
+if (target.checked == false && chosenGenres.includes(target.value)) {
+    setChosenGenres(chosenGenres.filter((item) => item !== target.value))
 } else {
-    setChosenGenres([...chosenGenres, value])
+    setChosenGenres([...chosenGenres, target.value])
 }
 }
 
@@ -24,7 +24,7 @@ useEffect(() => {
     <p>What are your favorite genres?</p>
     {genres ? 
         <GenresContainer>      
-          {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target.value)} />{genre}<br /></Label>)}
+          {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target)} />{genre}<br /></Label>)}
         </GenresContainer>
          : null
         }
