@@ -18,12 +18,12 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
   }
 
 function setSongs(suggestion) {
-  if (chosenSongs.length < 10 && chosenSongs.find((song) => song.id == suggestion.id) == undefined) {
+  if (chosenSongs.length < 5 && chosenSongs.find((song) => song.id == suggestion.id) == undefined) {
     setChosenSongs([...chosenSongs, suggestion])
   } else if (chosenSongs.find((song) => song.id == suggestion.id) != undefined) {
     alert("you've already chosen this song")
-  } else if (chosenSongs.length > 10) {
-    alert("you've chosen 10 songs, remove one if you want to add this song")
+  } else if (chosenSongs.length > 5) {
+    alert("you've chosen 5 songs, remove one if you want to add this song")
   }
 }
 

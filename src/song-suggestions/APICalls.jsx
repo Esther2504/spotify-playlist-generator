@@ -71,16 +71,14 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         });
 }
 
-export function getRecommendations(getAccessToken, artistseeds, tracksseeds, chosenGenres, amount, recommendations, setRecommendations) {
-    console.log(amount)
-    console.log(artistseeds)
-    console.log(tracksseeds)
-    console.log(chosenGenres)
+export function getRecommendations(getAccessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
+// only 5 seeds total, still need to fix that
+
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
             limit: amount,
             seed_artists: artistseeds,
-            seed_genres: chosenGenres,
+            seed_genres: genreseeds,
             seed_tracks: tracksseeds
         },
         headers: {

@@ -16,7 +16,8 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
   }
 
 function setArtists(suggestion) {
-  if (chosenArtists.length < 10 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
+  console.log(chosenArtists.length)
+  if (chosenArtists.length < 5 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
     setChosenArtists([...chosenArtists, suggestion])
   } 
 }

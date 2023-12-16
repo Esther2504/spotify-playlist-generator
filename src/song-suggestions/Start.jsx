@@ -54,10 +54,11 @@ export default function Start({ AUTH_URL }) {
 
   let artistsseeds = (chosenArtists.map((artist) => artist.id)).toString()
   let tracksseeds = (chosenSongs.map((song) => song.id)).toString()
+  let genreseeds = (chosenGenres.map((genre) => genre).toString())
 
   useEffect(() => {
     if (step == 6) {
-      getRecommendations(getAccessToken, artistsseeds, tracksseeds, chosenGenres, amount, recommendations, setRecommendations);
+      getRecommendations(getAccessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
       getUser(accessToken, setUserID);
       
       

@@ -6,10 +6,12 @@ export default function Genres({chosenGenres, setChosenGenres, getAccessToken, s
 const [genres, setGenres] = useState()
 
 function setGenre(target) {
-if (target.checked == false && chosenGenres.includes(target.value)) {
-    setChosenGenres(chosenGenres.filter((item) => item !== target.value))
+if (target.checked == true && !chosenGenres.includes(target.value) && chosenGenres.length <= 5) {
+  setChosenGenres([...chosenGenres, target.value])
+} else if (target.checked == false && chosenGenres.includes(target.value)) {
+  setChosenGenres(chosenGenres.filter((item) => item !== target.value))
 } else {
-    setChosenGenres([...chosenGenres, target.value])
+  alert("you can't choose more than 5 genres")
 }
 }
 
