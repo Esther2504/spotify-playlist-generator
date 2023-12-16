@@ -10,19 +10,19 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
 
   function getArtistSuggestions(value) {
     setArtist(value)
-    if (value.length > 2) {
+    if (value.length > 1) {
       searchArtist(getAccessToken, artist, setArtistSuggestions)
     }
   }
 
 function setArtists(suggestion) {
-  if (chosenArtists.length < 10 && !chosenArtists.includes(suggestion)) {
+  if (chosenArtists.length < 10 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
     setChosenArtists([...chosenArtists, suggestion])
   } 
 }
 
 useEffect(() => {
-if (artist.length > 2) {
+if (artist.length > 1) {
   setBorder(true)
 } else {
   setBorder(false)
@@ -35,7 +35,7 @@ if (artist.length > 2) {
     <Container>
     <Label>     
     <TextInput border={border} type="text" value={artist} onChange={(e) => getArtistSuggestions(e.target.value)} />
-    {artistSuggestions && artist.length > 2 ?
+    {artistSuggestions && artist.length > 1 ?
       <Suggestions>
         {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
       </Suggestions>

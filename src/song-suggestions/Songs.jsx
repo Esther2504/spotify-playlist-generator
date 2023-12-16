@@ -18,9 +18,6 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
   }
 
 function setSongs(suggestion) {
-  console.log(chosenSongs.find((song) => song.id == suggestion.id) == undefined)
-  console.log(chosenSongs)
-  console.log(suggestion)
   if (chosenSongs.length < 10 && chosenSongs.find((song) => song.id == suggestion.id) == undefined) {
     setChosenSongs([...chosenSongs, suggestion])
   } else if (chosenSongs.find((song) => song.id == suggestion.id) != undefined) {
