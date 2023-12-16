@@ -10,7 +10,7 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
 
   function getSongSuggestions(value) {
     setSong(value)
-    if (value.length > 2) {
+    if (value.length > 1) {
       searchSong(getAccessToken, song, setSongSuggestions)
       console.log(songSuggestions)
     }
@@ -18,13 +18,20 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
   }
 
 function setSongs(suggestion) {
-  if (chosenSongs.length < 10 && !chosenSongs.includes(suggestion)) {
+  console.log(chosenSongs.find((song) => song.id == suggestion.id) == undefined)
+  console.log(chosenSongs)
+  console.log(suggestion)
+  if (chosenSongs.length < 10 && chosenSongs.find((song) => song.id == suggestion.id) == undefined) {
     setChosenSongs([...chosenSongs, suggestion])
-  } 
+  } else if (chosenSongs.find((song) => song.id == suggestion.id) != undefined) {
+    alert("you've already chosen this song")
+  } else if (chosenSongs.length > 10) {
+    alert("you've chosen 10 songs, remove one if you want to add this song")
+  }
 }
 
 useEffect(() => {
-if (song.length > 2) {
+if (song.length > 1) {
   setBorder(true)
 } else {
   setBorder(false)
@@ -37,7 +44,7 @@ if (song.length > 2) {
     <Container>
     <Label>     
     <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
-    {songSuggestions && song.length > 2 ?
+    {songSuggestions && song.length > 1 ?
       <Suggestions>
         {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setSongs(suggestion); setSong("")}}><AlbumImg src={suggestion.album.images[0].url} />{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
       </Suggestions>
