@@ -6,7 +6,7 @@ export default function Genres({chosenGenres, setChosenGenres, getAccessToken, s
 const [genres, setGenres] = useState()
 
 function setGenre(target) {
-if (target.checked == true && !chosenGenres.includes(target.value) && chosenGenres.length <= 5) {
+if (target.checked == true && !chosenGenres.includes(target.value) && chosenGenres.length < 1) {
   setChosenGenres([...chosenGenres, target.value])
 } else if (target.checked == false && chosenGenres.includes(target.value)) {
   setChosenGenres(chosenGenres.filter((item) => item !== target.value))
@@ -23,7 +23,7 @@ useEffect(() => {
 
   return (
     <>
-    <p>What are your favorite genres?</p>
+    <p>What is your favorite genre?</p>
     {genres ? 
         <GenresContainer>      
           {genres.map((genre) => <Label><Checkbox type="checkbox" value={genre} onChange={(e) => setGenre(e.target)} />{genre}<br /></Label>)}

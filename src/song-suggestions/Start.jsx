@@ -70,17 +70,6 @@ export default function Start({ AUTH_URL }) {
     }
   }, [step])
 
-  // useEffect(() => {
-  //   if (newPlaylist) {
-     
-  //     if (newPlaylist.tracks.items.length > 1) {
-  //       setStep(8)
-  //     }
-  //   }
-  // }, [])
-
-
-
   useEffect(() => {
     if (newPlaylist) {
       addTracks(getAccessToken, recommendations, newPlaylist, setStep)

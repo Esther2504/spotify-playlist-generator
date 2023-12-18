@@ -37,7 +37,7 @@ if (song.length > 1) {
 
   return (
     <>
-    <h2>What are your favorite songs?</h2>
+    <h2>What is your favorite song?</h2>
     <Container>
     <Label>     
     <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
@@ -53,7 +53,7 @@ if (song.length > 1) {
         <Songs>
           {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item.id !== suggestion.id))} /></Song>)}
         </Songs>
-        : <P>Your chosen songs will appear here. You can also continue without choosing a song, just click on next step.</P>
+        : <P>Your chosen song will appear here. You can also continue without choosing a song, just click on next step.</P>
       }
     </ArtistContainer>
     </Container>

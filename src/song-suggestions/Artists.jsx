@@ -16,8 +16,7 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
   }
 
 function setArtists(suggestion) {
-  console.log(chosenArtists.length)
-  if (chosenArtists.length < 5 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
+  if (chosenArtists.length < 1 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
     setChosenArtists([...chosenArtists, suggestion])
   } 
 }
@@ -32,7 +31,7 @@ if (artist.length > 1) {
 
   return (
     <>
-        <h2>Who are your favorite artists?</h2>
+      <h2>Who is your favorite artist?</h2>
     <Container>
     <Label>     
     <TextInput border={border} type="text" value={artist} onChange={(e) => getArtistSuggestions(e.target.value)} />
@@ -48,7 +47,7 @@ if (artist.length > 1) {
         <Artists>
           {chosenArtists.map((suggestion) => <Artist><ArtistName><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists(chosenArtists.filter(item => item !== suggestion))} /></Artist>)}
         </Artists>
-        : <P>Your chosen artists will appear here. You can also continue without choosing an artist, just click on next step.</P>
+        : <P>Your chosen artist will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }
     </ArtistContainer>
     </Container>
