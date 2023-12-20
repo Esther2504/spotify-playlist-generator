@@ -80,29 +80,39 @@ export default function Start({ AUTH_URL }) {
     <div>
       {step == 2 || step == 3 || step == 4 || step == 5 ?
       <BarContainer>
-      
       <Bar></Bar>
       <CircleContainer>
-      <Circle onClick={() => setStep(2)}>1</Circle>
+        {step == 2 || step == 3 || step == 4 || step == 5 ?
+        <Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle>
+        : 
+        <Circle color={"#ffffff"} onClick={() => setStep(2)}>1</Circle>
+        }
       <p>Artist</p>
       </CircleContainer>
-      <CircleContainer><Circle onClick={() => setStep(3)}>2</Circle>
+      <CircleContainer>
+      {step == 3 || step == 4 || step == 5 ?
+        <Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle>
+        : 
+        <Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle>
+        }
       <p>Song</p>
       </CircleContainer>
       <CircleContainer>
-      <Circle onClick={() => setStep(4)}>3</Circle>
+      {step == 4 || step == 5 ?
+        <Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle>
+        : 
+        <Circle color={"#ffffff"} onClick={() => setStep(4)}>3</Circle>
+        }
       <p>Genre</p>
       </CircleContainer>
       <CircleContainer>
-      <Circle onClick={() => setStep(5)}>4</Circle>
+      {step == 5 ?
+        <Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle>
+        : 
+        <Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle>
+        }
       <p>Amount</p>
       </CircleContainer>
-      {/* <p>Artist</p>
-      <p>Song</p>
-      <p>Genre</p>
-      <p>Amount</p> */}
-      
-
       </BarContainer>
       : null
     }
@@ -200,23 +210,29 @@ height: 8px;
 background-color: white;
 position: absolute;
 top: 35px;
+border-radius: 20px;
 `
 
 const CircleContainer = styled.div`
 display: flex;
 flex-direction: column;
-width: 50px;
-font-size: 1rem;
-text-align: left;
+width: 40px;
+font-size: 0.7rem;
+font-weight: 600;
+z-index: 2;
 `
 
 const Circle = styled.div`
 width: 40px;
 height: 40px;
-background-color: white;
+background-color: ${props => props.color};
 border-radius: 20px;
 // position: relative;
 // top: -15px;
-color: black;
+color: ${props => props.color == "#ffffff" ? "black" : "white"};
 cursor: pointer;
+
+&:hover {
+  background-color: #148255;
+}
 `
