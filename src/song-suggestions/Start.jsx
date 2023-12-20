@@ -78,6 +78,35 @@ export default function Start({ AUTH_URL }) {
 
   return (
     <div>
+      {step == 2 || step == 3 || step == 4 || step == 5 ?
+      <BarContainer>
+      
+      <Bar></Bar>
+      <CircleContainer>
+      <Circle onClick={() => setStep(2)}>1</Circle>
+      <p>Artist</p>
+      </CircleContainer>
+      <CircleContainer><Circle onClick={() => setStep(3)}>2</Circle>
+      <p>Song</p>
+      </CircleContainer>
+      <CircleContainer>
+      <Circle onClick={() => setStep(4)}>3</Circle>
+      <p>Genre</p>
+      </CircleContainer>
+      <CircleContainer>
+      <Circle onClick={() => setStep(5)}>4</Circle>
+      <p>Amount</p>
+      </CircleContainer>
+      {/* <p>Artist</p>
+      <p>Song</p>
+      <p>Genre</p>
+      <p>Amount</p> */}
+      
+
+      </BarContainer>
+      : null
+    }
+      
       {step == 1 ?
         <>
           <StartPage AUTH_URL={AUTH_URL} />
@@ -118,13 +147,6 @@ font-size: 1rem;
 cursor: pointer;
 `
 
-// const Genres = styled.div`
-// display: grid;
-// grid-template-columns: repeat(7, 1fr);
-// text-align: left;
-// font-size: 1rem;
-// `
-
 const TextInput = styled.input`
 width: 500px;
 height: 40px;
@@ -161,5 +183,40 @@ const Checkbox = styled.input`
 `
 
 const Label = styled.label`
+cursor: pointer;
+`
+
+
+const BarContainer = styled.div`
+width: 800px;
+display: flex;
+margin: 0 auto;
+justify-content: space-between;
+`
+
+const Bar = styled.div`
+width: 800px;
+height: 8px;
+background-color: white;
+position: absolute;
+top: 35px;
+`
+
+const CircleContainer = styled.div`
+display: flex;
+flex-direction: column;
+width: 50px;
+font-size: 1rem;
+text-align: left;
+`
+
+const Circle = styled.div`
+width: 40px;
+height: 40px;
+background-color: white;
+border-radius: 20px;
+// position: relative;
+// top: -15px;
+color: black;
 cursor: pointer;
 `
