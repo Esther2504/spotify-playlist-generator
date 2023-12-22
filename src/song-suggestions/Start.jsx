@@ -78,41 +78,41 @@ export default function Start({ AUTH_URL }) {
 
   return (
     <div>
-      {step == 2 || step == 3 || step == 4 || step == 5 ?
+      {step != 1 || step > 5 ?
       <BarContainer>
       <Bar></Bar>
-      <CircleContainer>
-        {step == 2 || step == 3 || step == 4 || step == 5 ?
-        <Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle>
-        : 
-        <Circle color={"#ffffff"} onClick={() => setStep(2)}>1</Circle>
-        }
-      <p>Artist</p>
-      </CircleContainer>
-      <CircleContainer>
+      <BarProgress step={step} />
+      <Circles>
+        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle><br/><span>Artist</span></CircleContainer>
       {step == 3 || step == 4 || step == 5 ?
-        <Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle>
+      <>
+      {/* <BarProgress width="260px" /> */}
+        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
+        </>
         : 
-        <Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle>
+        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
         }
-      <p>Song</p>
-      </CircleContainer>
       <CircleContainer>
       {step == 4 || step == 5 ?
-        <Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle>
+      <>
+      {/* <BarProgress width="250px" /> */}
+        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
+        </>
         : 
-        <Circle color={"#ffffff"} onClick={() => setStep(4)}>3</Circle>
+        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
         }
-      <p>Genre</p>
       </CircleContainer>
       <CircleContainer>
       {step == 5 ?
-        <Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle>
+      <ProgressBarContainer>
+      {/* <BarProgress width="250px" /> */}
+        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
+        </ProgressBarContainer>
         : 
-        <Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle>
+        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
         }
-      <p>Amount</p>
       </CircleContainer>
+      </Circles>
       </BarContainer>
       : null
     }
@@ -183,25 +183,11 @@ display: flex;
 align-items: center;
 `
 
-const ArtistImg = styled.img`
-width: 50px;
-margin-right: 5px;
-`
-
-const Checkbox = styled.input`
-
-`
-
-const Label = styled.label`
-cursor: pointer;
-`
-
-
 const BarContainer = styled.div`
 width: 800px;
-display: flex;
+// display: flex;
 margin: 0 auto;
-justify-content: space-between;
+// justify-content: space-between;
 `
 
 const Bar = styled.div`
@@ -211,6 +197,16 @@ background-color: white;
 position: absolute;
 top: 35px;
 border-radius: 20px;
+`
+
+const BarProgress = styled.div`
+width: ${props => props.step == 3 ? "260px" : props.step == 4 ? "520px" : props.step == 5 ? "800px" : "0"};
+height: 8px;
+background-color: #148255;
+position: absolute;
+top: 35px;
+border-radius: 20px;
+z-index:2;
 `
 
 const CircleContainer = styled.div`
@@ -227,12 +223,25 @@ width: 40px;
 height: 40px;
 background-color: ${props => props.color};
 border-radius: 20px;
-// position: relative;
-// top: -15px;
 color: ${props => props.color == "#ffffff" ? "black" : "white"};
 cursor: pointer;
+font-size: 1.5rem;
+line-height: 2.5rem;
 
 &:hover {
   background-color: #148255;
+  color: #ffffff;
 }
+`
+
+const Circles = styled.div`
+width: 800px;
+position: absolute;
+top: 20px;
+display: flex;
+justify-content: space-between;
+`
+
+const ProgressBarContainer = styled.div`
+width: 800px;
 `
