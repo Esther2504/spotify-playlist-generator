@@ -28,8 +28,6 @@ export default function Start({ AUTH_URL }) {
   const [newPlaylist, setNewPlayList] = useState()
   const [recommendations, setRecommendations] = useState([])
 
-  // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/spotify-playlist-generator?&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
-
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
   useEffect(() => {
@@ -76,9 +74,11 @@ export default function Start({ AUTH_URL }) {
     }
   }, [newPlaylist])
 
+  console.log(step)
+
   return (
     <div>
-      {step != 1 || step > 5 ?
+      {step != 1 && step < 6 ?
       <BarContainer>
       <Bar></Bar>
       <BarProgress step={step} />
@@ -86,7 +86,6 @@ export default function Start({ AUTH_URL }) {
         <CircleContainer><Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle><br/><span>Artist</span></CircleContainer>
       {step == 3 || step == 4 || step == 5 ?
       <>
-      {/* <BarProgress width="260px" /> */}
         <CircleContainer><Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
         </>
         : 
@@ -95,7 +94,6 @@ export default function Start({ AUTH_URL }) {
       <CircleContainer>
       {step == 4 || step == 5 ?
       <>
-      {/* <BarProgress width="250px" /> */}
         <CircleContainer><Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
         </>
         : 
@@ -105,7 +103,6 @@ export default function Start({ AUTH_URL }) {
       <CircleContainer>
       {step == 5 ?
       <ProgressBarContainer>
-      {/* <BarProgress width="250px" /> */}
         <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
         </ProgressBarContainer>
         : 
@@ -116,7 +113,6 @@ export default function Start({ AUTH_URL }) {
       </BarContainer>
       : null
     }
-      
       {step == 1 ?
         <>
           <StartPage AUTH_URL={AUTH_URL} />
@@ -128,8 +124,9 @@ export default function Start({ AUTH_URL }) {
             : step == 4 ?
               <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={getAccessToken} setStep={setStep} />
               : step == 5 ?
-                <RecomAmount amount={amount} setAmount={setAmount} setStep={setStep} />
-                : step == 6 ?
+                <RecomAmount amount={amount} setAmount={setAmount} chosenArtists={chosenArtists} chosenSongs={chosenSongs} chosenGenres={chosenGenres} setStep={setStep} />
+                : 
+                step == 6 ?
                   <PlaylistNameDescription setPlaylistName={setPlaylistName} setPlaylistDescription={setPlaylistDescription} setStep={setStep} />
                   : step == 7 ?
                     <Loading />
@@ -235,7 +232,7 @@ line-height: 2.5rem;
 `
 
 const Circles = styled.div`
-width: 800px;
+width: 802px;
 position: absolute;
 top: 20px;
 display: flex;

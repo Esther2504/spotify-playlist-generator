@@ -1,12 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function RecomAmount({ amount, setAmount, setStep }) {
+export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSongs, chosenGenres, setStep }) {
+
+    console.log(chosenArtists)
+
+function checkSeeds() {
+    if (chosenArtists.length == 0 && chosenSongs.length == 0  && chosenGenres.length == 0) {
+        alert("chose at least 1 artist, song or genre")
+    } else {
+        setStep(6)
+    }
+}
+
     return (
         <label>
             <p>How many recommendations do you want?</p>
             <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} /><br/>
-            <SmallButton onClick={() => setStep(6)}>Get recommendations</SmallButton>
+            <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
         </label>
     )
 }
