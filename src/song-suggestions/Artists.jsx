@@ -37,7 +37,7 @@ if (artist.length > 1) {
     <TextInput border={border} type="text" value={artist} onChange={(e) => getArtistSuggestions(e.target.value)} />
     {artistSuggestions && artist.length > 1 ?
       <Suggestions>
-        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}><ArtistSugImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
       </Suggestions>
       : null
     }
@@ -45,7 +45,7 @@ if (artist.length > 1) {
     <ArtistContainer>
       {chosenArtists.length > 0 ?
         <Artists>
-          {chosenArtists.map((suggestion) => <Artist><ArtistName><ArtistImg src={suggestion.images[0].url} />{suggestion.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists(chosenArtists.filter(item => item !== suggestion))} /></Artist>)}
+          {chosenArtists.map((suggestion) => <Artist><ArtistImg src={suggestion.images[0].url} /><ArtistName>{suggestion.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists(chosenArtists.filter(item => item !== suggestion))} /></Artist>)}
         </Artists>
         : <P>Your chosen artist will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }
@@ -63,7 +63,7 @@ const Container = styled.div`
 display: grid;
 gap: 50px;
 width: 100%;
-max-width: 1500px;
+max-width: 1000px;
 align-items: flex-start;
 grid-template-columns: 1fr 2fr;
 `
@@ -77,7 +77,7 @@ justify-content: space-between;
 `
 
 const ArtistContainer = styled.div`
-text-align: left;
+// text-align: left;
 `
 
 const SmallButton = styled.button`
@@ -90,13 +90,17 @@ cursor: pointer;
 margin-top: 20px;
 `
 
-const ArtistName = styled.div`
-display: flex;
-align-items: center;
+const ArtistName = styled.p`
+position: relative;
+left: 0;
+top: 200px;
+width: 300px;
+height: 40px;
+background-color: #333333;
 `
 
 const TextInput = styled.input`
-width: 500px;
+width: 400px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
@@ -108,7 +112,7 @@ outline: none;
 
 const Suggestions = styled.div`
 border: 2px solid #148255;
-width: 500px;
+width: 400px;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
@@ -127,17 +131,25 @@ display: flex;
 flex-direction: column;
 height: 400px;
 flex-wrap: wrap;
+align-items: end;
 `
 
-const Artist = styled.p`
-width: 400px;
+const Artist = styled.div`
+width: 300px;
+height: 300px;
 display: flex;
-justify-content: space-between;
-align-items: center;
-margin: 10px 50px 10px 0;
+flex-direction: column;
 `
 
 const ArtistImg = styled.img`
+width: 300px;
+// margin-right: 15px;
+border-radius: 15px;
+position: absolute;
+// left: 0;
+`
+
+const ArtistSugImg = styled.img`
 width: 50px;
 margin-right: 15px;
 border-radius: 15px;
@@ -151,8 +163,12 @@ height: 500px;
 `
 
 const Image = styled.img`
-width: 15px;
+width: 25px;
+height: 25px;
 cursor: pointer;
+position: relative;
+top: -90px;
+left: 270px;
 `
 
 const P = styled.p`
