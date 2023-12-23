@@ -57,7 +57,10 @@ if (song.length > 1) {
       }
     </ArtistContainer>
     </Container>
-    <SmallButton onClick={() => setStep(4)}>Next step</SmallButton>
+    <ButtonContainer>
+    <SmallButton onClick={() => setStep(2)}>Previous</SmallButton>
+    <SmallButton onClick={() => setStep(4)}>Next</SmallButton>
+    </ButtonContainer>
     </>
   )
 }
@@ -69,6 +72,14 @@ width: 100%;
 max-width: 1500px;
 align-items: flex-start;
 grid-template-columns: 1fr 2fr;
+`
+
+const ButtonContainer = styled.div`
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
 `
 
 const ArtistContainer = styled.div`

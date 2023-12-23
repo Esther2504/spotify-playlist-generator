@@ -14,13 +14,29 @@ function checkSeeds() {
 }
 
     return (
-        <label>
+        <Container>
             <p>How many recommendations do you want?</p>
             <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} /><br/>
+            <ButtonContainer>
+            <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
             <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
-        </label>
+            </ButtonContainer>
+        </Container>
     )
 }
+
+const Container = styled.div`
+width: 100%;
+max-width: 1500px;
+`
+
+const ButtonContainer = styled.div`
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+`
 
 const Input = styled.input`
 width: 100px;

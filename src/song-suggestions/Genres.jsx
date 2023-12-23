@@ -30,7 +30,10 @@ useEffect(() => {
         </GenresContainer>
          : null
         }
-        <SmallButton onClick={() => setStep(5)}>Next step</SmallButton>
+        <ButtonContainer>
+        <SmallButton onClick={() => setStep(3)}>Previous</SmallButton>
+        <SmallButton onClick={() => setStep(5)}>Next</SmallButton>
+        </ButtonContainer>
   </>
   )
 }
@@ -41,6 +44,14 @@ grid-template-columns: repeat(7, 1fr);
 text-align: left;
 font-size: 1rem;
 margin: 2rem 0;
+`
+
+const ButtonContainer = styled.div`
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
 `
 
 const Checkbox = styled.input`

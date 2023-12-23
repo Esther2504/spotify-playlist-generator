@@ -72,7 +72,6 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
 }
 
 export function getRecommendations(getAccessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
-// only 5 seeds total, still need to fix that
 
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
@@ -87,11 +86,8 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, gen
 
     })
         .then(res => {
-            console.log(res.config.url)
-            console.log(res.data)
             res.data.tracks.forEach((track) => recommendations.push(track.uri))
             res.data.tracks.forEach((track) => console.log(track.uri))
-            console.log(recommendations)
         })
         .catch(err => {
             console.log(err)
