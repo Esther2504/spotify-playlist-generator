@@ -63,7 +63,7 @@ const Container = styled.div`
 display: grid;
 gap: 50px;
 width: 100%;
-max-width: 1000px;
+max-width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr 2fr;
 `
@@ -93,14 +93,16 @@ margin-top: 20px;
 const ArtistName = styled.p`
 position: relative;
 left: 0;
-top: 200px;
-width: 300px;
+top: 260px;
+width: 350px;
 height: 40px;
 background-color: #333333;
+border-top: 2px solid white;
+border-bottom: 2px solid white;
 `
 
 const TextInput = styled.input`
-width: 400px;
+width: 450px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
@@ -112,7 +114,7 @@ outline: none;
 
 const Suggestions = styled.div`
 border: 2px solid #148255;
-width: 400px;
+width: 450px;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
@@ -135,18 +137,19 @@ align-items: end;
 `
 
 const Artist = styled.div`
-width: 300px;
-height: 300px;
+width: 354px;
+height: 354px;
 display: flex;
 flex-direction: column;
+position: relative;
+border-radius: 15px;
+border: 2px solid white;
 `
 
 const ArtistImg = styled.img`
-width: 300px;
-// margin-right: 15px;
+width: 350px;
 border-radius: 15px;
 position: absolute;
-// left: 0;
 `
 
 const ArtistSugImg = styled.img`
@@ -167,8 +170,8 @@ width: 25px;
 height: 25px;
 cursor: pointer;
 position: relative;
-top: -90px;
-left: 270px;
+top: -80px;
+left: 310px;
 `
 
 const P = styled.p`
