@@ -16,9 +16,7 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
   }
 
 function setArtists(suggestion) {
-  if (chosenArtists.length < 1 && chosenArtists.find((song) => song.id == suggestion.id) == undefined) {
-    setChosenArtists([...chosenArtists, suggestion])
-  } 
+    setChosenArtists(suggestion)
 }
 
 useEffect(() => {
@@ -43,9 +41,9 @@ if (artist.length > 1) {
     }
       </Label>
     <ArtistContainer>
-      {chosenArtists.length > 0 ?
+      {chosenArtists ?
         <Artists>
-          {chosenArtists.map((suggestion) => <Artist><ArtistImg src={suggestion.images[0].url} /><ArtistName>{suggestion.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists(chosenArtists.filter(item => item !== suggestion))} /></Artist>)}
+          <Artist><ArtistImg src={chosenArtists.images[0].url} /><ArtistName>{chosenArtists.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists()} /></Artist>
         </Artists>
         : <P>Your chosen artist will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }
@@ -93,9 +91,9 @@ margin-top: 20px;
 const ArtistName = styled.p`
 position: relative;
 left: 0;
-top: 260px;
+top: 265px;
 width: 350px;
-height: 40px;
+height: 45px;
 background-color: #333333;
 border-top: 2px solid white;
 border-bottom: 2px solid white;
@@ -144,11 +142,12 @@ flex-direction: column;
 position: relative;
 border-radius: 15px;
 border: 2px solid white;
+overflow: hidden;
 `
 
 const ArtistImg = styled.img`
 width: 350px;
-border-radius: 15px;
+// border-radius: 15px;
 position: absolute;
 `
 

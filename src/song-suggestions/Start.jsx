@@ -17,7 +17,7 @@ export default function Start({ AUTH_URL }) {
 
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState([])
-  const [chosenArtists, setChosenArtists] = useState([])
+  const [chosenArtists, setChosenArtists] = useState()
   const [chosenGenres, setChosenGenres] = useState([])
   const [amount, setAmount] = useState(20)
   const [border, setBorder] = useState("10px")
@@ -50,7 +50,8 @@ export default function Start({ AUTH_URL }) {
     }
   }
 
-  let artistsseeds = (chosenArtists.map((artist) => artist.id)).toString()
+  console.log(chosenArtists)
+  let artistsseeds = chosenArtists
   let tracksseeds = (chosenSongs.map((song) => song.id)).toString()
   let genreseeds = (chosenGenres.map((genre) => genre).toString())
 

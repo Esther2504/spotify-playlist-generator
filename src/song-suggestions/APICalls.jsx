@@ -76,7 +76,7 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, gen
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
             limit: amount,
-            seed_artists: artistseeds,
+            seed_artists: artistseeds.id,
             seed_genres: genreseeds,
             seed_tracks: tracksseeds
         },
@@ -87,7 +87,6 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, gen
     })
         .then(res => {
             res.data.tracks.forEach((track) => recommendations.push(track.uri))
-            res.data.tracks.forEach((track) => console.log(track.uri))
         })
         .catch(err => {
             console.log(err)
