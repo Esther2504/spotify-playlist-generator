@@ -16,7 +16,7 @@ export default function Start({ AUTH_URL }) {
   const [song, setSong] = useState([])
 
   const [songSuggestions, setSongSuggestions] = useState()
-  const [chosenSongs, setChosenSongs] = useState([])
+  const [chosenSongs, setChosenSongs] = useState()
   const [chosenArtists, setChosenArtists] = useState()
   const [chosenGenres, setChosenGenres] = useState([])
   const [amount, setAmount] = useState(20)
@@ -52,7 +52,7 @@ export default function Start({ AUTH_URL }) {
 
   console.log(chosenArtists)
   let artistsseeds = chosenArtists
-  let tracksseeds = (chosenSongs.map((song) => song.id)).toString()
+  let tracksseeds = chosenSongs
   let genreseeds = (chosenGenres.map((genre) => genre).toString())
 
   useEffect(() => {

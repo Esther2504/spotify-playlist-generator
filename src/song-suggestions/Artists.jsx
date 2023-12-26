@@ -91,9 +91,11 @@ margin-top: 20px;
 const ArtistName = styled.p`
 position: relative;
 left: 0;
-top: 265px;
+top: 275px;
 width: 350px;
-height: 45px;
+height: auto;
+font-size: 1.3rem;
+padding: 5px;
 background-color: #333333;
 border-top: 2px solid white;
 border-bottom: 2px solid white;
@@ -169,7 +171,7 @@ width: 25px;
 height: 25px;
 cursor: pointer;
 position: relative;
-top: -80px;
+top: -70px;
 left: 310px;
 `
 

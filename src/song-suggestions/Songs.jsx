@@ -17,14 +17,8 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
    
   }
 
-function setSongs(suggestion) {
-  if (chosenSongs.length < 5 && chosenSongs.find((song) => song.id == suggestion.id) == undefined) {
-    setChosenSongs([...chosenSongs, suggestion])
-  } else if (chosenSongs.find((song) => song.id == suggestion.id) != undefined) {
-    alert("you've already chosen this song")
-  } else if (chosenSongs.length > 5) {
-    alert("you've chosen 5 songs, remove one if you want to add this song")
-  }
+function setSongs(suggestion) { 
+    setChosenSongs(suggestion)
 }
 
 useEffect(() => {
@@ -43,15 +37,15 @@ if (song.length > 1) {
     <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
     {songSuggestions && song.length > 1 ?
       <Suggestions>
-        {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setSongs(suggestion); setSong("")}}><AlbumImg src={suggestion.album.images[0].url} />{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
+        {songSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setSongs(suggestion); setSong("")}}><AlbumSugImg src={suggestion.album.images[0].url} />{suggestion.name} - {suggestion.artists[0].name}</Suggestion>)}
       </Suggestions>
       : null
     }
       </Label>
     <ArtistContainer>
-      {chosenSongs.length > 0 ?
+      {chosenSongs ?
         <Songs>
-          {chosenSongs.map((suggestion) => <Song><AlbumImg src={suggestion.album.images[0].url} /><SongName><span>{suggestion.name}</span><span>{suggestion.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs(chosenSongs.filter(item => item.id !== suggestion.id))} /></Song>)}
+          <Song><AlbumImg src={chosenSongs.album.images[0].url} /><SongName><span>{chosenSongs.name}</span><span>{chosenSongs.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs()} /></Song>
         </Songs>
         : <P>Your chosen song will appear here. You can also continue without choosing a song, just click on next step.</P>
       }
@@ -69,7 +63,7 @@ const Container = styled.div`
 display: grid;
 gap: 50px;
 width: 100%;
-max-width: 1500px;
+max-width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr 2fr;
 `
@@ -97,14 +91,23 @@ margin-top: 20px;
 `
 
 const SongName = styled.div`
+position: relative;
+left: 0;
+top: 275px;
+width: 354px;
+height: auto;
+padding: 5px;
+font-size: 1rem;
+background-color: #333333;
+border-top: 2px solid white;
+border-bottom: 2px solid white;
 display: flex;
 flex-direction: column;
-align-items: flex-start;
-font-size: 1rem;
+text-align: center;
 `
 
 const TextInput = styled.input`
-width: 500px;
+width: 450px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
@@ -116,7 +119,7 @@ outline: none;
 
 const Suggestions = styled.div`
 border: 2px solid #148255;
-width: 500px;
+width: 450px;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
@@ -135,18 +138,27 @@ display: flex;
 flex-direction: column;
 height: 400px;
 flex-wrap: wrap;
+align-items: end;
 `
 
 const Song = styled.p`
-width: 400px;
-display: grid;
-grid-template-columns: 50px 250px 50px;
-align-items: center;
-margin: 10px 50px 10px 0;
-gap: 15px;
+width: 354px;
+height: 354px;
+display: flex;
+flex-direction: column;
+position: relative;
+border-radius: 15px;
+border: 2px solid white;
+overflow: hidden;
+margin-top: 0;
 `
 
 const AlbumImg = styled.img`
+width: 350px;
+position: absolute;
+`
+
+const AlbumSugImg = styled.img`
 width: 50px;
 margin-right: 15px;
 border-radius: 15px;
@@ -160,8 +172,12 @@ height: 500px;
 `
 
 const Image = styled.img`
-width: 15px;
+width: 25px;
+height: 25px;
 cursor: pointer;
+position: relative;
+top: -40px;
+left: 310px;
 `
 
 
