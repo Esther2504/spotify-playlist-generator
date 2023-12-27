@@ -5,28 +5,31 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
 
     console.log(chosenArtists)
 
-function checkSeeds() {
-    if (chosenArtists.length == 0 && chosenSongs.length == 0  && chosenGenres.length == 0) {
-        alert("chose at least 1 artist, song or genre")
-    } else {
-        setStep(6)
+    function checkSeeds() {
+        if (chosenArtists.length == 0 && chosenSongs.length == 0 && chosenGenres.length == 0) {
+            alert("chose at least 1 artist, song or genre")
+        } else {
+            setStep(6)
+        }
     }
-}
 
     return (
-        <Container>
-            <p>How many recommendations do you want?</p>
-            <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} /><br/>
+        <>
+            <Container>
+                <p>How many recommendations do you want?</p>
+                <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} /><br />
+            </Container>
             <ButtonContainer>
-            <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
-            <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
+                <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
+                <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
             </ButtonContainer>
-        </Container>
+        </>
     )
 }
 
 const Container = styled.div`
 width: 100%;
+height: 400px;
 max-width: 1500px;
 `
 
