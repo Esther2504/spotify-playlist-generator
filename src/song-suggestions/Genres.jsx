@@ -47,7 +47,7 @@ const Container = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
-height: 400px;
+height: 600px;
 max-width: 850px;
 align-items: center;
 `
@@ -72,7 +72,7 @@ outline: none;
 
 const ButtonContainer = styled.div`
 width: 100%;
-max-width: 800px;
+max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;

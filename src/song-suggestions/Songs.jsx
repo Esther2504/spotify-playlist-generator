@@ -70,7 +70,7 @@ grid-template-columns: 1fr 2fr;
 
 const ButtonContainer = styled.div`
 width: 100%;
-max-width: 800px;
+max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
@@ -148,7 +148,7 @@ display: flex;
 flex-direction: column;
 position: relative;
 border-radius: 15px;
-border: 2px solid white;
+border: 3px solid #148255;
 overflow: hidden;
 margin-top: 0;
 `

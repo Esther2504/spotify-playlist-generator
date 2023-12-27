@@ -50,7 +50,6 @@ export default function Start({ AUTH_URL }) {
     }
   }
 
-  console.log(chosenArtists)
   let artistsseeds = chosenArtists
   let tracksseeds = chosenSongs
   let genreseeds = (chosenGenres.map((genre) => genre).toString())
@@ -59,13 +58,8 @@ export default function Start({ AUTH_URL }) {
     if (step == 6) {
       getRecommendations(getAccessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
       getUser(accessToken, setUserID);
-      
-      
-      console.log(userID)
     } else if (step == 7) {
         createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
-
-       
     }
   }, [step])
 
@@ -103,9 +97,7 @@ export default function Start({ AUTH_URL }) {
       </CircleContainer>
       <CircleContainer>
       {step == 5 ?
-      <ProgressBarContainer>
         <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
-        </ProgressBarContainer>
         : 
         <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
         }
