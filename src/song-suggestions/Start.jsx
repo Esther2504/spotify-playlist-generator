@@ -52,7 +52,7 @@ export default function Start({ AUTH_URL }) {
 
   let artistsseeds = chosenArtists
   let tracksseeds = chosenSongs
-  let genreseeds = (chosenGenres.map((genre) => genre).toString())
+  let genreseeds = chosenGenres
 
   useEffect(() => {
     if (step == 6) {

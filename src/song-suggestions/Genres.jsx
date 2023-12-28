@@ -4,17 +4,12 @@ import styled from 'styled-components'
 
 export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep }) {
   const [genres, setGenres] = useState()
+  const [genreInput, setGenreInput] = useState()
   const [border, setBorder] = useState(false)
   const [genreSuggestions, setGenreSuggestions] = useState()
 
   function setGenre(target) {
-    if (target.checked == true && !chosenGenres.includes(target.value) && chosenGenres.length < 1) {
-      setChosenGenres([...chosenGenres, target.value])
-    } else if (target.checked == false && chosenGenres.includes(target.value)) {
-      setChosenGenres(chosenGenres.filter((item) => item !== target.value))
-    } else {
-      alert("you can't choose more than 5 genres")
-    }
+      setChosenGenres(target.value)
   }
 
   useEffect(() => {
@@ -23,16 +18,24 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }
   }, [])
 
+console.log(chosenGenres)
 
   return (
     <>
     <Container>
       <h2>What is your favorite genre?</h2>
       {genres ?
-          <TextInput border={border} onFocus={() => setBorder(true)} onBlur={() => setBorder(false)}>
-          <option value="">None</option>
-          {genres.map((genre) => <option type="checkbox" value={genre} onClick={(e) => {setGenre(e.target); setBorder(false)}}>{genre}</option>)}
+      <>
+          <TextInput border={border} onFocus={(e) => {setGenreInput(true);setBorder(true)}} value={chosenGenres}>
         </TextInput>  
+        {genreInput ?
+        <Suggestions>
+        {genres.map((genre) => 
+        <option type="checkbox" value={genre} onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>{genre}</option>
+        )}
+      </Suggestions>
+      : null}
+        </>
     : null}
       </Container>
       <ButtonContainer>
@@ -59,15 +62,27 @@ text-align: left;
 font-size: 1rem;
 margin: 2rem 0;
 `
-const TextInput = styled.select`
+const TextInput = styled.input`
 width: 450px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
-border-color: ${props => props.border ? "#148255 #148255 white" : "2px"};
-border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
+border-radius: 10px;
 padding: 0 10px;
 outline: none;
+`
+const Suggestions = styled.div`
+border: 2px solid #148255;
+border-top: 2px solid white;
+width: 450px;
+height: 310px;
+padding: 0 10px;
+text-align: left;
+font-size: 0.9rem;
+border-radius: 0 0 10px 10px;
+border-top: none;
+overflow-y: scroll;
+cursor: pointer;
 `
 
 const ButtonContainer = styled.div`
