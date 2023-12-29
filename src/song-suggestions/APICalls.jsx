@@ -76,7 +76,7 @@ export function getRecommendations(getAccessToken, artistseeds, tracksseeds, gen
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
             limit: amount,
-            seed_artists: artistseeds.id,
+            seed_artists: artistseeds,
             seed_genres: genreseeds,
             seed_tracks: tracksseeds
         },

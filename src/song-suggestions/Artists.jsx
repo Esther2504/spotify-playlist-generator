@@ -177,4 +177,5 @@ left: 310px;
 
 const P = styled.p`
 margin-top: 0;
+text-align: left;
 `

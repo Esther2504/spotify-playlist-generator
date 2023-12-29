@@ -18,7 +18,13 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }
   }, [])
 
-console.log(chosenGenres)
+  useEffect(() => {
+    if (genreInput) {
+      setBorder(true)
+    } else {
+      setBorder(false)
+    }
+    }, [genreInput])
 
   return (
     <>
@@ -26,12 +32,13 @@ console.log(chosenGenres)
       <h2>What is your favorite genre?</h2>
       {genres ?
       <>
-          <TextInput border={border} onFocus={(e) => {setGenreInput(true);setBorder(true)}} value={chosenGenres}>
+          <TextInput border={border} onClick={(e) => {setGenreInput(true)}} value={chosenGenres}>
         </TextInput>  
         {genreInput ?
         <Suggestions>
+        <option value="" onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>none</option>
         {genres.map((genre) => 
-        <option type="checkbox" value={genre} onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>{genre}</option>
+        <option value={genre} onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>{genre}</option>
         )}
       </Suggestions>
       : null}

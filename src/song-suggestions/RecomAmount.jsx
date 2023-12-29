@@ -6,8 +6,8 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
     console.log(chosenArtists)
 
     function checkSeeds() {
-        if (chosenArtists.length == 0 && chosenSongs.length == 0 && chosenGenres.length == 0) {
-            alert("chose at least 1 artist, song or genre")
+        if (!chosenArtists && !chosenSongs && !chosenGenres) {
+            alert("Choose at least 1 artist, song or genre")
         } else {
             setStep(6)
         }
@@ -16,8 +16,8 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
     return (
         <>
             <Container>
-                <p>How many recommendations do you want?</p>
-                <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} /><br />
+                <h2>How many recommendations do you want?</h2>
+                <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />
             </Container>
             <ButtonContainer>
                 <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
@@ -31,6 +31,9 @@ const Container = styled.div`
 width: 100%;
 height: 600px;
 max-width: 1500px;
+display: flex;
+flex-direction: column;
+align-items: center;
 `
 
 const ButtonContainer = styled.div`
@@ -43,9 +46,11 @@ justify-content: space-between;
 
 const Input = styled.input`
 width: 100px;
-height: 50px;
-font-size: 2rem;
+height: 70px;
+width: 100px;
+font-size: 2.5rem;
 font-weight: bold;
+padding: 0.5rem;
 `
 
 const SmallButton = styled.button`

@@ -18,7 +18,7 @@ export default function Start({ AUTH_URL }) {
   const [songSuggestions, setSongSuggestions] = useState()
   const [chosenSongs, setChosenSongs] = useState()
   const [chosenArtists, setChosenArtists] = useState()
-  const [chosenGenres, setChosenGenres] = useState([])
+  const [chosenGenres, setChosenGenres] = useState()
   const [amount, setAmount] = useState(20)
   const [border, setBorder] = useState("10px")
   const [accessToken, setAccessToken] = useState()
@@ -54,6 +54,8 @@ export default function Start({ AUTH_URL }) {
   let tracksseeds = chosenSongs
   let genreseeds = chosenGenres
 
+  console.log(artistsseeds)
+
   useEffect(() => {
     if (step == 6) {
       getRecommendations(getAccessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
@@ -69,7 +71,12 @@ export default function Start({ AUTH_URL }) {
     }
   }, [newPlaylist])
 
-  console.log(step)
+  function startOver() {
+    setStep(2)
+    setChosenSongs()
+    setChosenArtists()
+    setChosenGenres()
+  }
 
   return (
     <div>
@@ -124,7 +131,7 @@ export default function Start({ AUTH_URL }) {
                   : step == 7 ?
                     <Loading />
                     :
-                    <Playlist newPlaylist={newPlaylist} />
+                    <Playlist newPlaylist={newPlaylist} startOver={startOver} />
       }
     </div>
   )
@@ -211,7 +218,7 @@ z-index: 2;
 const Circle = styled.div`
 width: 40px;
 height: 40px;
-background-color: ${props => props.color};
+background-color: ${props => props.color ? props.color : "#ffffff"};
 border-radius: 20px;
 color: ${props => props.color == "#ffffff" ? "black" : "white"};
 cursor: pointer;
