@@ -10,8 +10,8 @@ import Loading from './Loading'
 import PlaylistNameDescription from './PlaylistName'
 import Playlist from './Playlist'
 
-export default function Start({ AUTH_URL }) {
-  const [step, setStep] = useState(1)
+export default function Start({ accessToken, step, setStep }) {
+
   // const [genres, setGenres] = useState()
   const [song, setSong] = useState([])
 
@@ -21,50 +21,61 @@ export default function Start({ AUTH_URL }) {
   const [chosenGenres, setChosenGenres] = useState()
   const [amount, setAmount] = useState(20)
   const [border, setBorder] = useState("10px")
-  const [accessToken, setAccessToken] = useState()
+  // const [accessToken, setAccessToken] = useState()
   const [userID, setUserID] = useState()
   const [PlaylistName, setPlaylistName] = useState()
   const [PlaylistDescription, setPlaylistDescription] = useState()
   const [newPlaylist, setNewPlayList] = useState()
   const [recommendations, setRecommendations] = useState([])
 
-  const getAccessToken = window.location.hash.substring(14).split('&')[0]
+  // window.location.href = AUTH_URL
 
-  useEffect(() => {
-    if (window.location.hash.includes("access_token")) {
-      setAccessToken(getAccessToken)
-    }
-  }, [window.location])
+  // const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
-  useEffect(() => {
-    if (getAccessToken) {
-      setStep(2)
-    }
-  }, [getAccessToken])
+
+  // useEffect(() => {
+  //   if (window.location.hash.includes("access_token")) {
+  //     setAccessToken(getAccessToken)
+  //   }
+  // }, [window.location])
+
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     setStep(2)
+  //   }
+  // }, [accessToken])
 
   function getSongSuggestions(value) {
     setSong(value)
     if (value.length > 2) {
-      searchSong(getAccessToken, song, setSongSuggestions)
+      searchSong(accessToken, song, setSongSuggestions)
     }
   }
 
-  let artistsseeds = chosenArtists
+  let artistsseeds
+
+  console.log(chosenArtists)
+
+if (chosenArtists) {
+  artistsseeds = chosenArtists.id
+}
+
   let tracksseeds = chosenSongs
   let genreseeds = chosenGenres
 
+
   useEffect(() => {
     if (step == 6) {
-      getRecommendations(getAccessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
+      getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
       getUser(accessToken, setUserID);
     } else if (step == 7) {
-        createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
+      createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }
   }, [step])
 
   useEffect(() => {
     if (newPlaylist) {
-      addTracks(getAccessToken, recommendations, newPlaylist, setStep)
+      addTracks(accessToken, recommendations, newPlaylist, setStep)
     }
   }, [newPlaylist])
 
@@ -75,54 +86,56 @@ export default function Start({ AUTH_URL }) {
     setChosenGenres()
   }
 
+  console.log(accessToken)
+
   return (
     <div>
       {step != 1 && step < 6 ?
-      <BarContainer>
-      <Bar></Bar>
-      <BarProgress step={step} />
-      <Circles>
-        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle><br/><span>Artist</span></CircleContainer>
-      {step == 3 || step == 4 || step == 5 ?
-      <>
-        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
-        </>
-        : 
-        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
-        }
-      <CircleContainer>
-      {step == 4 || step == 5 ?
-      <>
-        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
-        </>
-        : 
-        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
-        }
-      </CircleContainer>
-      <CircleContainer>
-      {step == 5 ?
-        <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
-        : 
-        <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
-        }
-      </CircleContainer>
-      </Circles>
-      </BarContainer>
-      : null
-    }
+        <BarContainer>
+          <Bar></Bar>
+          <BarProgress step={step} />
+          <Circles>
+            <CircleContainer><Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle><br /><span>Artist</span></CircleContainer>
+            {step == 3 || step == 4 || step == 5 ?
+              <>
+                <CircleContainer><Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
+              </>
+              :
+              <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
+            }
+            <CircleContainer>
+              {step == 4 || step == 5 ?
+                <>
+                  <CircleContainer><Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
+                </>
+                :
+                <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
+              }
+            </CircleContainer>
+            <CircleContainer>
+              {step == 5 ?
+                <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
+                :
+                <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
+              }
+            </CircleContainer>
+          </Circles>
+        </BarContainer>
+        : null
+      }
       {step == 1 ?
         <>
-          <StartPage AUTH_URL={AUTH_URL} />
+          {/* <StartPage AUTH_URL={AUTH_URL} /> */}
         </>
         : step == 2 ?
-          <FaveArtists getAccessToken={getAccessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          <FaveArtists getAccessToken={accessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
           : step == 3 ?
-            <FaveSongs getAccessToken={getAccessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
+            <FaveSongs getAccessToken={accessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
             : step == 4 ?
-              <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={getAccessToken} setStep={setStep} />
+              <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={accessToken} setStep={setStep} />
               : step == 5 ?
                 <RecomAmount amount={amount} setAmount={setAmount} chosenArtists={chosenArtists} chosenSongs={chosenSongs} chosenGenres={chosenGenres} setStep={setStep} />
-                : 
+                :
                 step == 6 ?
                   <PlaylistNameDescription setPlaylistName={setPlaylistName} setPlaylistDescription={setPlaylistDescription} setStep={setStep} />
                   : step == 7 ?

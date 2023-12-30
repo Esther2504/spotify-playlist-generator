@@ -14,10 +14,10 @@ export function getUser(accessToken, setUserID) {
         })
 }
 
-export function getGenres(getAccessToken, setGenres) {
+export function getGenres(accessToken, setGenres) {
     axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         headers: {
-            Authorization: "Bearer " + getAccessToken,
+            Authorization: "Bearer " + accessToken,
         },
     })
         .then(res => {
@@ -28,7 +28,7 @@ export function getGenres(getAccessToken, setGenres) {
             console.log(err)
         });
 }
-export function searchArtist(getAccessToken, artist, setArtistSuggestions) {
+export function searchArtist(accessToken, artist, setArtistSuggestions) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: artist,
@@ -36,7 +36,7 @@ export function searchArtist(getAccessToken, artist, setArtistSuggestions) {
             limit: 5
         },
         headers: {
-            Authorization: "Bearer " + getAccessToken,
+            Authorization: "Bearer " + accessToken,
         },
 
     })
@@ -49,7 +49,7 @@ export function searchArtist(getAccessToken, artist, setArtistSuggestions) {
         });
 }
 
-export function searchSong(getAccessToken, song, setSongSuggestions) {
+export function searchSong(accessToken, song, setSongSuggestions) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: song,
@@ -57,7 +57,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
             limit: 5
         },
         headers: {
-            Authorization: "Bearer " + getAccessToken,
+            Authorization: "Bearer " + accessToken,
         },
 
     })
@@ -71,7 +71,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
         });
 }
 
-export function getRecommendations(getAccessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
+export function getRecommendations(accessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
 console.log(artistseeds + genreseeds + tracksseeds)
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
@@ -81,11 +81,12 @@ console.log(artistseeds + genreseeds + tracksseeds)
             seed_tracks: tracksseeds
         },
         headers: {
-            Authorization: "Bearer " + getAccessToken,
+            Authorization: "Bearer " + accessToken,
         },
 
     })
         .then(res => {
+            console.log(res.data)
             res.data.tracks.forEach((track) => recommendations.push(track.uri))
         })
         .catch(err => {
@@ -93,11 +94,11 @@ console.log(artistseeds + genreseeds + tracksseeds)
         });
 }
 
-export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList) {
+export function createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
-        Authorization: `Bearer ${getAccessToken}`,
+        Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
     };
 
@@ -118,11 +119,11 @@ export function createPlaylist(getAccessToken, userID, PlaylistName, PlaylistDes
         });
 }
 
-export function addTracks(getAccessToken, recommendations, newPlaylist, setStep) {
+export function addTracks(accessToken, recommendations, newPlaylist, setStep) {
     let uniqueuris = [...new Set(recommendations)];
 
     const headers = {
-        'Authorization': `Bearer ${getAccessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
     };
 
