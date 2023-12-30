@@ -17,7 +17,8 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
         <>
             <Container>
                 <h2>How many recommendations do you want?</h2>
-                <Input type="number" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />
+                <Input type="range" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />
+            <Amount>{amount}</Amount>
             </Container>
             <ButtonContainer>
                 <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
@@ -45,12 +46,38 @@ justify-content: space-between;
 `
 
 const Input = styled.input`
-width: 100px;
-height: 70px;
-width: 100px;
-font-size: 2.5rem;
-font-weight: bold;
-padding: 0.5rem;
+// width: 100px;
+// height: 70px;
+// width: 100px;
+// font-size: 2.5rem;
+// font-weight: bold;
+// padding: 0.5rem;
+-webkit-appearance: none;
+appearance: none;
+background: #148255;
+cursor: pointer;
+width: 500px;
+height: 20px;
+border-radius: 40px;
+
+&::-webkit-slider-thumb {
+-webkit-appearance: none;
+ width: 40px;
+ height: 40px;
+ background: #ffffff;
+ border-radius: 40px;
+}
+
+&::-moz-range-thumb {
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+`
+const Amount = styled.p`
+color: #ffffff;
+font-size: 6rem;
 `
 
 const SmallButton = styled.button`

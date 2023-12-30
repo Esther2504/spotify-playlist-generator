@@ -72,7 +72,7 @@ export function searchSong(getAccessToken, song, setSongSuggestions) {
 }
 
 export function getRecommendations(getAccessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
-
+console.log(artistseeds + genreseeds + tracksseeds)
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
             limit: amount,

@@ -38,7 +38,6 @@ export default function Start({ AUTH_URL }) {
 
   useEffect(() => {
     if (getAccessToken) {
-      // getGenres(getAccessToken, setGenres)
       setStep(2)
     }
   }, [getAccessToken])
@@ -72,7 +71,7 @@ export default function Start({ AUTH_URL }) {
   }, [newPlaylist])
 
   function startOver() {
-    setStep(2)
+    setStep(1)
     setChosenSongs()
     setChosenArtists()
     setChosenGenres()
