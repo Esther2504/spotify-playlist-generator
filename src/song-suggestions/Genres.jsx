@@ -27,12 +27,14 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }
   }, [genreInput])
 
-  useEffect(() => {
-    if (genres.includes(genreInput)) {
-      setShowGenres(false)
-    } 
-  }, [genreInput])
-
+    useEffect(() => {
+      if (genres) {
+      if (genres.includes(genreInput)) {
+        setShowGenres(false)
+      } 
+    }
+    }, [genreInput])
+  
   return (
     <>
       <Container>

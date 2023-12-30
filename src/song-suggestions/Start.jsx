@@ -53,8 +53,6 @@ export default function Start({ AUTH_URL }) {
   let tracksseeds = chosenSongs
   let genreseeds = chosenGenres
 
-  console.log(artistsseeds)
-
   useEffect(() => {
     if (step == 6) {
       getRecommendations(getAccessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
