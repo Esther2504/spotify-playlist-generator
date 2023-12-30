@@ -5,11 +5,12 @@ import styled from 'styled-components'
 export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep }) {
   const [genres, setGenres] = useState()
   const [genreInput, setGenreInput] = useState()
+  const [showGenres, setShowGenres] = useState(false)
   const [border, setBorder] = useState(false)
   const [genreSuggestions, setGenreSuggestions] = useState()
 
   function setGenre(target) {
-      setChosenGenres(target.value)
+    setChosenGenres(target.value)
   }
 
   useEffect(() => {
@@ -24,32 +25,40 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     } else {
       setBorder(false)
     }
-    }, [genreInput])
+  }, [genreInput])
+
+  useEffect(() => {
+    if (genres.includes(genreInput)) {
+      setShowGenres(false)
+    } 
+  }, [genreInput])
 
   return (
     <>
-    <Container>
-      <h2>What is your favorite genre?</h2>
-      {genres ?
-      <>
-          <TextInput border={border} onClick={(e) => {setGenreInput(true)}} value={chosenGenres}>
-        </TextInput>  
-        {genreInput ?
-        <Suggestions>
-        <option value="" onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>none</option>
-        {genres.map((genre) => 
-        <option value={genre} onClick={(e) => {setGenre(e.target); setGenreInput(false)}}>{genre}</option>
-        )}
-      </Suggestions>
-      : null}
-        </>
-    : null}
+      <Container>
+        <h2>What is your favorite genre?</h2>
+        {genres ?
+          <>
+            <TextInput border={border} onInput={(e) => { setGenreInput(e.target.value); setShowGenres(true)}} value={genreInput}>
+            </TextInput>
+            {genreInput && showGenres ?
+              <Suggestions>
+                {genres.map((genre) => {
+                  return genre.includes(genreInput) ?
+                    <option value={genre} onClick={(e) => { setGenre(e.target); setGenreInput(genre); setShowGenres(false) }}>{genre}</option>
+                    : null
+                }
+                )}
+              </Suggestions>
+              : null}
+          </>
+          : null}
       </Container>
       <ButtonContainer>
         <SmallButton onClick={() => setStep(3)}>Previous</SmallButton>
         <SmallButton onClick={() => setStep(5)}>Next</SmallButton>
       </ButtonContainer>
-      </>
+    </>
   )
 }
 
@@ -82,7 +91,8 @@ const Suggestions = styled.div`
 border: 2px solid #148255;
 border-top: 2px solid white;
 width: 450px;
-height: 310px;
+height: auto;
+max-height: 310px;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;

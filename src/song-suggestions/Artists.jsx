@@ -96,9 +96,9 @@ width: 350px;
 height: auto;
 font-size: 1.3rem;
 padding: 5px;
-background-color: #333333;
-border-top: 2px solid white;
-border-bottom: 2px solid white;
+background-color: #148255;
+border-top: 2px solid #fff;
+border-bottom: 2px solid #fff;
 `
 
 const TextInput = styled.input`
