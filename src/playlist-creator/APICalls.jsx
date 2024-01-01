@@ -15,8 +15,7 @@ export function getPlaylists(getAccessToken, setData, data, accessToken) {
 }
 
 export function getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
-    axios
-        .get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
+    axios.get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
             headers: {
                 Authorization: "Bearer " + accessToken,
             },
@@ -32,8 +31,7 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
 }
 
 function getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
-    axios
-        .get(`https://api.spotify.com/v1/albums/${playlistid}`, {
+    axios.get(`https://api.spotify.com/v1/albums/${playlistid}`, {
             headers: {
                 Authorization: "Bearer " + accessToken,
             },

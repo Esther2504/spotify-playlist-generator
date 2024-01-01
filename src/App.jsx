@@ -76,7 +76,7 @@ function App() {
         {accessToken ? <>
         {tool == 'playlistmixer' ?
         // <StartPage AUTH_URL={AUTH_URL} />
-        <AllPlaylists AUTH_URL={AUTH_URL} data={data} />
+        <AllPlaylists accessToken={accessToken} data={data} />
         : tool == 'songsuggestions' ?
           <Start accessToken={accessToken} step={step} setStep={setStep} />
           :

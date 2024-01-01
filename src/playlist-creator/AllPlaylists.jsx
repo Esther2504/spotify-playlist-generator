@@ -4,7 +4,7 @@ import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 import { getTracks } from './APICalls'
 
-export default function AllPlaylists({ data, accessToken }) {
+export default function AllPlaylists({ accessToken, data }) {
   const [playlistid, setPlaylistid] = useState()
   const [playlistName, setPlaylistName] = useState()
   const [publicplaylist, setPublicplaylist] = useState()

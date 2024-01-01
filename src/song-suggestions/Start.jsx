@@ -53,14 +53,19 @@ export default function Start({ accessToken, step, setStep }) {
   }
 
   let artistsseeds
+  let tracksseeds
 
-  console.log(chosenArtists)
+
 
 if (chosenArtists) {
   artistsseeds = chosenArtists.id
 }
 
-  let tracksseeds = chosenSongs
+if (chosenSongs) {
+  tracksseeds = chosenSongs.id
+}
+
+  
   let genreseeds = chosenGenres
 
 
@@ -80,7 +85,7 @@ if (chosenArtists) {
   }, [newPlaylist])
 
   function startOver() {
-    setStep(1)
+    setStep(2)
     setChosenSongs()
     setChosenArtists()
     setChosenGenres()

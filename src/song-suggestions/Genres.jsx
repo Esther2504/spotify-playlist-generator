@@ -29,11 +29,13 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
 
     useEffect(() => {
       if (genres) {
-      if (genres.includes(genreInput)) {
+      if (genres.includes(chosenGenres)) {
         setShowGenres(false)
       } 
     }
-    }, [genreInput])
+    }, [chosenGenres])
+
+    console.log(chosenGenres)
   
   return (
     <>
@@ -41,13 +43,13 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
         <h2>What is your favorite genre?</h2>
         {genres ?
           <>
-            <TextInput border={border} onInput={(e) => { setGenreInput(e.target.value); setShowGenres(true)}} value={genreInput}>
+            <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); setShowGenres(true)}} value={chosenGenres}>
             </TextInput>
-            {genreInput && showGenres ?
+            {chosenGenres && showGenres ?
               <Suggestions>
                 {genres.map((genre) => {
-                  return genre.includes(genreInput) ?
-                    <option value={genre} onClick={(e) => { setGenre(e.target); setGenreInput(genre); setShowGenres(false) }}>{genre}</option>
+                  return genre.includes(chosenGenres) ?
+                    <option value={genre} onClick={(e) => { setChosenGenres(genre); setShowGenres(false) }}>{genre}</option>
                     : null
                 }
                 )}
