@@ -207,7 +207,7 @@ width: 800px;
 height: 8px;
 background-color: white;
 position: absolute;
-top: 35px;
+top: 100px;
 border-radius: 20px;
 `
 
@@ -216,7 +216,7 @@ width: ${props => props.step == 3 ? "260px" : props.step == 4 ? "520px" : props.
 height: 8px;
 background-color: #148255;
 position: absolute;
-top: 35px;
+top: 100px;
 border-radius: 20px;
 z-index:2;
 `
@@ -249,7 +249,7 @@ line-height: 2.5rem;
 const Circles = styled.div`
 width: 802px;
 position: absolute;
-top: 20px;
+top: 85px;
 display: flex;
 justify-content: space-between;
 `

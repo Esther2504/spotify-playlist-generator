@@ -10,7 +10,7 @@ export default function StartPage({ setTool }) {
           <BR />Playlist
           <BR />Mixer
         </H1>
-        <P>Create new playlists from existing playlists based on mood and genre preferences</P>
+        <P>Create playlists from existing playlists based on your mood and genre preferences</P>
         {/* <A href={AUTH_URL}> */}
           <Button onClick={() => {setTool('playlistmixer')}}>Choose a playlist</Button>
         {/* </A> */}

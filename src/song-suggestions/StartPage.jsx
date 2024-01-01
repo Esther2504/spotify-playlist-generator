@@ -7,7 +7,7 @@ export default function StartPage({ setTool }) {
             <H1><Span>Spotify</Span><br></br>Song<br></br>Suggestions</H1>
             <p>Get suggestions based on your favorite song, artist and genre</p>
             {/* <A href={AUTH_URL}> */}
-                <Button onClick={() => setTool('songsuggestions')}>Get started</Button>
+                <Button onClick={() => setTool('songsuggestions')}>Get song suggestions</Button>
             {/* </A> */}
         </Container>
     )
