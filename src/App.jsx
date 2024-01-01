@@ -80,14 +80,14 @@ function App() {
         : tool == 'songsuggestions' ?
           <Start accessToken={accessToken} step={step} setStep={setStep} />
           :
-          <>
+          <StartContainer>
             {/* <A onClick={() => setTool('songsuggestions')} href={AUTH_URL}> */}
             <StartPage setTool={setTool} />
             <StartPage2 setTool={setTool} setStep={setStep} />
               {/* <button onClick={() => setTool('playlistmixer')}>Choose</button>
               <button onClick={() => setTool('songsuggestions')}>Choose</button> */}
             {/* </A> */}
-          </>
+          </StartContainer>
       }
       </>
       :
@@ -106,6 +106,14 @@ function App() {
 const Nav = styled.nav`
 height: 50px;
 border-bottom: 3px solid white;
+`
+
+const StartContainer = styled.div`
+display: flex;
+width: 90%;
+margin: 0 auto;
+max-width: 100%;
+justify-content: space-between;
 `
 
 const A = styled.a``
