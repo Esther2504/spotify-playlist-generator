@@ -26,18 +26,19 @@ export function getGenres(accessToken, setGenres, setError) {
             setGenres(res.data.genres)
         })
         .catch(err => {
-            setError(true)
+            console.log(err)
+            // setError(true)
         });
 }
 export function searchArtist(accessToken, artist, setArtistSuggestions, setError) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: artist,
-            type: "artist",
+            type: "artit",
             limit: 5
         },
         headers: {
-            Authorization: "Bearer " + accessToken2,
+            Authorization: "Bearer " + accessToken,
         },
 
     })

@@ -6,6 +6,7 @@ import { getPlaylists } from './playlist-creator/APICalls';
 import StartPage2 from './song-suggestions/StartPage';
 import Start from './song-suggestions/Start';
 import styled from 'styled-components';
+import ErrorModal from './ErrorModal';
 
 function App() {
   const [data, setData] = useState()
@@ -15,6 +16,7 @@ function App() {
   const [tool, setTool] = useState()
   const [step, setStep] = useState(1)
   const [error, setError] = useState(false)
+  const [showError, setShowError] = useState(false)
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&grant_type=refresh_token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -69,6 +71,7 @@ function App() {
 
   useEffect(() => {
     if (error) {
+      setShowError(true)
       setAccessToken()
     }
   }, [error])
@@ -76,6 +79,9 @@ function App() {
 
   return (
     <div className="App">
+      {showError ?
+      <ErrorModal setShowError={setShowError} />
+      : null} 
       {/* <Nav>
         <a>Playlist mixer</a>
         <a>Song suggestor</a>
