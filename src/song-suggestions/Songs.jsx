@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 import cross from '../images/cross.svg'
+import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
+
 
 export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, setStep}) {
   const [border, setBorder] = useState()
@@ -45,7 +47,10 @@ if (song.length > 1) {
     <ArtistContainer>
       {chosenSongs ?
         <Songs>
-          <Song><AlbumImg src={chosenSongs.album.images[0].url} /><SongName><span>{chosenSongs.name}</span><span>{chosenSongs.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs()} /></Song>
+          <Song>
+          {chosenSongs.album.images[0] ? <AlbumImg src={chosenSongs.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
+            <AlbumImg src={chosenSongs.album.images[0].url} />
+          <SongName><span>{chosenSongs.name}</span><span>{chosenSongs.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs()} /></Song>
         </Songs>
         : <P>Your chosen song will appear here. You can also continue without choosing a song, just click on next step.</P>
       }

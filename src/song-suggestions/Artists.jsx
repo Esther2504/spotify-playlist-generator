@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGenres, searchSong, searchArtist } from './APICalls'
 import cross from '../images/cross.svg'
+import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
 export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep}) {
   const [border, setBorder] = useState(false)
@@ -27,6 +28,8 @@ if (artist.length > 1) {
 }
 }, [artist])
 
+console.log(artistSuggestions)
+
   return (
     <>
       <h2>Who is your favorite artist?</h2>
@@ -35,7 +38,9 @@ if (artist.length > 1) {
     <TextInput border={border} type="text" value={artist} onChange={(e) => getArtistSuggestions(e.target.value)} />
     {artistSuggestions && artist.length > 1 ?
       <Suggestions>
-        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}><ArtistSugImg src={suggestion.images[0].url} />{suggestion.name}</Suggestion>)}
+        {artistSuggestions.map((suggestion) => <Suggestion onClick={(e) => {setArtists(suggestion); setArtist("")}}>
+          {suggestion.images[0] ? <ArtistSugImg src={suggestion.images[0].url} /> : <ArtistSugImg src={EmptyPlaylist} />} 
+          {suggestion.name}</Suggestion>)}
       </Suggestions>
       : null
     }
