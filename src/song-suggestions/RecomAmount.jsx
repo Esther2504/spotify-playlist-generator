@@ -14,9 +14,9 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
     }
 
     return (
-        <>
+        <ContainerContainer>
+        <h2>How many recommendations do you want?</h2>
             <Container>
-                <h2>How many recommendations do you want?</h2>
                 <Input type="range" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />
             <Amount>{amount}</Amount>
             </Container>
@@ -24,25 +24,48 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
                 <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
                 <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
             </ButtonContainer>
-        </>
+        </ContainerContainer>
     )
 }
 
-const Container = styled.div`
-width: 95%;
-height: 600px;
-max-width: 850px;
-display: flex;
-flex-direction: column;
-align-items: center;
-margin: 0 auto;
+const ContainerContainer = styled.div`
+// max-width: 800px;
+width: 100%;
+
 
 @media screen and (max-width: 850px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px 1fr;
-    justify-items: center;
-   width: auto;
-  }
+ width: 750px;
+}
+@media screen and (max-width: 750px) {
+ width: 650px;
+}
+@media screen and (max-width: 650px) {
+ width: 550px;
+}
+@media screen and (max-width: 550px) {
+ width: 450px;
+}
+@media screen and (max-width: 450px) {
+ width: 350px;
+}
+`
+
+const Container = styled.div`
+position: relative;
+display: grid;
+max-width: 100%;
+min-height: 200px;
+width: 800px;
+align-items: flex-start;
+grid-template-columns: 1fr;
+margin: 0 auto;
+min-width: 90%
+
+@media screen and (max-width: 850px) {
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  justify-items: center;
+}
 `
 
 const ButtonContainer = styled.div`
@@ -71,6 +94,7 @@ cursor: pointer;
 width: 500px;
 height: 20px;
 border-radius: 40px;
+margin: 0 auto;
 
 &::-webkit-slider-thumb {
 -webkit-appearance: none;
@@ -94,6 +118,7 @@ border-radius: 40px;
 const Amount = styled.p`
 color: #ffffff;
 font-size: 6rem;
+margin-top: 1rem;
 `
 
 const SmallButton = styled.button`

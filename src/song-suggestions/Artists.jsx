@@ -69,7 +69,7 @@ max-width: 800px;
 const Container = styled.div`
 display: grid;
 width: 100%;
-min-height: 500px;
+min-height: 400px;
 max-width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr 1fr;
@@ -149,7 +149,7 @@ font-size: 0.9rem;
 border-radius: 0 0 10px 10px;
 border-top: none;
 z-index: 2;
-background: #333333;
+background: #2C2C2C;
 
 @media screen and (max-width: 450px) {
   width: 300px;
@@ -206,7 +206,7 @@ const Label = styled.label`
 display: flex;
 flex-direction: column;
 justify-content: start;
-height: 500px;
+min-height: 400px;
 `
 
 const Image = styled.img`

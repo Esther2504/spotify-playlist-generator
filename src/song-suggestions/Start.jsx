@@ -75,7 +75,7 @@ console.log(!PlaylistName)
     setChosenGenres()
   }
 
-  console.log(accessToken)
+  console.log(step)
 
   return (
     <div>
@@ -112,7 +112,7 @@ console.log(!PlaylistName)
         </BarContainer>
         : null
       }
-      <Container>
+      <Container step={step}>
       {step == 1 ?
         <>
           {/* <StartPage AUTH_URL={AUTH_URL} /> */}
@@ -258,5 +258,9 @@ width: 800px;
 
 const Container = styled.div`
 position: relative;
-top: 100px;
+top: 0;
+
+@media screen and (max-width: 1280px) {
+  top: ${props => props.step > 5 ? "0" : "100px"};
+}
 `

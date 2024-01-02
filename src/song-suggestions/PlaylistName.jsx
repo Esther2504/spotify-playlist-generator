@@ -19,10 +19,27 @@ align-items: center;
 gap: 20px;
 width: 100%;
 max-width: 850px;
+
+@media screen and (max-width: 850px) {
+    width: 750px;
+   }
+   @media screen and (max-width: 750px) {
+    width: 650px;
+   }
+   @media screen and (max-width: 650px) {
+    width: 550px;
+   }
+   @media screen and (max-width: 550px) {
+    width: 450px;
+   }
+   @media screen and (max-width: 450px) {
+    width: 350px;
+   }
 `
 
 const TextInput = styled.input`
 width: 800px;
+max-width: 95%;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
@@ -39,6 +56,7 @@ border: 2px solid #148255;
 border-radius: 10px;
 padding: 10px;
 outline: none;
+max-width: 95%;
 `
 
 const SmallButton = styled.button`
@@ -49,4 +67,6 @@ padding: 15px;
 font-size: 1rem;
 cursor: pointer;
 font-weight: 600;
+width: 50%;
+margin-top: 20px;
 `

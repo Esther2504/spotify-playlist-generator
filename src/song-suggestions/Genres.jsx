@@ -20,7 +20,6 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
   }, [])
 
 
-
     useEffect(() => {
       if (genres) {
       if (genres.includes(chosenGenres)) {
@@ -30,15 +29,30 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }, [chosenGenres])
 
     useEffect(() => {
-      if (chosenGenres) {
-        if (chosenGenres.length > 0 && showGenres) {
+      // console.log(chosenGenres.length)
+      // console.log(showGenres)
+      // if (chosenGenres) {
+        console.log('yes')
+        if (showGenres && chosenGenres) {
           setBorder(true)
         } else {
           setBorder(false)
         }
-      }  
-    }, [chosenGenres, showGenres])
+      // }  
+    }, [showGenres])
+    console.log(showGenres)
+    // console.log(chosenGenres.length)
+    console.log(border)
 
+    function showGenresHandler(target) {
+      console.log('hey')
+      console.log(target)
+ if (target.length > 0) {
+  setShowGenres(true)
+ } else {
+  setShowGenres(false)
+ }
+    }
   
   return (
     <ContainerContainer>
@@ -46,7 +60,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
        <h2>What is your favorite genre?</h2>
       <Container>
       <Label>  
-            <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); setShowGenres(true)}} value={chosenGenres}>
+            <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); showGenresHandler(e.target.value)}} value={chosenGenres}>
             </TextInput>
             {chosenGenres && showGenres ?
               <Suggestions>
@@ -70,25 +84,42 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
 }
 
 const ContainerContainer = styled.div`
-max-width: 800px;
+// max-width: 800px;
 width: 100%;
+
+
+@media screen and (max-width: 850px) {
+ width: 750px;
+}
+@media screen and (max-width: 750px) {
+ width: 650px;
+}
+@media screen and (max-width: 650px) {
+ width: 550px;
+}
+@media screen and (max-width: 550px) {
+ width: 450px;
+}
+@media screen and (max-width: 450px) {
+ width: 350px;
+}
 `
 
 const Container = styled.div`
 position: relative;
 display: grid;
 max-width: 100%;
-min-height: 500px;
+min-height: 200px;
 width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr;
 // margin: 0 auto;
+min-width: 90%
 
 @media screen and (max-width: 850px) {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
   justify-items: center;
- width: auto;
 }
 `
 
@@ -111,16 +142,15 @@ outline: none;
 margin: 0 auto;
 
 @media screen and (max-width: 850px) {
-  margin-left: 80px;
+  // margin-left: 80px;
 }
 @media screen and (max-width: 480px) {
   width: 300px;
-  margin-left: 30px;
+  // margin-left: 30px;
   }
 `
 const Suggestions = styled.div`
 border: 2px solid #148255;
-border-top: 2px solid white;
 width: 450px;
 height: auto;
 max-height: 310px;
@@ -131,6 +161,7 @@ border-radius: 0 0 10px 10px;
 border-top: none;
 overflow-y: scroll;
 cursor: pointer;
+margin: 0 auto;
 
 @media screen and (max-width: 480px) {
   width: 300px;
@@ -138,7 +169,7 @@ cursor: pointer;
 `
 
 const ButtonContainer = styled.div`
-width: 95%;
+width: 90%;
 max-width: 850px;
 margin: 0 auto;
 display: flex;
@@ -149,7 +180,7 @@ const Label = styled.label`
 display: flex;
 flex-direction: column;
 justify-content: start;
-height: 500px;
+min-height: 400px;
 `
 
 const SmallButton = styled.button`
