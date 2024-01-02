@@ -129,4 +129,5 @@ color: #fff;
 padding: 15px;
 font-size: 1rem;
 cursor: pointer;
+font-weight: 600;
 `

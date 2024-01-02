@@ -17,6 +17,8 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: 20px;
+width: 100%;
+max-width: 850px;
 `
 
 const TextInput = styled.input`
@@ -46,4 +48,5 @@ color: #fff;
 padding: 15px;
 font-size: 1rem;
 cursor: pointer;
+font-weight: 600;
 `

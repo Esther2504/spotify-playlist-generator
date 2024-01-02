@@ -112,6 +112,7 @@ console.log(!PlaylistName)
         </BarContainer>
         : null
       }
+      <Container>
       {step == 1 ?
         <>
           {/* <StartPage AUTH_URL={AUTH_URL} /> */}
@@ -132,6 +133,7 @@ console.log(!PlaylistName)
                     :
                     <Playlist newPlaylist={newPlaylist} startOver={startOver} />
       }
+      </Container>
     </div>
   )
 }
@@ -143,6 +145,7 @@ color: #fff;
 padding: 15px 30px;
 font-size: 1.5rem;
 cursor: pointer;
+font-weight: 600;
 `
 const SmallButton = styled.button`
 background: #148255;
@@ -240,4 +243,8 @@ justify-content: space-between;
 
 const ProgressBarContainer = styled.div`
 width: 800px;
+`
+
+const Container = styled.div`
+position: relative;
 `

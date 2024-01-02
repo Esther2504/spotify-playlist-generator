@@ -46,6 +46,7 @@ color: #fff;
 padding: 15px;
 font-size: 1.2rem;
 cursor: pointer;
+font-weight: 600;
 `
 
 const H1 = styled.h1``

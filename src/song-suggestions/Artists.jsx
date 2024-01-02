@@ -86,6 +86,7 @@ padding: 15px;
 font-size: 1rem;
 cursor: pointer;
 margin-top: 20px;
+font-weight: 600;
 `
 
 const ArtistName = styled.p`

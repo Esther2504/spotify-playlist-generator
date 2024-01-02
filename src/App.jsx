@@ -150,6 +150,7 @@ color: #fff;
 padding: 15px 30px;
 font-size: 1.5rem;
 cursor: pointer;
+font-weight: 600;
 `
 
 const A = styled.a``
