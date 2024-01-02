@@ -19,13 +19,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }
   }, [])
 
-  useEffect(() => {
-    if (genreInput) {
-      setBorder(true)
-    } else {
-      setBorder(false)
-    }
-  }, [genreInput])
+
 
     useEffect(() => {
       if (genres) {
@@ -35,14 +29,23 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     }
     }, [chosenGenres])
 
-    console.log(chosenGenres)
+    useEffect(() => {
+      if (chosenGenres) {
+        if (chosenGenres.length > 0 && showGenres) {
+          setBorder(true)
+        } else {
+          setBorder(false)
+        }
+      }  
+    }, [chosenGenres, showGenres])
+
   
   return (
-    <>
+    <ContainerContainer>
+       {/* {genres ? */}
+       <h2>What is your favorite genre?</h2>
       <Container>
-        <h2>What is your favorite genre?</h2>
-        {genres ?
-          <>
+      <Label>  
             <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); setShowGenres(true)}} value={chosenGenres}>
             </TextInput>
             {chosenGenres && showGenres ?
@@ -54,25 +57,39 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
                 }
                 )}
               </Suggestions>
-              : null}
-          </>
-          : null}
+              : null}   
+              </Label>     
       </Container>
+      {/* : null} */}
       <ButtonContainer>
         <SmallButton onClick={() => setStep(3)}>Previous</SmallButton>
         <SmallButton onClick={() => setStep(5)}>Next</SmallButton>
       </ButtonContainer>
-    </>
+    </ContainerContainer>
   )
 }
 
-const Container = styled.div`
-display: flex;
-flex-direction: column;
+const ContainerContainer = styled.div`
+max-width: 800px;
 width: 100%;
-height: 600px;
-max-width: 850px;
-align-items: center;
+`
+
+const Container = styled.div`
+position: relative;
+display: grid;
+max-width: 100%;
+min-height: 500px;
+width: 850px;
+align-items: flex-start;
+grid-template-columns: 1fr;
+// margin: 0 auto;
+
+@media screen and (max-width: 850px) {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 1fr;
+  justify-items: center;
+ width: auto;
+}
 `
 
 const GenresContainer = styled.div`
@@ -87,9 +104,19 @@ width: 450px;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
-border-radius: 10px;
+border-color: ${props => props.border ? "#148255 #148255 none" : "#148255"};
+border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
 padding: 0 10px;
 outline: none;
+margin: 0 auto;
+
+@media screen and (max-width: 850px) {
+  margin-left: 80px;
+}
+@media screen and (max-width: 480px) {
+  width: 300px;
+  margin-left: 30px;
+  }
 `
 const Suggestions = styled.div`
 border: 2px solid #148255;
@@ -104,22 +131,25 @@ border-radius: 0 0 10px 10px;
 border-top: none;
 overflow-y: scroll;
 cursor: pointer;
+
+@media screen and (max-width: 480px) {
+  width: 300px;
+  }
 `
 
 const ButtonContainer = styled.div`
-width: 100%;
+width: 95%;
 max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
 `
 
-const Checkbox = styled.input`
-
-`
-
 const Label = styled.label`
-cursor: pointer;
+display: flex;
+flex-direction: column;
+justify-content: start;
+height: 500px;
 `
 
 const SmallButton = styled.button`
@@ -129,5 +159,6 @@ color: #fff;
 padding: 15px;
 font-size: 1rem;
 cursor: pointer;
+margin-top: 20px;
 font-weight: 600;
 `

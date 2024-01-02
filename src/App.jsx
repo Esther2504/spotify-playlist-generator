@@ -128,19 +128,34 @@ const Container = styled.div`
 display: flex;
 text-align: left;
 max-width: 95%;
+
+@media screen and (max-width: 850px) {
+  flex-direction: column;
+  }
 `
 
 const TextContainer = styled.div`
 width: 700px;
+// max-width: 95%;
 font-size: 1.5rem;
+
+@media screen and (max-width: 850px) {
+  text-align: center;
+  }
 `
 
 const StartContainer = styled.div`
 display: flex;
-width: 1200px;
+max-width: 1200px;
 margin: 0 auto;
-max-width: 100%;
+width: 100%;
 justify-content: space-between;
+align-items: center;
+
+@media screen and (max-width: 850px) {
+  flex-direction: column;
+  align-items: center;
+}
 `
 
 const Button = styled.button`
@@ -157,6 +172,12 @@ const A = styled.a``
 
 const SVG = styled.svg`
 width: 600px;
+
+
+@media screen and (max-width: 850px) {
+  width: 300px;
+  margin: 0 auto;
+  }
 `
 
 export default App;

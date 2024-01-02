@@ -20,6 +20,10 @@ width: 500px;
 max-width: 50%;
 text-align: right;
 padding: 40px;
+
+@media screen and (max-width: 850px) {
+    max-width: 100%;
+    }
 `
 
 const Span = styled.span`

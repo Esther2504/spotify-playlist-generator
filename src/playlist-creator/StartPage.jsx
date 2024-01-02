@@ -23,6 +23,10 @@ max-width: 50%;
 // margin: 0 auto;
 padding: 40px;
 text-align: left;
+
+@media screen and (max-width: 850px) {
+  max-width: 100%;
+  }
 `
 const Span = styled.span`
 color: #148255;

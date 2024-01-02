@@ -138,6 +138,7 @@ console.log(!PlaylistName)
   )
 }
 
+
 const Button = styled.button`
 background: #148255;
 border: none;
@@ -147,6 +148,7 @@ font-size: 1.5rem;
 cursor: pointer;
 font-weight: 600;
 `
+
 const SmallButton = styled.button`
 background: #148255;
 border: none;
@@ -183,14 +185,17 @@ align-items: center;
 `
 
 const BarContainer = styled.div`
-width: 800px;
+max-width: 800px;
+// width: 90%;
 // display: flex;
 margin: 0 auto;
 // justify-content: space-between;
+overflow-x: hidden;
 `
 
 const Bar = styled.div`
-width: 800px;
+max-width: 800px;
+width: 90%;
 height: 8px;
 background-color: white;
 position: absolute;
@@ -200,12 +205,17 @@ border-radius: 20px;
 
 const BarProgress = styled.div`
 width: ${props => props.step == 3 ? "260px" : props.step == 4 ? "520px" : props.step == 5 ? "800px" : "0"};
-height: 8px;
+max-width: 90%;
+height: 10px;
 background-color: #148255;
 position: absolute;
 top: 50px;
 border-radius: 20px;
-z-index:2;
+z-index: 2;
+
+@media screen and (max-width: 850px) {
+  width: ${props => props.step == 3 ? "33%" : props.step == 4 ? "62%" : props.step == 5 ? "100%" : "0"};
+}
 `
 
 const CircleContainer = styled.div`
@@ -234,7 +244,8 @@ line-height: 2.5rem;
 `
 
 const Circles = styled.div`
-width: 802px;
+width: 92%;
+max-width: 800px;
 position: absolute;
 top: 35px;
 display: flex;
@@ -247,4 +258,5 @@ width: 800px;
 
 const Container = styled.div`
 position: relative;
+top: 100px;
 `

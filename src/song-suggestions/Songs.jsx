@@ -32,10 +32,10 @@ if (song.length > 1) {
 }, [song])
 
   return (
-    <>
+    <ContainerContainer>
     <h2>What is your favorite song?</h2>
     <Container>
-    <Label>     
+    <Label>
     <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
     {songSuggestions && song.length > 1 ?
       <Suggestions>
@@ -46,13 +46,13 @@ if (song.length > 1) {
       </Label>
     <ArtistContainer>
       {chosenSongs ?
-        <Songs>
+        // <Songs>
           <Song>
           {chosenSongs.album.images[0] ? <AlbumImg src={chosenSongs.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
             <AlbumImg src={chosenSongs.album.images[0].url} />
           <SongName><span>{chosenSongs.name}</span><span>{chosenSongs.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs()} /></Song>
-        </Songs>
-        : <P>Your chosen song will appear here. You can also continue without choosing a song, just click on next step.</P>
+        // </Songs>
+        : <P>Your chosen song will appear here. You can also continue without choosing a song, just go to the next step.</P>
       }
     </ArtistContainer>
     </Container>
@@ -60,21 +60,37 @@ if (song.length > 1) {
     <SmallButton onClick={() => setStep(2)}>Previous</SmallButton>
     <SmallButton onClick={() => setStep(4)}>Next</SmallButton>
     </ButtonContainer>
-    </>
+    </ContainerContainer>
   )
 }
 
+const ContainerContainer = styled.div`
+max-width: 800px;
+// width: 90%;
+// display: flex;
+// margin: 0 auto;
+// justify-content: space-between;
+`
+
 const Container = styled.div`
 display: grid;
-gap: 50px;
 width: 100%;
+min-height: 500px;
 max-width: 850px;
 align-items: flex-start;
-grid-template-columns: 1fr 2fr;
+grid-template-columns: 1fr 1fr;
+// margin: 0 auto;
+
+@media screen and (max-width: 850px) {
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  justify-items: center;
+}
+
 `
 
 const ButtonContainer = styled.div`
-width: 100%;
+width: 95%;
 max-width: 850px;
 margin: 0 auto;
 display: flex;
@@ -82,7 +98,7 @@ justify-content: space-between;
 `
 
 const ArtistContainer = styled.div`
-text-align: left;
+// margin-left: -20px;
 `
 
 const SmallButton = styled.button`
@@ -110,10 +126,16 @@ border-bottom: 2px solid #fff;
 display: flex;
 flex-direction: column;
 text-align: center;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+  top: 220px;
+}
 `
 
 const TextInput = styled.input`
 width: 450px;
+max-width: 95%;
 height: 40px;
 font-size: 1rem;
 border: 2px solid #148255;
@@ -121,16 +143,27 @@ border-color: ${props => props.border ? "#148255 #148255 white" : "2px"};
 border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
 padding: 0 10px;
 outline: none;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const Suggestions = styled.div`
 border: 2px solid #148255;
 width: 450px;
+max-width: 95%;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
 border-radius: 0 0 10px 10px;
 border-top: none;
+z-index: 2;
+background: #333333;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const Suggestion = styled.p`
@@ -140,14 +173,15 @@ align-items: center;
 `
 
 const Songs = styled.div`
-display: flex;
-flex-direction: column;
-height: 400px;
-flex-wrap: wrap;
-align-items: end;
+// display: flex;
+// flex-direction: column;
+// height: 400px;
+// flex-wrap: wrap;
+// align-items: end;
+// width: 100%;
 `
 
-const Song = styled.p`
+const Song = styled.div`
 width: 354px;
 height: 354px;
 display: flex;
@@ -157,11 +191,20 @@ border-radius: 15px;
 border: 3px solid #148255;
 overflow: hidden;
 margin-top: 0;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+  height: 300px;
+}
 `
 
 const AlbumImg = styled.img`
 width: 350px;
 position: absolute;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const AlbumSugImg = styled.img`
@@ -184,9 +227,20 @@ cursor: pointer;
 position: relative;
 top: -40px;
 left: 310px;
+
+@media screen and (max-width: 450px) {
+  top: -45px;
+left: 260px;
+}
 `
 
 
 const P = styled.p`
 margin-top: 0;
+text-align: left;
+
+@media screen and (max-width: 850px) {
+  text-align: center;
+  padding: 10px;
+}
 `

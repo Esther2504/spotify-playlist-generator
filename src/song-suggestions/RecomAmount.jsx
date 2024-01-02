@@ -29,20 +29,32 @@ export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSo
 }
 
 const Container = styled.div`
-width: 100%;
+width: 95%;
 height: 600px;
-max-width: 1500px;
+max-width: 850px;
 display: flex;
 flex-direction: column;
 align-items: center;
+margin: 0 auto;
+
+@media screen and (max-width: 850px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px 1fr;
+    justify-items: center;
+   width: auto;
+  }
 `
 
 const ButtonContainer = styled.div`
-width: 100%;
+width: 95%;
 max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
+
+@media screen and (max-width: 320px) {
+    flex-direction: column;
+  }
 `
 
 const Input = styled.input`
@@ -74,6 +86,10 @@ border-radius: 40px;
     height: 40px;
     border-radius: 40px;
 }
+
+@media screen and (max-width: 550px) {
+    width: 300px;
+  }
 `
 const Amount = styled.p`
 color: #ffffff;

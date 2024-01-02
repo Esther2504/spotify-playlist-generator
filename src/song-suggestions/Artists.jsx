@@ -31,7 +31,7 @@ if (artist.length > 1) {
 console.log(artistSuggestions)
 
   return (
-    <>
+    <ContainerContainer>
       <h2>Who is your favorite artist?</h2>
     <Container>
     <Label>     
@@ -47,9 +47,9 @@ console.log(artistSuggestions)
       </Label>
     <ArtistContainer>
       {chosenArtists ?
-        <Artists>
+        // <Artists>
           <Artist><ArtistImg src={chosenArtists.images[0].url} /><ArtistName>{chosenArtists.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists()} /></Artist>
-        </Artists>
+        // </Artists>
         : <P>Your chosen artist will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }
     </ArtistContainer>
@@ -58,21 +58,32 @@ console.log(artistSuggestions)
       <div />
     <SmallButton onClick={() => setStep(3)}>Next</SmallButton>
     </ButtonContainer>
-    </>
+    </ContainerContainer>
   )
 }
 
+const ContainerContainer = styled.div`
+max-width: 800px;
+`
+
 const Container = styled.div`
 display: grid;
-gap: 50px;
 width: 100%;
+min-height: 500px;
 max-width: 850px;
 align-items: flex-start;
-grid-template-columns: 1fr 2fr;
+grid-template-columns: 1fr 1fr;
+// margin: 0 auto;
+
+@media screen and (max-width: 850px) {
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  justify-items: center;
+}
 `
 
 const ButtonContainer = styled.div`
-width: 100%;
+width: 95%;
 max-width: 850px;
 margin: 0 auto;
 display: flex;
@@ -105,27 +116,44 @@ padding: 5px;
 background-color: #148255;
 border-top: 2px solid #fff;
 border-bottom: 2px solid #fff;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+  top: 200px;
+}
 `
 
 const TextInput = styled.input`
 width: 450px;
 height: 40px;
+max-width: 95%;
 font-size: 1rem;
 border: 2px solid #148255;
 border-color: ${props => props.border ? "#148255 #148255 white" : "2px"};
 border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
 padding: 0 10px;
 outline: none;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const Suggestions = styled.div`
 border: 2px solid #148255;
 width: 450px;
+max-width: 95%;
 padding: 0 10px;
 text-align: left;
 font-size: 0.9rem;
 border-radius: 0 0 10px 10px;
 border-top: none;
+z-index: 2;
+background: #333333;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const Suggestion = styled.p`
@@ -151,12 +179,21 @@ position: relative;
 border-radius: 15px;
 border: 3px solid #148255;
 overflow: hidden;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+  height: 300px;
+}
 `
 
 const ArtistImg = styled.img`
 width: 350px;
 // border-radius: 15px;
 position: absolute;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
 `
 
 const ArtistSugImg = styled.img`
@@ -179,9 +216,18 @@ cursor: pointer;
 position: relative;
 top: -70px;
 left: 310px;
+
+@media screen and (max-width: 450px) {
+  top: -70px;
+left: 260px;
+}
 `
 
 const P = styled.p`
 margin-top: 0;
 text-align: left;
+
+@media screen and (max-width: 850px) {
+  text-align: center;
+}
 `
