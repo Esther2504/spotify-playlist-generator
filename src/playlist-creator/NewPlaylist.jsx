@@ -4,7 +4,7 @@ import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './
 import NoSuitableSongs from './NoSuitableSongs'
 import styled from 'styled-components'
 
-export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken }) {
+export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken, setError }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
@@ -26,7 +26,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   })
 
   if (songType && trackids && !audioDetails) {
-    getAudioFeatures(trackids, accessToken, setaudioDetails)
+    getAudioFeatures(trackids, accessToken, setaudioDetails, setError)
   }
 
   let genre = songType.toLowerCase()
@@ -203,12 +203,12 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 
   useEffect(() => {
     if (userID && newPlaylistIds && !newPlaylist && !noSongs) {
-      createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist)
+      createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist, setError)
     }
   }, [finished])
 
   useEffect(() => {
-    addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated)
+    addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated, setError)
   }, [newPlaylist])
 
   return (

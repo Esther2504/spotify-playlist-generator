@@ -4,7 +4,7 @@ import PlaylistOptions from './PlaylistOptions'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 import { getTracks } from './APICalls'
 
-export default function AllPlaylists({ accessToken, data }) {
+export default function AllPlaylists({ accessToken, data, setError }) {
   const [playlistid, setPlaylistid] = useState()
   const [playlistName, setPlaylistName] = useState()
   const [publicplaylist, setPublicplaylist] = useState()
@@ -13,7 +13,7 @@ export default function AllPlaylists({ accessToken, data }) {
   const [hidePrev, setHidePrev] = useState(true)
   const [hideNext, setHideNext] = useState(false)
   const [tracks, setTracks] = useState()
-  const [error, setError] = useState(false)
+  // const [error, setError] = useState(false)
 
   function choosePlaylist(playlist) {
     setPlaylistid(playlist.id)
@@ -82,7 +82,7 @@ export default function AllPlaylists({ accessToken, data }) {
           </PublicPlaylist>
         </Container>
         :
-        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} setPlaylistName={setPlaylistName} tracks={tracks} />}
+        <PlaylistOptions playlistid={playlistid} playlistName={playlistName} data={data} accessToken={accessToken} setPlaylistName={setPlaylistName} tracks={tracks} setError={setError} />}
     </>
   )
 }

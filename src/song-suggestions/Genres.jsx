@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getGenres } from './APICalls'
 import styled from 'styled-components'
 
-export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep }) {
+export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep, setError }) {
   const [genres, setGenres] = useState()
   const [genreInput, setGenreInput] = useState()
   const [showGenres, setShowGenres] = useState(false)
@@ -15,7 +15,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
 
   useEffect(() => {
     if (!genres) {
-      getGenres(getAccessToken, setGenres)
+      getGenres(getAccessToken, setGenres, setError)
     }
   }, [])
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function getPlaylists(getAccessToken, setData, data, accessToken) {
+export function getPlaylists(getAccessToken, setData, data, accessToken, setError) {
     axios
         .get('https://api.spotify.com/v1/me/playlists?limit=30', {
             headers: {
@@ -11,6 +11,8 @@ export function getPlaylists(getAccessToken, setData, data, accessToken) {
             setData(res.data)
         })
         .catch((err) => {
+            console.log(err)
+            setError(true)
         })
 }
 
@@ -41,6 +43,7 @@ function getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, 
             setPlaylistName(res.data.name)
         })
         .catch((err) => {
+            console.log(err)
             setError(true)
         })
 }
@@ -62,7 +65,7 @@ export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
         })
 }
 
-export function getUser(accessToken, setUserID) {
+export function getUser(accessToken, setUserID, setError) {
     axios
         .get(`https://api.spotify.com/v1/me`, {
             headers: {
@@ -73,10 +76,12 @@ export function getUser(accessToken, setUserID) {
             setUserID(res.data.id)
         })
         .catch((err) => {
+            console.log(err)
+            setError(true)
         })
 }
 
-export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist) {
+export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist, setError) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
@@ -96,12 +101,14 @@ export function createPlaylist(userID, accessToken, songType, playlistName, genr
                 setNewPlayListID(response.data.id)
                 setNewPlaylist(response.data.tracks.href)
             })
-            .catch(error => {
+            .catch(err => {
+                console.log(err)
+                setError(true)
             });
     }
 }
 
-export function addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated) {
+export function addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated, setError) {
     let uniqueuris = [...new Set(newPlaylistIds)];
 
     const requestHeaders = {
@@ -120,7 +127,6 @@ export function addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setP
         .then(response => {
             setPlaylistCreated(true)
         })
-        .catch(error => {
-
+        .catch(err => {
         });
 }

@@ -14,6 +14,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1);
   const [tool, setTool] = useState()
   const [step, setStep] = useState(1)
+  const [error, setError] = useState(false)
 
   const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&grant_type=refresh_token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
 
@@ -30,7 +31,7 @@ function App() {
 
   useEffect(() => {
     if (accessToken && !data) {
-      getPlaylists(getAccessToken, setData, data, setCurrentStep, currentStep, accessToken)
+      getPlaylists(getAccessToken, setData, data, setCurrentStep, currentStep, accessToken, setError)
     }
   }, [accessToken])
 
@@ -66,6 +67,13 @@ function App() {
     }
   }, [tool])
 
+  useEffect(() => {
+    if (error) {
+      setAccessToken()
+    }
+  }, [error])
+
+
   return (
     <div className="App">
       {/* <Nav>
@@ -76,9 +84,9 @@ function App() {
         {accessToken ? <>
         {tool == 'playlistmixer' ?
         // <StartPage AUTH_URL={AUTH_URL} />
-        <AllPlaylists accessToken={accessToken} data={data} />
+        <AllPlaylists accessToken={accessToken} data={data} setError={setError} />
         : tool == 'songsuggestions' ?
-          <Start accessToken={accessToken} step={step} setStep={setStep} />
+          <Start accessToken={accessToken} step={step} setStep={setStep} setError={setError} />
           :
           <StartContainer>
             {/* <A onClick={() => setTool('songsuggestions')} href={AUTH_URL}> */}

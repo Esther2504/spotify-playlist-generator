@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function getUser(accessToken, setUserID) {
+export function getUser(accessToken, setUserID, setError) {
     axios
         .get(`https://api.spotify.com/v1/me`, {
             headers: {
@@ -11,10 +11,11 @@ export function getUser(accessToken, setUserID) {
             setUserID(res.data.id)
         })
         .catch((err) => {
+            setError(true)
         })
 }
 
-export function getGenres(accessToken, setGenres) {
+export function getGenres(accessToken, setGenres, setError) {
     axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         headers: {
             Authorization: "Bearer " + accessToken,
@@ -25,10 +26,10 @@ export function getGenres(accessToken, setGenres) {
             setGenres(res.data.genres)
         })
         .catch(err => {
-            console.log(err)
+            setError(true)
         });
 }
-export function searchArtist(accessToken, artist, setArtistSuggestions) {
+export function searchArtist(accessToken, artist, setArtistSuggestions, setError) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: artist,
@@ -36,7 +37,7 @@ export function searchArtist(accessToken, artist, setArtistSuggestions) {
             limit: 5
         },
         headers: {
-            Authorization: "Bearer " + accessToken,
+            Authorization: "Bearer " + accessToken2,
         },
 
     })
@@ -45,11 +46,11 @@ export function searchArtist(accessToken, artist, setArtistSuggestions) {
             setArtistSuggestions(res.data.artists.items)
         })
         .catch(err => {
-            console.log(err)
+            setError(true)
         });
 }
 
-export function searchSong(accessToken, song, setSongSuggestions) {
+export function searchSong(accessToken, song, setSongSuggestions, setError) {
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: song,
@@ -67,11 +68,11 @@ export function searchSong(accessToken, song, setSongSuggestions) {
             console.log(res.data.tracks.items)
         })
         .catch(err => {
-            console.log(err)
+            setError(true)
         });
 }
 
-export function getRecommendations(accessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations) {
+export function getRecommendations(accessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError) {
 console.log(artistseeds)
 console.log(genreseeds)
 console.log(tracksseeds)
@@ -92,7 +93,7 @@ console.log(tracksseeds)
             res.data.tracks.forEach((track) => recommendations.push(track.uri))
         })
         .catch(err => {
-            console.log(err)
+            setError(true)
         });
 }
 

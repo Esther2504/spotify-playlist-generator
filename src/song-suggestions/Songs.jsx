@@ -5,7 +5,7 @@ import cross from '../images/cross.svg'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
 
-export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, setStep}) {
+export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, setStep, setError}) {
   const [border, setBorder] = useState()
   const [song, setSong] = useState([])
   const [songSuggestions, setSongSuggestions] = useState()
@@ -13,7 +13,7 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
   function getSongSuggestions(value) {
     setSong(value)
     if (value.length > 1) {
-      searchSong(getAccessToken, song, setSongSuggestions)
+      searchSong(getAccessToken, song, setSongSuggestions, setError)
       console.log(songSuggestions)
     }
    

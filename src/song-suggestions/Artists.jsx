@@ -4,7 +4,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import cross from '../images/cross.svg'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
-export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep}) {
+export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep, setError}) {
   const [border, setBorder] = useState(false)
   const [artist, setArtist] = useState([])
   const [artistSuggestions, setArtistSuggestions] = useState()
@@ -12,7 +12,7 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
   function getArtistSuggestions(value) {
     setArtist(value)
     if (value.length > 1) {
-      searchArtist(getAccessToken, artist, setArtistSuggestions)
+      searchArtist(getAccessToken, artist, setArtistSuggestions, setError)
     }
   }
 

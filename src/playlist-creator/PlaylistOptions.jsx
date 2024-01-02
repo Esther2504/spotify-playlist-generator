@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import NewPlaylist from './NewPlaylist.jsx'
 
-export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken, tracks }) {
+export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken, tracks, setError }) {
   const [songType, setSongType] = useState()
 
   return (
@@ -62,7 +62,7 @@ export default function PlaylistOptions({ playlistid, playlistName, setPlaylistN
           </Options>
         </Container>
         :
-        <NewPlaylist tracks={tracks.items} songType={songType} playlistName={playlistName} data={data} accessToken={accessToken} />
+        <NewPlaylist tracks={tracks.items} songType={songType} playlistName={playlistName} data={data} accessToken={accessToken} setError={setError} />
       }
     </>
   )

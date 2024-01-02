@@ -10,7 +10,7 @@ import Loading from './Loading'
 import PlaylistNameDescription from './PlaylistName'
 import Playlist from './Playlist'
 
-export default function Start({ accessToken, step, setStep }) {
+export default function Start({ accessToken, step, setStep, setError }) {
 
   // const [genres, setGenres] = useState()
   const [song, setSong] = useState([])
@@ -56,7 +56,7 @@ console.log(!PlaylistName)
   useEffect(() => {
     if (step == 6) {
       getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
-      getUser(accessToken, setUserID);
+      getUser(accessToken, setUserID, setError);
     } else if (step == 7) {
         createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }
@@ -118,11 +118,11 @@ console.log(!PlaylistName)
           {/* <StartPage AUTH_URL={AUTH_URL} /> */}
         </>
         : step == 2 ?
-          <FaveArtists getAccessToken={accessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} />
+          <FaveArtists getAccessToken={accessToken} chosenArtists={chosenArtists} setChosenArtists={setChosenArtists} setStep={setStep} setError={setError} />
           : step == 3 ?
-            <FaveSongs getAccessToken={accessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} />
+            <FaveSongs getAccessToken={accessToken} chosenSongs={chosenSongs} setChosenSongs={setChosenSongs} setStep={setStep} setError={setError} />
             : step == 4 ?
-              <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={accessToken} setStep={setStep} />
+              <Genres chosenGenres={chosenGenres} setChosenGenres={setChosenGenres} getAccessToken={accessToken} setStep={setStep} setError={setError} />
               : step == 5 ?
                 <RecomAmount amount={amount} setAmount={setAmount} chosenArtists={chosenArtists} chosenSongs={chosenSongs} chosenGenres={chosenGenres} setStep={setStep} />
                 :
