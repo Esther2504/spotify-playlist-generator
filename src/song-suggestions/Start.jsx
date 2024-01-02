@@ -23,27 +23,10 @@ export default function Start({ accessToken, step, setStep }) {
   const [border, setBorder] = useState("10px")
   // const [accessToken, setAccessToken] = useState()
   const [userID, setUserID] = useState()
-  const [PlaylistName, setPlaylistName] = useState()
-  const [PlaylistDescription, setPlaylistDescription] = useState()
+  const [PlaylistName, setPlaylistName] = useState('Created with the Spotify Playlist Generator')
+  const [PlaylistDescription, setPlaylistDescription] = useState('')
   const [newPlaylist, setNewPlayList] = useState()
   const [recommendations, setRecommendations] = useState([])
-
-  // window.location.href = AUTH_URL
-
-  // const getAccessToken = window.location.hash.substring(14).split('&')[0]
-
-
-  // useEffect(() => {
-  //   if (window.location.hash.includes("access_token")) {
-  //     setAccessToken(getAccessToken)
-  //   }
-  // }, [window.location])
-
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     setStep(2)
-  //   }
-  // }, [accessToken])
 
   function getSongSuggestions(value) {
     setSong(value)
@@ -68,13 +51,14 @@ if (chosenSongs) {
   
   let genreseeds = chosenGenres
 
+console.log(!PlaylistName)
 
   useEffect(() => {
     if (step == 6) {
       getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
       getUser(accessToken, setUserID);
     } else if (step == 7) {
-      createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
+        createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }
   }, [step])
 
@@ -207,7 +191,7 @@ width: 800px;
 height: 8px;
 background-color: white;
 position: absolute;
-top: 100px;
+top: 50px;
 border-radius: 20px;
 `
 
@@ -216,7 +200,7 @@ width: ${props => props.step == 3 ? "260px" : props.step == 4 ? "520px" : props.
 height: 8px;
 background-color: #148255;
 position: absolute;
-top: 100px;
+top: 50px;
 border-radius: 20px;
 z-index:2;
 `
@@ -249,7 +233,7 @@ line-height: 2.5rem;
 const Circles = styled.div`
 width: 802px;
 position: absolute;
-top: 85px;
+top: 35px;
 display: flex;
 justify-content: space-between;
 `

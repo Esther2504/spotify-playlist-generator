@@ -104,11 +104,24 @@ export function createPlaylist(accessToken, userID, PlaylistName, PlaylistDescri
         'Content-Type': 'application/json',
     };
 
-    const data = {
-        name: `${PlaylistName}`,
-        description: `${PlaylistDescription}`,
-        public: false,
-    };
+    console.log(PlaylistName)
+
+    let data;
+
+    if (!PlaylistName) {
+        data = {
+            name: `Created with the Spotify Playlist Generator`,
+            description: `${PlaylistDescription}`,
+            public: false,
+        };
+    } else {
+        data = {
+            name: `${PlaylistName}`,
+            description: `${PlaylistDescription}`,
+            public: false,
+        };
+    }
+
 
     axios.post(url, data, { headers })
         .then(res => {
