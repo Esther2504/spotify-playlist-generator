@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function RecomAmount({ amount, setAmount, chosenArtists, chosenSongs, chosenGenres, setStep }) {
+export default function RecomAmount({ amount, setAmount, chosenArtist, chosenSong, chosenGenre, setStep }) {
 
-    console.log(chosenArtists)
+    console.log(chosenArtist)
 
     function checkSeeds() {
-        if (!chosenArtists && !chosenSongs && !chosenGenres) {
+        if (!chosenArtist && !chosenSong && !chosenGenre) {
             alert("Choose at least 1 artist, song or genre")
         } else {
             setStep(6)

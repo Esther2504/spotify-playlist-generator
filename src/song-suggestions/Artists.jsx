@@ -4,7 +4,7 @@ import { getGenres, searchSong, searchArtist } from './APICalls'
 import cross from '../images/cross.svg'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
-export default function FaveArtists({getAccessToken, song, chosenArtists, setChosenArtists, setStep, setError}) {
+export default function FaveArtists({getAccessToken, song, chosenArtist, setChosenArtist, setStep, setError}) {
   const [border, setBorder] = useState(false)
   const [artist, setArtist] = useState([])
   const [artistSuggestions, setArtistSuggestions] = useState()
@@ -17,7 +17,7 @@ export default function FaveArtists({getAccessToken, song, chosenArtists, setCho
   }
 
 function setArtists(suggestion) {
-    setChosenArtists(suggestion)
+    setChosenArtist(suggestion)
 }
 
 useEffect(() => {
@@ -46,9 +46,9 @@ console.log(artistSuggestions)
     }
       </Label>
     <ArtistContainer>
-      {chosenArtists ?
+      {chosenArtist ?
         // <Artists>
-          <Artist><ArtistImg src={chosenArtists.images[0].url} /><ArtistName>{chosenArtists.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtists()} /></Artist>
+          <Artist><ArtistImg src={chosenArtist.images[0].url} /><ArtistName>{chosenArtist.name}</ArtistName><Image src={cross} onClick={(e) => setChosenArtist()} /></Artist>
         // </Artists>
         : <P>Your chosen artist will appear here. You can also continue without choosing an artist, just click on next step.</P>
       }

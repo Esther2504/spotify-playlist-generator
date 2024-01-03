@@ -5,7 +5,7 @@ import cross from '../images/cross.svg'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
 
-export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, setStep, setError}) {
+export default function FaveSongs({getAccessToken, chosenSong, setChosenSong, setStep, setError}) {
   const [border, setBorder] = useState()
   const [song, setSong] = useState([])
   const [songSuggestions, setSongSuggestions] = useState()
@@ -20,7 +20,7 @@ export default function FaveSongs({getAccessToken, chosenSongs, setChosenSongs, 
   }
 
 function setSongs(suggestion) { 
-    setChosenSongs(suggestion)
+    setChosenSong(suggestion)
 }
 
 useEffect(() => {
@@ -45,12 +45,12 @@ if (song.length > 1) {
     }
       </Label>
     <ArtistContainer>
-      {chosenSongs ?
+      {chosenSong ?
         // <Songs>
           <Song>
-          {chosenSongs.album.images[0] ? <AlbumImg src={chosenSongs.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
-            <AlbumImg src={chosenSongs.album.images[0].url} />
-          <SongName><span>{chosenSongs.name}</span><span>{chosenSongs.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSongs()} /></Song>
+          {chosenSong.album.images[0] ? <AlbumImg src={chosenSong.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
+            <AlbumImg src={chosenSong.album.images[0].url} />
+          <SongName><span>{chosenSong.name}</span><span>{chosenSong.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSong()} /></Song>
         // </Songs>
         : <P>Your chosen song will appear here. You can also continue without choosing a song, just go to the next step.</P>
       }

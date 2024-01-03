@@ -3,7 +3,7 @@ import { getGenres } from './APICalls'
 import styled from 'styled-components'
 import genres from '../genres.json'
 
-export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep, setError }) {
+export default function Genres({ chosenGenre, setChosenGenre, getAccessToken, setStep, setError }) {
   // const [genres, setGenres] = useState()
   const [genreInput, setGenreInput] = useState()
   const [showGenres, setShowGenres] = useState(false)
@@ -11,7 +11,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
   const [genreSuggestions, setGenreSuggestions] = useState()
 
   function setGenre(target) {
-    setChosenGenres(target.value)
+    setChosenGenre(target.value)
   }
 
   // useEffect(() => {
@@ -23,18 +23,18 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
 
     useEffect(() => {
       if (genres) {
-      if (genres.genres.includes(chosenGenres)) {
+      if (genres.genres.includes(chosenGenre)) {
         setShowGenres(false)
       } 
     }
-    }, [chosenGenres])
+    }, [chosenGenre])
 
     useEffect(() => {
-      // console.log(chosenGenres.length)
+      // console.log(chosenGenre.length)
       // console.log(showGenres)
-      // if (chosenGenres) {
+      // if (chosenGenre) {
         console.log('yes')
-        if (showGenres && chosenGenres) {
+        if (showGenres && chosenGenre) {
           setBorder(true)
         } else {
           setBorder(false)
@@ -42,7 +42,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
       // }  
     }, [showGenres])
     console.log(showGenres)
-    // console.log(chosenGenres.length)
+    // console.log(chosenGenre.length)
     console.log(border)
 
     function showGenresHandler(target) {
@@ -62,13 +62,13 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
        {genres ?
       <Container>
       <Label>  
-            <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); showGenresHandler(e.target.value)}} value={chosenGenres}>
+            <TextInput border={border} onInput={(e) => { setChosenGenre(e.target.value); showGenresHandler(e.target.value)}} value={chosenGenre}>
             </TextInput>
-            {chosenGenres && showGenres ?
+            {chosenGenre && showGenres ?
               <Suggestions>
                 {genres.genres.map((genre) => {
-                  return genre.includes(chosenGenres) ?
-                    <option value={genre} onClick={(e) => { setChosenGenres(genre); setShowGenres(false) }}>{genre}</option>
+                  return genre.includes(chosenGenre) ?
+                    <option value={genre} onClick={(e) => { setChosenGenre(genre); setShowGenres(false) }}>{genre}</option>
                     : null
                 }
                 )}
