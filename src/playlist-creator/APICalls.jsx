@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function getPlaylists(getAccessToken, setData, data, accessToken) {
+export function getPlaylists(getAccessToken, setData, setError) {
     axios
         .get('https://api.spotify.com/v1/me/playlists?limit=30', {
             headers: {
@@ -11,16 +11,16 @@ export function getPlaylists(getAccessToken, setData, data, accessToken) {
             setData(res.data)
         })
         .catch((err) => {
+            setError(true)
         })
 }
 
 export function getTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
-    axios
-        .get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
-            headers: {
-                Authorization: "Bearer " + accessToken,
-            },
-        })
+    axios.get(`https://api.spotify.com/v1/playlists/${playlistid}`, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    })
         .then((res) => {
             setTracks(res.data.tracks)
             setPlaylistName(res.data.name)
@@ -31,13 +31,12 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
 
 }
 
-function getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError) {
-    axios
-        .get(`https://api.spotify.com/v1/albums/${playlistid}`, {
-            headers: {
-                Authorization: "Bearer " + accessToken,
-            },
-        })
+function getAlbumTracks(playlistid, setPlaylistName, accessToken, setTracks, setError) {
+    axios.get(`https://api.spotify.com/v1/albums/${playlistid}`, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    })
         .then((res) => {
             setTracks(res.data.tracks)
             setPlaylistName(res.data.name)
@@ -64,7 +63,7 @@ export function getAudioFeatures(trackids, accessToken, setaudioDetails) {
         })
 }
 
-export function getUser(accessToken, setUserID) {
+export function getUser(accessToken, setUserID, setError) {
     axios
         .get(`https://api.spotify.com/v1/me`, {
             headers: {
@@ -75,10 +74,11 @@ export function getUser(accessToken, setUserID) {
             setUserID(res.data.id)
         })
         .catch((err) => {
+            setError(true)
         })
 }
 
-export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist) {
+export function createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist, setError) {
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
     const headers = {
@@ -98,7 +98,8 @@ export function createPlaylist(userID, accessToken, songType, playlistName, genr
                 setNewPlayListID(response.data.id)
                 setNewPlaylist(response.data.tracks.href)
             })
-            .catch(error => {
+            .catch(err => {
+                setError(true)
             });
     }
 }
@@ -122,7 +123,6 @@ export function addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setP
         .then(response => {
             setPlaylistCreated(true)
         })
-        .catch(error => {
-
+        .catch(err => {
         });
 }

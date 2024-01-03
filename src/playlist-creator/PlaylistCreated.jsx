@@ -34,7 +34,6 @@ margin: 50px auto;
   flex-direction: column;
 }
 `
-
 const TextContainer = styled.div`
 max-width: 100%;
 
@@ -42,7 +41,6 @@ max-width: 100%;
   max-width: 100%;
 }
 `
-
 const Button = styled.button`
   background: #148255;
   border: none;
@@ -52,7 +50,6 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
 `
-
 const Iframe = styled.iframe`
   width: 700px;
   max-width: 100%;
@@ -61,6 +58,5 @@ const Iframe = styled.iframe`
     width: 500px;
   }
 `
-
 const H1 = styled.h1``
 const P = styled.p``

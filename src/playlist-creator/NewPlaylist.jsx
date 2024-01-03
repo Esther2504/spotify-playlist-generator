@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import PlaylistCreated from './PlaylistCreated'
-import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
-import NoSuitableSongs from './NoSuitableSongs'
 import styled from 'styled-components'
+import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
+import PlaylistCreated from './PlaylistCreated'
+import NoSuitableSongs from './NoSuitableSongs'
 
-export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken }) {
+export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken, setError }) {
   const [audioDetails, setaudioDetails] = useState()
   const [newPlaylistIds, setNewPlaylistIds] = useState([])
   const [userID, setUserID] = useState()
@@ -26,7 +26,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
   })
 
   if (songType && trackids && !audioDetails) {
-    getAudioFeatures(trackids, accessToken, setaudioDetails)
+    getAudioFeatures(trackids, accessToken, setaudioDetails, setError)
   }
 
   let genre = songType.toLowerCase()
@@ -203,23 +203,23 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 
   useEffect(() => {
     if (userID && newPlaylistIds && !newPlaylist && !noSongs) {
-      createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist)
+      createPlaylist(userID, accessToken, songType, playlistName, genre, setNewPlayListID, setNewPlaylist, newPlaylist, setError)
     }
   }, [finished])
 
   useEffect(() => {
-    addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated)
+    addPlaylistTracks(newPlaylistIds, accessToken, newPlaylist, setPlaylistCreated, setError)
   }, [newPlaylist])
 
   return (
     <>
       {!playlistCreated && !noSongs ?
         <Spinner>
-          <Round />
-          <Round />
-          <Round />
-          <Round />
-          <Round />
+          <Circle />
+          <Circle />
+          <Circle />
+          <Circle />
+          <Circle />
         </Spinner>
         : noSongs ?
           <NoSuitableSongs data={data} accessToken={accessToken} />
@@ -233,8 +233,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 const Spinner = styled.div`
 position: relative;
 `
-
-const Round = styled.div`
+const Circle = styled.div`
   width: 15px;
   height: 15px;
   border-radius: 90px;
