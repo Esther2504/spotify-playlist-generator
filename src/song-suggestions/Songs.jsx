@@ -41,7 +41,7 @@ if (song.length > 1) {
       : null
     }
       </Label>
-    <ArtistContainer>
+    <SongContainer>
       {chosenSong ?
           <Song>
           {chosenSong.album.images[0] ? <AlbumImg src={chosenSong.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
@@ -49,7 +49,7 @@ if (song.length > 1) {
           <SongName><span>{chosenSong.name}</span><span>{chosenSong.artists[0].name}</span></SongName><Cross src={cross} onClick={(e) => setChosenSong()} /></Song>
         : <P>Your chosen song will appear here. You can also continue without choosing a song, just go to the next step.</P>
       }
-    </ArtistContainer>
+    </SongContainer>
     </Container>
     <ButtonContainer>
     <Button onClick={() => setStep(2)}>Previous</Button>
@@ -129,6 +129,7 @@ align-items: center;
 `
 const AlbumSugImg = styled.img`
 width: 50px;
+height: 50px;
 margin-right: 15px;
 border-radius: 15px;
 `
@@ -170,6 +171,7 @@ text-align: center;
 `
 const AlbumImg = styled.img`
 width: 350px;
+height: 350px;
 position: absolute;
 
 @media screen and (max-width: 450px) {
@@ -207,4 +209,4 @@ margin-top: 20px;
 font-weight: 600;
 `
 const H2 = styled.h2``
-const ArtistContainer = styled.div``
+const SongContainer = styled.div``

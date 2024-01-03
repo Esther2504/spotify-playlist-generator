@@ -1,94 +1,66 @@
 import React, { useEffect, useState } from 'react'
-import { getGenres } from './APICalls'
 import styled from 'styled-components'
 import genres from '../genres.json'
 
-export default function Genres({ chosenGenre, setChosenGenre, getAccessToken, setStep, setError }) {
-  // const [genres, setGenres] = useState()
-  const [genreInput, setGenreInput] = useState()
+export default function Genres({ chosenGenre, setChosenGenre, setStep }) {
   const [showGenres, setShowGenres] = useState(false)
   const [border, setBorder] = useState(false)
-  const [genreSuggestions, setGenreSuggestions] = useState()
 
-  function setGenre(target) {
-    setChosenGenre(target.value)
-  }
-
-  // useEffect(() => {
-  //   if (!genres) {
-  //     getGenres(getAccessToken, setGenres, setError)
-  //   }
-  // }, [])
-
-
-    useEffect(() => {
-      if (genres) {
+  useEffect(() => {
+    if (genres) {
       if (genres.genres.includes(chosenGenre)) {
         setShowGenres(false)
-      } 
+      }
     }
-    }, [chosenGenre])
+  }, [chosenGenre])
 
-    useEffect(() => {
-      // console.log(chosenGenre.length)
-      // console.log(showGenres)
-      // if (chosenGenre) {
-        console.log('yes')
-        if (showGenres && chosenGenre) {
-          setBorder(true)
-        } else {
-          setBorder(false)
-        }
-      // }  
-    }, [showGenres])
-    console.log(showGenres)
-    // console.log(chosenGenre.length)
-    console.log(border)
-
-    function showGenresHandler(target) {
-      console.log('hey')
-      console.log(target)
- if (target.length > 0) {
-  setShowGenres(true)
- } else {
-  setShowGenres(false)
- }
+  useEffect(() => {
+    if (showGenres && chosenGenre) {
+      setBorder(true)
+    } else {
+      setBorder(false)
     }
-  
+  }, [showGenres])
+
+  function showGenresHandler(target) {
+    if (target.length > 0) {
+      setShowGenres(true)
+    } else {
+      setShowGenres(false)
+    }
+  }
+
   return (
-    <ContainerContainer>
-       
-       <h2>What is your favorite genre?</h2>
-       {genres ?
-      <Container>
-      <Label>  
-            <TextInput border={border} onInput={(e) => { setChosenGenre(e.target.value); showGenresHandler(e.target.value)}} value={chosenGenre}>
+    <MainContainer>
+      <H2>What is your favorite genre?</H2>
+      {genres ?
+        <Container>
+          <Label>
+            <TextInput border={border} onInput={(e) => { setChosenGenre(e.target.value); showGenresHandler(e.target.value) }} value={chosenGenre}>
             </TextInput>
             {chosenGenre && showGenres ?
               <Suggestions>
                 {genres.genres.map((genre) => {
                   return genre.includes(chosenGenre) ?
-                    <option value={genre} onClick={(e) => { setChosenGenre(genre); setShowGenres(false) }}>{genre}</option>
+                    <Option value={genre} onClick={(e) => { setChosenGenre(genre); setShowGenres(false) }}>{genre}</Option>
                     : null
                 }
                 )}
               </Suggestions>
-              : null}   
-              </Label>     
-      </Container>
-      : null}
+              : null}
+          </Label>
+        </Container>
+        : null}
       <ButtonContainer>
-        <SmallButton onClick={() => setStep(3)}>Previous</SmallButton>
-        <SmallButton onClick={() => setStep(5)}>Next</SmallButton>
+        <Button onClick={() => setStep(3)}>Previous</Button>
+        <Button onClick={() => setStep(5)}>Next</Button>
       </ButtonContainer>
-    </ContainerContainer>
+    </MainContainer>
   )
 }
 
-const ContainerContainer = styled.div`
-// max-width: 800px;
+const MainContainer = styled.div`
 width: 100%;
-
 
 @media screen and (max-width: 850px) {
  width: 750px;
@@ -106,7 +78,6 @@ width: 100%;
  width: 350px;
 }
 `
-
 const Container = styled.div`
 position: relative;
 display: grid;
@@ -115,7 +86,6 @@ min-height: 200px;
 width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr;
-// margin: 0 auto;
 min-width: 90%
 
 @media screen and (max-width: 850px) {
@@ -124,13 +94,11 @@ min-width: 90%
   justify-items: center;
 }
 `
-
-const GenresContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-text-align: left;
-font-size: 1rem;
-margin: 2rem 0;
+const Label = styled.label`
+display: flex;
+flex-direction: column;
+justify-content: start;
+min-height: 400px;
 `
 const TextInput = styled.input`
 width: 450px;
@@ -143,13 +111,9 @@ padding: 0 10px;
 outline: none;
 margin: 0 auto;
 
-@media screen and (max-width: 850px) {
-  // margin-left: 80px;
-}
 @media screen and (max-width: 480px) {
   width: 300px;
-  // margin-left: 30px;
-  }
+}
 `
 const Suggestions = styled.div`
 border: 2px solid #148255;
@@ -169,7 +133,6 @@ margin: 0 auto;
   width: 300px;
   }
 `
-
 const ButtonContainer = styled.div`
 width: 90%;
 max-width: 850px;
@@ -177,15 +140,7 @@ margin: 0 auto;
 display: flex;
 justify-content: space-between;
 `
-
-const Label = styled.label`
-display: flex;
-flex-direction: column;
-justify-content: start;
-min-height: 400px;
-`
-
-const SmallButton = styled.button`
+const Button = styled.button`
 background: #148255;
 border: none;
 color: #fff;
@@ -195,3 +150,5 @@ cursor: pointer;
 margin-top: 20px;
 font-weight: 600;
 `
+const H2 = styled.h2``
+const Option = styled.option``

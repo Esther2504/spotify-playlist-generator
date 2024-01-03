@@ -1,29 +1,26 @@
 import React from 'react'
-import { createPlaylist } from './APICalls'
 import styled from 'styled-components'
 
 export default function Loading() {
   return (
     <Spinner>
-      <Round />
-      <Round />
-      <Round />
-      <Round />
-      <Round />
+      <Circle />
+      <Circle />
+      <Circle />
+      <Circle />
+      <Circle />
     </Spinner>
   )
 }
 
-
 const Spinner = styled.div`
 position: relative;
 `
-
-const Round = styled.div`
+const Circle = styled.div`
   width: 15px;
   height: 15px;
   border-radius: 90px;
-  background: white;
+  backgCircle: white;
   animation: spinner 0.7s cubic-bezier(.38,.55,.8,.38) infinite;
   position: absolute;
   top: 0;

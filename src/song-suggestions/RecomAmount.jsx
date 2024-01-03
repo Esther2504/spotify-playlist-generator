@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Modal from './Modal'
 
 export default function RecomAmount({ amount, setAmount, chosenArtist, chosenSong, chosenGenre, setStep }) {
-const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     function checkSeeds() {
         if (!chosenArtist && !chosenSong && !chosenGenre) {
@@ -14,28 +14,26 @@ const [showModal, setShowModal] = useState(false)
     }
 
     return (
-        <ContainerContainer>
+        <MainContainer>
             {showModal ?
-        <Modal setShowModal={setShowModal} />
-        : null    
-        }
-        <h2>How many recommendations do you want?</h2>
+                <Modal setShowModal={setShowModal} />
+                : null
+            }
+            <H2>How many recommendations do you want?</H2>
             <Container>
                 <Input type="range" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />
-            <Amount>{amount}</Amount>
+                <Amount>{amount}</Amount>
             </Container>
             <ButtonContainer>
-                <SmallButton onClick={() => setStep(4)}>Previous</SmallButton>
-                <SmallButton onClick={() => checkSeeds()}>Get recommendations</SmallButton>
+                <Button onClick={() => setStep(4)}>Previous</Button>
+                <Button onClick={() => checkSeeds()}>Get recommendations</Button>
             </ButtonContainer>
-        </ContainerContainer>
+        </MainContainer>
     )
 }
 
-const ContainerContainer = styled.div`
-// max-width: 800px;
+const MainContainer = styled.div`
 width: 100%;
-
 
 @media screen and (max-width: 850px) {
  width: 750px;
@@ -53,7 +51,6 @@ width: 100%;
  width: 350px;
 }
 `
-
 const Container = styled.div`
 position: relative;
 display: grid;
@@ -71,26 +68,7 @@ min-width: 90%
   justify-items: center;
 }
 `
-
-const ButtonContainer = styled.div`
-width: 95%;
-max-width: 850px;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-
-@media screen and (max-width: 320px) {
-    flex-direction: column;
-  }
-`
-
 const Input = styled.input`
-// width: 100px;
-// height: 70px;
-// width: 100px;
-// font-size: 2.5rem;
-// font-weight: bold;
-// padding: 0.5rem;
 -webkit-appearance: none;
 appearance: none;
 background: #148255;
@@ -124,8 +102,18 @@ color: #ffffff;
 font-size: 6rem;
 margin-top: 1rem;
 `
+const ButtonContainer = styled.div`
+width: 95%;
+max-width: 850px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
 
-const SmallButton = styled.button`
+@media screen and (max-width: 320px) {
+    flex-direction: column;
+  }
+`
+const Button = styled.button`
 background: #148255;
 border: none;
 color: #fff;
@@ -135,3 +123,4 @@ cursor: pointer;
 margin-top: 20px;
 font-weight: 600;
 `
+const H2 = styled.h2``

@@ -1,22 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Playlist({newPlaylist, startOver}) {
+export default function Playlist({ newPlaylist, startOver }) {
   return (
-       <Container>
-          <TextContainer>
-            <H1>Your playlist was created!</H1>
-            <P>We already saved the playlist to your Spotify. Want to create another playlist?</P>
-            <Button onClick={() => startOver()}>Create new playlist</Button>
-          </TextContainer>
-        <Iframe src={`https://open.spotify.com/embed/playlist/${newPlaylist.id}`} width="500" height="652" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></Iframe>
+    <Container>
+      <TextContainer>
+        <H1>Your playlist was created!</H1>
+        <P>We already saved the playlist to your Spotify. Want to create another playlist?</P>
+        <Button onClick={() => startOver()}>Create new playlist</Button>
+      </TextContainer>
+      <Iframe src={`https://open.spotify.com/embed/playlist/${newPlaylist.id}`} width="500" height="652" frameBorder="0" allowfullscreen="yes" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></Iframe>
     </Container>
   )
 }
-
-
-
-const Iframe = styled.iframe``
 
 const Container = styled.div`
 display: flex;
@@ -30,7 +26,6 @@ margin: 50px auto;
   flex-direction: column;
 }
 `
-
 const TextContainer = styled.div`
 max-width: 100%;
 
@@ -38,7 +33,6 @@ max-width: 100%;
   max-width: 100%;
 }
 `
-
 const Button = styled.button`
 background: #148255;
 border: none;
@@ -48,6 +42,6 @@ font-size: 1.2rem;
 cursor: pointer;
 font-weight: 600;
 `
-
 const H1 = styled.h1``
 const P = styled.p``
+const Iframe = styled.iframe``

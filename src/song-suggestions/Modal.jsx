@@ -27,9 +27,6 @@ border: 5px solid white;
   font-size: 1rem;
 }
 `
-const IMG = styled.img`
-width: 200px;
-`
 const Button = styled.button`
 background: #148255;
 border: none;
@@ -40,4 +37,3 @@ cursor: pointer;
 font-weight: 600;
 `
 const H1 = styled.h1``
-const BR = styled.br``
