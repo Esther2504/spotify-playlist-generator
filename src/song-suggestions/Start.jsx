@@ -58,7 +58,6 @@ console.log(!PlaylistName)
       console.log('request!')
       getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError);
       getUser(accessToken, setUserID, setError);
-      // getRecommendations2(accessToken)
     } else if (step == 7) {
         createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }

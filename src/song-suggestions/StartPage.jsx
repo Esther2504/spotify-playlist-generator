@@ -4,11 +4,13 @@ import styled from 'styled-components'
 export default function StartPage({ setTool }) {
     return (
         <Container>
-            <H1><Span>Spotify</Span><br></br>Song<br></br>Suggestions</H1>
-            <p>Get song suggestions based on your favorite song, artist and genre</p>
-            {/* <A href={AUTH_URL}> */}
-                <Button onClick={() => setTool('songsuggestions')}>Get song suggestions</Button>
-            {/* </A> */}
+            <H1>
+                <Span>Spotify</Span>
+                <BR />Song
+                <BR />Suggestions
+            </H1>
+            <P>Get song suggestions based on your favorite song, artist and genre</P>
+            <Button onClick={() => setTool('songsuggestions')}>Get song suggestions</Button>
         </Container>
     )
 }
@@ -25,7 +27,6 @@ padding: 40px;
     max-width: 100%;
     }
 `
-
 const Span = styled.span`
 color: #148255;
 `
@@ -38,7 +39,7 @@ font-size: 1.2rem;
 font-weight: 600;
 cursor: pointer;
 `
-
 const H1 = styled.h1``
-
+const P = styled.p``
 const A = styled.a``
+const BR = styled.br``

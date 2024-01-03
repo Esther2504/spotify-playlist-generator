@@ -4,13 +4,13 @@ import styled from 'styled-components'
 export default function StartPage({ setTool }) {
   return (
     <Container>
-        <H1>
-          <Span>Spotify</Span>
-          <BR />Playlist
-          <BR />Mixer
-        </H1>
-        <P>Create playlists from existing playlists based on your preferences</P>
-          <Button onClick={() => {setTool('playlistmixer')}}>Choose a playlist</Button>
+      <H1>
+        <Span>Spotify</Span>
+        <BR />Playlist
+        <BR />Mixer
+      </H1>
+      <P>Create playlists from existing playlists based on your preferences</P>
+      <Button onClick={() => { setTool('playlistmixer') }}>Choose a playlist</Button>
     </Container>
   )
 }
@@ -20,7 +20,6 @@ display: flex;
 flex-direction: column;
 width: 500px;
 max-width: 50%;
-// margin: 0 auto;
 padding: 40px;
 text-align: left;
 
@@ -44,8 +43,7 @@ const SVG = styled.svg`
 @media screen and (max-width: 500px) {
     display: none;
 }`
-const Text = styled.div``
+
 const H1 = styled.h1``
 const P = styled.p``
-const A = styled.a``
 const BR = styled.br``
