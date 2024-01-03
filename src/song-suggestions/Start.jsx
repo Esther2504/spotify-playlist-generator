@@ -176,9 +176,9 @@ line-height: 2.5rem;
 `
 const Container = styled.div`
 position: relative;
-top: 0;
+top: ${props => props.step > 5 ? "0" : "15vh"};
 
-@media screen and (max-width: 1280px) {
-  top: ${props => props.step > 5 ? "0" : "100px"};
+@media screen and (max-width: 1450px) {
+  top: ${props => props.step > 5 ? "0" : "25vh"};
 }
 `
