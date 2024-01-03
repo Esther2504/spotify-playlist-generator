@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import NewPlaylist from './NewPlaylist.jsx'
 
-export default function PlaylistOptions({ playlistid, playlistName, setPlaylistName, data, accessToken, tracks, setError }) {
+export default function PlaylistOptions({ playlistName, data, accessToken, tracks, setError }) {
   const [songType, setSongType] = useState()
 
   return (
@@ -74,7 +74,6 @@ flex-direction: column;
 text-wrap: wrap;
 max-width: 100%;
 `
-
 const Options = styled.div`
 display: flex;
 flex-wrap: wrap;
@@ -95,11 +94,6 @@ margin: 0 auto;
   max-width: 100%;
 }
 `
-
-const H1 = styled.h1``
-
-const Span = styled.span``
-
 const Option = styled.div`
 width: 180px;
 height: 180px;
@@ -127,7 +121,6 @@ align-items: center;
   margin: 0 auto;
 }
 `
-
 const SVG = styled.svg`
 width: 90px;
 fill: #ffffff;
@@ -136,3 +129,5 @@ fill: #ffffff;
 fill: #148255;
 }
 `
+const H1 = styled.h1``
+const Span = styled.span``

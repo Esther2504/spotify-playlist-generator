@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Modal from './Modal'
 
 export default function RecomAmount({ amount, setAmount, chosenArtist, chosenSong, chosenGenre, setStep }) {
-
-    console.log(chosenArtist)
+const [showModal, setShowModal] = useState(false)
 
     function checkSeeds() {
         if (!chosenArtist && !chosenSong && !chosenGenre) {
-            alert("Choose at least 1 artist, song or genre")
+            setShowModal(true)
         } else {
             setStep(6)
         }
@@ -15,6 +15,10 @@ export default function RecomAmount({ amount, setAmount, chosenArtist, chosenSon
 
     return (
         <ContainerContainer>
+            {showModal ?
+        <Modal setShowModal={setShowModal} />
+        : null    
+        }
         <h2>How many recommendations do you want?</h2>
             <Container>
                 <Input type="range" min="1" max="100" value={amount} onInput={(e) => setAmount(e.target.value)} />

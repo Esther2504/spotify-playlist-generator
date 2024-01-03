@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { getGenres, searchSong, searchArtist } from './APICalls'
+import { searchSong } from './APICalls'
 import cross from '../images/cross.svg'
 import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
-
 
 export default function FaveSongs({getAccessToken, chosenSong, setChosenSong, setStep, setError}) {
   const [border, setBorder] = useState()
@@ -14,9 +13,7 @@ export default function FaveSongs({getAccessToken, chosenSong, setChosenSong, se
     setSong(value)
     if (value.length > 1) {
       searchSong(getAccessToken, song, setSongSuggestions, setError)
-      console.log(songSuggestions)
     }
-   
   }
 
 function setSongs(suggestion) { 
@@ -32,8 +29,8 @@ if (song.length > 1) {
 }, [song])
 
   return (
-    <ContainerContainer>
-    <h2>What is your favorite song?</h2>
+    <MainContainer>
+    <H2>What is your favorite song?</H2>
     <Container>
     <Label>
     <TextInput border={border} type="text" value={song} onChange={(e) => getSongSuggestions(e.target.value)} />
@@ -46,32 +43,25 @@ if (song.length > 1) {
       </Label>
     <ArtistContainer>
       {chosenSong ?
-        // <Songs>
           <Song>
           {chosenSong.album.images[0] ? <AlbumImg src={chosenSong.album.images[0].url} /> : <AlbumImg src={EmptyPlaylist} />} 
             <AlbumImg src={chosenSong.album.images[0].url} />
-          <SongName><span>{chosenSong.name}</span><span>{chosenSong.artists[0].name}</span></SongName><Image src={cross} onClick={(e) => setChosenSong()} /></Song>
-        // </Songs>
+          <SongName><span>{chosenSong.name}</span><span>{chosenSong.artists[0].name}</span></SongName><Cross src={cross} onClick={(e) => setChosenSong()} /></Song>
         : <P>Your chosen song will appear here. You can also continue without choosing a song, just go to the next step.</P>
       }
     </ArtistContainer>
     </Container>
     <ButtonContainer>
-    <SmallButton onClick={() => setStep(2)}>Previous</SmallButton>
-    <SmallButton onClick={() => setStep(4)}>Next</SmallButton>
+    <Button onClick={() => setStep(2)}>Previous</Button>
+    <Button onClick={() => setStep(4)}>Next</Button>
     </ButtonContainer>
-    </ContainerContainer>
+    </MainContainer>
   )
 }
 
-const ContainerContainer = styled.div`
+const MainContainer = styled.div`
 max-width: 800px;
-// width: 90%;
-// display: flex;
-// margin: 0 auto;
-// justify-content: space-between;
 `
-
 const Container = styled.div`
 display: grid;
 width: 100%;
@@ -79,39 +69,85 @@ min-height: 400px;
 max-width: 850px;
 align-items: flex-start;
 grid-template-columns: 1fr 1fr;
-// margin: 0 auto;
 
 @media screen and (max-width: 850px) {
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
   justify-items: center;
 }
-
 `
-
-const ButtonContainer = styled.div`
-width: 95%;
-max-width: 850px;
-margin: 0 auto;
+const Label = styled.label`
 display: flex;
-justify-content: space-between;
+flex-direction: column;
+justify-content: start;
+height: auto;
 `
+const P = styled.p`
+margin-top: 0;
+text-align: left;
 
-const ArtistContainer = styled.div`
-// margin-left: -20px;
+@media screen and (max-width: 850px) {
+  text-align: center;
+  padding: 10px;
+}
 `
-
-const SmallButton = styled.button`
-background: #148255;
-border: none;
-color: #fff;
-padding: 15px;
+const TextInput = styled.input`
+width: 450px;
+max-width: 95%;
+height: 40px;
 font-size: 1rem;
-cursor: pointer;
-margin-top: 20px;
-font-weight: 600;
-`
+border: 2px solid #148255;
+border-color: ${props => props.border ? "#148255 #148255 white" : "2px"};
+border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
+padding: 0 10px;
+outline: none;
 
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
+`
+const Suggestions = styled.div`
+border: 2px solid #148255;
+width: 450px;
+max-width: 95%;
+padding: 0 10px;
+text-align: left;
+font-size: 0.9rem;
+border-radius: 0 0 10px 10px;
+border-top: none;
+z-index: 2;
+background: #2C2C2C;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+}
+`
+const Suggestion = styled.p`
+cursor: pointer;
+display: flex;
+align-items: center;
+`
+const AlbumSugImg = styled.img`
+width: 50px;
+margin-right: 15px;
+border-radius: 15px;
+`
+const Song = styled.div`
+width: 354px;
+height: 354px;
+display: flex;
+flex-direction: column;
+position: relative;
+border-radius: 15px;
+border: 3px solid #148255;
+overflow: hidden;
+margin-top: 0;
+
+@media screen and (max-width: 450px) {
+  width: 300px;
+  height: 300px;
+}
+`
 const SongName = styled.div`
 position: relative;
 left: 0;
@@ -132,72 +168,6 @@ text-align: center;
   top: 220px;
 }
 `
-
-const TextInput = styled.input`
-width: 450px;
-max-width: 95%;
-height: 40px;
-font-size: 1rem;
-border: 2px solid #148255;
-border-color: ${props => props.border ? "#148255 #148255 white" : "2px"};
-border-radius: ${props => props.border ? "10px 10px 0 0" : "10px"};
-padding: 0 10px;
-outline: none;
-
-@media screen and (max-width: 450px) {
-  width: 300px;
-}
-`
-
-const Suggestions = styled.div`
-border: 2px solid #148255;
-width: 450px;
-max-width: 95%;
-padding: 0 10px;
-text-align: left;
-font-size: 0.9rem;
-border-radius: 0 0 10px 10px;
-border-top: none;
-z-index: 2;
-background: #2C2C2C;
-
-@media screen and (max-width: 450px) {
-  width: 300px;
-}
-`
-
-const Suggestion = styled.p`
-cursor: pointer;
-display: flex;
-align-items: center;
-`
-
-const Songs = styled.div`
-// display: flex;
-// flex-direction: column;
-// height: 400px;
-// flex-wrap: wrap;
-// align-items: end;
-// width: 100%;
-`
-
-const Song = styled.div`
-width: 354px;
-height: 354px;
-display: flex;
-flex-direction: column;
-position: relative;
-border-radius: 15px;
-border: 3px solid #148255;
-overflow: hidden;
-margin-top: 0;
-
-@media screen and (max-width: 450px) {
-  width: 300px;
-  height: 300px;
-}
-`
-
 const AlbumImg = styled.img`
 width: 350px;
 position: absolute;
@@ -206,21 +176,7 @@ position: absolute;
   width: 300px;
 }
 `
-
-const AlbumSugImg = styled.img`
-width: 50px;
-margin-right: 15px;
-border-radius: 15px;
-`
-
-const Label = styled.label`
-display: flex;
-flex-direction: column;
-justify-content: start;
-height: auto;
-`
-
-const Image = styled.img`
+const Cross = styled.img`
 width: 25px;
 height: 25px;
 cursor: pointer;
@@ -230,17 +186,25 @@ left: 310px;
 
 @media screen and (max-width: 450px) {
   top: -45px;
-left: 260px;
+  left: 260px;
 }
 `
-
-
-const P = styled.p`
-margin-top: 0;
-text-align: left;
-
-@media screen and (max-width: 850px) {
-  text-align: center;
-  padding: 10px;
-}
+const ButtonContainer = styled.div`
+width: 95%;
+max-width: 850px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
 `
+const Button = styled.button`
+background: #148255;
+border: none;
+color: #fff;
+padding: 15px;
+font-size: 1rem;
+cursor: pointer;
+margin-top: 20px;
+font-weight: 600;
+`
+const H2 = styled.h2``
+const ArtistContainer = styled.div``

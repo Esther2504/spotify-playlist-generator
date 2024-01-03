@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import PlaylistCreated from './PlaylistCreated'
-import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
-import NoSuitableSongs from './NoSuitableSongs'
 import styled from 'styled-components'
+import { createPlaylist, getAudioFeatures, getUser, addPlaylistTracks } from './APICalls'
+import PlaylistCreated from './PlaylistCreated'
+import NoSuitableSongs from './NoSuitableSongs'
 
 export default function NewPlaylist({ tracks, songType, playlistName, data, accessToken, setError }) {
   const [audioDetails, setaudioDetails] = useState()
@@ -215,11 +215,11 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
     <>
       {!playlistCreated && !noSongs ?
         <Spinner>
-          <Round />
-          <Round />
-          <Round />
-          <Round />
-          <Round />
+          <Circle />
+          <Circle />
+          <Circle />
+          <Circle />
+          <Circle />
         </Spinner>
         : noSongs ?
           <NoSuitableSongs data={data} accessToken={accessToken} />
@@ -233,8 +233,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 const Spinner = styled.div`
 position: relative;
 `
-
-const Round = styled.div`
+const Circle = styled.div`
   width: 15px;
   height: 15px;
   border-radius: 90px;

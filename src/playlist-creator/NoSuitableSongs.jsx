@@ -27,9 +27,6 @@ text-align: left;
 gap: 30px;
 flex-direction: column;
 `
-const H1 = styled.h1``
-const P = styled.p``
-
 const Button = styled.button`
 background: #148255;
 border: none;
@@ -40,3 +37,5 @@ font-weight: 600;
 cursor: pointer;
 width: 250px;
 `
+const H1 = styled.h1``
+const P = styled.p``

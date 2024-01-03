@@ -13,7 +13,6 @@ export default function AllPlaylists({ accessToken, data, setError }) {
   const [hidePrev, setHidePrev] = useState(true)
   const [hideNext, setHideNext] = useState(false)
   const [tracks, setTracks] = useState()
-  // const [error, setError] = useState(false)
 
   function choosePlaylist(playlist) {
     setPlaylistid(playlist.id)
@@ -119,7 +118,29 @@ gap: 20px;
   width: auto;
 }
 `
-const H1 = styled.h1``
+const Playlist = styled.div`
+width: 200px;
+height: 250px;
+background-color: #148255;
+padding: 20px;
+font-size: 0.9rem;
+cursor: pointer;
+overflow: hidden;
+
+@media screen and (max-width: 450px) {
+  width: 120px;
+  height: 185px;
+  padding: 10px 5px;
+}
+`
+const Image = styled.img`
+width: 130px;
+border: 1px solid white;
+
+@media screen and (max-width: 450px) {
+  width: 100px;
+}
+`
 const H3 = styled.h3`
 margin: 0;
 font-size: 1.2rem;
@@ -156,51 +177,6 @@ margin-top: 20px;
   width: 260px;
 }
 `
-const Playlist = styled.div`
-width: 200px;
-height: 250px;
-background-color: #148255;
-padding: 20px;
-font-size: 0.9rem;
-cursor: pointer;
-overflow: hidden;
-
-@media screen and (max-width: 450px) {
-  width: 120px;
-  height: 185px;
-  padding: 10px 5px;
-}
-`
-const Image = styled.img`
-width: 130px;
-border: 1px solid white;
-
-@media screen and (max-width: 450px) {
-  width: 100px;
-}
-`
-const Button = styled.button`
-background: #148255;
-border: none;
-color: #fff;
-padding: 15px 30px;
-font-size: 1.2rem;
-font-weight: 600;
-cursor: pointer;
-width: 130px;
-
-@media screen and (max-width: 450px) {
-  width: 120px;
-}
-
-${({ hidePrev }) => hidePrev && `
-    visibility: hidden;
-  `}
-
-  ${({ hideNext }) => hideNext && `
-    visibility: hidden;
-  `}
-`
 const PublicPlaylist = styled.div`
 width: 500px;
 display: flex;
@@ -225,6 +201,28 @@ height: 30px;
 border: none;
 padding: 8px;
 `
+const Button = styled.button`
+background: #148255;
+border: none;
+color: #fff;
+padding: 15px 30px;
+font-size: 1.2rem;
+font-weight: 600;
+cursor: pointer;
+width: 130px;
+
+@media screen and (max-width: 450px) {
+  width: 120px;
+}
+
+${({ hidePrev }) => hidePrev && `
+    visibility: hidden;
+  `}
+
+  ${({ hideNext }) => hideNext && `
+    visibility: hidden;
+  `}
+`
 const SubmitButton = styled.button`
 width: 85%;
 height: 30px;
@@ -234,3 +232,4 @@ cursor: pointer;
 font-weight: 600;
 color: #33333;
 `
+const H1 = styled.h1``
