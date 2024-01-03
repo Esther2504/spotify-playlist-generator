@@ -144,8 +144,8 @@ z-index: 2;
 }
 `
 const Circles = styled.div`
-width: 92%;
-max-width: 800px;
+width: 90%;
+max-width: 803px;
 position: absolute;
 top: 35px;
 display: flex;
