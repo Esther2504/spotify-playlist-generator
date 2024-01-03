@@ -26,15 +26,19 @@ z-index: 8;
 const Container = styled.div`
 position: relative;
 z-index: 9;
-width: 80%;
+width: 70%;
 height: 500px;
 background: #2C2C2C;
-top: 20%;
-left: 10%;
+top: 15vh;
+left: 15%;
 border-radius: 15px;
 // border: 5px solid red;
 font-size: 1.5rem;
 padding: 20px;
+
+@media screen and (max-width: 1180px) {
+  height: 600px;
+}
 `
 
 const IMG = styled.img`

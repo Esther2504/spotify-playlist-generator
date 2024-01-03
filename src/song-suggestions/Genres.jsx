@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getGenres } from './APICalls'
 import styled from 'styled-components'
+import genres from '../genres.json'
 
 export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, setStep, setError }) {
-  const [genres, setGenres] = useState()
+  // const [genres, setGenres] = useState()
   const [genreInput, setGenreInput] = useState()
   const [showGenres, setShowGenres] = useState(false)
   const [border, setBorder] = useState(false)
@@ -13,16 +14,16 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
     setChosenGenres(target.value)
   }
 
-  useEffect(() => {
-    if (!genres) {
-      getGenres(getAccessToken, setGenres, setError)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!genres) {
+  //     getGenres(getAccessToken, setGenres, setError)
+  //   }
+  // }, [])
 
 
     useEffect(() => {
       if (genres) {
-      if (genres.includes(chosenGenres)) {
+      if (genres.genres.includes(chosenGenres)) {
         setShowGenres(false)
       } 
     }
@@ -56,15 +57,16 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
   
   return (
     <ContainerContainer>
-       {/* {genres ? */}
+       
        <h2>What is your favorite genre?</h2>
+       {genres ?
       <Container>
       <Label>  
             <TextInput border={border} onInput={(e) => { setChosenGenres(e.target.value); showGenresHandler(e.target.value)}} value={chosenGenres}>
             </TextInput>
             {chosenGenres && showGenres ?
               <Suggestions>
-                {genres.map((genre) => {
+                {genres.genres.map((genre) => {
                   return genre.includes(chosenGenres) ?
                     <option value={genre} onClick={(e) => { setChosenGenres(genre); setShowGenres(false) }}>{genre}</option>
                     : null
@@ -74,7 +76,7 @@ export default function Genres({ chosenGenres, setChosenGenres, getAccessToken, 
               : null}   
               </Label>     
       </Container>
-      {/* : null} */}
+      : null}
       <ButtonContainer>
         <SmallButton onClick={() => setStep(3)}>Previous</SmallButton>
         <SmallButton onClick={() => setStep(5)}>Next</SmallButton>

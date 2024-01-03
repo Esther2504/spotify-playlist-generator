@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getUser, getGenres, searchSong, searchArtist, getRecommendations, createPlaylist, addTracks } from './APICalls'
+import { getUser, getGenres, searchSong, searchArtist, getRecommendations, getRecommendations2, createPlaylist, addTracks } from './APICalls'
 import styled from 'styled-components'
 import StartPage from '../song-suggestions/StartPage'
 import FaveArtists from './Artists'
@@ -38,7 +38,7 @@ export default function Start({ accessToken, step, setStep, setError }) {
   let artistsseeds
   let tracksseeds
 
-
+console.log(accessToken)
 
 if (chosenArtists) {
   artistsseeds = chosenArtists.id
@@ -54,9 +54,11 @@ if (chosenSongs) {
 console.log(!PlaylistName)
 
   useEffect(() => {
-    if (step == 6) {
-      getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations);
+    if (step == 6 && recommendations.length == 0) {
+      console.log('request!')
+      getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError);
       getUser(accessToken, setUserID, setError);
+      // getRecommendations2(accessToken)
     } else if (step == 7) {
         createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }

@@ -31,10 +31,12 @@ export function getGenres(accessToken, setGenres, setError) {
         });
 }
 export function searchArtist(accessToken, artist, setArtistSuggestions, setError) {
+    console.log('request')
     axios.get('https://api.spotify.com/v1/search', {
+        
         params: {
             q: artist,
-            type: "artit",
+            type: "artist",
             limit: 5
         },
         headers: {
@@ -52,6 +54,7 @@ export function searchArtist(accessToken, artist, setArtistSuggestions, setError
 }
 
 export function searchSong(accessToken, song, setSongSuggestions, setError) {
+    console.log('request')
     axios.get('https://api.spotify.com/v1/search', {
         params: {
             q: song,
@@ -74,9 +77,8 @@ export function searchSong(accessToken, song, setSongSuggestions, setError) {
 }
 
 export function getRecommendations(accessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError) {
-console.log(artistseeds)
-console.log(genreseeds)
-console.log(tracksseeds)
+console.log(recommendations.length)
+if (recommendations.length == 0) {
     axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
             limit: amount,
@@ -90,12 +92,32 @@ console.log(tracksseeds)
 
     })
         .then(res => {
-            console.log(res.data)
             res.data.tracks.forEach((track) => recommendations.push(track.uri))
         })
         .catch(err => {
+            console.log(err)
+            // setTimeout(getRecommendations(accessToken, artistseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError), 30000)
             setError(true)
         });
+} else {
+    console.log('stop')
+}
+    
+}
+
+export function getRecommendations2(accessToken) {
+    axios.get('https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA', {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+        
+    }).then(res => {
+        console.log(res.data)
+        
+    })
+    .catch(err => {
+        console.log(err)
+    });
 }
 
 export function createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList) {
