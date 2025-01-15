@@ -150,6 +150,10 @@ position: absolute;
 top: 35px;
 display: flex;
 justify-content: space-between;
+
+@media screen and (max-width: 600px) {
+width: 95%
+}
 `
 const CircleContainer = styled.div`
 display: flex;

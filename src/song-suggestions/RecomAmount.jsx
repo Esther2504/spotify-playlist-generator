@@ -108,6 +108,7 @@ max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
+margin-bottom: 20px;
 
 @media screen and (max-width: 320px) {
     flex-direction: column;

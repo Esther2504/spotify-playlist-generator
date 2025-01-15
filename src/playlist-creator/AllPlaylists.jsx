@@ -160,6 +160,7 @@ max-width: 100%;
 display: flex;
 justify-content: space-between;
 margin-top: 20px;
+margin-bottom: 20px;
 
 @media screen and (max-width: 1100px) {
   width: 860px;

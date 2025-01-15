@@ -98,6 +98,8 @@ max-width: 95%;
 `
 const TextContainer = styled.div`
 width: 700px;
+max-width: 100%;
+margin-bottom: 20px;
 font-size: 1.5rem;
 
 @media screen and (max-width: 850px) {

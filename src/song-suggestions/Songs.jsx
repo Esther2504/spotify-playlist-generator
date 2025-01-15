@@ -197,6 +197,7 @@ max-width: 850px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
+margin-bottom: 20px;
 `
 const Button = styled.button`
 background: #148255;
