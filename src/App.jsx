@@ -7,6 +7,7 @@ import AllPlaylists from './playlist-creator/AllPlaylists';
 import Start from './song-suggestions/Start';
 import ErrorModal from './ErrorModal';
 import styled from 'styled-components';
+import Nav from './Nav';
 
 function App() {
   const [accessToken, setAccessToken] = useState()
@@ -48,6 +49,7 @@ function App() {
 
   return (
     <div className="App">
+      <Nav />
       {showError ?
         <ErrorModal setShowError={setShowError} />
         : null}
