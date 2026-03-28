@@ -2,21 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router'
 import { useState, useEffect } from 'react'
+import getAccessToken from './AccessToken.tsx'
 
 export default function Nav() {
     const [accessToken, setAccessToken] = useState<string>()
  const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-top-read`
 
-  const getAccessToken = (window.location.search).substring(6, (window.location.search).length)
+  const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
 
 
-  useEffect(() => {
-    if (getAccessToken) {
-      setAccessToken(getAccessToken)
-      console.log(getAccessToken)
-      localStorage.setItem("accessToken", getAccessToken)
-    }
-  }, [window.location])
+  // useEffect(() => {
+  //   if (getAuthToken) {
+  //     // setAccessToken(getAccessToken)
+  //     console.log(getAuthToken)
+  //     getAccessToken(getAuthToken)
+  //     localStorage.setItem("authToken", getAuthToken)
+  //   }
+  // }, [window.location])
 
     return (
         <NavContainer>

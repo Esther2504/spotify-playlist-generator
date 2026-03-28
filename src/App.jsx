@@ -20,8 +20,10 @@ function App() {
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
+  const savedAccessToken = localStorage.getItem('accessToken')
+
   useEffect(() => {
-    if (window.location.hash.includes("access_token")) {
+    if (window.location.hash.includes("access_token") && !savedAccessToken) {
       setAccessToken(getAccessToken)
     }
   }, [window.location])
