@@ -5,14 +5,13 @@ import { useState, useEffect } from 'react'
 
 export default function Nav() {
     const [accessToken, setAccessToken] = useState<string>()
- const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private`
+ const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-top-read`
 
-  const getAccessToken = window.location.hash.substring(14).split('&')[0]
+  const getAccessToken = (window.location.search).substring(6, (window.location.search).length)
 
 
   useEffect(() => {
-    console.log(window.location)
-    if (window.location.hash.includes("access_token")) {
+    if (getAccessToken) {
       setAccessToken(getAccessToken)
       console.log(getAccessToken)
       localStorage.setItem("accessToken", getAccessToken)
@@ -27,7 +26,7 @@ export default function Nav() {
                 <NavLink to="./discover">Discover</NavLink>
                 <NavLink to="./statistics">Statistics</NavLink>
             </NavLinks>
-            <NavLink to={AUTH_URL}>Login</NavLink>
+            <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
         </NavContainer>
     )
 }
@@ -39,6 +38,15 @@ padding: 10px;
 display: flex;
 align-items: center;
 gap: 30px;
+
+.login-btn {
+background: #148255;
+color: #fff;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 20px;
+align-self: right;
+}
 `
 
 const NavLinks = styled.div`
