@@ -2,14 +2,17 @@ import React, { useState } from 'react'
   import axios from "axios";
 
 export default function Statistics() {
-  const [data, setData] = useState()
+  const [data, setData] = useState<any>(false)
 
   const accessToken = localStorage.getItem('accessToken')
 
   console.log(accessToken)
+  console.log(data)
 
+  if (!data) {
   getTopTracks()
-  
+  }
+
 function getTopTracks() {
       axios
           .get('https://api.spotify.com/v1/me/top/tracks?limit=20&offset=0', {
@@ -19,7 +22,9 @@ function getTopTracks() {
           })
           .then((res) => {
             console.log(res)
-              setData(res.data)
+            console.log(res.data.items)
+            let tracks = res.data.items
+              setData(tracks)
           })
           .catch((err) => {
             console.log(err)
@@ -31,6 +36,14 @@ function getTopTracks() {
 // https://api.spotify.com/v1/me/top/
 
   return (
-    <div>Statistics</div>
+    <div>
+    Statistics
+    {data && data.map((item) => {
+      return (
+      <div>{item.name}</div>
+      )
+    })}
+    </div>
   )
 }
+

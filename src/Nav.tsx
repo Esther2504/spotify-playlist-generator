@@ -11,14 +11,14 @@ export default function Nav() {
   const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
 
 
-  // useEffect(() => {
-  //   if (getAuthToken) {
-  //     // setAccessToken(getAccessToken)
-  //     console.log(getAuthToken)
-  //     getAccessToken(getAuthToken)
-  //     localStorage.setItem("authToken", getAuthToken)
-  //   }
-  // }, [window.location])
+  useEffect(() => {
+    if (getAuthToken) {
+      // setAccessToken(getAccessToken)
+      console.log(getAuthToken)
+      getAccessToken(getAuthToken)
+      localStorage.setItem("authToken", getAuthToken)
+    }
+  }, [getAuthToken])
 
     return (
         <NavContainer>
