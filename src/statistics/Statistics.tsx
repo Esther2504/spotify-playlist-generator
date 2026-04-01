@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 
 export default function Statistics() {
+  const [typeFilter, setTypeFilter] = useState<String>("tracks")
   const [periodFilter, setPeriodFilter] = useState<String>("short_term")
   const [data, setData] = useState<any>(false)
 
@@ -21,11 +22,11 @@ export default function Statistics() {
 
   useEffect(() => {
     getTopTracks()
-  }, [periodFilter])
+  }, [periodFilter, typeFilter])
 
   function getTopTracks() {
     axios
-      .get(`https://api.spotify.com/v1/me/top/tracks?limit=50&offset=0&time_range=${periodFilter}`, {
+      .get(`https://api.spotify.com/v1/me/top/${typeFilter}?limit=50&offset=0&time_range=${periodFilter}`, {
         headers: {
           Authorization: "Bearer " + accessToken,
         },
@@ -42,15 +43,28 @@ export default function Statistics() {
       })
   }
 
+  function handleFilter(period: String) {
+      setPeriodFilter(period)
+  }
+  function handleTypeFilter(type: String) {
+      setTypeFilter(type)
+  }
+
   return (
     <Container>
-      Current filter: {periodFilter}
-      <div onClick={() => setPeriodFilter("short_term")}>Past month</div>
-      <div onClick={() => setPeriodFilter("medium_term")}>Past 6 months</div>
-      <div onClick={() => setPeriodFilter("long_term")}>Past year</div>
+      <PeriodFilters>
+        <Label htmlFor="songs" className={typeFilter == "tracks" ? "fill" : "non-fill"}><input id="songs" type="radio" value="tracks" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Songs</Label>
+        <Label htmlFor="artists" className={typeFilter == "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
+      </PeriodFilters>
+      <PeriodFilters>
+      <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
+      <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
+      <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
+      </PeriodFilters>
       {data && data.map((item, i) => {
         return (
           <SpotifyItem>
+            {typeFilter != 'artists' ? <>
             <TrackNumber>{i + 1}</TrackNumber>
             <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
             <SongInfo><strong>{item.name}</strong><p className="artists">
@@ -61,9 +75,11 @@ export default function Statistics() {
               })}</i>
             </p></SongInfo>
             <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
+          </> : <p>{item.name}</p>}
           </SpotifyItem>
         )
       })}
+      
     </Container>
   )
 }
@@ -106,4 +122,26 @@ overflow: hidden;
 
 const TrackLength = styled.div`
 text-align: center;
+`
+
+const Label = styled.label`
+background: transparent;
+border: 1px solid #148255;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cusrsor: pointer;
+
+&.fill {
+background: #148255;
+}
+
+input {
+display: none;
+}
+`
+
+const PeriodFilters = styled.div`
+display: flex;
+margin-bottom: 30px;
+gap: 20px;
 `
