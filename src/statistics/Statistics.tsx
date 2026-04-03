@@ -5,15 +5,16 @@ import styled from 'styled-components';
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
   const [periodFilter, setPeriodFilter] = useState<String>("short_term")
-  const [data, setData] = useState<any>(false)
+  const [songData, setSongData] = useState<any>(false)
+  const [artistData, setArtistData] = useState<any>(false)
 
   const accessToken = localStorage.getItem('accessToken')
 
   console.log(accessToken)
-  console.log(data)
+  console.log(songData)
 
   useEffect(() => {
-    if (!data) {
+    if (!songData) {
       getTopTracks()
     }
 
@@ -34,8 +35,13 @@ export default function Statistics() {
       .then((res) => {
         console.log(res)
         console.log(res.data.items)
-        let tracks = res.data.items
-        setData(tracks)
+        let dataItems = res.data.items
+        if (typeFilter === "artists") {
+          setArtistData(dataItems)
+        } else {
+          setSongData(dataItems)
+        }
+
       })
       .catch((err) => {
         console.log(err)
@@ -44,10 +50,10 @@ export default function Statistics() {
   }
 
   function handleFilter(period: String) {
-      setPeriodFilter(period)
+    setPeriodFilter(period)
   }
   function handleTypeFilter(type: String) {
-      setTypeFilter(type)
+    setTypeFilter(type)
   }
 
   return (
@@ -57,17 +63,17 @@ export default function Statistics() {
         <Label htmlFor="artists" className={typeFilter == "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
       </PeriodFilters>
       <PeriodFilters>
-      <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
-      <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
-      <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
+        <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
+        <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
+        <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
       </PeriodFilters>
-      {data && data.map((item, i) => {
+      {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
         return (
           <SpotifyItem>
             <TrackNumber>{i + 1}</TrackNumber>
             <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
-            <SongInfo><TrackArtistName href={item.external_urls.spotify}>{item.name}</TrackArtistName><p className="artists">
-              <i>{(item.artists).map((artist, i) => {
+            <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
+              <i>{(item.artists).map((artist: any, i: number) => {
                 return (
                   <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
                 )
@@ -77,7 +83,16 @@ export default function Statistics() {
           </SpotifyItem>
         )
       })}
-      {/* <><AlbumCover src={item.images[0].url} alt={item.name}></AlbumCover>{item.name}</> */}
+      {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
+        return (
+          <SpotifyItem>
+            <TrackNumber>{i + 1}</TrackNumber>
+            <ArtistIcon style={{backgroundImage: `url(${item.images[0].url})`}}></ArtistIcon>
+            <TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName>
+            {/* Get song suggestions based on this artist */}
+            </SpotifyItem>
+        )
+      })}
     </Container>
   )
 }
@@ -123,6 +138,13 @@ font-weight: bold;
 
 const AlbumCover = styled.img`
 height: 70px;
+`
+
+const ArtistIcon = styled.div`
+width: 70px;
+height: 70px;
+background-size: cover;
+background-position: center;
 `
 
 const SongInfo = styled.div`
