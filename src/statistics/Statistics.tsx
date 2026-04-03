@@ -64,22 +64,20 @@ export default function Statistics() {
       {data && data.map((item, i) => {
         return (
           <SpotifyItem>
-            {typeFilter != 'artists' ? <>
             <TrackNumber>{i + 1}</TrackNumber>
             <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
-            <SongInfo><strong>{item.name}</strong><p className="artists">
+            <SongInfo><TrackArtistName href={item.external_urls.spotify}>{item.name}</TrackArtistName><p className="artists">
               <i>{(item.artists).map((artist, i) => {
                 return (
-                  <>{i != (item.artists).length - 1 ? <span>{artist.name}, </span> : <span>{artist.name}</span>}</>
+                  <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
                 )
               })}</i>
             </p></SongInfo>
             <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-          </> : <p>{item.name}</p>}
           </SpotifyItem>
         )
       })}
-      
+      {/* <><AlbumCover src={item.images[0].url} alt={item.name}></AlbumCover>{item.name}</> */}
     </Container>
   )
 }
@@ -101,6 +99,22 @@ justify-content: center;
 gap: 20px;
 `
 
+const TrackArtistName = styled.div`
+text-decoration: none;
+display: inline;
+
+&::first-child {
+font-weight: bold;
+}
+
+a {
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+`
+
 const TrackNumber = styled.p`
 font-size: 1.3rem;
 text-align: center;
@@ -117,6 +131,8 @@ flex-direction: column;
 
 .artists {
 overflow: hidden;
+font-size: 0.8rem;
+margin-top: 2px;
 }
 `
 
