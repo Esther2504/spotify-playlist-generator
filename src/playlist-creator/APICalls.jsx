@@ -1,4 +1,28 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router";
+import getAccessToken from "../AccessToken.tsx";
+
+export function Authentication() {
+    const [accessToken, setAccessToken] = useState()
+
+    const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-top-read`
+
+    Navigate(AUTH_URL)
+
+    const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
+
+    useEffect(() => {
+        if (getAuthToken) {
+            setAccessToken(getAccessToken)
+            console.log(getAuthToken)
+            getAccessToken(getAuthToken)
+            localStorage.setItem("authToken", getAuthToken)
+        }
+    }, [getAuthToken])
+
+}
+
 
 export function getPlaylists(getAccessToken, setData, setError) {
     axios

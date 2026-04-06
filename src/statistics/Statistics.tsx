@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import styled from 'styled-components';
+import { NavLink } from 'react-router'
+import { Authentication } from '../playlist-creator/APICalls';
 
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
   const [periodFilter, setPeriodFilter] = useState<String>("short_term")
   const [songData, setSongData] = useState<any>(false)
   const [artistData, setArtistData] = useState<any>(false)
+  const [error, setError] = useState<boolean>(false)
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -24,6 +27,8 @@ export default function Statistics() {
   useEffect(() => {
     getTopTracks()
   }, [periodFilter, typeFilter])
+
+  const AuthURL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/statistics&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-top-read`
 
   function getTopTracks() {
     axios
@@ -45,7 +50,7 @@ export default function Statistics() {
       })
       .catch((err) => {
         console.log(err)
-        // setError(true)
+        setError(true)
       })
   }
 
@@ -58,41 +63,47 @@ export default function Statistics() {
 
   return (
     <Container>
-      <PeriodFilters>
-        <Label htmlFor="songs" className={typeFilter == "tracks" ? "fill" : "non-fill"}><input id="songs" type="radio" value="tracks" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Songs</Label>
-        <Label htmlFor="artists" className={typeFilter == "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
-      </PeriodFilters>
-      <PeriodFilters>
-        <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
-        <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
-        <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
-      </PeriodFilters>
-      {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
-        return (
-          <SpotifyItem>
-            <TrackNumber>{i + 1}</TrackNumber>
-            <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
-            <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
-              <i>{(item.artists).map((artist: any, i: number) => {
-                return (
-                  <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
-                )
-              })}</i>
-            </p></SongInfo>
-            <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-          </SpotifyItem>
-        )
-      })}
-      {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
-        return (
-          <SpotifyItem>
-            <TrackNumber>{i + 1}</TrackNumber>
-            <ArtistIcon style={{backgroundImage: `url(${item.images[0].url})`}}></ArtistIcon>
-            <TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName>
-            {/* Get song suggestions based on this artist */}
-            </SpotifyItem>
-        )
-      })}
+      {error ?
+        <div>Connect to Spotify to see your statistics <NavLink to={AuthURL} className="login-btn">Connect to Spotify</NavLink></div>
+        :
+        <>
+          <PeriodFilters>
+            <Label htmlFor="songs" className={typeFilter == "tracks" ? "fill" : "non-fill"}><input id="songs" type="radio" value="tracks" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Songs</Label>
+            <Label htmlFor="artists" className={typeFilter == "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
+          </PeriodFilters>
+          <PeriodFilters>
+            <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
+            <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
+            <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
+          </PeriodFilters>
+          {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
+            return (
+              <SpotifyItem>
+                <TrackNumber>{i + 1}</TrackNumber>
+                <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
+                <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
+                  <i>{(item.artists).map((artist: any, i: number) => {
+                    return (
+                      <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
+                    )
+                  })}</i>
+                </p></SongInfo>
+                <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
+              </SpotifyItem>
+            )
+          })}
+          {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
+            return (
+              <SpotifyItem>
+                <TrackNumber>{i + 1}</TrackNumber>
+                <ArtistIcon style={{ backgroundImage: `url(${item.images[0].url})` }}></ArtistIcon>
+                <TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName>
+                {/* Get song suggestions based on this artist */}
+              </SpotifyItem>
+            )
+          })}
+        </>
+      }
     </Container>
   )
 }
@@ -101,6 +112,15 @@ const Container = styled.div`
 max-width: 1200px;
 width: 90%;
 margin: 0 auto;
+
+.login-btn {
+background: #148255;
+color: #fff;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 20px;
+align-self: right;
+}
 `
 
 const SpotifyItem = styled.div`
@@ -164,10 +184,10 @@ text-align: center;
 
 const Label = styled.label`
 background: transparent;
-border: 1px solid #148255;
+border: 2px solid #148255;
     padding: 8px 20px;
     border-radius: 20px;
-    cusrsor: pointer;
+    cursor: pointer;
 
 &.fill {
 background: #148255;
@@ -180,6 +200,6 @@ display: none;
 
 const PeriodFilters = styled.div`
 display: flex;
-margin-bottom: 30px;
-gap: 20px;
+margin-bottom: 10px;
+    gap: 10px;
 `
