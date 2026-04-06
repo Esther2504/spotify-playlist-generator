@@ -40,6 +40,7 @@ padding: 10px;
 display: flex;
 align-items: center;
 gap: 30px;
+border-bottom: 1px solid #148255;
 
 .login-btn {
 background: #148255;
@@ -48,6 +49,9 @@ padding: 10px 20px;
 text-decoration: none;
 border-radius: 20px;
 align-self: right;
+margin-right: 0;
+    margin-left: auto;
+    font-weight: bold;
 }
 `
 

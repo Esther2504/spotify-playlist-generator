@@ -6,6 +6,7 @@ import Nav from './Nav.tsx';
 import Discover from './discover/Discover.tsx';
 import Statistics from './statistics/Statistics.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router';
+import Artists from './discover/Artists.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,6 +24,7 @@ root.render(
       </Route>
       <Route path="discover">
         <Route index element={<Discover />} />
+        <Route path="artists" element={<Artists />} />
       </Route>
       <Route path="statistics">
         <Route index element={<Statistics />} />
