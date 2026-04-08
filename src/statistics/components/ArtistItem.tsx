@@ -1,21 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function SpotifyTrack({ item, i }) {
-  return (
-    <SpotifyItem>
-      <TrackNumber>{i + 1}</TrackNumber>
-      <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
-      <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
-        <i>{(item.artists).map((artist: any, i: number) => {
-          return (
-            <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
-          )
-        })}</i>
-      </p></SongInfo>
-      <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-    </SpotifyItem>
-  )
+export default function ArtistItem({item, i}) {
+    return (
+        <SpotifyItem>
+            <TrackNumber>{i + 1}</TrackNumber>
+            <ArtistIcon style={{ backgroundImage: `url(${item.images[0].url})` }}></ArtistIcon>
+            <TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName>
+            {/* <NavLink to={`../discover/artists?artist=${item.id}&artistname=${item.name}`}>Get recommendations</NavLink> */}
+        </SpotifyItem>
+    )
 }
 
 
@@ -55,7 +49,7 @@ font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #148255;
+        border: 2px solid #148255;
     border-radius: 99%;
 `
 

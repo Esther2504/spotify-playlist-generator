@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from 'styled-components';
 import { NavLink } from 'react-router'
 import { Authentication } from '../playlist-creator/APICalls';
+import SpotifyTrack from './components/SpotifyTrack.tsx';
+import ArtistItem from './components/ArtistItem.tsx';
 
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
@@ -64,7 +66,7 @@ export default function Statistics() {
   return (
     <Container>
       {error ?
-        <div>Connect to Spotify to see your statistics <NavLink to={AuthURL} className="login-btn">Connect to Spotify</NavLink></div>
+        <ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AuthURL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
         :
         <>
           <h1>Most listened to</h1>
@@ -81,29 +83,12 @@ export default function Statistics() {
           </Filters>
           {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
             return (
-              <SpotifyItem>
-                <TrackNumber>{i + 1}</TrackNumber>
-                <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
-                <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
-                  <i>{(item.artists).map((artist: any, i: number) => {
-                    return (
-                      <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
-                    )
-                  })}</i>
-                </p></SongInfo>
-                <TrackLength>{(item.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-              </SpotifyItem>
+              <SpotifyTrack item={item} i={i} />
             )
           })}
           {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
             return (
-              <SpotifyItem>
-                <TrackNumber>{i + 1}</TrackNumber>
-                <ArtistIcon style={{ backgroundImage: `url(${item.images[0].url})` }}></ArtistIcon>
-                <TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName>
-                <NavLink to={`../discover/artists?artist=${item.id}&artistname=${item.name}`}>Get recommendations</NavLink>
-                {/* Get song suggestions based on this artist */}
-              </SpotifyItem>
+              <ArtistItem item={item} i={i}  />
             )
           })}
         </>
@@ -123,12 +108,19 @@ color: #fff;
 padding: 10px 20px;
 text-decoration: none;
 border-radius: 20px;
-align-self: right;
+width: fit-content;
 }
 
 h1 {
 margin: 20px 0;
 }
+`
+
+const ErrorMessage = styled.div`
+display: flex;
+flex-direction: column;
+margin-top: 30px;
+gap:20px;
 `
 
 const SpotifyItem = styled.div`
