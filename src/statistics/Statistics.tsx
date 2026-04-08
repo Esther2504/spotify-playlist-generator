@@ -22,7 +22,6 @@ export default function Statistics() {
     if (!songData) {
       getTopTracks()
     }
-
   }, [])
 
 

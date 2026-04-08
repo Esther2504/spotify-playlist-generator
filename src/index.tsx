@@ -7,6 +7,7 @@ import Discover from './discover/Discover.tsx';
 import Statistics from './statistics/Statistics.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Artists from './discover/Artists.tsx';
+import RecentyPlayed from './statistics/RecentyPlayed.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,6 +29,7 @@ root.render(
       </Route>
       <Route path="statistics">
         <Route index element={<Statistics />} />
+        <Route path="recent" element={<RecentyPlayed />} />
       </Route>
     </Routes>
   </BrowserRouter>
