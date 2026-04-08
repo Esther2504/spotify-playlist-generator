@@ -1,10 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function SpotifyTrack({ item, i }) {
+export default function SpotifyTrack({ item, i, dateTime }) {
+
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    day: "2-digit",
+    month: "2-digit"
+  };
+  const playDate = new Date(dateTime).toLocaleDateString("nl-NL", options)
+  // const playHour = new Date(dateTime).toLocaleDateString("nl-NL", options2).getHours()
+  const playMinute = new Date(dateTime).getMinutes()
+
+
+
+  console.log(playDate)
+
   return (
     <SpotifyItem>
-      <TrackNumber>{i + 1}</TrackNumber>
+      {dateTime ?
+        <TrackNumber $fontSize="0.8rem">{playDate.replace(",", "\n")}</TrackNumber>
+        :
+        <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>
+      }
+
+
       <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
       <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
         <i>{(item.artists).map((artist: any, i: number) => {
@@ -46,8 +67,8 @@ text-decoration: underline;
 }
 `
 
-const TrackNumber = styled.p`
-font-size: 1.3rem;
+const TrackNumber = styled.p<{ $fontSize?: string; }>`
+font-size: ${props => props.$fontSize || "1.3rem"};
 text-align: center;
 font-weight: bold;
     height: 100%;

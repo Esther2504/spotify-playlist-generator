@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import SpotifyTrack from './components/SpotifyTrack'
+import SpotifyTrack from './components/SpotifyTrack.tsx'
 
 export default function RecentyPlayed() {
     const [tracks, setTracks] = useState()
@@ -38,7 +38,7 @@ export default function RecentyPlayed() {
         <Container>
             {tracks && tracks.map((item, i) => {
                 return (
-                    <SpotifyTrack item={item} i={i} />
+                    <SpotifyTrack item={item.track} i={i} dateTime={item.played_at} />
                 )
             })}
         </Container>
