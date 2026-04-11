@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import PlaylistOptions from './PlaylistOptions.tsx'
 
 export default function SeparateArtistPlaylist() {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
   const [playlistID, setPlaylistID] = useState<string>()
+  const [playlistTool, setPlaylistTool] = useState<string>()
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -37,7 +39,10 @@ export default function SeparateArtistPlaylist() {
       <p>Search for a playlist or enter a playlist id</p>
       <label>Your playlistid</label>
       <input type="text" onInput={(e) => setPlaylistID(e.target.value)}></input>
-     <button onClick={() => getPlaylists()}>Get playlist</button>
+
+      <p>What would you like to do with this playlist?</p>
+      <PlaylistOptions setPlaylistTool={setPlaylistTool} />
+     <button onClick={() => getPlaylists()}>Start</button>
     </div>
   )
 }
