@@ -2,11 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
 import getAccessToken from "../AccessToken.tsx";
+import { AUTH_URL } from "../AuthURL.tsx";
 
 export function Authentication() {
     const [accessToken, setAccessToken] = useState()
-
-    const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`
 
     Navigate(AUTH_URL)
 

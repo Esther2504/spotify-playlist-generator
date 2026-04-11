@@ -7,7 +7,7 @@ import AllPlaylists from './playlist-creator/AllPlaylists';
 import Start from './song-suggestions/Start';
 import ErrorModal from './ErrorModal';
 import styled from 'styled-components';
-import { AUTH_URL } from './AuthURL';
+import { AUTH_URL } from './AuthURL.tsx';
 
 function App() {
   const [accessToken, setAccessToken] = useState()
@@ -16,8 +16,6 @@ function App() {
   const [step, setStep] = useState(1)
   const [error, setError] = useState(false)
   const [showError, setShowError] = useState(false)
-
-  // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`
 
   const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
