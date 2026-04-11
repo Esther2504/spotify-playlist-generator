@@ -5,6 +5,7 @@ import { NavLink } from 'react-router'
 import { Authentication } from '../playlist-creator/APICalls';
 import SpotifyTrack from './components/SpotifyTrack.tsx';
 import ArtistItem from './components/ArtistItem.tsx';
+import { AUTH_URL } from '../AuthURL.tsx';
 
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
@@ -29,7 +30,7 @@ export default function Statistics() {
     getTopTracks()
   }, [periodFilter, typeFilter])
 
-  const AuthURL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://esther2504.github.io/spotify-playlist-generator/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`
+  // const AuthURL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`
 
   function getTopTracks() {
     axios
@@ -65,7 +66,7 @@ export default function Statistics() {
   return (
     <Container>
       {error ?
-        <ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AuthURL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
+        <ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
         :
         <>
           <h1>Most listened to</h1>
