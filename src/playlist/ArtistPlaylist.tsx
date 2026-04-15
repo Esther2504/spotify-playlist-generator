@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
 type Props = {
-    playlistid : string;
-    playlistItems : any;
+    playlistid: string;
+    playlistItems: any;
 }
 
-export default function ArtistPlaylist({playlistid, playlistItems}: Props) {
-const [playlistArtists, setPlaylistArtists] = useState([])
+export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
+    const [playlistArtists, setPlaylistArtists] = useState([])
+    const [uniquePlaylistArtists, setUniquePlaylistArtists] = useState([])
 
     const params = useParams()
 
@@ -16,19 +17,23 @@ const [playlistArtists, setPlaylistArtists] = useState([])
     console.log(playlistItems)
     console.log(playlistArtists)
 
-    playlistItems.forEach(element => {
-        for (let i = 0; i < element.artists.length; i++) {
-        if (!playlistArtists.includes(element.artists[i].name)) {
-            setPlaylistArtists([...prev, element.artists[i].name])
-        }
-        }
+    useEffect(() => {
+        playlistItems.forEach(element => {
+            element.item.artists.forEach(artist => {
+                setPlaylistArtists((prevArtists) => [...prevArtists, artist.name])
+            })
+        });
 
-    });
+    }, [])
 
-  return (
-    <div>
-<p>For what artist do you want to create a seperate playlist?</p>
+    useEffect(() => {
+        setUniquePlaylistArtists([...new Set(playlistArtists)])
+    }, [playlistArtists])
 
-    </div>
-  )
+    return (
+        <div>
+            <p>For what artist do you want to create a seperate playlist?</p>
+            {uniquePlaylistArtists.map((artist) => <p>{artist}</p>)}
+        </div>
+    )
 }

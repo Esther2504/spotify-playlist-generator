@@ -9,7 +9,7 @@ export default function PlaylistOptions({ setPlaylistTool }) {
   return (
     <Container>
         <OptionsContainer>
-          <Option>Create separate playlist per artist</Option>
+          <Option onClick={() => setPlaylistTool("ArtistPlaylist")}>Create separate playlist per artist</Option>
           <Option>Create separate playlist per year</Option>
           <Option>Remove duplicates</Option>
           <Option>Remove artist from your playlist</Option>

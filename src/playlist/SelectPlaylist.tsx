@@ -38,7 +38,7 @@ export default function SeparateArtistPlaylist() {
 
   return (
     <Container>
-      {step == 1 ?
+      {step == 1 && !playlistTool ?
         <>
           <p>Search for a playlist or enter a playlist id</p>
           <label>Your playlistid</label>
