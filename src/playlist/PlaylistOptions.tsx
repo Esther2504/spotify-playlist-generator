@@ -56,4 +56,5 @@ text-align: center;
 vertical-align: middle;
 background: var(--green);
 color: #fff;
+border-radius: 15px;
 `

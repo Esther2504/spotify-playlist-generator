@@ -11,6 +11,7 @@ export default function SeparateArtistPlaylist() {
   const [playlistTool, setPlaylistTool] = useState<string>()
   const [step, setStep] = useState<number>(1)
   const [errorMessage, SetErrorMessage] = useState()
+  const [playlistItems, setPlaylistItems] = useState([])
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -29,6 +30,36 @@ export default function SeparateArtistPlaylist() {
       })
       .then((res) => {
         setData(res.data)
+        setPlaylistItems(res.data.items.items)
+        if (res.data.items.total > 100) {
+          getAllTracks(res.data.items.next)
+          console.log(res.data.items.next)
+        }
+
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+        setError(true)
+        SetErrorMessage(err.response.data.error.message)
+      })
+  }
+
+  function getAllTracks(nextURL : string) {
+ axios
+      .get(`${nextURL}`, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
+      .then((res) => {
+
+        setPlaylistItems((prevItems) => [...prevItems, res.data.items])
+
+        if (res.data.next) {
+          getAllTracks(res.data.next)
+        }
+
         console.log(res.data)
       })
       .catch((err) => {
@@ -49,11 +80,12 @@ export default function SeparateArtistPlaylist() {
           <p>What would you like to do with this playlist?</p>
           <p>{errorMessage}</p>
           <PlaylistOptions setPlaylistTool={setPlaylistTool} />
+          <button onClick={() => setStep(2)}>Next</button>
         </>
         :
         <>
-          {playlistTool == "ArtistPlaylist" && playlistID ?
-            <ArtistPlaylist playlistid={playlistID} playlistItems={data.items.items} />
+          {playlistTool == "ArtistPlaylist" && playlistID && step == 2 ?
+            <ArtistPlaylist playlistid={playlistID} playlistItems={playlistItems} playlistName={data.name} />
             : null
           }
         </>
@@ -68,7 +100,7 @@ export default function SeparateArtistPlaylist() {
 const Container = styled.div`
 max-width: 1400px;
 width: 90%;
-margin: 0 auto;
+margin: 50px auto;
 
 .login-btn {
 background: #148255;

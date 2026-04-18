@@ -6,12 +6,13 @@ import axios from 'axios'
 type Props = {
     playlistid: string;
     playlistItems: any;
+    playlistName: string;
 }
 
-export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
+export default function ArtistPlaylist({ playlistid, playlistItems, playlistName }: Props) {
     const [playlistArtists, setPlaylistArtists] = useState([])
     const [uniquePlaylistArtists, setUniquePlaylistArtists] = useState([])
-    const [artist, setArtist] = useState<string>()
+    const [selectedArtist, setSelectedArtist] = useState<string>()
     const [uris, setUris] = useState([])
     const [newPlaylistID, setNewPlaylistID] = useState()
     const [playlistReady, setPlaylistReady] = useState<boolean>(false)
@@ -37,12 +38,12 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
     }, [playlistArtists])
 
     useEffect(() => {
-        if (artist) {
+        if (selectedArtist) {
             playlistItems.forEach(element => {
-                console.log(element?.item?.artists)
+                console.log(selectedArtist)
 
                 element?.item?.artists?.forEach(artistitem => {
-                    if (artistitem?.name == artist) {
+                    if (artistitem?.name == selectedArtist) {
                         console.log(artistitem.name)
                         setUris((prevUris) => [...prevUris, element?.item?.uri])
                     }
@@ -50,13 +51,14 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
             })
         }
-    }, [artist])
+    }, [selectedArtist])
 
     const accessToken = localStorage.getItem('accessToken')
 
     useEffect(() => {
         if (!newPlaylistID) {
-            createPlaylist()
+            console.log(selectedArtist)
+            createPlaylist(selectedArtist)
         }
     }, [])
 
@@ -72,11 +74,12 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
     }, [uris])
 
-    function createPlaylist() {
+    function createPlaylist(selectedArtist : string) {
+        console.log(selectedArtist)
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
-                "name": "New Playlist",
-                "description": "New playlist description",
+                "name": `${playlistName} - ${selectedArtist}`,
+                "description": "",
                 "public": false
             }, {
                 headers: {
@@ -118,12 +121,20 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
     return (
         <Container>
-            <p>For what artist do you want to create a seperate playlist?</p>
-            {uniquePlaylistArtists.map((artist) => <Artist onClick={() => setArtist(artist)}>{artist}</Artist>)}
-
             {playlistReady ?
+            <>
+            <h1>Your playlist is ready!</h1>
+            <p onClick={() => {setPlaylistReady(false); setUris([])}}>&arrowleft; Choose another artist</p>
                 <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                : null}
+                </>
+                :             
+                <>
+            <h1>Which artist do you want to create a playlist of?</h1>
+            <ArtistsContainer>
+            {uniquePlaylistArtists.map((artist) => <Artist onClick={() => setSelectedArtist(artist)}>{artist}</Artist>)}
+            </ArtistsContainer>
+            </>
+            }
 
         </Container>
     )
@@ -131,12 +142,13 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
 const Container = styled.div`
 display: flex;
-gap: 10px;
-flex-wrap: wrap;
-justify-content: center;
+gap: 30px;
+align-items: center;
+flex-direction: column;
 
-p {
-width: 100%;
+iframe {
+max-width: 800px;
+min-height: 600px;
 }
 `
 
@@ -145,4 +157,16 @@ background: var(--green);
 padding: 10px 20px;
 border-radius: 15px;
 cursor: pointer;
+border: 2px solid transparent;
+
+&:hover {
+border: 2px solid #fff;
+}
+`
+
+const ArtistsContainer = styled.div`
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+justify-content: center;
 `
