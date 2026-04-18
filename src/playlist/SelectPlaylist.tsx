@@ -10,6 +10,7 @@ export default function SeparateArtistPlaylist() {
   const [playlistID, setPlaylistID] = useState<string>()
   const [playlistTool, setPlaylistTool] = useState<string>()
   const [step, setStep] = useState<number>(1)
+  const [errorMessage, SetErrorMessage] = useState()
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -33,6 +34,7 @@ export default function SeparateArtistPlaylist() {
       .catch((err) => {
         console.log(err)
         setError(true)
+        SetErrorMessage(err.response.data.error.message)
       })
   }
 
@@ -45,6 +47,7 @@ export default function SeparateArtistPlaylist() {
           <input type="text" onInput={(e) => setPlaylistID(e.target.value)}></input>
           <button onClick={() => getPlaylists()}>Start</button>
           <p>What would you like to do with this playlist?</p>
+          <p>{errorMessage}</p>
           <PlaylistOptions setPlaylistTool={setPlaylistTool} />
         </>
         :

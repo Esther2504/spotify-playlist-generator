@@ -14,6 +14,7 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
     const [artist, setArtist] = useState<string>()
     const [uris, setUris] = useState([])
     const [newPlaylistID, setNewPlaylistID] = useState()
+    const [playlistReady, setPlaylistReady] = useState<boolean>(false)
 
     const params = useParams()
 
@@ -24,7 +25,8 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
     useEffect(() => {
         playlistItems.forEach(element => {
-            element.item.artists.forEach(artist => {
+            console.log(element)
+            element?.item?.artists?.forEach(artist => {
                 setPlaylistArtists((prevArtists) => [...prevArtists, artist.name])
             })
         });
@@ -37,12 +39,12 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
     useEffect(() => {
         if (artist) {
             playlistItems.forEach(element => {
-                console.log(element.item.artists)
+                console.log(element?.item?.artists)
 
-                element.item.artists.forEach(artistitem => {
-                    if (artistitem.name == artist) {
+                element?.item?.artists?.forEach(artistitem => {
+                    if (artistitem?.name == artist) {
                         console.log(artistitem.name)
-                        setUris((prevUris) => [...prevUris, element.item.uri])
+                        setUris((prevUris) => [...prevUris, element?.item?.uri])
                     }
                 })
 
@@ -52,13 +54,20 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
 
     const accessToken = localStorage.getItem('accessToken')
 
+    useEffect(() => {
+        if (!newPlaylistID) {
+            createPlaylist()
+        }
+    }, [])
 
     useEffect(() => {
 
-        // https://api.spotify.com/v1/me/playlists
 
-        createPlaylist()
+        if (newPlaylistID) {
 
+            addPlaylistItems(newPlaylistID)
+
+        }
 
 
     }, [uris])
@@ -86,11 +95,11 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
             })
     }
 
-    function addPlaylistItems(playlist_id : string) {
+    function addPlaylistItems(playlist_id: string) {
         axios
             .post(`https://api.spotify.com/v1/playlists/${playlist_id}/items`, {
-               "uris": uris,
-    "position": 0
+                "uris": uris,
+                "position": 0
             }, {
                 headers: {
                     Authorization: "Bearer " + accessToken,
@@ -99,6 +108,7 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
             })
             .then((res) => {
                 console.log(res.data)
+                setPlaylistReady(true)
             })
             .catch((err) => {
                 console.log(err)
@@ -111,7 +121,10 @@ export default function ArtistPlaylist({ playlistid, playlistItems }: Props) {
             <p>For what artist do you want to create a seperate playlist?</p>
             {uniquePlaylistArtists.map((artist) => <Artist onClick={() => setArtist(artist)}>{artist}</Artist>)}
 
-<iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            {playlistReady ?
+                <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                : null}
+
         </Container>
     )
 }
