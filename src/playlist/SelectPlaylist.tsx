@@ -54,7 +54,7 @@ export default function SeparateArtistPlaylist() {
       })
       .then((res) => {
 
-        setPlaylistItems((prevItems) => [...prevItems, res.data.items])
+        setPlaylistItems((prevItems) => [...prevItems, ...res.data.items])
 
         if (res.data.next) {
           getAllTracks(res.data.next)
@@ -67,7 +67,8 @@ export default function SeparateArtistPlaylist() {
         setError(true)
         SetErrorMessage(err.response.data.error.message)
       })
-  }
+   }
+  //  0TQBfIB1DDcLVmAHLiIGsi
 
   return (
     <Container>
@@ -84,7 +85,7 @@ export default function SeparateArtistPlaylist() {
         </>
         :
         <>
-          {playlistTool == "ArtistPlaylist" && playlistID && step == 2 ?
+          {playlistTool == "ArtistPlaylist" && playlistID ?
             <ArtistPlaylist playlistid={playlistID} playlistItems={playlistItems} playlistName={data.name} />
             : null
           }
