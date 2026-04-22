@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import ArtistPlaylist from './ArtistPlaylist.tsx'
 
-export default function PlaylistOptions({ setPlaylistTool }) {
+export default function PlaylistOptions({ setPlaylistTool, playlistTool }) {
   const [tool, setTool] = useState<string>()
   const [step, setStep] = useState<number>(1)
 
   return (
     <Container>
         <OptionsContainer>
-          <Option onClick={() => setPlaylistTool("ArtistPlaylist")}>Create separate playlist per artist</Option>
+          <Option onClick={() => setPlaylistTool("ArtistPlaylist")} selected={playlistTool == "ArtistPlaylist"}>Create separate playlist per artist</Option>
           <Option>Create separate playlist per year</Option>
           <Option>Remove duplicates</Option>
           <Option>Remove artist from your playlist</Option>
@@ -48,7 +48,7 @@ gap: 20px;
 width: 100%;
 `
 
-const Option = styled.div`
+const Option = styled.div<{ $selected?: boolean; }>`
 width: 150px;
 height: 150px;
 padding: 20px;
@@ -57,4 +57,9 @@ vertical-align: middle;
 background: var(--green);
 color: #fff;
 border-radius: 15px;
+
+${props =>
+    props.$selected && css`
+      border: 1px solid #fff;
+    `};
 `

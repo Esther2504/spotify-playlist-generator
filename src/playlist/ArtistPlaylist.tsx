@@ -40,7 +40,7 @@ export default function ArtistPlaylist({ playlistid, playlistItems, playlistName
     useEffect(() => {
         if (selectedArtist) {
             playlistItems.forEach(element => {
-console.log('set uris' + selectedArtist)
+
                 element?.item?.artists?.forEach(artistitem => {
                     if (artistitem?.name == selectedArtist) {
                         setUris((prevUris) => [...prevUris, element?.item?.uri])
@@ -138,8 +138,8 @@ setPlaylistReady(true)
             {playlistReady ?
             <>
             <h1>Your playlist is ready!</h1>
-            <p onClick={() => {setPlaylistReady(false); setUris([])}}>&arrowleft; Add another artist to this playlist</p>
-            <p onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID()}}>&arrowleft; Create new playlist with another artist</p>
+            <button onClick={() => {setPlaylistReady(false); setUris([])}}>Add another artist to this playlist</button>
+            <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button>
                 <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </>
                 :             
