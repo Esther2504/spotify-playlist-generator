@@ -3,6 +3,7 @@ import axios from 'axios'
 import PlaylistOptions from './PlaylistOptions.tsx'
 import styled from 'styled-components'
 import ArtistPlaylist from './ArtistPlaylist.tsx'
+import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
 
 export default function SeparateArtistPlaylist() {
   const [data, setData] = useState()
@@ -37,6 +38,9 @@ export default function SeparateArtistPlaylist() {
       getOwnPlaylists()
     }
   }, [accessToken])
+  useEffect(() => {
+    window.history.pushState(null, '/', playlistTool);
+  }, [playlistTool])
 
   function getPlaylists() {
     axios
@@ -131,6 +135,11 @@ console.log(ownPlaylists)
   return (
     <Container>
       {step == 1 && !playlistTool ?
+
+<PlaylistOptions setPlaylistTool={setPlaylistTool} playlistTool={playlistTool} />
+
+: playlistTool ?
+
         <>
           <Container>
             <h1>Choose one of your saved playlists</h1>
@@ -140,7 +149,7 @@ console.log(ownPlaylists)
                              {playlist.images ?
                                <Image src={playlist.images[0].url} />
                                :
-                               <Image src={"EmptyPlaylist"} />
+                               <Image src={EmptyPlaylist} />
                              }
                              <P>{playlist.name}</P>
                            </Playlist>
@@ -162,7 +171,7 @@ console.log(ownPlaylists)
           <button onClick={() => getPlaylists()}>Get playlist</button>
           <p>What would you like to do with this playlist?</p>
           <p>{errorMessage}</p>
-          <PlaylistOptions setPlaylistTool={setPlaylistTool} playlistTool={playlistTool} />
+          
           <button onClick={() => setStep(2)}>Next</button>
         </>
         :

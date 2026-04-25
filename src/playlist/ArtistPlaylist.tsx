@@ -139,7 +139,7 @@ setPlaylistReady(true)
             <>
             <h1>Your playlist is ready!</h1>
             <button onClick={() => {setPlaylistReady(false); setUris([])}}>Add another artist to this playlist</button>
-            <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button>
+            {/* <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button> */}
                 <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </>
                 :             
