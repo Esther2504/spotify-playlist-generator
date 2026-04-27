@@ -25,6 +25,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     console.log(uris)
 
     useEffect(() => {
+        console.log(playlistItems)
         playlistItems.forEach(element => {
             console.log(element)
             element?.item?.artists?.forEach(artist => {

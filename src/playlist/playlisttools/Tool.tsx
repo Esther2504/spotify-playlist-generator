@@ -20,20 +20,19 @@ export default function Tool({ }: Props) {
   const tool = params.tool
 
   useEffect(() => {
-    if (playlistItems) {
-      setPlaylistReady(true)
-    }
-  }, [playlistItems])
-  console.log(params.tool)
+    console.log(playlistReady)
+
+  }, [playlistReady])
+
 
   return (
     <div>
-      <SelectPlaylist setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} />
+      
       {tool == "artistplaylist" && playlistReady && playlistID ?
         <>
           <ArtistPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
-        : null}
+        : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
     </div>
   )
 }

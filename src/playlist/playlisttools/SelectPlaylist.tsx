@@ -5,10 +5,10 @@ import styled from 'styled-components'
 import ArtistPlaylist from './ArtistPlaylist.tsx'
 import EmptyPlaylist from '../../images/EmptyPlaylist.PNG'
 
-export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistName}) {
+export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID}) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
-  const [playlistID, setPlaylistID] = useState<string>()
+  // const [playlistID, setPlaylistID] = useState<string>()
 
   const [step, setStep] = useState<number>(1)
   const [errorMessage, SetErrorMessage] = useState()
@@ -26,12 +26,12 @@ export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistNam
 
   const accessToken = localStorage.getItem('accessToken')
 
-  //   useEffect(() => {
-  // if (!data && playlistID) {
-  //   getPlaylists()
-  // }
-  //   }, [])
-
+    useEffect(() => {
+  if (!data && playlistID) {
+    console.log('get it')
+    getPlaylists()
+  }
+    }, [playlistID])
 
   useEffect(() => {
     if (ownPlaylists.length == 0) {
@@ -54,6 +54,9 @@ export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistNam
         if (res.data.items.total > 100) {
           getAllTracks(res.data.items.next)
           console.log(res.data.items.next)
+        } else {
+          setPlaylistReady(true)
+          console.log('ready!')
         }
 
         console.log(res.data)
@@ -78,6 +81,9 @@ export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistNam
 
         if (res.data.next) {
           getAllTracks(res.data.next)
+        } else {
+          setPlaylistReady(true)
+          console.log('ready!')
         }
 
         console.log(res.data)
@@ -117,9 +123,7 @@ export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistNam
   }
 
   useEffect(() => {
-    if (playlistID) {
-      getPlaylists()
-    }
+    console.log(playlistID)
   }, [playlistID])
 
   function getPublicPlaylistID({ url }) {
@@ -133,13 +137,12 @@ export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistNam
 console.log(ownPlaylists)
   return (
     <Container>
-      {step == 1 ?
         <>
           <Container>
             <h1>Choose one of your saved playlists</h1>
             <PlaylistContainer>
                 {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
-                           <Playlist onClick={() => setPlaylistID(playlist?.id)}>
+                           <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
                              {playlist.images ?
                                <Image src={playlist.images[0].url} />
                                :
@@ -165,19 +168,8 @@ console.log(ownPlaylists)
           <button onClick={() => getPlaylists()}>Get playlist</button>
           <p>What would you like to do with this playlist?</p>
           <p>{errorMessage}</p>
-          
           <button onClick={() => setStep(2)}>Next</button>
         </>
-        :
-        <>
-          {/* {playlistTool == "ArtistPlaylist" && playlistID ?
-            <ArtistPlaylist playlistid={playlistID} playlistItems={playlistItems} playlistName={data.name} />
-            : null
-          } */}
-        </>
-      }
-
-
     </Container>
   )
 }
