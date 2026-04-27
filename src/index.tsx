@@ -8,8 +8,9 @@ import Statistics from './statistics/Statistics.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Artists from './discover/Artists.tsx';
 import RecentyPlayed from './statistics/RecentyPlayed.tsx';
-import SelectPlaylist from './playlist/SelectPlaylist.tsx'
+import SelectPlaylist from './playlist/playlisttools/SelectPlaylist.tsx'
 import Tool from './playlist/playlisttools/Tool.tsx'
+import PlaylistIndex from './playlist/ToolOptions.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,7 +23,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="playlist">
-        <Route index element={<SelectPlaylist />} />
+        <Route index element={<PlaylistIndex />} />
         <Route path="playlist-mixer" element={<App />} />
         <Route path=":tool" element={<Tool />} />
       </Route>

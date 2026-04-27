@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ArtistPlaylist from './ArtistPlaylist.tsx'
+import ArtistPlaylist from './playlisttools/ArtistPlaylist.tsx'
+import { NavLink } from 'react-router'
 
 export default function PlaylistOptions({ setPlaylistTool, playlistTool }) {
   const [tool, setTool] = useState<string>()
   const [step, setStep] = useState<number>(1)
-
+//  onClick={() => setPlaylistTool("ArtistPlaylist")} selected={playlistTool == "ArtistPlaylist"}
   return (
     <Container>
         <OptionsContainer>
-          <Option onClick={() => setPlaylistTool("ArtistPlaylist")} selected={playlistTool == "ArtistPlaylist"}>Create separate playlist per artist</Option>
+          <NavLink to="../playlist/artistplaylist"><Option>Create separate playlist per artist</Option>
+          </NavLink>
           <Option>Create separate playlist per year</Option>
           <Option>Remove duplicates</Option>
           <Option>Remove artist from your playlist</Option>

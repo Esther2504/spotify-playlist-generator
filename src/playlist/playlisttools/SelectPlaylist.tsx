@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import PlaylistOptions from './PlaylistOptions.tsx'
+import PlaylistOptions from '../PlaylistOptions.tsx'
 import styled from 'styled-components'
 import ArtistPlaylist from './ArtistPlaylist.tsx'
-import EmptyPlaylist from '../images/EmptyPlaylist.PNG'
+import EmptyPlaylist from '../../images/EmptyPlaylist.PNG'
 
-export default function SeparateArtistPlaylist() {
+export default function SeparateArtistPlaylist({setPlaylistItems, setPlaylistName}) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
   const [playlistID, setPlaylistID] = useState<string>()
-  const [playlistTool, setPlaylistTool] = useState<string>()
+
   const [step, setStep] = useState<number>(1)
   const [errorMessage, SetErrorMessage] = useState()
-  const [playlistItems, setPlaylistItems] = useState([])
+  
   // const [playlistid, setPlaylistid] = useState()
-  const [playlistName, setPlaylistName] = useState()
+  
   const [publicplaylist, setPublicplaylist] = useState()
   const [firstSlide, setFirstSlide] = useState(0)
   const [lastSlide, setLastSlide] = useState(10)
@@ -38,9 +38,7 @@ export default function SeparateArtistPlaylist() {
       getOwnPlaylists()
     }
   }, [accessToken])
-  useEffect(() => {
-    window.history.pushState(null, '/', playlistTool);
-  }, [playlistTool])
+
 
   function getPlaylists() {
     axios
@@ -51,6 +49,7 @@ export default function SeparateArtistPlaylist() {
       })
       .then((res) => {
         setData(res.data)
+        setPlaylistName(res.data.name)
         setPlaylistItems(res.data.items.items)
         if (res.data.items.total > 100) {
           getAllTracks(res.data.items.next)
@@ -134,12 +133,7 @@ export default function SeparateArtistPlaylist() {
 console.log(ownPlaylists)
   return (
     <Container>
-      {step == 1 && !playlistTool ?
-
-<PlaylistOptions setPlaylistTool={setPlaylistTool} playlistTool={playlistTool} />
-
-: playlistTool ?
-
+      {step == 1 ?
         <>
           <Container>
             <h1>Choose one of your saved playlists</h1>
@@ -176,10 +170,10 @@ console.log(ownPlaylists)
         </>
         :
         <>
-          {playlistTool == "ArtistPlaylist" && playlistID ?
+          {/* {playlistTool == "ArtistPlaylist" && playlistID ?
             <ArtistPlaylist playlistid={playlistID} playlistItems={playlistItems} playlistName={data.name} />
             : null
-          }
+          } */}
         </>
       }
 
