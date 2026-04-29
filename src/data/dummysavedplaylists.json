@@ -1,0 +1,1206 @@
+{
+    "data": {
+        "href": "https://api.spotify.com/v1/users/esther%2Bes/playlists?offset=0&limit=30&locale=en-US,en;q%3D0.9",
+        "limit": 30,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 25,
+        "items": [
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/6Te12jVTuLuxL2RAFdpx6D"
+                },
+                "href": "https://api.spotify.com/v1/playlists/6Te12jVTuLuxL2RAFdpx6D",
+                "id": "6Te12jVTuLuxL2RAFdpx6D",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e020b04da4f224b51ff86e0a481ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02904445d70d04eb24d6bb79acab67616d00001e02e787cffec20aa2a396a61647",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e020b04da4f224b51ff86e0a481ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02904445d70d04eb24d6bb79acab67616d00001e02e787cffec20aa2a396a61647",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e020b04da4f224b51ff86e0a481ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02904445d70d04eb24d6bb79acab67616d00001e02e787cffec20aa2a396a61647",
+                        "width": 60
+                    }
+                ],
+                "name": "Faves - Taylor Swift",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAABa0z01PxODLMLhNhwp9UA66KrAmK",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/6Te12jVTuLuxL2RAFdpx6D/tracks",
+                    "total": 131
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/6Te12jVTuLuxL2RAFdpx6D/items",
+                    "total": 131
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:6Te12jVTuLuxL2RAFdpx6D"
+            },
+            {
+                "collaborative": false,
+                "description": "Playlist for discovering new songs based on your music taste, generated via Skiley (https:&#x2F;&#x2F;skiley.net).",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/3a9AOo2bqObLw13vFffhRt"
+                },
+                "href": "https://api.spotify.com/v1/playlists/3a9AOo2bqObLw13vFffhRt",
+                "id": "3a9AOo2bqObLw13vFffhRt",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0207fdb7827a09741192c6242eab67616d00001e0250a3147b4edd7701a876c6ceab67616d00001e02ba5db46f4b838ef6027e6f96ab67616d00001e02ccbe93ce9eda066d4bf5c9ba",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0207fdb7827a09741192c6242eab67616d00001e0250a3147b4edd7701a876c6ceab67616d00001e02ba5db46f4b838ef6027e6f96ab67616d00001e02ccbe93ce9eda066d4bf5c9ba",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0207fdb7827a09741192c6242eab67616d00001e0250a3147b4edd7701a876c6ceab67616d00001e02ba5db46f4b838ef6027e6f96ab67616d00001e02ccbe93ce9eda066d4bf5c9ba",
+                        "width": 60
+                    }
+                ],
+                "name": "[Skiley] Discover Daily",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAA18pjKAloLhYnkgoAYAEIl/QC33y",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/3a9AOo2bqObLw13vFffhRt/tracks",
+                    "total": 15
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/3a9AOo2bqObLw13vFffhRt/items",
+                    "total": 15
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:3a9AOo2bqObLw13vFffhRt"
+            },
+            {
+                "collaborative": false,
+                "description": "Playlist filtered from &quot;Faves&quot; via Skiley (https:&#x2F;&#x2F;skiley.net).",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/5XZiGUQjmLegc9DQZJSBdr"
+                },
+                "href": "https://api.spotify.com/v1/playlists/5XZiGUQjmLegc9DQZJSBdr",
+                "id": "5XZiGUQjmLegc9DQZJSBdr",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0210b3547f66125a4da0cf156bab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02db60b1daedc0f3ba2d70756b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0210b3547f66125a4da0cf156bab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02db60b1daedc0f3ba2d70756b",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0210b3547f66125a4da0cf156bab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02db60b1daedc0f3ba2d70756b",
+                        "width": 60
+                    }
+                ],
+                "name": "[Skiley] Faves - Filtered by popularity",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAABGRGKkZPEmRr0mhP3/5i2Q+t/9cf",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/5XZiGUQjmLegc9DQZJSBdr/tracks",
+                    "total": 148
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/5XZiGUQjmLegc9DQZJSBdr/items",
+                    "total": 148
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:5XZiGUQjmLegc9DQZJSBdr"
+            },
+            {
+                "collaborative": false,
+                "description": "Playlist filtered from &quot;Faves&quot; via Skiley (https:&#x2F;&#x2F;skiley.net).",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/1nDqW4TqdlELabaKiuMz3R"
+                },
+                "href": "https://api.spotify.com/v1/playlists/1nDqW4TqdlELabaKiuMz3R",
+                "id": "1nDqW4TqdlELabaKiuMz3R",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e020d532e2c7962b0562516b1afab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02bb54dde68cd23e2a268ae0f5",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e020d532e2c7962b0562516b1afab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02bb54dde68cd23e2a268ae0f5",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e020d532e2c7962b0562516b1afab67616d00001e02500f0405c1d3feb14d62849cab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02bb54dde68cd23e2a268ae0f5",
+                        "width": 60
+                    }
+                ],
+                "name": "[Skiley] Faves - Filtered by mood sad",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAABwSKZ4KpKp45bRzKCqDv40O4YTDH",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/1nDqW4TqdlELabaKiuMz3R/tracks",
+                    "total": 237
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/1nDqW4TqdlELabaKiuMz3R/items",
+                    "total": 237
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:1nDqW4TqdlELabaKiuMz3R"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/5imdNsQVuwlsjAEB06WAJX"
+                },
+                "href": "https://api.spotify.com/v1/playlists/5imdNsQVuwlsjAEB06WAJX",
+                "id": "5imdNsQVuwlsjAEB06WAJX",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84fd142003dc8246b78020a628",
+                        "width": null
+                    }
+                ],
+                "name": "Disney",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAANeyQ8Qh0A5u+mltICljcGN33Qf81",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/5imdNsQVuwlsjAEB06WAJX/tracks",
+                    "total": 51
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/5imdNsQVuwlsjAEB06WAJX/items",
+                    "total": 51
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:5imdNsQVuwlsjAEB06WAJX"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/4h6bnyaWl6RNhcwmdBH0YK"
+                },
+                "href": "https://api.spotify.com/v1/playlists/4h6bnyaWl6RNhcwmdBH0YK",
+                "id": "4h6bnyaWl6RNhcwmdBH0YK",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02ec71fa8ff10d3d642be5e3f0",
+                        "width": null
+                    }
+                ],
+                "name": "Kerst",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAA4URS98RMT313qu84mOTDXSw0Yg1",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/4h6bnyaWl6RNhcwmdBH0YK/tracks",
+                    "total": 2
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/4h6bnyaWl6RNhcwmdBH0YK/items",
+                    "total": 2
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:4h6bnyaWl6RNhcwmdBH0YK"
+            },
+            {
+                "collaborative": false,
+                "description": "Een muzikale tijdcapsule uit het verleden is nu geopend!",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/6yVG4ip3snZU2bW6wFyzy2"
+                },
+                "href": "https://api.spotify.com/v1/playlists/6yVG4ip3snZU2bW6wFyzy2",
+                "id": "6yVG4ip3snZU2bW6wFyzy2",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84bcc21a85edfd08f5c45bdeb0",
+                        "width": null
+                    }
+                ],
+                "name": "Mijn Playlist voor de toekomst van 2024",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAABOuTtWW577U96+dq0EkwGbDFtD2n",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/6yVG4ip3snZU2bW6wFyzy2/tracks",
+                    "total": 3
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/6yVG4ip3snZU2bW6wFyzy2/items",
+                    "total": 3
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:6yVG4ip3snZU2bW6wFyzy2"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/1ZuVsD1MCzgJGkkD8cRzm3"
+                },
+                "href": "https://api.spotify.com/v1/playlists/1ZuVsD1MCzgJGkkD8cRzm3",
+                "id": "1ZuVsD1MCzgJGkkD8cRzm3",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e02182398b3b52a64fcf63068f8ab67616d00001e022878b429bdce9804bfa780fbab67616d00001e02821367154abcc695e6358a63ab67616d00001e02df8d072aca99b3716dcf1504",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e02182398b3b52a64fcf63068f8ab67616d00001e022878b429bdce9804bfa780fbab67616d00001e02821367154abcc695e6358a63ab67616d00001e02df8d072aca99b3716dcf1504",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e02182398b3b52a64fcf63068f8ab67616d00001e022878b429bdce9804bfa780fbab67616d00001e02821367154abcc695e6358a63ab67616d00001e02df8d072aca99b3716dcf1504",
+                        "width": 60
+                    }
+                ],
+                "name": "Nederlands",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAALJthOxNfeGV75dFZ3bvsjhtsIN1C",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/1ZuVsD1MCzgJGkkD8cRzm3/tracks",
+                    "total": 42
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/1ZuVsD1MCzgJGkkD8cRzm3/items",
+                    "total": 42
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:1ZuVsD1MCzgJGkkD8cRzm3"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/1q2DrDcE7E6DbMZQ79Liu1"
+                },
+                "href": "https://api.spotify.com/v1/playlists/1q2DrDcE7E6DbMZQ79Liu1",
+                "id": "1q2DrDcE7E6DbMZQ79Liu1",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02a9173cdb5fc02e5dafc32a03",
+                        "width": null
+                    }
+                ],
+                "name": "Piano",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAA/AvL6LzmKD9ElqTLXTR6UdSJx+c",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/1q2DrDcE7E6DbMZQ79Liu1/tracks",
+                    "total": 1
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/1q2DrDcE7E6DbMZQ79Liu1/items",
+                    "total": 1
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:1q2DrDcE7E6DbMZQ79Liu1"
+            },
+            {
+                "collaborative": false,
+                "description": "Playlist containing the happy songs from &#x27;Faves&#x27;",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/4mhrt1ugAtOyc6M2vjcf3S"
+                },
+                "href": "https://api.spotify.com/v1/playlists/4mhrt1ugAtOyc6M2vjcf3S",
+                "id": "4mhrt1ugAtOyc6M2vjcf3S",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0231d6b27ffaa0b2f89234698aab67616d00001e023613a80185a11b15987d2885ab67616d00001e024e31e0d38b89b8fb239d4fbfab67616d00001e028cefe8e2f2cfd63ce073fa96",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0231d6b27ffaa0b2f89234698aab67616d00001e023613a80185a11b15987d2885ab67616d00001e024e31e0d38b89b8fb239d4fbfab67616d00001e028cefe8e2f2cfd63ce073fa96",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0231d6b27ffaa0b2f89234698aab67616d00001e023613a80185a11b15987d2885ab67616d00001e024e31e0d38b89b8fb239d4fbfab67616d00001e028cefe8e2f2cfd63ce073fa96",
+                        "width": 60
+                    }
+                ],
+                "name": "Happy songs from 'Faves'",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAA6QWXwR7rbxyv6y8O9PO/DnIzohc",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/4mhrt1ugAtOyc6M2vjcf3S/tracks",
+                    "total": 14
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/4mhrt1ugAtOyc6M2vjcf3S/items",
+                    "total": 14
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:4mhrt1ugAtOyc6M2vjcf3S"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/2tn9j4NpC5ofsmueVL2nRM"
+                },
+                "href": "https://api.spotify.com/v1/playlists/2tn9j4NpC5ofsmueVL2nRM",
+                "id": "2tn9j4NpC5ofsmueVL2nRM",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0208a1b1e0674086d3f1995e1bab67616d00001e020caabdbacf4b39b1dfac6d4dab67616d00001e0289cdab29de21e943078162dbab67616d00001e028b58d20f1b77295730db15b4",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0208a1b1e0674086d3f1995e1bab67616d00001e020caabdbacf4b39b1dfac6d4dab67616d00001e0289cdab29de21e943078162dbab67616d00001e028b58d20f1b77295730db15b4",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0208a1b1e0674086d3f1995e1bab67616d00001e020caabdbacf4b39b1dfac6d4dab67616d00001e0289cdab29de21e943078162dbab67616d00001e028b58d20f1b77295730db15b4",
+                        "width": 60
+                    }
+                ],
+                "name": "Download",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAJ17LvL0F7H3ekbKVlm7AqRnR8+BW",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/2tn9j4NpC5ofsmueVL2nRM/tracks",
+                    "total": 38
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/2tn9j4NpC5ofsmueVL2nRM/items",
+                    "total": 38
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:2tn9j4NpC5ofsmueVL2nRM"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/6CTHHLprvcInCnaZHRP1Ke"
+                },
+                "href": "https://api.spotify.com/v1/playlists/6CTHHLprvcInCnaZHRP1Ke",
+                "id": "6CTHHLprvcInCnaZHRP1Ke",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c344f6fd0c378becec5bda83",
+                        "width": null
+                    }
+                ],
+                "name": "Best of Musicals - Ziggo Dome - 29 juni 2024",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": true,
+                "snapshot_id": "AAAAWswSreZ1cZC9u43Ov80JnvOK+15a",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/6CTHHLprvcInCnaZHRP1Ke/tracks",
+                    "total": 41
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/6CTHHLprvcInCnaZHRP1Ke/items",
+                    "total": 41
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:6CTHHLprvcInCnaZHRP1Ke"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/29uCEVXA4nE0UNQTFXV6ms"
+                },
+                "href": "https://api.spotify.com/v1/playlists/29uCEVXA4nE0UNQTFXV6ms",
+                "id": "29uCEVXA4nE0UNQTFXV6ms",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e026f6fd002ef1fc6b1f3f90c87ab67616d00001e02720d368aa9ea6335ca40a6f8ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02a7cb3e00ac2f3a1bf8679fef",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e026f6fd002ef1fc6b1f3f90c87ab67616d00001e02720d368aa9ea6335ca40a6f8ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02a7cb3e00ac2f3a1bf8679fef",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e026f6fd002ef1fc6b1f3f90c87ab67616d00001e02720d368aa9ea6335ca40a6f8ab67616d00001e028ecc33f195df6aa257c39eaaab67616d00001e02a7cb3e00ac2f3a1bf8679fef",
+                        "width": 60
+                    }
+                ],
+                "name": "MV",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAC98lCdPw2NvdSuxebuAyipHQRIEL",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/29uCEVXA4nE0UNQTFXV6ms/tracks",
+                    "total": 6
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/29uCEVXA4nE0UNQTFXV6ms/items",
+                    "total": 6
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:29uCEVXA4nE0UNQTFXV6ms"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/5FcYPocGK4VYJsQpIvIDsI"
+                },
+                "href": "https://api.spotify.com/v1/playlists/5FcYPocGK4VYJsQpIvIDsI",
+                "id": "5FcYPocGK4VYJsQpIvIDsI",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0210e3124957f7ff8c1a596a22ab67616d00001e022c20ffc2c9c82c75e67fb006ab67616d00001e02969438a8091085c2472a0766ab67616d00001e02bcda9701e49a3e3a13abbaee",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0210e3124957f7ff8c1a596a22ab67616d00001e022c20ffc2c9c82c75e67fb006ab67616d00001e02969438a8091085c2472a0766ab67616d00001e02bcda9701e49a3e3a13abbaee",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0210e3124957f7ff8c1a596a22ab67616d00001e022c20ffc2c9c82c75e67fb006ab67616d00001e02969438a8091085c2472a0766ab67616d00001e02bcda9701e49a3e3a13abbaee",
+                        "width": 60
+                    }
+                ],
+                "name": "DB",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAHyysRI76wGc00RhGL+eXab8KDdHg",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/5FcYPocGK4VYJsQpIvIDsI/tracks",
+                    "total": 30
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/5FcYPocGK4VYJsQpIvIDsI/items",
+                    "total": 30
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:5FcYPocGK4VYJsQpIvIDsI"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/72Mc46nX1FpTonrSy6y8ye"
+                },
+                "href": "https://api.spotify.com/v1/playlists/72Mc46nX1FpTonrSy6y8ye",
+                "id": "72Mc46nX1FpTonrSy6y8ye",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e020c050ad175d6f80399020e09ab67616d00001e02333e0af767d75c6d7195a81dab67616d00001e02387b76ed26932a212676eab1ab67616d00001e024a97c76d7b4f6530f439c249",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e020c050ad175d6f80399020e09ab67616d00001e02333e0af767d75c6d7195a81dab67616d00001e02387b76ed26932a212676eab1ab67616d00001e024a97c76d7b4f6530f439c249",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e020c050ad175d6f80399020e09ab67616d00001e02333e0af767d75c6d7195a81dab67616d00001e02387b76ed26932a212676eab1ab67616d00001e024a97c76d7b4f6530f439c249",
+                        "width": 60
+                    }
+                ],
+                "name": "Sad songs from 'Your Top Songs 2023'",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAABGbvbAg9xG3eCMNgZ/55YdQ4baV/",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/72Mc46nX1FpTonrSy6y8ye/tracks",
+                    "total": 65
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/72Mc46nX1FpTonrSy6y8ye/items",
+                    "total": 65
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:72Mc46nX1FpTonrSy6y8ye"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/0S9cF94pYSFGRCfk71DU27"
+                },
+                "href": "https://api.spotify.com/v1/playlists/0S9cF94pYSFGRCfk71DU27",
+                "id": "0S9cF94pYSFGRCfk71DU27",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e02063105d1f305127b458ec821ab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e02063105d1f305127b458ec821ab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e02063105d1f305127b458ec821ab67616d00001e023ad95d88d244df3b7ca0655fab67616d00001e02b183047805b5b6a60c917023ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 60
+                    }
+                ],
+                "name": "Sad songs from 'Favorite songs'",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAA+Qj6ktjpj7CPjJy5jti69N4bFh9",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/0S9cF94pYSFGRCfk71DU27/tracks",
+                    "total": 64
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/0S9cF94pYSFGRCfk71DU27/items",
+                    "total": 64
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:0S9cF94pYSFGRCfk71DU27"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/5hcD5OiN9XiIebgu9xw9Vh"
+                },
+                "href": "https://api.spotify.com/v1/playlists/5hcD5OiN9XiIebgu9xw9Vh",
+                "id": "5hcD5OiN9XiIebgu9xw9Vh",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e02363cb299ad654b7f34305100ab67616d00001e0264b1cb74af61bc8e31f9f1d3ab67616d00001e02a98ac6e99650043fc9a1aba0ab67616d00001e02ac86b547c5078f9baf5d2efd",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e02363cb299ad654b7f34305100ab67616d00001e0264b1cb74af61bc8e31f9f1d3ab67616d00001e02a98ac6e99650043fc9a1aba0ab67616d00001e02ac86b547c5078f9baf5d2efd",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e02363cb299ad654b7f34305100ab67616d00001e0264b1cb74af61bc8e31f9f1d3ab67616d00001e02a98ac6e99650043fc9a1aba0ab67616d00001e02ac86b547c5078f9baf5d2efd",
+                        "width": 60
+                    }
+                ],
+                "name": "Generated",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": true,
+                "snapshot_id": "AAAAAi9qrwqs1Z8zvahjseQL18pnZoEz",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/5hcD5OiN9XiIebgu9xw9Vh/tracks",
+                    "total": 30
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/5hcD5OiN9XiIebgu9xw9Vh/items",
+                    "total": 30
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:5hcD5OiN9XiIebgu9xw9Vh"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/2WoylqrivrpK1MxoyT1AH9"
+                },
+                "href": "https://api.spotify.com/v1/playlists/2WoylqrivrpK1MxoyT1AH9",
+                "id": "2WoylqrivrpK1MxoyT1AH9",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e023489e6761b0bcb5a995ba769ab67616d00001e02407bd04707c463bbb3410737ab67616d00001e0259ac0a9acb7bf0d315301152ab67616d00001e02e471b0b396a4dc0c0066d4f1",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e023489e6761b0bcb5a995ba769ab67616d00001e02407bd04707c463bbb3410737ab67616d00001e0259ac0a9acb7bf0d315301152ab67616d00001e02e471b0b396a4dc0c0066d4f1",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e023489e6761b0bcb5a995ba769ab67616d00001e02407bd04707c463bbb3410737ab67616d00001e0259ac0a9acb7bf0d315301152ab67616d00001e02e471b0b396a4dc0c0066d4f1",
+                        "width": 60
+                    }
+                ],
+                "name": "Richy Duskwood",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAET7caWfr7mO6G3wTlCEB4KYLiTds",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/2WoylqrivrpK1MxoyT1AH9/tracks",
+                    "total": 16
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/2WoylqrivrpK1MxoyT1AH9/items",
+                    "total": 16
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:2WoylqrivrpK1MxoyT1AH9"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/0lwL88FC3pNZOI29MgJaPI"
+                },
+                "href": "https://api.spotify.com/v1/playlists/0lwL88FC3pNZOI29MgJaPI",
+                "id": "0lwL88FC3pNZOI29MgJaPI",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e021681bea7ad5545e29c083fc7ab67616d00001e02942a0c9ac8f1def7c8805044ab67616d00001e02bb54dde68cd23e2a268ae0f5ab67616d00001e02c60473419a4ce96822541181",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e021681bea7ad5545e29c083fc7ab67616d00001e02942a0c9ac8f1def7c8805044ab67616d00001e02bb54dde68cd23e2a268ae0f5ab67616d00001e02c60473419a4ce96822541181",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e021681bea7ad5545e29c083fc7ab67616d00001e02942a0c9ac8f1def7c8805044ab67616d00001e02bb54dde68cd23e2a268ae0f5ab67616d00001e02c60473419a4ce96822541181",
+                        "width": 60
+                    }
+                ],
+                "name": "Justin Foley",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAKu/IEwantgvAq8SHPjda3hZ7beDA",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/0lwL88FC3pNZOI29MgJaPI/tracks",
+                    "total": 41
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/0lwL88FC3pNZOI29MgJaPI/items",
+                    "total": 41
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:0lwL88FC3pNZOI29MgJaPI"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/4IIz9geNIKHUJGIbf1wiMx"
+                },
+                "href": "https://api.spotify.com/v1/playlists/4IIz9geNIKHUJGIbf1wiMx",
+                "id": "4IIz9geNIKHUJGIbf1wiMx",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e0283661fd91c77c202bd4ca19cab67616d00001e02b5dd0cfdb2492054b434f180ab67616d00001e02c60473419a4ce96822541181ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e0283661fd91c77c202bd4ca19cab67616d00001e02b5dd0cfdb2492054b434f180ab67616d00001e02c60473419a4ce96822541181ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e0283661fd91c77c202bd4ca19cab67616d00001e02b5dd0cfdb2492054b434f180ab67616d00001e02c60473419a4ce96822541181ab67616d00001e02e0b60c608586d88252b8fbc0",
+                        "width": 60
+                    }
+                ],
+                "name": "Ty Borden",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAFdHjdC1t/JgVWpj0YDQ+PGIUmTTD",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/4IIz9geNIKHUJGIbf1wiMx/tracks",
+                    "total": 17
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/4IIz9geNIKHUJGIbf1wiMx/items",
+                    "total": 17
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:4IIz9geNIKHUJGIbf1wiMx"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/0TQBfIB1DDcLVmAHLiIGsi"
+                },
+                "href": "https://api.spotify.com/v1/playlists/0TQBfIB1DDcLVmAHLiIGsi",
+                "id": "0TQBfIB1DDcLVmAHLiIGsi",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8403ee9b8bf3fee340286337f6",
+                        "width": null
+                    }
+                ],
+                "name": "Faves",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAHoKQnR0nfZMBO3fYVIkI3jXEVKNdn",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/0TQBfIB1DDcLVmAHLiIGsi/tracks",
+                    "total": 1038
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/0TQBfIB1DDcLVmAHLiIGsi/items",
+                    "total": 1038
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:0TQBfIB1DDcLVmAHLiIGsi"
+            },
+            {
+                "collaborative": false,
+                "description": "Alle liedjes die ooit in de Nederlandse versie van ´The Passion´, &#x27;The Passion Hemelvaart&#x27; en &#x27;De Kerststal van Nederland&#x27; voorbij zijn gekomen, van 2011 tot 2026, vind je in deze afspeellijst. Veel luisterplezier!",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/6II94aAlpM9liPBRL0gZXO"
+                },
+                "href": "https://api.spotify.com/v1/playlists/6II94aAlpM9liPBRL0gZXO",
+                "id": "6II94aAlpM9liPBRL0gZXO",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84ae0c28a9c3fd7773364c0315",
+                        "width": null
+                    }
+                ],
+                "name": "The Passion - Alle Liedjes",
+                "owner": {
+                    "display_name": "Maureen Freie",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/1176569569"
+                    },
+                    "href": "https://api.spotify.com/v1/users/1176569569",
+                    "id": "1176569569",
+                    "type": "user",
+                    "uri": "spotify:user:1176569569"
+                },
+                "primary_color": null,
+                "public": true,
+                "snapshot_id": "AAAC/vHVQb/FW6mZ/BjFOO3aM19G+7oc",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/6II94aAlpM9liPBRL0gZXO/tracks",
+                    "total": 342
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/6II94aAlpM9liPBRL0gZXO/items",
+                    "total": 342
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:6II94aAlpM9liPBRL0gZXO"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/4toKzMA0xZhxOb4161AlO9"
+                },
+                "href": "https://api.spotify.com/v1/playlists/4toKzMA0xZhxOb4161AlO9",
+                "id": "4toKzMA0xZhxOb4161AlO9",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da8430bdb1731f14ff90ec6f2d46",
+                        "width": null
+                    }
+                ],
+                "name": "Frans",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAGE0azBWSRqmKTdCor7snKxdzm+Kn",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/4toKzMA0xZhxOb4161AlO9/tracks",
+                    "total": 21
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/4toKzMA0xZhxOb4161AlO9/items",
+                    "total": 21
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:4toKzMA0xZhxOb4161AlO9"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/3WSdP0he3lQI5qO6yXTV1p"
+                },
+                "href": "https://api.spotify.com/v1/playlists/3WSdP0he3lQI5qO6yXTV1p",
+                "id": "3WSdP0he3lQI5qO6yXTV1p",
+                "images": [
+                    {
+                        "height": null,
+                        "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84350ae200903ade83f26921e4",
+                        "width": null
+                    }
+                ],
+                "name": "Worship",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAAQ7x4LqufSiECylZ3xvGRL8gozHJF",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/3WSdP0he3lQI5qO6yXTV1p/tracks",
+                    "total": 50
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/3WSdP0he3lQI5qO6yXTV1p/items",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:3WSdP0he3lQI5qO6yXTV1p"
+            },
+            {
+                "collaborative": false,
+                "description": "",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/playlist/0q2ujBiZOE0Ic7eytkLaZa"
+                },
+                "href": "https://api.spotify.com/v1/playlists/0q2ujBiZOE0Ic7eytkLaZa",
+                "id": "0q2ujBiZOE0Ic7eytkLaZa",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://mosaic.scdn.co/640/ab67616d00001e020591768de50b4ff871686a3dab67616d00001e0226326de37059f74ae696bf70ab67616d00001e0258c4e9c84ece7d31f51636f3ab67616d00001e02e3b5eb8c9f527387747b0a99",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://mosaic.scdn.co/300/ab67616d00001e020591768de50b4ff871686a3dab67616d00001e0226326de37059f74ae696bf70ab67616d00001e0258c4e9c84ece7d31f51636f3ab67616d00001e02e3b5eb8c9f527387747b0a99",
+                        "width": 300
+                    },
+                    {
+                        "height": 60,
+                        "url": "https://mosaic.scdn.co/60/ab67616d00001e020591768de50b4ff871686a3dab67616d00001e0226326de37059f74ae696bf70ab67616d00001e0258c4e9c84ece7d31f51636f3ab67616d00001e02e3b5eb8c9f527387747b0a99",
+                        "width": 60
+                    }
+                ],
+                "name": "I&E",
+                "owner": {
+                    "display_name": "Esther",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/user/esther+es"
+                    },
+                    "href": "https://api.spotify.com/v1/users/esther+es",
+                    "id": "esther+es",
+                    "type": "user",
+                    "uri": "spotify:user:esther%2Bes"
+                },
+                "primary_color": null,
+                "public": false,
+                "snapshot_id": "AAAANiubs/tphCSWm6zwd+TNtiiCR4+u",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/playlists/0q2ujBiZOE0Ic7eytkLaZa/tracks",
+                    "total": 45
+                },
+                "items": {
+                    "href": "https://api.spotify.com/v1/playlists/0q2ujBiZOE0Ic7eytkLaZa/items",
+                    "total": 45
+                },
+                "type": "playlist",
+                "uri": "spotify:playlist:0q2ujBiZOE0Ic7eytkLaZa"
+            }
+        ]
+    },
+    "status": 200,
+    "statusText": "",
+    "headers": {
+        "cache-control": "public, max-age=0",
+        "content-length": "4638",
+        "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": "xhr",
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Authorization": "Bearer BQAf3YhVIJLPQD9XRn0C60_hIXSDvsuvij4cSyZ2M_UJZm2W6e_VpvshLNMktCBSIDy2W4v7PVzDcYHjMM2wx4FlXs8j3ymsoR88AKVWEdhffzeEZp3KrjcAcyH4kca-wy1ptxhfDEWRRoorMJ91DtZwzmjHoyX_ONPiDEjkhmIGwvjnokABQVG3GOOT0ivr8ATGhaxdf44vTY0nkL0ajP2k91gfBq6DZV9UEsk6R1Rs8IcPJ-O3P1KfFEWcjgG0Pj8U7j0moCAqb9zndqiPbb6PSNmicW7p22KnhzIjEMs1BaQvqvbtertFw75vdu7bDLEhNdMe-llkTOsX89IURPmHOSIU1dA"
+        },
+        "method": "get",
+        "url": "https://api.spotify.com/v1/me/playlists?limit=30"
+    },
+    "request": {}
+}

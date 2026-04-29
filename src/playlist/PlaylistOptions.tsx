@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import ArtistPlaylist from './playlisttools/ArtistPlaylist.tsx'
 import { NavLink } from 'react-router'
 
-export default function PlaylistOptions({ setPlaylistTool, playlistTool }) {
+export default function PlaylistOptions() {
   const [tool, setTool] = useState<string>()
   const [step, setStep] = useState<number>(1)
-//  onClick={() => setPlaylistTool("ArtistPlaylist")} selected={playlistTool == "ArtistPlaylist"}
+
   return (
     <Container>
         <OptionsContainer>
@@ -48,20 +48,29 @@ display: flex;
 flex-wrap: wrap;
 gap: 20px;
 width: 100%;
+
+a {
+text-decoration: none;
+}
 `
 
-const Option = styled.div<{ $selected?: boolean; }>`
+const Option = styled.div`
 width: 150px;
 height: 150px;
-padding: 20px;
+padding: 15px;
+display: flex;
 text-align: center;
-vertical-align: middle;
+align-items: center;
+justify-content: center;
 background: var(--green);
 color: #fff;
 border-radius: 15px;
+font-weight: 500;
+border: 2px solid transparent;
+font-size: 1.1rem;
+cursor: pointer;
 
-${props =>
-    props.$selected && css`
-      border: 1px solid #fff;
-    `};
+&:hover {
+border: 2px solid #fff;
+}
 `

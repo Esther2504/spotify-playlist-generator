@@ -2,14 +2,30 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import PlaylistOptions from './PlaylistOptions.tsx'
 import { NavLink } from 'react-router'
+import styled from 'styled-components'
 
 type Props = {}
 
-export default function index({}: Props) {
-      // const [playlistTool, setPlaylistTool] = useState<string>()
+export default function index({ }: Props) {
+  // const [playlistTool, setPlaylistTool] = useState<string>()
 
 
   return (
-    <div><PlaylistOptions /></div>
+    <Container>
+      <h1>What tool do you want to use?</h1>
+      <PlaylistOptions />
+    </Container>
   )
 }
+
+const Container = styled.div`
+margin: 150px auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 50px;
+
+h1 {
+font-size: 2.6rem;
+}
+`

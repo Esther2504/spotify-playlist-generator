@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router'
 import ArtistPlaylist from './ArtistPlaylist.tsx'
 import SelectPlaylist from './SelectPlaylist.tsx'
+import styled from 'styled-components'
 
 type Props = {}
 
@@ -26,13 +27,19 @@ export default function Tool({ }: Props) {
 
 
   return (
-    <div>
-      
+    <Container>
       {tool == "artistplaylist" && playlistReady && playlistID ?
         <>
           <ArtistPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+margin: 150px auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+`
