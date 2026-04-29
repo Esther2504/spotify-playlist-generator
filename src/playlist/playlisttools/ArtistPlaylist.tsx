@@ -145,7 +145,7 @@ setPlaylistReady(true)
                 </>
                 :             
                 <>
-            <h1>Which artist do you want to create a playlist of?</h1>
+            <h1>Which artist do you want to create a new playlist for?</h1>
             <ArtistsContainer>
             {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => setSelectedArtist(artist)}>{artist}</Artist>)}
             </ArtistsContainer>
@@ -157,10 +157,18 @@ setPlaylistReady(true)
 }
 
 const Container = styled.div`
+max-width: 1400px;
+width: 90%;
+margin: 0;
 display: flex;
-gap: 30px;
-align-items: center;
 flex-direction: column;
+align-items: center;
+gap: 50px;
+scroll-behavior: smooth;
+
+h1 {
+font-size: 2.6rem;
+}
 
 iframe {
 max-width: 800px;

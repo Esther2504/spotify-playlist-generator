@@ -24,6 +24,7 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
   const [hideNext, setHideNext] = useState(false)
   const [tracks, setTracks] = useState()
   const [ownPlaylists, setOwnPlaylists] = useState([])
+  const [publicPlaylist, setPublicPlaylist] = useState<string>()
 
 
   const accessToken = localStorage.getItem('accessToken')
@@ -43,36 +44,36 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
 
 
   function getPlaylists() {
-    // axios
-    //   .get(`https://api.spotify.com/v1/playlists/${playlistID}`, {
-    //     headers: {
-    //       Authorization: "Bearer " + accessToken,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     setData(res.data)
-    //     setPlaylistName(res.data.name)
-    //     setPlaylistItems(res.data.items.items)
-    //     if (res.data.items.total > 100) {
-    //       getAllTracks(res.data.items.next)
-    //       console.log(res.data.items.next)
-    //     } else {
-    //       setPlaylistReady(true)
-    //       console.log('ready!')
-    //     }
+    axios
+      .get(`https://api.spotify.com/v1/playlists/${playlistID}`, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data)
+        setPlaylistName(res.data.name)
+        setPlaylistItems(res.data.items.items)
+        if (res.data.items.total > 100) {
+          getAllTracks(res.data.items.next)
+          console.log(res.data.items.next)
+        } else {
+          setPlaylistReady(true)
+          console.log('ready!')
+        }
 
-    //     console.log(res.data)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //     setError(true)
-    //     SetErrorMessage(err.response.data.error.message)
-    //   })
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+        setError(true)
+        SetErrorMessage(err.response.data.error.message)
+      })
 
-        setData(playlist.data)
-        setPlaylistName(playlist.data.name)
-        setPlaylistItems(playlist.data.items.items)
-        setPlaylistReady(true)
+        // setData(playlist.data)
+        // setPlaylistName(playlist.data.name)
+        // setPlaylistItems(playlist.data.items.items)
+        // setPlaylistReady(true)
 
   }
 
@@ -115,31 +116,34 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
   }
 
   function getOwnPlaylists() {
-    // axios
-    //   .get('https://api.spotify.com/v1/me/playlists?limit=30', {
-    //     headers: {
-    //       Authorization: "Bearer " + accessToken,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data)
-    //     setOwnPlaylists(res.data.items)
-    //   })
-    //   .catch((err) => {
-    //     setError(true)
-    //   })
-    setOwnPlaylists(dummyplaylists.data.items)
+    axios
+      .get('https://api.spotify.com/v1/me/playlists?limit=30', {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        setOwnPlaylists(res.data.items)
+      })
+      .catch((err) => {
+        setError(true)
+      })
+    // setOwnPlaylists(dummyplaylists.data.items)
   }
 
   useEffect(() => {
     console.log(playlistID)
   }, [playlistID])
 
-  function getPublicPlaylistID({ url }) {
+  function getPublicPlaylistID(url) {
+console.log(url)
     if (url) {
       let publicplaylisturl = url.split("?si")[0].split("/")
       let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
       setPlaylistID(publicplaylistid)
+      
+      console.log(publicplaylistid)
     }
   }
 
@@ -170,8 +174,8 @@ console.log(ownPlaylists)
             </ButtonContainer>
             <PublicPlaylist id="enterurl">
               <h3>Enter the link of a playlist/album</h3>
-              <Input placeholder='Enter URL' onKeyDown={(e) => getPublicPlaylistID(e.target.value)}></Input>
-              <SubmitButton>Continue</SubmitButton>
+              <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
+              <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
               <p>{errorMessage}</p>
             </PublicPlaylist>
           </Container>
@@ -205,7 +209,7 @@ h1 {
 font-size: 2.6rem;
 }
 a {
-text-align: center
+text-align: center;
 display: block;
 margin: 7px 0 0;
 }
