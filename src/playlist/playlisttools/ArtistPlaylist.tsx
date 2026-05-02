@@ -137,12 +137,16 @@ setPlaylistReady(true)
     return (
         <Container>
             {playlistReady ?
-            <>
+            <ReadyContainer>
+                <div>
             <h1>Your playlist is ready!</h1>
-            {/* <button onClick={() => {setPlaylistReady(false); setUris([])}}>Add another artist to this playlist</button> */}
-            {/* <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button> */}
+            <p>We already saved the playlist to your Spotify</p>
+            <button onClick={() => {setPlaylistReady(false); setUris([])}}>Add another artist to this playlist</button>
+            <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button>
+            </div>
+
                 <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </>
+                </ReadyContainer>
                 :             
                 <>
             <h1>Which artist do you want to create a new playlist for?</h1>
@@ -169,9 +173,15 @@ scroll-behavior: smooth;
 h1 {
 font-size: 2.6rem;
 }
+`
+const ReadyContainer = styled.div` 
+display: flex;
+gap: 50px;
+justify-content: space-evenly;
+width: 100%;
 
 iframe {
-max-width: 800px;
+max-width: 600px;
 min-height: 600px;
 }
 `

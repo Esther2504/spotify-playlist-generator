@@ -8,30 +8,31 @@ import Start from './song-suggestions/Start';
 import ErrorModal from './ErrorModal';
 import styled from 'styled-components';
 import { AUTH_URL } from './AuthURL.tsx';
+import getAccessToken from './AccessToken.tsx';
 
 function App() {
-  const [accessToken, setAccessToken] = useState()
+  // const [accessToken, setAccessToken] = useState()
   const [data, setData] = useState()
   const [tool, setTool] = useState()
   const [step, setStep] = useState(1)
   const [error, setError] = useState(false)
   const [showError, setShowError] = useState(false)
 
-  const getAccessToken = window.location.hash.substring(14).split('&')[0]
+  // const getAccessToken = window.location.hash.substring(14).split('&')[0]
 
   const savedAccessToken = localStorage.getItem('accessToken')
 
-  useEffect(() => {
-    if (window.location.hash.includes("access_token") && !savedAccessToken) {
-      setAccessToken(getAccessToken)
-    }
-  }, [window.location])
+  // useEffect(() => {
+  //   if (window.location.hash.includes("access_token") && !savedAccessToken) {
+  //     setAccessToken(getAccessToken)
+  //   }
+  // }, [window.location])
 
-  useEffect(() => {
-    if (accessToken && !data) {
-      getPlaylists(getAccessToken, setData, data, accessToken, setError)
-    }
-  }, [accessToken])
+  // useEffect(() => {
+  //   if (accessToken && !data) {
+  //     getPlaylists(getAccessToken, setData, data, accessToken, setError)
+  //   }
+  // }, [accessToken])
 
   useEffect(() => {
     if (tool) {
@@ -43,9 +44,22 @@ function App() {
   useEffect(() => {
     if (error) {
       setShowError(true)
-      setAccessToken()
+      // setAccessToken()
     }
   }, [error])
+
+const accessToken = localStorage.getItem('accessToken')
+
+  useEffect(() => {
+    let accessTokenTime = localStorage.getItem('accessTokenTime');
+    let currentTime = Date.now()
+    console.log(accessTokenTime)
+    console.log(currentTime)
+ if (accessToken && accessTokenTime && (currentTime - accessTokenTime > 3600000)) {
+  console.log('get new')
+  getAccessToken()
+ }
+  }, [])
 
   return (
     <div className="App">

@@ -13,7 +13,7 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
   // const [playlistID, setPlaylistID] = useState<string>()
 
   const [step, setStep] = useState<number>(1)
-  const [errorMessage, SetErrorMessage] = useState()
+  const [errorMessage, setErrorMessage] = useState<string>()
   
   // const [playlistid, setPlaylistid] = useState()
   
@@ -67,7 +67,12 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
       .catch((err) => {
         console.log(err)
         setError(true)
-        SetErrorMessage(err.response.data.error.message)
+        if (err.response.data.error.message == 'Resource not found') {
+setErrorMessage("Sorry, we can't find this playlist")
+        } else {
+setErrorMessage(err.response.data.error.message)
+        }
+        
       })
 
         // setData(playlist.data)
@@ -173,7 +178,8 @@ console.log(ownPlaylists)
               <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
             </ButtonContainer>
             <PublicPlaylist id="enterurl">
-              <h3>Enter the link of a playlist/album</h3>
+              {/* later album optie toevoegen? */}
+              <h3>Enter the link of a playlist</h3>
               <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
               <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
               <p>{errorMessage}</p>
@@ -324,7 +330,7 @@ padding: 25px;
 gap: 10px;
 border-radius: 20px;
 
-h3 {
+h3, p {
 background: transparent;
 }
 

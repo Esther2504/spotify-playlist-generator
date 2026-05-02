@@ -6,9 +6,22 @@ import getAccessToken from './AccessToken.tsx'
 import { AUTH_URL } from './AuthURL.tsx'
 
 export default function Nav() {
-    const [accessToken, setAccessToken] = useState<string>()
-
   const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
+
+  const savedAuthToken = localStorage.getItem('authToken')
+
+  const accessToken = localStorage.getItem('accessToken')
+  
+    useEffect(() => {
+      let accessTokenTime = localStorage.getItem('accessTokenTime');
+      let currentTime = Date.now()
+      console.log(accessTokenTime)
+      console.log(currentTime)
+   if (accessToken && accessTokenTime && (currentTime - parseInt(accessTokenTime) > 3600000)) {
+    console.log('get new')
+    getAccessToken(savedAuthToken)
+   }
+    }, [])
 
 
   useEffect(() => {
