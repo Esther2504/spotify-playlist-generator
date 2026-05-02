@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
-import getAccessToken from "../AccessToken.tsx";
+import checkAccessToken from "../AccessToken.tsx";
 import { AUTH_URL } from "../AuthURL.tsx";
 
 export function Authentication() {
@@ -15,7 +15,7 @@ export function Authentication() {
         if (getAuthToken) {
             setAccessToken(getAccessToken)
             console.log(getAuthToken)
-            getAccessToken(getAuthToken)
+            checkAccessToken()
             localStorage.setItem("authToken", getAuthToken)
         }
     }, [getAuthToken])

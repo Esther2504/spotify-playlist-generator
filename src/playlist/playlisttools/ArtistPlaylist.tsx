@@ -65,7 +65,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
 
         if (newPlaylistID) {
-console.log('id!')
+            console.log('id!')
             addPlaylistItems(newPlaylistID, uris)
 
         }
@@ -73,7 +73,7 @@ console.log('id!')
 
     }, [uris])
 
-    function createPlaylist(selectedArtist : string) {
+    function createPlaylist(selectedArtist: string) {
         console.log(selectedArtist)
         const artistName = selectedArtist
         axios
@@ -121,11 +121,11 @@ console.log('id!')
             })
             .then((res) => {
                 console.log(res.data)
-                
+
                 if (leftovers) {
                     addPlaylistItems(playlist_id, leftovers)
                 } else {
-setPlaylistReady(true)
+                    setPlaylistReady(true)
                 }
             })
             .catch((err) => {
@@ -137,23 +137,23 @@ setPlaylistReady(true)
     return (
         <Container>
             {playlistReady ?
-            <ReadyContainer>
-                <div>
-            <h1>Your playlist is ready!</h1>
-            <p>We already saved the playlist to your Spotify</p>
-            <button onClick={() => {setPlaylistReady(false); setUris([])}}>Add another artist to this playlist</button>
-            <button onClick={() => {setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined)}}>Create new playlist with another artist</button>
-            </div>
+                <ReadyContainer>
+                    <div>
+                        <h1>Your playlist is ready!</h1>
+                        <p>We already saved the playlist to your Spotify.</p>
+                        <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another artist to this playlist</Button>
+                        <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button>
+                    </div>
 
-                <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
-                :             
+                :
                 <>
-            <h1>Which artist do you want to create a new playlist for?</h1>
-            <ArtistsContainer>
-            {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => setSelectedArtist(artist)}>{artist}</Artist>)}
-            </ArtistsContainer>
-            </>
+                    <h1>Which artist do you want to create a new playlist for?</h1>
+                    <ArtistsContainer>
+                        {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => setSelectedArtist(artist)}>{artist}</Artist>)}
+                    </ArtistsContainer>
+                </>
             }
 
         </Container>
@@ -180,6 +180,12 @@ gap: 50px;
 justify-content: space-evenly;
 width: 100%;
 
+div {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
 iframe {
 max-width: 600px;
 min-height: 600px;
@@ -203,4 +209,17 @@ display: flex;
 gap: 10px;
 flex-wrap: wrap;
 justify-content: center;
+`
+
+const Button = styled.button`
+background: #148255;
+color: #fff;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 20px;
+margin-right: auto;
+font-weight: bold;
+border: none;
+font-size: 1rem;
+cursor: pointer;
 `

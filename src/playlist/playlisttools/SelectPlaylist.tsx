@@ -6,6 +6,7 @@ import ArtistPlaylist from './ArtistPlaylist.tsx'
 import EmptyPlaylist from '../../images/EmptyPlaylist.PNG'
 import dummyplaylists from '../../data/dummysavedplaylists.json'
 import playlist from '../../data/dummyplaylist.json'
+import checkAccessToken from '../../AccessToken.tsx'
 
 export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID}) {
   const [data, setData] = useState()
@@ -37,10 +38,11 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
     }, [playlistID])
 
   useEffect(() => {
+    checkAccessToken()
     if (ownPlaylists.length == 0) {
       getOwnPlaylists()
     }
-  }, [accessToken])
+  }, [])
 
 
   function getPlaylists() {

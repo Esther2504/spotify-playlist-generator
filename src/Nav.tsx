@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router'
 import { useState, useEffect } from 'react'
-import getAccessToken from './AccessToken.tsx'
+import checkAccessToken from './AccessToken.tsx'
 import { AUTH_URL } from './AuthURL.tsx'
 
 export default function Nav() {
@@ -12,23 +12,12 @@ export default function Nav() {
 
   const accessToken = localStorage.getItem('accessToken')
   
-    useEffect(() => {
-      let accessTokenTime = localStorage.getItem('accessTokenTime');
-      let currentTime = Date.now()
-      console.log(accessTokenTime)
-      console.log(currentTime)
-   if (accessToken && accessTokenTime && (currentTime - parseInt(accessTokenTime) > 3600000)) {
-    console.log('get new')
-    getAccessToken(savedAuthToken)
-   }
-    }, [])
-
 
   useEffect(() => {
     if (getAuthToken) {
       // setAccessToken(getAccessToken)
       console.log(getAuthToken)
-      getAccessToken(getAuthToken)
+     checkAccessToken()
       localStorage.setItem("authToken", getAuthToken)
     }
   }, [getAuthToken])
