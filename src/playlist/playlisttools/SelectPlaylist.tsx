@@ -8,16 +8,16 @@ import dummyplaylists from '../../data/dummysavedplaylists.json'
 import playlist from '../../data/dummyplaylist.json'
 import checkAccessToken from '../../AccessToken.tsx'
 
-export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID}) {
+export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID }) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
   // const [playlistID, setPlaylistID] = useState<string>()
 
   const [step, setStep] = useState<number>(1)
   const [errorMessage, setErrorMessage] = useState<string>()
-  
+
   // const [playlistid, setPlaylistid] = useState()
-  
+
   const [publicplaylist, setPublicplaylist] = useState()
   const [firstSlide, setFirstSlide] = useState(0)
   const [lastSlide, setLastSlide] = useState(10)
@@ -27,15 +27,13 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
   const [ownPlaylists, setOwnPlaylists] = useState([])
   const [publicPlaylist, setPublicPlaylist] = useState<string>()
 
-
   const accessToken = localStorage.getItem('accessToken')
 
-    useEffect(() => {
-  if (!data && playlistID) {
-    console.log('get it')
-    getPlaylists()
-  }
-    }, [playlistID])
+  useEffect(() => {
+    if (!data && playlistID) {
+      getPlaylists()
+    }
+  }, [playlistID])
 
   useEffect(() => {
     checkAccessToken()
@@ -70,17 +68,17 @@ export default function SeparateArtistPlaylist({setPlaylistReady, setPlaylistIte
         console.log(err)
         setError(true)
         if (err.response.data.error.message == 'Resource not found') {
-setErrorMessage("Sorry, we can't find this playlist")
+          setErrorMessage("Sorry, we either can't find or use this playlist")
         } else {
-setErrorMessage(err.response.data.error.message)
+          setErrorMessage(err.response.data.error.message)
         }
-        
+
       })
 
-        // setData(playlist.data)
-        // setPlaylistName(playlist.data.name)
-        // setPlaylistItems(playlist.data.items.items)
-        // setPlaylistReady(true)
+    // setData(playlist.data)
+    // setPlaylistName(playlist.data.name)
+    // setPlaylistItems(playlist.data.items.items)
+    // setPlaylistReady(true)
 
   }
 
@@ -144,51 +142,51 @@ setErrorMessage(err.response.data.error.message)
   }, [playlistID])
 
   function getPublicPlaylistID(url) {
-console.log(url)
+    console.log(url)
     if (url) {
       let publicplaylisturl = url.split("?si")[0].split("/")
       let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
       setPlaylistID(publicplaylistid)
-      
+
       console.log(publicplaylistid)
     }
   }
 
-console.log(ownPlaylists)
+  console.log(ownPlaylists)
   return (
     <Container>
-        <>
-          <Container>
-            <div>
+      <>
+        <Container>
+          <div>
             <h1>Choose one of your playlists</h1>
             <a href="#enterurl" target="_self">or enter an URL</a>
-            </div>
-            <PlaylistContainer>
-                {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
-                           <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
-                             {playlist.images ?
-                               <Image src={playlist.images[0].url} />
-                               :
-                               <Image src={EmptyPlaylist} />
-                             }
-                             <p>{playlist.name}</p>
-                           </Playlist>
-                         )}
-            </PlaylistContainer>
-            <ButtonContainer>
-              <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
-              <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
-            </ButtonContainer>
-            <PublicPlaylist id="enterurl">
-              {/* later album optie toevoegen? */}
-              <h3>Enter the link of a playlist</h3>
-              <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
-              <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
-              <p>{errorMessage}</p>
-            </PublicPlaylist>
-          </Container>
-          
-        </>
+          </div>
+          <PlaylistContainer>
+            {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
+              <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
+                {playlist.images ?
+                  <Image src={playlist.images[0].url} />
+                  :
+                  <Image src={EmptyPlaylist} />
+                }
+                <p>{playlist.name}</p>
+              </Playlist>
+            )}
+          </PlaylistContainer>
+          <ButtonContainer>
+            <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
+            <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
+          </ButtonContainer>
+          <PublicPlaylist id="enterurl">
+            {/* later album optie toevoegen? */}
+            <h3>Enter the link of a playlist</h3>
+            <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
+            <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
+            <p>{errorMessage}</p>
+          </PublicPlaylist>
+        </Container>
+
+      </>
     </Container>
   )
 }
@@ -228,7 +226,7 @@ width: 1080px;
 max-width: 90%;
 justify-content: space-evenly;
 display: grid; 
-grid-template-columns: repeat(5, 1fr);
+grid-template-columns: repeat(auto-fill, 200px);
 justify-content: space-evenly;
 gap: 20px;
 

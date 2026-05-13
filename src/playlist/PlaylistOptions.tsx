@@ -12,7 +12,7 @@ export default function PlaylistOptions() {
         <OptionsContainer>
           <NavLink to="../playlist/artistplaylist"><Option>Create separate playlist per artist</Option>
           </NavLink>
-          <Option>Create separate playlist per year</Option>
+          <NavLink to="../playlist/yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
           <Option>Remove duplicates</Option>
           <Option>Remove artist from your playlist</Option>
           <Option>Shuffle playlist</Option>
