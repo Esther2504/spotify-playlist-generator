@@ -55,14 +55,14 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     const accessToken = localStorage.getItem('accessToken')
 
     useEffect(() => {
+        console.log(!newPlaylistID)
         if (!newPlaylistID && uris) {
             console.log(selectedArtist)
             createPlaylist(selectedArtist)
         }
-    }, [])
+    }, [selectedArtist, uris])
 
     useEffect(() => {
-
 
         if (newPlaylistID) {
             console.log('id!')
@@ -149,7 +149,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 </ReadyContainer>
                 :
                 <>
-                    <h1>Which artist do you want to create a new playlist for?</h1>
+                    <h1>Which artist do you want to create a new playlist of?</h1>
                     <ArtistsContainer>
                         {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => setSelectedArtist(artist)}>{artist}</Artist>)}
                     </ArtistsContainer>
