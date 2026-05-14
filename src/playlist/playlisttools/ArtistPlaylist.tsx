@@ -56,7 +56,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
     useEffect(() => {
         console.log(!newPlaylistID)
-        if (!newPlaylistID && uris) {
+        if (!newPlaylistID && uris.length > 0) {
             console.log(selectedArtist)
             createPlaylist(selectedArtist)
         }
@@ -74,6 +74,10 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     }, [uris])
 
     function createPlaylist(selectedArtist: string) {
+if (uris.length === 0) {
+    return;
+}
+
         console.log(selectedArtist)
         const artistName = selectedArtist
         axios

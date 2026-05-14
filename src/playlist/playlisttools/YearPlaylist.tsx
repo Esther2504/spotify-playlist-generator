@@ -60,10 +60,10 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
     }, [selectedYear, uris])
 
     function createPlaylist(selectedYear: string) {
-console.log(uris)
+
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
-                "name": `Seperate year playlist created from ${playlistName}`,
+                "name": `Playlist ${playlistName} - Songs from ${selectedYear}`,
                 "description": "",
                 "public": false
             }, {
@@ -84,7 +84,7 @@ console.log(uris)
     }
 
     function addPlaylistItems(playlist_id: string, uri_items: any) {
-        if (uri_items.length == 0) {
+        if (uri_items.length === 0) {
             return;
         }
         let max_uris = uri_items;
@@ -130,8 +130,8 @@ console.log(uris)
                     <div>
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
-                        <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another artist to this playlist</Button>
-                        {/* <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button> */}
+                        <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another year to this playlist</Button>
+                        <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button>
                     </div>
 
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
