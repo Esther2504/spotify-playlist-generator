@@ -56,6 +56,7 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
         setPlaylistItems(res.data.items.items)
         if (res.data.items.total > 100) {
           getAllTracks(res.data.items.next)
+          // set loading screen
           console.log(res.data.items.next)
         } else {
           setPlaylistReady(true)
