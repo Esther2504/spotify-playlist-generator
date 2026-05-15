@@ -17,46 +17,25 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     const [newPlaylistID, setNewPlaylistID] = useState()
     const [playlistReady, setPlaylistReady] = useState<boolean>(false)
 
-    const params = useParams()
-
-    // const playlistID = params.playlistid
-
-    console.log(playlistItems)
-    console.log(uris)
+    const accessToken = localStorage.getItem('accessToken')
 
     useEffect(() => {
 
-        const allartists = []
+        const allArtists: Array<string> = []
 
         console.log(playlistItems)
         playlistItems.forEach(element => {
             console.log(element)
             element?.item?.artists?.forEach(artist => {
-                setPlaylistArtists((prevArtists) => [...prevArtists, artist.name])
+                allArtists.push(artist.name)
             })
         });
 
-        
+        setPlaylistArtists(allArtists)
+        setUniquePlaylistArtists([...new Set(allArtists)])
 
     }, [])
 
-    useMemo(() => {
-        setUniquePlaylistArtists([...new Set(playlistArtists)])
-    }, [playlistArtists])
-
-    // useEffect(() => {
-    //     if (selectedArtist) {
-    //         playlistItems.forEach(element => {
-
-    //             element?.item?.artists?.forEach(artistitem => {
-    //                 if (artistitem?.name == selectedArtist) {
-    //                     setUris((prevUris) => [...prevUris, element?.item?.uri])
-    //                 }
-    //             })
-
-    //         })
-    //     }
-    // }, [selectedArtist])
 
     function artistSelectionHandler(artist: string) {
 
@@ -68,7 +47,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             element?.item?.artists?.forEach(artistitem => {
                 if (artistitem?.name == artist) {
                     allUris.push(element?.item?.uri)
-                    // setUris((prevUris) => [...prevUris, element?.item?.uri])
                 }
             })
 
@@ -76,35 +54,15 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         setUris(allUris)
 
-    }
-
-    const accessToken = localStorage.getItem('accessToken')
-
-    useEffect(() => {
-        console.log(!newPlaylistID)
-        if (!newPlaylistID && uris.length > 0) {
-            console.log(selectedArtist)
+        if (!newPlaylistID) {
             createPlaylist()
         }
-    }, [selectedArtist, uris])
-
-    useEffect(() => {
-
-        if (newPlaylistID) {
-            console.log('id!')
-            addPlaylistItems(newPlaylistID, uris)
-
-        }
-
-
-    }, [uris])
+    }
 
     function createPlaylist() {
         if (uris.length === 0) {
             return;
         }
-
-        console.log(selectedArtist)
 
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
@@ -136,9 +94,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             leftovers = uri_items.slice(100, uri_items.length)
         }
 
-        console.log(max_uris)
-        console.log(leftovers)
-
         axios
             .post(`https://api.spotify.com/v1/playlists/${playlist_id}/items`, {
                 "uris": max_uris,
@@ -150,8 +105,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
             })
             .then((res) => {
-                console.log(res.data)
-
                 if (leftovers) {
                     addPlaylistItems(playlist_id, leftovers)
                 } else {
@@ -160,7 +113,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
             .catch((err) => {
                 console.log(err)
-
             })
     }
 
@@ -172,7 +124,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
                         <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another artist to this playlist</Button>
-                        <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button>
+                        {/* <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button> */}
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
@@ -184,7 +136,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                     </ArtistsContainer>
                 </>
             }
-
         </Container>
     )
 }
