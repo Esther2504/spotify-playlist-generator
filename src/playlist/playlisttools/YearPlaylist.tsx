@@ -30,7 +30,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
                 return;
             }
             allYears.push(releaseYear)
-            
+
 
         });
 
@@ -39,12 +39,12 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
         setUniqueYears([...new Set(allYears)])
     }, [])
 
-    
+    function addMore() {
+
+    }
+
+
     function yearSelectionHandler(year: number) {
-
-        console.log('t')
-
-        console.log(year)
 
         setSelectedYear(year)
 
@@ -56,47 +56,20 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             let releaseYear = releaseDate.getFullYear()
 
 
-                if (releaseYear == year) {
-                    allUris.push(element?.item?.uri)
-                }
-            })
+            if (releaseYear == year) {
+                allUris.push(element?.item?.uri)
+            }
+        })
 
 
         setUris(allUris)
 
         if (!newPlaylistID && allUris.length > 0) {
             createPlaylist(selectedYear, allUris)
+        } else if (newPlaylistID && allUris.length > 0) {
+            addPlaylistItems(newPlaylistID, allUris)
         }
     }
-
-    // useEffect(() => {
-    //     setUniqueYears([...new Set(playlistYears)])
-    // }, [playlistYears])
-
-    // useEffect(() => {
-    //     if (selectedYear) {
-    //         console.log(playlistItems)
-    //         playlistItems.forEach(element => {
-
-    //             let releaseDate = new Date(element?.item?.album?.release_date)
-    //         let releaseYear = releaseDate.getFullYear()
-
-    //         console.log(releaseYear)
-    //         console.log(selectedYear)
-
-    //             if (releaseYear == selectedYear) {
-    //                 setUris((prevUris) => [...prevUris, element?.item?.uri])
-    //             }
-
-    //         })
-    //     }
-    // }, [selectedYear])
-
-    // useEffect(() => {
-    //     if (!newPlaylistID && uris.length > 0) {
-    //         createPlaylist(selectedYear)
-    //     }
-    // }, [selectedYear, uris])
 
     function createPlaylist(selectedYear: string, allUris: any) {
 
@@ -118,14 +91,11 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             })
             .catch((err) => {
                 console.log(err)
-
             })
     }
 
     function addPlaylistItems(playlist_id: string, uri_items: any) {
 
-        console.log(uri_items)
-   
         if (uri_items.length === 0) {
             return;
         }
@@ -136,9 +106,6 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             max_uris = uri_items.slice(0, 99)
             leftovers = uri_items.slice(100, uri_items.length)
         }
-
-        console.log(max_uris)
-        console.log(leftovers)
 
         axios
             .post(`https://api.spotify.com/v1/playlists/${playlist_id}/items`, {
@@ -161,10 +128,8 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             })
             .catch((err) => {
                 console.log(err)
-
             })
     }
-
 
     return (
         <Container>
@@ -173,11 +138,9 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
                     <div>
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
-                        <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another year to this playlist</Button>
-                        {/* ^ doesnt work yet */}
+                        <Button onClick={() => { setPlaylistReady(false); setUris([])}}>Add another year to this playlist</Button>
                         <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist for another year</Button>
                     </div>
-
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
                 :

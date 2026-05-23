@@ -54,8 +54,10 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         setUris(allUris)
 
-        if (!newPlaylistID) {
+        if (!newPlaylistID && allUris.length > 0) {
             createPlaylist()
+        } else if (newPlaylistID && allUris.length > 0) {
+            addPlaylistItems(newPlaylistID, allUris)
         }
     }
 
