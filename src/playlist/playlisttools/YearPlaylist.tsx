@@ -22,47 +22,83 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
     const accessToken = localStorage.getItem('accessToken')
 
     useEffect(() => {
-        console.log(playlistItems)
+        const allYears: Array<string> = []
         playlistItems.forEach(element => {
             let releaseDate = new Date(element?.item?.album?.release_date)
             let releaseYear = releaseDate.getFullYear()
             if (!releaseYear) {
                 return;
             }
-            setPlaylistYears((prevYears) => [...prevYears, releaseYear])
+            allYears.push(releaseYear)
+            
+
         });
+
+        setPlaylistYears(allYears)
+
+        setUniqueYears([...new Set(allYears)])
     }, [])
 
-    useEffect(() => {
-        setUniqueYears([...new Set(playlistYears)])
-    }, [playlistYears])
+    
+    function yearSelectionHandler(year: number) {
 
-    useEffect(() => {
-        if (selectedYear) {
-            console.log(playlistItems)
-            playlistItems.forEach(element => {
+        console.log('t')
 
-                let releaseDate = new Date(element?.item?.album?.release_date)
+        console.log(year)
+
+        setSelectedYear(year)
+
+        const allUris: Array<string> = [];
+
+        playlistItems.forEach(element => {
+
+            let releaseDate = new Date(element?.item?.album?.release_date)
             let releaseYear = releaseDate.getFullYear()
 
-            console.log(releaseYear)
-            console.log(selectedYear)
 
-                if (releaseYear == selectedYear) {
-                    setUris((prevUris) => [...prevUris, element?.item?.uri])
+                if (releaseYear == year) {
+                    allUris.push(element?.item?.uri)
                 }
-
             })
-        }
-    }, [selectedYear])
 
-    useEffect(() => {
-        if (!newPlaylistID && uris.length > 0) {
-            createPlaylist(selectedYear)
-        }
-    }, [selectedYear, uris])
 
-    function createPlaylist(selectedYear: string) {
+        setUris(allUris)
+
+        if (!newPlaylistID && allUris.length > 0) {
+            createPlaylist(selectedYear, allUris)
+        }
+    }
+
+    // useEffect(() => {
+    //     setUniqueYears([...new Set(playlistYears)])
+    // }, [playlistYears])
+
+    // useEffect(() => {
+    //     if (selectedYear) {
+    //         console.log(playlistItems)
+    //         playlistItems.forEach(element => {
+
+    //             let releaseDate = new Date(element?.item?.album?.release_date)
+    //         let releaseYear = releaseDate.getFullYear()
+
+    //         console.log(releaseYear)
+    //         console.log(selectedYear)
+
+    //             if (releaseYear == selectedYear) {
+    //                 setUris((prevUris) => [...prevUris, element?.item?.uri])
+    //             }
+
+    //         })
+    //     }
+    // }, [selectedYear])
+
+    // useEffect(() => {
+    //     if (!newPlaylistID && uris.length > 0) {
+    //         createPlaylist(selectedYear)
+    //     }
+    // }, [selectedYear, uris])
+
+    function createPlaylist(selectedYear: string, allUris: any) {
 
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
@@ -78,7 +114,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             .then((res) => {
                 console.log(res.data.id)
                 setNewPlaylistID(res.data.id)
-                addPlaylistItems(res.data.id, uris)
+                addPlaylistItems(res.data.id, allUris)
             })
             .catch((err) => {
                 console.log(err)
@@ -87,9 +123,13 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
     }
 
     function addPlaylistItems(playlist_id: string, uri_items: any) {
+
+        console.log(uri_items)
+   
         if (uri_items.length === 0) {
             return;
         }
+
         let max_uris = uri_items;
         let leftovers = null;
         if (uri_items.length > 100) {
@@ -144,7 +184,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
                 <>
                     <h1>Which year do you want to create a playlist of?</h1>
                     <YearContainer>
-                        {uniqueYears.sort().map((year) => <Year onClick={() => setSelectedYear(year)}>{year}</Year>)}
+                        {uniqueYears.sort().map((year) => <Year onClick={() => yearSelectionHandler(year)}>{year}</Year>)}
                     </YearContainer>
                 </>
             }
