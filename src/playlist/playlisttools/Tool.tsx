@@ -5,6 +5,7 @@ import ArtistPlaylist from './ArtistPlaylist.tsx'
 import SelectPlaylist from './SelectPlaylist.tsx'
 import YearPlaylist from './YearPlaylist.tsx'
 import styled from 'styled-components'
+import DeduplicatePlaylist from './DeduplicatePlaylist.tsx'
 
 type Props = {}
 
@@ -36,6 +37,10 @@ export default function Tool({ }: Props) {
         : tool == "yearplaylist" && playlistReady && playlistID ?
         <>
           <YearPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
+        </>
+         : tool == "deduplicateplaylist" && playlistReady && playlistID ?
+        <>
+          <DeduplicatePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
     </Container>

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 
 type Props = {
-    playlistid: string;
+    playlistID: string;
     playlistItems: any;
     playlistName: string;
 }

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 
 type Props = {
-    playlistid: string;
+    playlistID: string;
     playlistItems: any;
     playlistName: string;
 }
@@ -23,7 +23,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         const allArtists: Array<string> = []
 
-        console.log(playlistItems)
         playlistItems.forEach(element => {
             console.log(element)
             element?.item?.artists?.forEach(artist => {
@@ -43,13 +42,11 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         const allUris: Array<string> = [];
 
         playlistItems.forEach(element => {
-
             element?.item?.artists?.forEach(artistitem => {
                 if (artistitem?.name == artist) {
                     allUris.push(element?.item?.uri)
                 }
             })
-
         })
 
         setUris(allUris)
@@ -75,7 +72,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 headers: {
                     Authorization: "Bearer " + accessToken,
                 },
-
             })
             .then((res) => {
                 console.log(res.data.id)
@@ -84,7 +80,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
             .catch((err) => {
                 console.log(err)
-
             })
     }
 
@@ -104,7 +99,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 headers: {
                     Authorization: "Bearer " + accessToken,
                 },
-
             })
             .then((res) => {
                 if (leftovers) {
