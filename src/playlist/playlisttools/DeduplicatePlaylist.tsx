@@ -18,25 +18,43 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
 
     useEffect(() => {
         let foundDups = []
-        let foundNameArtist = []
+        let foundNameArtists = []
         let foundIds = []
-        playlistItems.reduce((accumulator, currentValue) => {
-            // foundIds
-            // if (currentValue.track.id)
-            // foundDups.push(currentValue.)
+        playlistItems.reduce((accumulator, track) => {
+            const nameArtist = (track.track.name + '|' + track.track.artists[0].name).toLowerCase()
+            console.log(foundIds)
+            console.log(foundNameArtists)
+            if (foundIds.includes(track.track.id)) {
+                foundDups.push({"trackInfo": track, "reason": "Same track ID"})
+            } else if (foundNameArtists.includes(nameArtist)) {
+                foundDups.push({"trackInfo": track, "reason": "Same name and artist"})
+            } else {
+            foundIds.push(track.track.id)
+            foundNameArtists.push(nameArtist)
+            }
+            setDuplicates(foundDups)
         }, foundDups)
+
+        console.log(foundDups)
     }, [])
 
+    console.log(duplicates)
 
     return (
         <Container>
-            {ready ?
-                <></>
-                :
+            {duplicates.length > 0 ?
+            
                 <>
                     <h1>Which duplicates do you want to remove?</h1>
-
-                </>
+                    <p>{duplicates.length}</p>
+                    {duplicates.map((item, index) => (
+                        <div>
+                        <p>{item?.trackInfo.track.name}</p>
+                        <p>{item?.reason}</p>
+                        </div>
+                    ))}
+                
+                </> : null
             }
         </Container>
     )
@@ -45,3 +63,5 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
 const Container = styled.div`
 
 `
+
+const Duplicate = styled.div``
