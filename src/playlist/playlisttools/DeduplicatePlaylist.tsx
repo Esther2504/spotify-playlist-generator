@@ -10,13 +10,29 @@ type Props = {
 
 export default function DeduplicatePlaylist({ playlistID, playlistItems, playlistName }: Props) {
     const [ready, setReady] = useState<boolean>(false)
-    const [duplicates, setDuplicates] = useState([])
-    const [selectedUris, setSelectedUris] = useState([])
+    const [duplicates, setDuplicates] = useState<Array<any>>([])
+    const [selectedUris, setSelectedUris] = useState<Array<any>>([])
 
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken: string = localStorage.getItem('accessToken') || ""
 
     console.log(playlistItems)
 
+    function handleSelection(item) {
+        if (item.checked) {
+            setSelectedUris((prev) => [...prev, item.value])
+        } else {
+            setSelectedUris((prev) => prev.filter((uri) => uri !== item.value))
+        }
+    }
+
+    function removeAllDups() {
+        setSelectedUris(duplicates.map((item) => item.trackInfo.track.uri))
+        document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.checked = true
+        })
+
+        removeDuplicates();
+    }
 
     useEffect(() => {
         let foundDups = []
@@ -41,25 +57,23 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         console.log(foundDups)
     }, [])
 
-    function removeDuplicates(uris) {
-        
+    function removeDuplicates() {
 
+        const uriArray: Array<any> = []
+        selectedUris.forEach(element => {
+            uriArray.push({ "uri": element })
 
-        const uriArray = []
-uris.forEach(element => {
-    uriArray.push({"uri": element} )
-                        
-                    });
+        });
 
-                    console.log(uriArray)
+        console.log(uriArray)
 
-  axios
-            .delete(`https://api.spotify.com/v1/playlists/${playlist_id}/items`, {
+        axios
+            .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
                 "items": uriArray
             }, {
                 headers: {
                     Authorization: "Bearer " + accessToken,
-                },
+                }
             })
             .then((res) => {
 
@@ -87,7 +101,7 @@ uris.forEach(element => {
                                     })}</i>
                                 </p></SongInfo>
                                 <TrackLength>{(item?.trackInfo.track.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-                                <input type="checkbox" value={item?.trackInfo.track.uri}/>
+                                <input type="checkbox" value={item?.trackInfo.track.uri} onChange={(e) => handleSelection(e.target)} />
                             </Duplicate>
                         ))}
                     </DuplicatesContainer>
