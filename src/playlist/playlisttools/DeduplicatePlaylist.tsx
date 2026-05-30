@@ -12,6 +12,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
     const [ready, setReady] = useState<boolean>(false)
     const [duplicates, setDuplicates] = useState<Array<any>>([])
     const [selectedUris, setSelectedUris] = useState<Array<any>>([])
+    const [itemsDeleted, setItemsDeleted] = useState<boolean>(false)
 
     const accessToken: string = localStorage.getItem('accessToken') || ""
 
@@ -25,13 +26,11 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         }
     }
 
-    function removeAllDups() {
+    function selectAllDups() {
         setSelectedUris(duplicates.map((item) => item.trackInfo.track.uri))
         document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
             checkbox.checked = true
-        })
-
-        removeDuplicates();
+        })   
     }
 
     useEffect(() => {
@@ -59,6 +58,11 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
 
     function removeDuplicates() {
 
+        if (selectedUris.length === 0) {
+            alert("Please select at least one duplicate to remove")
+            return
+        }
+
         const uriArray: Array<any> = []
         selectedUris.forEach(element => {
             uriArray.push({ "uri": element })
@@ -69,14 +73,16 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
 
         axios
             .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
-                "items": uriArray
-            }, {
+                data: {
+                    "items": uriArray
+                },
                 headers: {
                     Authorization: "Bearer " + accessToken,
                 }
             })
             .then((res) => {
-
+                console.log(res);
+                setItemsDeleted(true)
             })
             .catch((err) => {
                 console.log(err)
@@ -85,27 +91,36 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
 
     return (
         <Container>
-            {duplicates.length > 0 ?
-                <>
-                    <h1>Which duplicates do you want to remove?</h1>
-                    <button>Remove all duplicates</button>
-                    <DuplicatesContainer>
-                        {duplicates.map((item, index) => (
-                            <Duplicate>
-                                <AlbumCover src={item?.trackInfo.track.album.images[0].url} alt={item?.trackInfo.track.album.name}></AlbumCover>
-                                <SongInfo><TrackArtistName><a href={item?.trackInfo.track.external_urls.spotify}>{item?.trackInfo.track.name}</a></TrackArtistName><p className="artists">
-                                    <i>{(item?.trackInfo.track.artists).map((artist: any, i: number) => {
-                                        return (
-                                            <>{i != (item?.trackInfo.track.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
-                                        )
-                                    })}</i>
-                                </p></SongInfo>
-                                <TrackLength>{(item?.trackInfo.track.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-                                <input type="checkbox" value={item?.trackInfo.track.uri} onChange={(e) => handleSelection(e.target)} />
-                            </Duplicate>
-                        ))}
-                    </DuplicatesContainer>
-                </> : duplicates.length === 0 && ready ? <p>No duplicates found</p> : <p>Loading</p>
+            {itemsDeleted ?
+                <div>
+                    <p>The selected duplicates have been deleted from the playlist</p>
+
+                    <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                :
+                duplicates.length > 0 ?
+                    <>
+                        <h1>Which duplicates do you want to remove?</h1>
+                        <Button onClick={() => selectAllDups()}>Select all duplicates</Button>
+                        <Button onClick={() => removeDuplicates()}>Remove selected duplicates</Button>
+                        <DuplicatesContainer>
+                            {duplicates.map((item, index) => (
+                                <Duplicate>
+                                    <AlbumCover src={item?.trackInfo.track.album.images[0].url} alt={item?.trackInfo.track.album.name}></AlbumCover>
+                                    <SongInfo><TrackArtistName><a href={item?.trackInfo.track.external_urls.spotify}>{item?.trackInfo.track.name}</a></TrackArtistName><p className="artists">
+                                        <i>{(item?.trackInfo.track.artists).map((artist: any, i: number) => {
+                                            return (
+                                                <>{i != (item?.trackInfo.track.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
+                                            )
+                                        })}</i>
+                                    </p></SongInfo>
+                                    <TrackLength>{(item?.trackInfo.track.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
+                                    <input type="checkbox" value={item?.trackInfo.track.uri} onChange={(e) => handleSelection(e.target)} />
+                                </Duplicate>
+                            ))}
+                        </DuplicatesContainer>
+
+                    </> : duplicates.length === 0 && ready ? <p>No duplicates found</p> : <p>Loading</p>
             }
         </Container>
     )
@@ -142,6 +157,18 @@ justify-content: center;
 gap: 20px;
 `
 
+const Button = styled.button`
+background: #148255;
+color: #fff;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 20px;
+margin-right: auto;
+font-weight: bold;
+border: none;
+font-size: 1rem;
+cursor: pointer;
+`
 
 const TrackArtistName = styled.div`
 text-decoration: none;
