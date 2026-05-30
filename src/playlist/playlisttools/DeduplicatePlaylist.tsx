@@ -1,8 +1,6 @@
-// check song name & artists & similar duration and dedupliate
-// first check for same ids
-
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 
 type Props = {
     playlistID: string;
@@ -13,8 +11,12 @@ type Props = {
 export default function DeduplicatePlaylist({ playlistID, playlistItems, playlistName }: Props) {
     const [ready, setReady] = useState<boolean>(false)
     const [duplicates, setDuplicates] = useState([])
+    const [selectedUris, setSelectedUris] = useState([])
+
+    const accessToken = localStorage.getItem('accessToken')
 
     console.log(playlistItems)
+
 
     useEffect(() => {
         let foundDups = []
@@ -35,11 +37,36 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
             setDuplicates(foundDups)
         }, foundDups)
 
+        setReady(true)
         console.log(foundDups)
     }, [])
 
-    function removeDuplicates() {
+    function removeDuplicates(uris) {
+        
 
+
+        const uriArray = []
+uris.forEach(element => {
+    uriArray.push({"uri": element} )
+                        
+                    });
+
+                    console.log(uriArray)
+
+  axios
+            .delete(`https://api.spotify.com/v1/playlists/${playlist_id}/items`, {
+                "items": uriArray
+            }, {
+                headers: {
+                    Authorization: "Bearer " + accessToken,
+                },
+            })
+            .then((res) => {
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
@@ -60,11 +87,11 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
                                     })}</i>
                                 </p></SongInfo>
                                 <TrackLength>{(item?.trackInfo.track.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-                                <div>X</div>
+                                <input type="checkbox" value={item?.trackInfo.track.uri}/>
                             </Duplicate>
                         ))}
                     </DuplicatesContainer>
-                </> : null
+                </> : duplicates.length === 0 && ready ? <p>No duplicates found</p> : <p>Loading</p>
             }
         </Container>
     )
