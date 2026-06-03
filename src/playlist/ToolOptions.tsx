@@ -12,7 +12,7 @@ export default function index({ }: Props) {
 
   return (
     <Container>
-      <h1>What tool do you want to use?</h1>
+      <h1>What <span>tool</span> do you want to use?</h1>
       <PlaylistOptions />
     </Container>
   )

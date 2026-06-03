@@ -26,6 +26,7 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
   const [tracks, setTracks] = useState()
   const [ownPlaylists, setOwnPlaylists] = useState([])
   const [publicPlaylist, setPublicPlaylist] = useState<string>()
+  const [loading, setLoading] = useState<boolean>(false)
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -84,6 +85,8 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
   }
 
   function getAllTracks(nextURL: string) {
+    setLoading(true);
+
     axios
       .get(`${nextURL}`, {
         headers: {
@@ -98,13 +101,14 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
           getAllTracks(res.data.next)
         } else {
           setPlaylistReady(true)
-          console.log('ready!')
+          setLoading(false)
         }
 
         console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
+        setLoading(false)
         setError(true)
         SetErrorMessage(err.response.data.error.message)
       })
@@ -155,39 +159,43 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
 
   console.log(ownPlaylists)
   return (
-    <Container>
-      <>
-        <Container>
-          <div>
-            <h1>Choose one of your playlists</h1>
-            <a href="#enterurl" target="_self">or enter an URL</a>
-          </div>
-          <PlaylistContainer>
-            {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
-              <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
-                {playlist.images ?
-                  <Image src={playlist.images[0].url} />
-                  :
-                  <Image src={EmptyPlaylist} />
-                }
-                <p>{playlist.name}</p>
-              </Playlist>
-            )}
-          </PlaylistContainer>
-          <ButtonContainer>
-            <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
-            <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
-          </ButtonContainer>
-          <PublicPlaylist id="enterurl">
-            {/* later album optie toevoegen? */}
-            <h3>Enter the link of a playlist</h3>
-            <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
-            <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
-            <p>{errorMessage}</p>
-          </PublicPlaylist>
-        </Container>
 
-      </>
+    <Container>
+      {loading ?
+        <LoaderContainer>
+          <Loader>
+            <LoaderDots />
+            <p>Retrieving the tracks</p>
+          </Loader>
+        </LoaderContainer>
+        : null}
+      <div>
+        <h1>Choose one of your playlists</h1>
+        <a href="#enterurl" target="_self">or enter an URL</a>
+      </div>
+      <PlaylistContainer>
+        {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
+          <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
+            {playlist.images ?
+              <Image src={playlist.images[0].url} />
+              :
+              <Image src={EmptyPlaylist} />
+            }
+            <p>{playlist.name}</p>
+          </Playlist>
+        )}
+      </PlaylistContainer>
+      <ButtonContainer>
+        <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
+        <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
+      </ButtonContainer>
+      <PublicPlaylist id="enterurl">
+        {/* later album optie toevoegen? */}
+        <h3>Enter the link of a playlist</h3>
+        <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
+        <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
+        <p>{errorMessage}</p>
+      </PublicPlaylist>
     </Container>
   )
 }
@@ -195,13 +203,14 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
 
 const Container = styled.div`
 max-width: 1400px;
-width: 90%;
+width: 100%;
 margin: 0;
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 50px;
 scroll-behavior: smooth;
+position: relative;
 
 .login-btn {
 background: #148255;
@@ -383,3 +392,34 @@ color: #333333;
 border-radius: 20px;
 `
 const H1 = styled.h1``
+
+const LoaderContainer = styled.div`
+background: #2c2c2f91;
+width: 100%;
+height: 100%;
+position: absolute;
+
+@keyframes loading { 
+  100%{transform: rotate(1turn)}
+}
+`
+
+const Loader = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+
+`
+
+const LoaderDots = styled.div`
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#148255 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#148255);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: loading 1s infinite linear;
+`

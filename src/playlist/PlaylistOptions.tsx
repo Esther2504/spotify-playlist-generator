@@ -19,6 +19,7 @@ export default function PlaylistOptions() {
           <Option>Remove explicit songs</Option>
           <Option>Create new playlist based on popularity</Option>
           <Option>Remove multiple playlist items at the same time</Option>
+          <Option>Move songs between playlists</Option>
         </OptionsContainer>
     </Container>
   )

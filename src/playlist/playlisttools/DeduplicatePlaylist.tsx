@@ -38,15 +38,15 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         let foundNameArtists = []
         let foundIds = []
         playlistItems.reduce((accumulator, track) => {
-            const nameArtist = (track.track.name + '|' + track.track.artists[0].name).toLowerCase()
+            const nameArtist = (track?.track?.name + '|' + track?.track?.artists[0]?.name).toLowerCase()
             console.log(foundIds)
             console.log(foundNameArtists)
-            if (foundIds.includes(track.track.id)) {
+            if (foundIds.includes(track?.track?.id)) {
                 foundDups.push({ "trackInfo": track, "reason": "Same track ID" })
             } else if (foundNameArtists.includes(nameArtist)) {
                 foundDups.push({ "trackInfo": track, "reason": "Same name and artist" })
             } else {
-                foundIds.push(track.track.id)
+                foundIds.push(track?.track?.id)
                 foundNameArtists.push(nameArtist)
             }
             setDuplicates(foundDups)
