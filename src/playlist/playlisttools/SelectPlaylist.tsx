@@ -340,9 +340,6 @@ padding: 25px;
 gap: 10px;
 border-radius: 20px;
 
-h3, p {
-background: transparent;
-}
 
 @media screen and (max-width: 680px) {
   width: 420px;
@@ -394,7 +391,7 @@ border-radius: 20px;
 const H1 = styled.h1``
 
 const LoaderContainer = styled.div`
-background: #2c2c2f91;
+background: #2c2c2fcf;
 width: 100%;
 height: 100%;
 position: absolute;
@@ -410,7 +407,6 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 20px;
-
 `
 
 const LoaderDots = styled.div`

@@ -138,7 +138,6 @@ text-align: center;
 `
 
 const Label = styled.label`
-background: transparent;
 border: 2px solid #148255;
     padding: 8px 20px;
     border-radius: 20px;

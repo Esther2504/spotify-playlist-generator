@@ -30,7 +30,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         setSelectedUris(duplicates.map((item) => item.trackInfo.track.uri))
         document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
             checkbox.checked = true
-        })   
+        })
     }
 
     useEffect(() => {
@@ -38,9 +38,11 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         let foundNameArtists = []
         let foundIds = []
         playlistItems.reduce((accumulator, track) => {
+            if (track.track == null) {
+                return;
+            }
             const nameArtist = (track?.track?.name + '|' + track?.track?.artists[0]?.name).toLowerCase()
-            console.log(foundIds)
-            console.log(foundNameArtists)
+
             if (foundIds.includes(track?.track?.id)) {
                 foundDups.push({ "trackInfo": track, "reason": "Same track ID" })
             } else if (foundNameArtists.includes(nameArtist)) {
@@ -101,21 +103,23 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
                 duplicates.length > 0 ?
                     <>
                         <h1>Which duplicates do you want to remove?</h1>
+                        <ButtonContainer>
                         <Button onClick={() => selectAllDups()}>Select all duplicates</Button>
                         <Button onClick={() => removeDuplicates()}>Remove selected duplicates</Button>
+                        </ButtonContainer>
                         <DuplicatesContainer>
                             {duplicates.map((item, index) => (
                                 <Duplicate>
-                                    <AlbumCover src={item?.trackInfo.track.album.images[0].url} alt={item?.trackInfo.track.album.name}></AlbumCover>
-                                    <SongInfo><TrackArtistName><a href={item?.trackInfo.track.external_urls.spotify}>{item?.trackInfo.track.name}</a></TrackArtistName><p className="artists">
-                                        <i>{(item?.trackInfo.track.artists).map((artist: any, i: number) => {
+                                    <AlbumCover src={item?.trackInfo?.track?.album?.images[0]?.url} alt={item?.trackInfo?.track?.album?.name}></AlbumCover>
+                                    <SongInfo><TrackArtistName><a href={item?.trackInfo?.track?.external_urls?.spotify}>{item?.trackInfo?.track?.name}</a></TrackArtistName><p className="artists">
+                                        <div>{(item?.trackInfo?.track?.artists).map((artist: any, i: number) => {
                                             return (
-                                                <>{i != (item?.trackInfo.track.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
+                                                <>{i != (item?.trackInfo?.track?.artists).length - 1 ? <TrackArtistName><a href={artist?.external_urls?.spotify}>{artist?.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
                                             )
-                                        })}</i>
+                                        })}</div>
                                     </p></SongInfo>
-                                    <TrackLength>{(item?.trackInfo.track.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
-                                    <input type="checkbox" value={item?.trackInfo.track.uri} onChange={(e) => handleSelection(e.target)} />
+                                    <TrackLength>{(item?.trackInfo?.track?.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
+                                    <Input type="checkbox" value={item?.trackInfo?.track?.uri} onChange={(e) => handleSelection(e.target)} />
                                 </Duplicate>
                             ))}
                         </DuplicatesContainer>
@@ -157,13 +161,18 @@ justify-content: center;
 gap: 20px;
 `
 
+const ButtonContainer = styled.div`
+display: flex;
+justify-content: space-evenly;
+width: 100%;
+`
+
 const Button = styled.button`
 background: #148255;
 color: #fff;
 padding: 10px 20px;
 text-decoration: none;
 border-radius: 20px;
-margin-right: auto;
 font-weight: bold;
 border: none;
 font-size: 1rem;
@@ -199,6 +208,12 @@ font-weight: bold;
     border-radius: 99%;
 `
 
+const Input = styled.input`
+accent-color: #148255;
+width: 20px;
+height: 20px;
+`
+
 const AlbumCover = styled.img`
 height: 70px;
 `
@@ -213,11 +228,18 @@ background-position: center;
 const SongInfo = styled.div`
 display: flex;
 flex-direction: column;
+overflow: clip;
 
 .artists {
-overflow: hidden;
-font-size: 0.8rem;
-margin-top: 2px;
+    font-size: 0.8rem;
+    margin-top: 2px;
+    max-height: 30px;
+}
+
+@keyframes scroll {
+    0%   { transform: translate(0, 0); }
+    50% { transform: translate(-100%, 0); }
+    100% { transform: translate(0, 0); }
 }
 `
 
