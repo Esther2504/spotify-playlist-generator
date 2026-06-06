@@ -212,6 +212,7 @@ const Input = styled.input`
 accent-color: #148255;
 width: 20px;
 height: 20px;
+cursor: pointer;
 `
 
 const AlbumCover = styled.img`
