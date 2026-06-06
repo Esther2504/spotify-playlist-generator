@@ -14,7 +14,7 @@ export default function PlaylistOptions() {
           </NavLink>
           <NavLink to="../playlist/yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
           <NavLink to="../playlist/deduplicateplaylist"><Option>Remove duplicates</Option></NavLink>
-          <Option>Remove artist from your playlist</Option>
+          <NavLink to="../playlist/removeartist"><Option>Remove artist from your playlist</Option></NavLink>
           <Option>Shuffle playlist</Option>
           <Option>Remove explicit songs</Option>
           <Option>Create new playlist based on popularity</Option>

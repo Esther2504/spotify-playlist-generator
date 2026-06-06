@@ -6,12 +6,9 @@ import SelectPlaylist from './SelectPlaylist.tsx'
 import YearPlaylist from './YearPlaylist.tsx'
 import styled from 'styled-components'
 import DeduplicatePlaylist from './DeduplicatePlaylist.tsx'
+import RemoveArtist from './RemoveArtist.tsx'
 
 type Props = {}
-
-// first page: choose tool
-// second: choose playlist / connect to spotify
-// third: tool
 
 
 export default function Tool({ }: Props) {
@@ -42,6 +39,8 @@ export default function Tool({ }: Props) {
         <>
           <DeduplicatePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
+        : tool == 'removeartist' && playlistReady && playlistID ?
+        <RemoveArtist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
     </Container>
   )

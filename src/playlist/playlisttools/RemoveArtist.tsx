@@ -10,17 +10,14 @@ type Props = {
 }
 
 export default function ArtistPlaylist({ playlistID, playlistItems, playlistName }: Props) {
-    const [playlistArtists, setPlaylistArtists] = useState([])
     const [uniquePlaylistArtists, setUniquePlaylistArtists] = useState([])
     const [selectedArtist, setSelectedArtist] = useState<string>()
     const [uris, setUris] = useState([])
-    const [newPlaylistID, setNewPlaylistID] = useState()
-    const [playlistReady, setPlaylistReady] = useState<boolean>(false)
+    const [tracksDeleted, setTracksDeleted] = useState<boolean>(false)
 
     const accessToken = localStorage.getItem('accessToken')
 
     useEffect(() => {
-
         const allArtists: Array<string> = []
 
         playlistItems.forEach(element => {
@@ -30,9 +27,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
         });
 
-        setPlaylistArtists(allArtists)
         setUniquePlaylistArtists([...new Set(allArtists)])
-
     }, [])
 
 
@@ -51,22 +46,49 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         setUris(allUris)
 
+         if (allUris.length > 0) {
+            removePlaylistItems(allUris)
+        }
+        
     }
 
-    function removePlaylistItems() {
+function removePlaylistItems(foundUris) {
 
-    }
+    const uriArray: Array<any> = []
+        foundUris.forEach(element => {
+            uriArray.push({ "uri": element })
+        });
 
+        console.log(uriArray)
+
+        axios
+            .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
+                data: {
+                    "items": uriArray
+                },
+                headers: {
+                    Authorization: "Bearer " + accessToken,
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                setTracksDeleted(true)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    
     return (
         <Container>
-            {playlistReady ?
+            {tracksDeleted ?
                 <ReadyContainer>
                     <div>
                         <h1>Your playlist is ready!</h1>
-                        <p>We already saved the playlist to your Spotify.</p>
-                        <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Remove another artist from this playlist</Button>
+                        <p>Tracks by {selectedArtist} have been removed.</p>
+                        <Button onClick={() => { setTracksDeleted(false); setUris([]) }}>Remove another artist from this playlist</Button>
                     </div>
-                    <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
                 :
                 <>
