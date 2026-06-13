@@ -4,8 +4,6 @@ import ArtistPlaylist from './playlisttools/ArtistPlaylist.tsx'
 import { NavLink } from 'react-router'
 
 export default function PlaylistOptions() {
-  const [tool, setTool] = useState<string>()
-  const [step, setStep] = useState<number>(1)
 
   return (
     <Container>
@@ -15,11 +13,12 @@ export default function PlaylistOptions() {
           <NavLink to="../playlist/yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
           <NavLink to="../playlist/deduplicateplaylist"><Option>Remove duplicates</Option></NavLink>
           <NavLink to="../playlist/removeartist"><Option>Remove artist from your playlist</Option></NavLink>
-          <Option>Shuffle playlist</Option>
+          <NavLink to="../playlist/mergeplaylist"><Option>Merge playlists</Option></NavLink>
+          {/* <Option>Shuffle playlist</Option>
           <Option>Remove explicit songs</Option>
           <Option>Create new playlist based on popularity</Option>
           <Option>Remove multiple playlist items at the same time</Option>
-          <Option>Move songs between playlists</Option>
+          <Option>Move songs between playlists</Option> */}
         </OptionsContainer>
     </Container>
   )

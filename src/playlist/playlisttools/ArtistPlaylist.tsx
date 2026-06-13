@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { useParams } from 'react-router'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -126,7 +125,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 </ReadyContainer>
                 :
                 <>
-                    <h1>Which artist do you want to create a new playlist of?</h1>
+                    <h1>Which artist do you want to create a playlist of?</h1>
                     <ArtistsContainer>
                         {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => artistSelectionHandler(artist)}>{artist}</Artist>)}
                     </ArtistsContainer>

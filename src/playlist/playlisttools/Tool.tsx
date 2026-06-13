@@ -7,6 +7,7 @@ import YearPlaylist from './YearPlaylist.tsx'
 import styled from 'styled-components'
 import DeduplicatePlaylist from './DeduplicatePlaylist.tsx'
 import RemoveArtist from './RemoveArtist.tsx'
+import MergePlaylist from './MergePlaylist.tsx'
 
 type Props = {}
 
@@ -41,6 +42,8 @@ export default function Tool({ }: Props) {
         </>
         : tool == 'removeartist' && playlistReady && playlistID ?
         <RemoveArtist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
+        : tool == 'mergeplaylist' && playlistReady && playlistID ?
+        <MergePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
     </Container>
   )
