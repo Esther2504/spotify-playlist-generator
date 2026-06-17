@@ -7,14 +7,17 @@ import EmptyPlaylist from '../../images/EmptyPlaylist.PNG'
 import dummyplaylists from '../../data/dummysavedplaylists.json'
 import playlist from '../../data/dummyplaylist.json'
 import checkAccessToken from '../../AccessToken.tsx'
+import { NavLink } from 'react-router'
+import { AUTH_URL } from '../../AuthURL.tsx';
 
-export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID }) {
+export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID }) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
   // const [playlistID, setPlaylistID] = useState<string>()
 
   const [step, setStep] = useState<number>(1)
   const [errorMessage, setErrorMessage] = useState<string>()
+  const [authError, setAuthError] = useState<boolean>(false)
 
   // const [playlistid, setPlaylistid] = useState()
 
@@ -138,13 +141,11 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
       })
       .catch((err) => {
         setError(true)
+        setAuthError(true)
       })
     // setOwnPlaylists(dummyplaylists.data.items)
   }
 
-  useEffect(() => {
-    console.log(playlistID)
-  }, [playlistID])
 
   function getPublicPlaylistID(url) {
     console.log(url)
@@ -157,10 +158,14 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
     }
   }
 
-  console.log(ownPlaylists)
+
   return (
 
     <Container>
+{authError ? 
+<ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
+:
+<>
       {loading ?
         <LoaderContainer>
           <Loader>
@@ -196,6 +201,8 @@ export default function SeparateArtistPlaylist({ setPlaylistReady, setPlaylistIt
         <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
         <p>{errorMessage}</p>
       </PublicPlaylist>
+      </>
+}
     </Container>
   )
 }
@@ -229,6 +236,13 @@ text-align: center;
 display: block;
 margin: 7px 0 0;
 }
+`
+
+const ErrorMessage = styled.div`
+display: flex;
+flex-direction: column;
+margin-top: 30px;
+gap:20px;
 `
 
 const PlaylistContainer = styled.div`
