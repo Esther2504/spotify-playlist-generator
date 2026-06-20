@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import DeduplicatePlaylist from './DeduplicatePlaylist.tsx'
 import RemoveArtist from './RemoveArtist.tsx'
 import MergePlaylist from './MergePlaylist.tsx'
+import { AUTH_URL } from '../../AuthURL.tsx'
 
 type Props = {}
 
@@ -24,6 +25,9 @@ export default function Tool({ }: Props) {
     console.log(playlistReady)
 
   }, [playlistReady])
+
+  let AUTH_URL_NEW = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/playlist/${tool}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`;
+
 
 
   return (
@@ -44,7 +48,7 @@ export default function Tool({ }: Props) {
         <RemoveArtist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : tool == 'mergeplaylist' && playlistReady && playlistID ?
         <MergePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
-        : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} />}
+        : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} AUTH_URL_NEW={AUTH_URL_NEW} />}
     </Container>
   )
 }

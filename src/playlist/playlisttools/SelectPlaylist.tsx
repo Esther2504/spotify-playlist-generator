@@ -10,23 +10,15 @@ import checkAccessToken from '../../AccessToken.tsx'
 import { NavLink } from 'react-router'
 import { AUTH_URL } from '../../AuthURL.tsx';
 
-export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID }) {
+export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID, AUTH_URL_NEW }) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
-  // const [playlistID, setPlaylistID] = useState<string>()
-
-  const [step, setStep] = useState<number>(1)
   const [errorMessage, setErrorMessage] = useState<string>()
   const [authError, setAuthError] = useState<boolean>(false)
-
-  // const [playlistid, setPlaylistid] = useState()
-
-  const [publicplaylist, setPublicplaylist] = useState()
   const [firstSlide, setFirstSlide] = useState(0)
   const [lastSlide, setLastSlide] = useState(10)
   const [hidePrev, setHidePrev] = useState(true)
   const [hideNext, setHideNext] = useState(false)
-  const [tracks, setTracks] = useState()
   const [ownPlaylists, setOwnPlaylists] = useState([])
   const [publicPlaylist, setPublicPlaylist] = useState<string>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -159,50 +151,54 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   }
 
 
+
   return (
 
     <Container>
-{authError ? 
-<ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
-:
-<>
-      {loading ?
-        <LoaderContainer>
-          <Loader>
-            <LoaderDots />
-            <p>Retrieving the tracks</p>
-          </Loader>
-        </LoaderContainer>
-        : null}
-      <div>
-        <h1>Choose one of your playlists</h1>
-        <a href="#enterurl" target="_self">or enter an URL</a>
-      </div>
-      <PlaylistContainer>
-        {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
-          <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
-            {playlist.images ?
-              <Image src={playlist.images[0].url} />
-              :
-              <Image src={EmptyPlaylist} />
-            }
-            <p>{playlist.name}</p>
-          </Playlist>
-        )}
-      </PlaylistContainer>
-      <ButtonContainer>
-        <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
-        <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
-      </ButtonContainer>
-      <PublicPlaylist id="enterurl">
-        {/* later album optie toevoegen? */}
-        <h3>Enter the link of a playlist</h3>
-        <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
-        <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
-        <p>{errorMessage}</p>
-      </PublicPlaylist>
-      </>
-}
+      {authError ?
+        <ErrorMessage>
+          <p>Connect to Spotify to see use this tool</p>
+          <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
+          </ErrorMessage>
+        :
+        <>
+          {loading ?
+            <LoaderContainer>
+              <Loader>
+                <LoaderDots />
+                <p>Retrieving the tracks</p>
+              </Loader>
+            </LoaderContainer>
+            : null}
+          <div>
+            <h1>Choose one of your playlists</h1>
+            <a href="#enterurl" target="_self">or enter an URL</a>
+          </div>
+          <PlaylistContainer>
+            {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
+              <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
+                {playlist.images ?
+                  <Image src={playlist.images[0].url} />
+                  :
+                  <Image src={EmptyPlaylist} />
+                }
+                <p>{playlist.name}</p>
+              </Playlist>
+            )}
+          </PlaylistContainer>
+          <ButtonContainer>
+            <Button onClick={() => setSlide('prev')} hidePrev={hidePrev}>Previous</Button>
+            <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
+          </ButtonContainer>
+          <PublicPlaylist id="enterurl">
+            {/* later album optie toevoegen? */}
+            <h3>Enter the link of a playlist</h3>
+            <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
+            <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>
+            <p>{errorMessage}</p>
+          </PublicPlaylist>
+        </>
+      }
     </Container>
   )
 }
@@ -241,8 +237,13 @@ margin: 7px 0 0;
 const ErrorMessage = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 margin-top: 30px;
 gap:20px;
+p {
+font-size: 1.5rem;
+}
+
 `
 
 const PlaylistContainer = styled.div`
