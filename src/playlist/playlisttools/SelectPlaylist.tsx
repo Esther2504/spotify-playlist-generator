@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import PlaylistOptions from '../PlaylistOptions.tsx'
 import styled from 'styled-components'
-import ArtistPlaylist from './ArtistPlaylist.tsx'
 import EmptyPlaylist from '../../images/EmptyPlaylist.PNG'
-import dummyplaylists from '../../data/dummysavedplaylists.json'
-import playlist from '../../data/dummyplaylist.json'
 import checkAccessToken from '../../AccessToken.tsx'
 import { NavLink } from 'react-router'
 import { AUTH_URL } from '../../AuthURL.tsx';
@@ -52,7 +48,6 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
         setPlaylistItems(res.data.items.items)
         if (res.data.items.total > 100) {
           getAllTracks(res.data.items.next)
-          // set loading screen
           console.log(res.data.items.next)
         } else {
           setPlaylistReady(true)
@@ -71,12 +66,6 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
         }
 
       })
-
-    // setData(playlist.data)
-    // setPlaylistName(playlist.data.name)
-    // setPlaylistItems(playlist.data.items.items)
-    // setPlaylistReady(true)
-
   }
 
   function getAllTracks(nextURL: string) {
@@ -105,7 +94,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
         console.log(err)
         setLoading(false)
         setError(true)
-        SetErrorMessage(err.response.data.error.message)
+        setErrorMessage(err.response.data.error.message)
       })
   }
 
@@ -135,29 +124,21 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
         setError(true)
         setAuthError(true)
       })
-    // setOwnPlaylists(dummyplaylists.data.items)
   }
 
-
   function getPublicPlaylistID(url) {
-    console.log(url)
     if (url) {
       let publicplaylisturl = url.split("?si")[0].split("/")
       let publicplaylistid = publicplaylisturl[publicplaylisturl.length - 1]
       setPlaylistID(publicplaylistid)
-
-      console.log(publicplaylistid)
     }
   }
 
-
-
   return (
-
     <Container>
       {authError ?
         <ErrorMessage>
-          <p>Connect to Spotify to see use this tool</p>
+          <p>Connect to Spotify to use this tool</p>
           <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
           </ErrorMessage>
         :
@@ -191,7 +172,6 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
             <Button onClick={() => setSlide('next')} hideNext={hideNext}>Next</Button>
           </ButtonContainer>
           <PublicPlaylist id="enterurl">
-            {/* later album optie toevoegen? */}
             <h3>Enter the link of a playlist</h3>
             <Input placeholder='Enter URL' onInput={(e) => setPublicPlaylist(e.target.value)}></Input>
             <SubmitButton onClick={(e) => getPublicPlaylistID(publicPlaylist)}>Continue</SubmitButton>

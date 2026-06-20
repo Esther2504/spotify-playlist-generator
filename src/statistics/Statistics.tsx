@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import styled from 'styled-components';
 import { NavLink } from 'react-router'
-import { Authentication } from '../playlist-creator/APICalls';
 import SpotifyTrack from './components/SpotifyTrack.tsx';
 import ArtistItem from './components/ArtistItem.tsx';
 import { AUTH_URL } from '../AuthURL.tsx';
@@ -16,21 +15,13 @@ export default function Statistics() {
 
   const accessToken = localStorage.getItem('accessToken')
 
-  console.log(accessToken)
-  console.log(songData)
+  getTopTracks();
 
   useEffect(() => {
     if (!songData) {
-      getTopTracks()
+      getTopTracks();
     }
-  }, [])
-
-
-  useEffect(() => {
-    getTopTracks()
   }, [periodFilter, typeFilter])
-
-  // const AuthURL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`
 
   function getTopTracks() {
     axios
@@ -66,7 +57,7 @@ export default function Statistics() {
   return (
     <Container>
       {error ?
-        <ErrorMessage>Connect to Spotify to see your statistics <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
+        <ErrorMessage><p>Connect to Spotify to see your statistics</p><NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
         :
         <>
           <h1>Most listened to</h1>
@@ -100,7 +91,7 @@ export default function Statistics() {
 const Container = styled.div`
 max-width: 1400px;
 width: 90%;
-margin: 0 auto;
+margin: 150px auto;
 
 .login-btn {
 background: #148255;
@@ -119,8 +110,13 @@ margin: 20px 0;
 const ErrorMessage = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 margin-top: 30px;
 gap:20px;
+
+p {
+font-size: 1.5rem;
+}
 `
 
 const SpotifyItem = styled.div`
