@@ -68,6 +68,34 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
       })
   }
 
+  function getLikedSongs() {
+    setLoading(true);
+        axios
+      .get(`https://api.spotify.com/v1/me/tracks`, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+         setData(res.data)
+        setPlaylistName("Liked songs")
+        setPlaylistItems(res.data.items)
+        if (res.data.items.total > 100) {
+          getAllTracks(res.data.next)
+          console.log(res.data.next)
+        } else {
+          setPlaylistReady(true)
+          setLoading(false)
+          setPlaylistID('likedsongs')
+          console.log('ready!')
+        }
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }
+
   function getAllTracks(nextURL: string) {
     setLoading(true);
 
@@ -156,6 +184,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
             <a href="#enterurl" target="_self">or enter an URL</a>
           </div>
           <PlaylistContainer>
+          <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /></Playlist>
             {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
               <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
                 {playlist.images ?
@@ -182,7 +211,6 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
     </Container>
   )
 }
-
 
 const Container = styled.div`
 max-width: 1400px;
@@ -223,7 +251,6 @@ gap:20px;
 p {
 font-size: 1.5rem;
 }
-
 `
 
 const PlaylistContainer = styled.div`
