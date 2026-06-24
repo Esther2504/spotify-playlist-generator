@@ -22,12 +22,24 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         const allArtists: Array<string> = []
 
-        playlistItems.forEach(element => {
-            console.log(element)
-            element?.item?.artists?.forEach(artist => {
-                allArtists.push(artist.name)
-            })
-        });
+        if (playlistID == "likedsongs") {
+            playlistItems.forEach(element => {
+                console.log(element)
+                element?.track?.artists?.forEach(artist => {
+                    console.log(artist.name)
+                    allArtists.push(artist.name)
+                })
+            });
+        } else {
+
+            playlistItems.forEach(element => {
+                console.log(element)
+                element?.item?.artists?.forEach(artist => {
+                    allArtists.push(artist.name)
+                })
+            });
+
+        };
 
         setPlaylistArtists(allArtists)
         setUniquePlaylistArtists([...new Set(allArtists)])
@@ -40,13 +52,26 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         setSelectedArtist(artist);
         const allUris: Array<string> = [];
 
-        playlistItems.forEach(element => {
-            element?.item?.artists?.forEach(artistitem => {
-                if (artistitem?.name == artist) {
-                    allUris.push(element?.item?.uri)
-                }
+        if (playlistID == "likedsongs") {
+            playlistItems.forEach(element => {
+                element?.track?.artists?.forEach(artistitem => {
+                    if (artistitem?.name == artist) {
+                        allUris.push(element?.track?.uri)
+                    }
+                })
             })
-        })
+
+        } else {
+
+            playlistItems.forEach(element => {
+                element?.item?.artists?.forEach(artistitem => {
+                    if (artistitem?.name == artist) {
+                        allUris.push(element?.item?.uri)
+                    }
+                })
+            })
+
+        }
 
         setUris(allUris)
 
@@ -64,7 +89,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
-                "name": `Playlist ${playlistName} - Songs by ${selectedArtist}`,
+                "name": `${playlistName} - Songs by ${selectedArtist}`,
                 "description": "",
                 "public": false
             }, {
