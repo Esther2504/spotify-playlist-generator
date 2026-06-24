@@ -20,12 +20,24 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     useEffect(() => {
         const allArtists: Array<string> = []
 
-        playlistItems.forEach(element => {
+                    if (playlistID == "likedsongs") {
+                   playlistItems.forEach(element => {
+            
+            element?.track?.artists?.forEach(artist => {
+                allArtists.push(artist.name)
+            })
+        });
+        } else {
+                    playlistItems.forEach(element => {
             console.log(element)
+            
             element?.item?.artists?.forEach(artist => {
                 allArtists.push(artist.name)
             })
         });
+        }
+
+
 
         setUniquePlaylistArtists([...new Set(allArtists)])
     }, [])
@@ -36,6 +48,17 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         setSelectedArtist(artist);
         const allUris: Array<string> = [];
 
+
+ if (playlistID == "likedsongs") {
+        playlistItems.forEach(element => {
+            element?.track?.artists?.forEach(artistitem => {
+                if (artistitem?.name == artist) {
+                    console.log(element.track)
+                    allUris.push(element?.track?.uri)
+                }
+            })
+        })
+ } else {
         playlistItems.forEach(element => {
             element?.item?.artists?.forEach(artistitem => {
                 if (artistitem?.name == artist) {
@@ -43,6 +66,8 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 }
             })
         })
+ }
+
 
         setUris(allUris)
 
@@ -59,8 +84,7 @@ function removePlaylistItems(foundUris) {
             uriArray.push({ "uri": element })
         });
 
-        console.log(uriArray)
-
+    //   use remove items from library api for liked songs id https://api.spotify.com/v1/me/library
         axios
             .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
                 data: {

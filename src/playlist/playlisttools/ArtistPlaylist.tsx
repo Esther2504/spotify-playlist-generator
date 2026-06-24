@@ -15,6 +15,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     const [uris, setUris] = useState([])
     const [newPlaylistID, setNewPlaylistID] = useState()
     const [playlistReady, setPlaylistReady] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const accessToken = localStorage.getItem('accessToken')
 
@@ -48,6 +49,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
 
     function artistSelectionHandler(artist: string) {
+        setLoading(true)
 
         setSelectedArtist(artist);
         const allUris: Array<string> = [];

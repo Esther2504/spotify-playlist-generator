@@ -24,7 +24,12 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
     useEffect(() => {
         const allYears: Array<string> = []
         playlistItems.forEach(element => {
-            let releaseDate = new Date(element?.item?.album?.release_date)
+            let releaseDate;
+                    if (playlistID == "likedsongs") {
+           releaseDate = new Date(element?.track?.album?.release_date)
+        } else {
+            releaseDate = new Date(element?.item?.album?.release_date)
+        }
             let releaseYear = releaseDate.getFullYear()
             if (!releaseYear) {
                 return;
@@ -52,7 +57,12 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
 
         playlistItems.forEach(element => {
 
-            let releaseDate = new Date(element?.item?.album?.release_date)
+               let releaseDate;
+                    if (playlistID == "likedsongs") {
+           releaseDate = new Date(element?.track?.album?.release_date)
+        } else {
+            releaseDate = new Date(element?.item?.album?.release_date)
+        }
             let releaseYear = releaseDate.getFullYear()
 
 

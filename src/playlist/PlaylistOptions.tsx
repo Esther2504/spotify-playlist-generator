@@ -13,8 +13,8 @@ export default function PlaylistOptions() {
           <NavLink to="../playlist/yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
           <NavLink to="../playlist/deduplicateplaylist"><Option>Remove duplicates</Option></NavLink>
           <NavLink to="../playlist/removeartist"><Option>Remove artist from your playlist</Option></NavLink>
-          <NavLink to="../playlist/mergeplaylist"><Option>Merge playlists</Option></NavLink>
-          <NavLink to="../playlist/mergeplaylist"><Option>TBA</Option></NavLink>
+          {/* <NavLink to="../playlist/mergeplaylist"><Option>Merge playlists</Option></NavLink>
+          <NavLink to="../playlist/mergeplaylist"><Option>TBA</Option></NavLink> */}
           {/* <Option>Shuffle playlist</Option>
           <Option>Remove explicit songs</Option>
           <Option>Create new playlist based on popularity</Option>
@@ -45,9 +45,10 @@ margin: 20px 0;
 `
 
 const OptionsContainer = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr;
+display: flex;
 flex-wrap: wrap;
+align-items: center;
+justify-content: center;
 gap: 20px;
 width: 100%;
 max-width: 1000px;
@@ -59,10 +60,10 @@ text-decoration: none;
 `
 
 const Option = styled.div`
-width: 100%;
-min-height: 100px;
+max-width: 100%;
 padding: 15px;
-max-width: 500px;
+width: 350px;
+aspect-ratio: 1 / 1;
 display: flex;
 text-align: center;
 align-items: center;
