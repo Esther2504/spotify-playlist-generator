@@ -14,6 +14,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     const [selectedArtist, setSelectedArtist] = useState<string>()
     const [uris, setUris] = useState([])
     const [tracksDeleted, setTracksDeleted] = useState<boolean>(false)
+    const [leftOvers, setLeftOvers] = useState()
 
     const accessToken = localStorage.getItem('accessToken')
 
@@ -92,7 +93,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             uriArray.push({ "uri": element })
         });
 
-        //   use remove items from library api for liked songs id https://api.spotify.com/v1/me/library
         axios
             .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
                 data: {
@@ -114,21 +114,30 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     function removeLikedSongs(foundUris) {
         const uriArray: Array<any> = []
         foundUris.forEach(element => {
-            uriArray.push({ "uri": element })
+            uriArray.push(element)
         });
 
+        let leftoverUris = leftOvers ? leftOvers : uriArray
+
+        if (uriArray.length > 40) {
+            leftoverUris = leftoverUris.slice(40, leftoverUris.length)
+            setLeftOvers(leftoverUris.slice(40, leftoverUris.length))
+        }
+
         axios
-            .delete(`https://api.spotify.com/v1/me/library`, {
-                data: {
-                    "items": uriArray
-                },
+            .delete(`https://api.spotify.com/v1/me/library?uris=${uriArray}`, {
                 headers: {
                     Authorization: "Bearer " + accessToken,
                 }
             })
             .then((res) => {
                 console.log(res);
-                setTracksDeleted(true)
+
+                if (leftOvers) {
+                    removeLikedSongs(leftoverUris)
+                } else {
+                    setTracksDeleted(true);
+                }
             })
             .catch((err) => {
                 console.log(err)
@@ -144,7 +153,9 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                         <p>Tracks by <i>{selectedArtist}</i> have been removed.</p>
                         <Button onClick={() => { setTracksDeleted(false); setUris([]) }}>Remove another artist from this playlist</Button>
                     </div>
-                    <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    {playlistID != 'likedsongs' ?
+                        <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        : null}
                 </ReadyContainer>
                 :
                 <>
