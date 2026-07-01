@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import { getPlaylists } from './playlist-creator/APICalls';
 import StartPageMixer from './playlist-creator/StartPage';
 import StartPageSuggestions from './song-suggestions/StartPage';
@@ -53,9 +54,25 @@ function App() {
 
   useEffect(() => {
 
+
     checkAccessToken()
 
   }, [])
+
+      const params = useParams()
+    const authCode = params.code
+    
+  useEffect(() => {
+  
+
+
+    if (authCode) {
+      localStorage.setItem('authToken', authCode)
+    }
+
+
+  }, [window.location])
+
 
   return (
     <div className="App">

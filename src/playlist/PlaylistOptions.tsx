@@ -63,7 +63,7 @@ const Option = styled.div`
 max-width: 100%;
 padding: 15px;
 width: 350px;
-aspect-ratio: 1 / 1;
+height: 200px;
 display: flex;
 text-align: center;
 align-items: center;

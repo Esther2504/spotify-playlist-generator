@@ -93,10 +93,25 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             uriArray.push({ "uri": element })
         });
 
+        
+        let leftoverUris = uriArray;
+        let max_uris;
+
+        if (uriArray.length > 99) {
+            max_uris = leftoverUris.slice(0, 99)
+            leftoverUris = leftoverUris.slice(100, leftoverUris.length)
+            setLeftOvers(true)
+        } else {
+            max_uris = uriArray;
+            setLeftOvers(false)
+        }
+
+        console.log(max_uris)
+
         axios
             .delete(`https://api.spotify.com/v1/playlists/${playlistID}/items`, {
                 data: {
-                    "items": uriArray
+                    "items": max_uris
                 },
                 headers: {
                     Authorization: "Bearer " + accessToken,
@@ -104,7 +119,12 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
             .then((res) => {
                 console.log(res);
-                setTracksDeleted(true)
+                 console.log(leftOvers)
+                                if (leftOvers) {
+                    removePlaylistItems(leftoverUris)
+                } else {
+                    setTracksDeleted(true);
+                }
             })
             .catch((err) => {
                 console.log(err)
@@ -117,21 +137,32 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             uriArray.push(element)
         });
 
-        let leftoverUris = leftOvers ? leftOvers : uriArray
+        console.log(foundUris)
+
+        let leftoverUris = leftOvers ? leftOvers : uriArray;
+        let max_uris;
 
         if (uriArray.length > 40) {
+            max_uris = leftoverUris.slice(0, 39)
             leftoverUris = leftoverUris.slice(40, leftoverUris.length)
             setLeftOvers(leftoverUris.slice(40, leftoverUris.length))
+        } else {
+            max_uris = uriArray;
+            setLeftOvers();
         }
 
+        console.log(max_uris)
+
         axios
-            .delete(`https://api.spotify.com/v1/me/library?uris=${uriArray}`, {
+            .delete(`https://api.spotify.com/v1/me/library?uris=${max_uris}`, {
                 headers: {
                     Authorization: "Bearer " + accessToken,
                 }
             })
             .then((res) => {
                 console.log(res);
+
+               
 
                 if (leftOvers) {
                     removeLikedSongs(leftoverUris)

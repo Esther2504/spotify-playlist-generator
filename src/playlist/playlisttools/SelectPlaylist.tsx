@@ -28,7 +28,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   }, [playlistID])
 
   useEffect(() => {
-    checkAccessToken()
+    checkAccessToken();
     if (ownPlaylists.length == 0) {
       getOwnPlaylists()
     }
