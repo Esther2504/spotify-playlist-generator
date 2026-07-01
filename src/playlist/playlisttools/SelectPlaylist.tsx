@@ -184,7 +184,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
             <a href="#enterurl" target="_self">or enter an URL</a>
           </div>
           <PlaylistContainer>
-          <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /></Playlist>
+          <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /><p>Liked songs</p></Playlist>
             {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
               <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
                 {playlist.images ?
@@ -279,7 +279,7 @@ gap: 20px;
 `
 const Playlist = styled.div`
 width: 200px;
-height: 200px;
+height: 230px;
 background-color: #148255;
 padding: 20px;
 font-size: 0.9rem;
@@ -292,16 +292,12 @@ gap: 10px;
     border-radius: 15px;
 
 p {
-    margin-top: -70%;
-    padding: 5px;
     text-align: center;
-    display: none;
+        white-space: nowrap;
+            width: 160px;
+    text-overflow: ellipsis;
+    overflow: hidden
     }
-&:hover {
-
-p {
-display: block;
-}
 }
 
 @media screen and (max-width: 450px) {

@@ -109,6 +109,8 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
     }
 
+// waarom 2x artist klikken? uitzoeken
+
     function addPlaylistItems(playlist_id: string, uri_items: any) {
         let max_uris = uri_items;
         let leftovers = null;

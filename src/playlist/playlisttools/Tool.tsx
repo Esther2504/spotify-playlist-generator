@@ -18,6 +18,7 @@ export default function Tool({ }: Props) {
   const [playlistItems, setPlaylistItems] = useState([])
   const [playlistName, setPlaylistName] = useState<string>()
   const [playlistReady, setPlaylistReady] = useState<boolean>(false)
+  const [authError, setAuthError] = useState<boolean>(false)
   const params = useParams()
   const tool = params.tool
 
@@ -28,10 +29,21 @@ export default function Tool({ }: Props) {
 
   let AUTH_URL_NEW = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://emilia-nonepical-stevie.ngrok-free.dev/playlist/${tool}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`;
 
+getAuthCode();
 
+function getAuthCode() {
+  const authCode = localStorage.getItem('authToken');
+  if (!authCode) {
+    setAuthError(true)
+  }
+}
 
   return (
     <Container>
+      {authError ?
+      <p>error</p>
+    :  
+<>
       {tool == "artistplaylist" && playlistReady && playlistID ?
         <>
           <ArtistPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
@@ -49,7 +61,9 @@ export default function Tool({ }: Props) {
         : tool == 'mergeplaylist' && playlistReady && playlistID ?
         <MergePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} AUTH_URL_NEW={AUTH_URL_NEW} />}
-    </Container>
+      </>
+      }
+        </Container>
   )
 }
 

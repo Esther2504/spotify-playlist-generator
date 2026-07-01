@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export function getAccessToken(authToken: string, redirect_url: string) {
-    console.log(authToken);
 
     axios.post(`https://accounts.spotify.com/api/token`,
         new URLSearchParams({
