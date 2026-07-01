@@ -49,7 +49,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
 
     function artistSelectionHandler(artist: string) {
-        setLoading(true)
+        setLoading(true);
 
         setSelectedArtist(artist);
         const allUris: Array<string> = [];
@@ -67,6 +67,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
             playlistItems.forEach(element => {
                 element?.item?.artists?.forEach(artistitem => {
+                    console.log(artistitem)
                     if (artistitem?.name == artist) {
                         allUris.push(element?.item?.uri)
                     }
@@ -78,14 +79,15 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         setUris(allUris)
 
         if (!newPlaylistID && allUris.length > 0) {
-            createPlaylist()
+            createPlaylist(allUris)
         } else if (newPlaylistID && allUris.length > 0) {
             addPlaylistItems(newPlaylistID, allUris)
         }
     }
 
-    function createPlaylist() {
-        if (uris.length === 0) {
+    function createPlaylist(playlistURIS) {
+        console.log(playlistURIS)
+        if (playlistURIS.length === 0) {
             return;
         }
 
@@ -100,9 +102,8 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 },
             })
             .then((res) => {
-                console.log(res.data.id)
                 setNewPlaylistID(res.data.id)
-                addPlaylistItems(res.data.id, uris)
+                addPlaylistItems(res.data.id, playlistURIS)
             })
             .catch((err) => {
                 console.log(err)

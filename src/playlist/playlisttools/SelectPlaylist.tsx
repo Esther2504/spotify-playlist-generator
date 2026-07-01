@@ -296,7 +296,7 @@ p {
         white-space: nowrap;
             width: 160px;
     text-overflow: ellipsis;
-    overflow: hidden
+    overflow: hidden;
     }
 }
 
