@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { NavLink } from 'react-router'
 
 type Props = {
     playlistID: string;
@@ -79,13 +80,13 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         setUris(allUris)
 
         if (!newPlaylistID && allUris.length > 0) {
-            createPlaylist(allUris)
+            createPlaylist(allUris, artist)
         } else if (newPlaylistID && allUris.length > 0) {
             addPlaylistItems(newPlaylistID, allUris)
         }
     }
 
-    function createPlaylist(playlistURIS) {
+    function createPlaylist(playlistURIS, artistName) {
         console.log(playlistURIS)
         if (playlistURIS.length === 0) {
             return;
@@ -93,7 +94,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
-                "name": `${playlistName} - Songs by ${selectedArtist}`,
+                "name": `${artistName} (from ${playlistName})`,
                 "description": "",
                 "public": false
             }, {
@@ -149,7 +150,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
                         <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another artist to this playlist</Button>
-                        {/* <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist with another artist</Button> */}
+                        <NavLink to="/spotify-playlist-generator/playlist"><Button>Go back to the playlist tools</Button></NavLink>
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
@@ -174,6 +175,7 @@ flex-direction: column;
 align-items: center;
 gap: 50px;
 scroll-behavior: smooth;
+text-align: center;
 
 h1 {
 font-size: 2.6rem;
@@ -189,11 +191,16 @@ div {
 display: flex;
 flex-direction: column;
 gap: 20px;
+text-align: left;
 }
 
 iframe {
 max-width: 600px;
 min-height: 600px;
+}
+
+@media screen and (max-width: 750px) {
+flex-direction: column;
 }
 `
 

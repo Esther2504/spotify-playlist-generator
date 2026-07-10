@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ArtistPlaylist from './playlisttools/ArtistPlaylist.tsx'
 import { NavLink } from 'react-router'
 
 export default function PlaylistOptions() {
@@ -8,18 +7,11 @@ export default function PlaylistOptions() {
   return (
     <Container>
         <OptionsContainer>
-          <NavLink to="../playlist/artistplaylist"><Option>Create separate playlist per artist</Option>
+          <NavLink to="./artistplaylist"><Option>Create separate playlist per artist</Option>
           </NavLink>
-          <NavLink to="../playlist/yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
-          <NavLink to="../playlist/deduplicateplaylist"><Option>Remove duplicates</Option></NavLink>
-          <NavLink to="../playlist/removeartist"><Option>Remove artist from your playlist</Option></NavLink>
-          {/* <NavLink to="../playlist/mergeplaylist"><Option>Merge playlists</Option></NavLink>
-          <NavLink to="../playlist/mergeplaylist"><Option>TBA</Option></NavLink> */}
-          {/* <Option>Shuffle playlist</Option>
-          <Option>Remove explicit songs</Option>
-          <Option>Create new playlist based on popularity</Option>
-          <Option>Remove multiple playlist items at the same time</Option>
-          <Option>Move songs between playlists</Option> */}
+          <NavLink to="./yearplaylist"><Option>Create separate playlist per year</Option></NavLink>
+          <NavLink to="./deduplicateplaylist"><Option>Remove duplicates</Option></NavLink>
+          <NavLink to="./removeartist"><Option>Remove artist from your playlist</Option></NavLink>
         </OptionsContainer>
     </Container>
   )

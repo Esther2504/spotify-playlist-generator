@@ -2,6 +2,7 @@ import axios from "axios";
 
 export function getAccessToken(authToken: string, redirect_url: string) {
 
+
     axios.post(`https://accounts.spotify.com/api/token`,
         new URLSearchParams({
             grant_type: "authorization_code",
@@ -21,6 +22,8 @@ export function getAccessToken(authToken: string, redirect_url: string) {
         })
         .catch((err) => {
             console.log(err)
+                console.log(authToken)
+
         })
 
 }
@@ -40,3 +43,6 @@ export default function checkAccessToken() {
         console.log('get new token')
     }
 }
+
+
+// https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow

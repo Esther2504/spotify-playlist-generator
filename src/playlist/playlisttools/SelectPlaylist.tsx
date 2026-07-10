@@ -222,6 +222,7 @@ align-items: center;
 gap: 50px;
 scroll-behavior: smooth;
 position: relative;
+text-align: center;
 
 .login-btn {
 background: #148255;

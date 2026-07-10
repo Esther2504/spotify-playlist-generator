@@ -91,7 +91,7 @@ export default function Statistics() {
 const Container = styled.div`
 max-width: 1400px;
 width: 90%;
-margin: 150px auto;
+margin: 50px auto;
 
 .login-btn {
 background: #148255;
