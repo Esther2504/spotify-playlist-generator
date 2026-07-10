@@ -19,11 +19,12 @@ export default function index({ }: Props) {
 }
 
 const Container = styled.div`
-margin: 150px auto;
+margin: 40px auto;
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 50px;
+padding: 20px;
 
 h1 {
 font-size: 2.6rem;

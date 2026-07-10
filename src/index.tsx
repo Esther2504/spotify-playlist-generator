@@ -21,17 +21,13 @@ root.render(
   <BrowserRouter>
     <Nav />
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="playlist">
+      <Route path="/spotify-playlist-generator" element={<App />} />
+      <Route path="spotify-playlist-generator/playlist">
         <Route index element={<PlaylistIndex />} />
         <Route path="playlist-mixer" element={<App />} />
         <Route path=":tool" element={<Tool />} />
       </Route>
-      <Route path="discover">
-        <Route index element={<Discover />} />
-        <Route path="artists" element={<Artists />} />
-      </Route>
-      <Route path="statistics">
+      <Route path="spotify-playlist-generator/statistics">
         <Route index element={<Statistics />} />
         <Route path="recent" element={<RecentyPlayed />} />
       </Route>

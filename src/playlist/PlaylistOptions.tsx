@@ -29,6 +29,7 @@ const Container = styled.div`
 max-width: 1400px;
 width: 90%;
 margin: 0 auto;
+padding: 20px;
 
 .login-btn {
 background: #148255;
