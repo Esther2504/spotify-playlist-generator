@@ -36,6 +36,8 @@ export function getAccessToken(authToken: string, redirect_url: string) {
 
 // https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 
+export  async function authFlow() {
+
 
 const generateRandomString = (length) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -64,9 +66,20 @@ const codeChallenge = base64encode(hashed);
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = 'https://emilia-nonepical-stevie.ngrok-free.dev/';
 
-const scope = 'streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played';
-const authUrl = new URL("https://accounts.spotify.com/authorize")
+const scope = [
+  "streaming",
+  "user-read-email",
+  "user-read-private",
+  "user-library-read",
+  "user-top-read",
+  "user-library-modify",
+  "playlist-read-private",
+  "playlist-modify-public",
+  "playlist-modify-private",
+  "user-read-recently-played",
+].join(" ");
 
+const authUrl = new URL("https://accounts.spotify.com/authorize")
 
 window.localStorage.setItem('codeVerifier', codeVerifier);
 
@@ -80,13 +93,20 @@ const params =  {
 }
 
 authUrl.search = new URLSearchParams(params).toString();
-// window.location.href = authUrl.toString();
+window.location.href = authUrl.toString();
 
-export const newAuthURL = authUrl.toString();
+// export const newAuthURL = authUrl.toString();
+
+}
 
 const getToken = async code => {
 
   const codeVerifier = localStorage.getItem('codeVerifier');
+  const clientId = process.env.REACT_APP_CLIENT_ID;
+const redirectUri = 'https://emilia-nonepical-stevie.ngrok-free.dev/';
+
+console.log(clientId)
+//   const code = localStorage.getItem('authToken');
 
   const url = "https://accounts.spotify.com/api/token";
   const payload = {
@@ -106,7 +126,13 @@ const getToken = async code => {
   const body = await fetch(url, payload);
   const response = await body.json();
 
+  console.log(response)
+  console.log(clientId, code, redirectUri, codeVerifier);
+
   localStorage.setItem('accessToken', response.access_token);
+
+//   werkt, maar je moet refreshen
+//  auto refresh nog toevoegen
 }
 
 
@@ -114,13 +140,15 @@ export default function checkAccessToken() {
     const savedAuthToken = localStorage.getItem('authToken')
     const accessToken = localStorage.getItem('accessToken')
     let accessTokenTime = localStorage.getItem('accessTokenTime');
+    const code = localStorage.getItem('authToken');
     let currentTime = Date.now()
     console.log(accessTokenTime)
     console.log(currentTime)
+    
     if (accessToken && accessTokenTime && ((currentTime - parseInt(accessTokenTime)) < 3600000)) {
         return true;
     } else {
-        getToken();
+        getToken(code);
         console.log('get new token')
     }
 }
