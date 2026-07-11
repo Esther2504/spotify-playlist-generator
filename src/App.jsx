@@ -59,12 +59,12 @@ function App() {
 
   }, [])
 
-      const params = useParams()
-    const authCode = params.code
+
     
   useEffect(() => {
   
-
+    const params = useParams()
+    const authCode = params.code
 
     if (authCode) {
       localStorage.setItem('authToken', authCode)

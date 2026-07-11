@@ -3,29 +3,110 @@ import axios from "axios";
 export function getAccessToken(authToken: string, redirect_url: string) {
 
 
-    axios.post(`https://accounts.spotify.com/api/token`,
-        new URLSearchParams({
-            grant_type: "authorization_code",
-            code: authToken,
-            redirect_uri: "https://emilia-nonepical-stevie.ngrok-free.dev/",
-        }), {
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization': "Basic " + btoa(`${process.env.REACT_APP_CLIENT_ID}:${process.env.REACT_APP_CLIENT_SECRET}`),
-        },
-    })
-        .then((res) => {
-            console.log(res);
-            let currentDate = Date.now()
-            localStorage.setItem('accessToken', res.data.access_token)
-            localStorage.setItem('accessTokenTime', currentDate.toString())
-        })
-        .catch((err) => {
-            console.log(err)
-                console.log(authToken)
+    // axios.post(`https://accounts.spotify.com/api/token`,
+    //     new URLSearchParams({
+    //         grant_type: "authorization_code",
+    //         code: authToken,
+    //         redirect_uri: "https://emilia-nonepical-stevie.ngrok-free.dev/",
+    //     }), {
+    //     headers: {
+    //         'content-type': 'application/x-www-form-urlencoded',
+    //         'Authorization': "Basic " + btoa(`${process.env.REACT_APP_CLIENT_ID}:${process.env.REACT_APP_CLIENT_SECRET}`),
+    //     },
+    // })
+    //     .then((res) => {
+    //         console.log(res);
+    //         let currentDate = Date.now()
+    //         localStorage.setItem('accessToken', res.data.access_token)
+    //         localStorage.setItem('accessTokenTime', currentDate.toString())
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //             console.log(authToken)
 
-        })
+    //     })
 
+    
+
+}
+
+
+
+
+
+// https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
+
+
+const generateRandomString = (length) => {
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const values = crypto.getRandomValues(new Uint8Array(length));
+  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
+}
+
+const codeVerifier  = generateRandomString(64);
+
+const sha256 = async (plain) => {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(plain)
+  return window.crypto.subtle.digest('SHA-256', data)
+}
+
+const base64encode = (input) => {
+  return btoa(String.fromCharCode(...new Uint8Array(input)))
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+}
+
+const hashed = await sha256(codeVerifier)
+const codeChallenge = base64encode(hashed);
+
+const clientId = process.env.REACT_APP_CLIENT_ID;
+const redirectUri = 'https://emilia-nonepical-stevie.ngrok-free.dev/';
+
+const scope = 'streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played';
+const authUrl = new URL("https://accounts.spotify.com/authorize")
+
+
+window.localStorage.setItem('codeVerifier', codeVerifier);
+
+const params =  {
+  response_type: 'code',
+  client_id: clientId,
+  scope,
+  code_challenge_method: 'S256',
+  code_challenge: codeChallenge,
+  redirect_uri: redirectUri,
+}
+
+authUrl.search = new URLSearchParams(params).toString();
+// window.location.href = authUrl.toString();
+
+export const newAuthURL = authUrl.toString();
+
+const getToken = async code => {
+
+  const codeVerifier = localStorage.getItem('codeVerifier');
+
+  const url = "https://accounts.spotify.com/api/token";
+  const payload = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      client_id: clientId,
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: redirectUri,
+      code_verifier: codeVerifier,
+    }),
+  }
+
+  const body = await fetch(url, payload);
+  const response = await body.json();
+
+  localStorage.setItem('accessToken', response.access_token);
 }
 
 
@@ -39,10 +120,7 @@ export default function checkAccessToken() {
     if (accessToken && accessTokenTime && ((currentTime - parseInt(accessTokenTime)) < 3600000)) {
         return true;
     } else {
-        getAccessToken(savedAuthToken)
+        getToken();
         console.log('get new token')
     }
 }
-
-
-// https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
