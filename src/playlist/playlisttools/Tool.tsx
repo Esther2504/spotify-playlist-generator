@@ -47,7 +47,10 @@ function getAuthCode() {
   return (
     <Container>
       {authError ?
+      <ErrorMessage>
+      <p>Connect to Spotify to use this tool</p>
       <NavLink to={AUTH_URL} className="loginBtn">Connect to Spotify</NavLink>
+      </ErrorMessage>
     :  
 <>
       {tool == "artistplaylist" && playlistReady && playlistID ?
@@ -89,3 +92,13 @@ align-items: center;
 }
 `
 
+const ErrorMessage = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 30px;
+gap:20px;
+p {
+font-size: 1.5rem;
+}
+`
