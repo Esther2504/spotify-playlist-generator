@@ -149,7 +149,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
                         <Button onClick={() => { setPlaylistReady(false); setUris([])}}>Add another year to this playlist</Button>
-                        <Button onClick={() => { setPlaylistReady(false); setUris([]), setNewPlaylistID(undefined) }}>Create new playlist for another year</Button>
+                        <Button onClick={() => { setPlaylistReady(false); setUris([]); setNewPlaylistID(undefined)} }>Create new playlist for another year</Button>
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>

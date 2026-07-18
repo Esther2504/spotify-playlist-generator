@@ -4,23 +4,23 @@ import { Navigate, useNavigate } from "react-router";
 import checkAccessToken from "../AccessToken.tsx";
 import { AUTH_URL } from "../AuthURL.tsx";
 
-export function Authentication() {
-    const [accessToken, setAccessToken] = useState()
+// export function Authentication() {
+//     const [accessToken, setAccessToken] = useState()
 
-    Navigate(AUTH_URL)
+//     Navigate(AUTH_URL)
 
-    const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
+//     const getAuthToken = (window.location.search).substring(6, (window.location.search).length)
 
-    useEffect(() => {
-        if (getAuthToken) {
-            setAccessToken(getAccessToken)
-            console.log(getAuthToken)
-            checkAccessToken()
-            localStorage.setItem("authToken", getAuthToken)
-        }
-    }, [getAuthToken])
+//     useEffect(() => {
+//         if (getAuthToken) {
+//             setAccessToken(getAccessToken)
+//             console.log(getAuthToken)
+//             checkAccessToken()
+//             localStorage.setItem("authToken", getAuthToken)
+//         }
+//     }, [getAuthToken])
 
-}
+// }
 
 
 export function getPlaylists(getAccessToken, setData, setError) {

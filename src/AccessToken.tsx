@@ -7,7 +7,7 @@ export function getAccessToken(authToken: string, redirect_url: string) {
     //     new URLSearchParams({
     //         grant_type: "authorization_code",
     //         code: authToken,
-    //         redirect_uri: "https://emilia-nonepical-stevie.ngrok-free.dev/",
+    //         redirect_uri: "https://esther2504.github.io/spotify-playlist-generator/",
     //     }), {
     //     headers: {
     //         'content-type': 'application/x-www-form-urlencoded',
@@ -64,7 +64,7 @@ const hashed = await sha256(codeVerifier)
 const codeChallenge = base64encode(hashed);
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = 'https://emilia-nonepical-stevie.ngrok-free.dev/';
+const redirectUri = 'https://esther2504.github.io/spotify-playlist-generator/';
 
 const scope = [
   "streaming",
@@ -103,7 +103,7 @@ const getToken = async code => {
 
   const codeVerifier = localStorage.getItem('codeVerifier');
   const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = 'https://emilia-nonepical-stevie.ngrok-free.dev/';
+const redirectUri = 'https://esther2504.github.io/spotify-playlist-generator/';
 
 console.log(clientId)
 //   const code = localStorage.getItem('authToken');
