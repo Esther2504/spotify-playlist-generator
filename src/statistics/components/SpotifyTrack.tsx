@@ -27,7 +27,7 @@ export default function SpotifyTrack({ item, i, dateTime }) {
       <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
         <i>{(item.artists).map((artist: any, i: number) => {
           return (
-            <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify}>{artist.name}</a></TrackArtistName>}</>
+            <>{i != (item.artists).length - 1 ? <TrackArtistName><a href={artist.external_urls.spotify} target="_blank">{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify} target="_blank">{artist.name}</a></TrackArtistName>}</>
           )
         })}</i>
       </p></SongInfo>

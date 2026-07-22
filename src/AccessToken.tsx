@@ -127,7 +127,7 @@ console.log(clientId)
   const response = await body.json();
 
   console.log(response)
-  console.log(clientId, code, redirectUri, codeVerifier);
+  console.log(clientId + ' ' + code + ' ' + redirectUri + ' ' + codeVerifier);
 
   localStorage.setItem('accessToken', response.access_token);
 
@@ -139,13 +139,13 @@ console.log(clientId)
 export default function checkAccessToken() {
     const savedAuthToken = localStorage.getItem('authToken')
     const accessToken = localStorage.getItem('accessToken')
-    let accessTokenTime = localStorage.getItem('accessTokenTime');
+    // let accessTokenTime = localStorage.getItem('accessTokenTime');
     const code = localStorage.getItem('authToken');
     let currentTime = Date.now()
-    console.log(accessTokenTime)
-    console.log(currentTime)
+    // console.log(accessTokenTime)
+    // console.log(currentTime)
     
-    if (accessToken && accessTokenTime && ((currentTime - parseInt(accessTokenTime)) < 3600000)) {
+    if (accessToken) {
         return true;
     } else {
         getToken(code);
