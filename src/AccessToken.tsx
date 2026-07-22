@@ -129,10 +129,13 @@ console.log(clientId)
   console.log(response)
   console.log(clientId + ' ' + code + ' ' + redirectUri + ' ' + codeVerifier);
 
-  localStorage.setItem('accessToken', response.access_token);
+  const currentDate = new Date();
 
-//   werkt, maar je moet refreshen
-//  auto refresh nog toevoegen
+  localStorage.setItem('accessToken', response.access_token);
+  localStorage.setItem('refreshToken', response.refresh_token);
+  localStorage.setItem('expiration', currentDate + response.expires_in);
+
+
 }
 
 
@@ -152,3 +155,40 @@ export default function checkAccessToken() {
         console.log('get new token')
     }
 }
+
+  const getRefreshToken = async () => {
+
+   const refreshToken = localStorage.getItem('refreshToken');
+   const url = "https://accounts.spotify.com/api/token";
+   const clientId = process.env.REACT_APP_CLIENT_ID;
+
+   const payload = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+        client_id: clientId
+      }),
+   }
+   const result = await fetch(url, payload);
+   const response = await result.json();
+
+   if (!result.ok) {
+     if (response.error === 'invalid_grant') {
+       localStorage.removeItem('accessToken');
+       localStorage.removeItem('refreshToken');
+       window.location.href = '/authenticate';
+       return;
+     }
+
+     throw new Error(`Token refresh failed: ${response.error}`);
+   }
+
+   localStorage.setItem('accessToken', response.access_token);
+   if (response.refresh_token) {
+     localStorage.setItem('refreshToken', response.refresh_token);
+   }
+  }
