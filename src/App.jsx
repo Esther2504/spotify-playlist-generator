@@ -167,7 +167,7 @@ const Button = styled.button`
 background: #148255;
 border: none;
 color: #fff;
-padding: 15px 30px;
+padding: 15px 20px;
 font-size: 1.1rem;
 cursor: pointer;
 font-weight: 600;

@@ -142,16 +142,15 @@ console.log(clientId)
 export default function checkAccessToken() {
     const savedAuthToken = localStorage.getItem('authToken')
     const accessToken = localStorage.getItem('accessToken')
-    // let accessTokenTime = localStorage.getItem('accessTokenTime');
+    let accessTokenTime = localStorage.getItem('expirationTime');
     const code = localStorage.getItem('authToken');
-    let currentTime = Date.now()
-    // console.log(accessTokenTime)
-    // console.log(currentTime)
+    let currentTime = new Date()
+    let expireTime = new Date(accessTokenTime)
     
-    if (accessToken) {
+    if (accessToken && currentTime < expireTime) {
         return true;
     } else {
-        getToken(code);
+        getRefreshToken();
         console.log('get new token')
     }
 }
@@ -177,6 +176,7 @@ export default function checkAccessToken() {
    const response = await result.json();
 
    if (!result.ok) {
+    console.log(response)
      if (response.error === 'invalid_grant') {
        localStorage.removeItem('accessToken');
        localStorage.removeItem('refreshToken');
@@ -187,7 +187,12 @@ export default function checkAccessToken() {
      throw new Error(`Token refresh failed: ${response.error}`);
    }
 
+   console.log(response)
+   const currentDate = new Date();
+   
    localStorage.setItem('accessToken', response.access_token);
+  localStorage.setItem('expiration', currentDate + response.expires_in);
+
    if (response.refresh_token) {
      localStorage.setItem('refreshToken', response.refresh_token);
    }
