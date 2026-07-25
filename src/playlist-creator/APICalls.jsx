@@ -51,7 +51,6 @@ export function getTracks(playlistid, playlistName, setPlaylistName, accessToken
         .catch((err) => {
             getAlbumTracks(playlistid, playlistName, setPlaylistName, accessToken, setTracks, setError)
         })
-
 }
 
 function getAlbumTracks(playlistid, setPlaylistName, accessToken, setTracks, setError) {

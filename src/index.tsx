@@ -31,6 +31,7 @@ root.render(
         <Route index element={<Statistics />} />
         <Route path="recent" element={<RecentyPlayed />} />
       </Route>
+      <Route path="spotify-playlist-generator/authenticate" />
     </Routes>
   </BrowserRouter>
 );
