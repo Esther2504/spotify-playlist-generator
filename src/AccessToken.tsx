@@ -169,7 +169,7 @@ const getRefreshToken = async () => {
     if (response.error === 'invalid_grant') {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      window.location.href = '/spotify-playlist-generator';
+      window.location.href = '/spotify-playlist-generator/authenticate';
       return;
     }
 

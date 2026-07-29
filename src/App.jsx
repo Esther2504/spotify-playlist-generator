@@ -55,7 +55,6 @@ function App() {
   useEffect(() => {
 
 
-    checkAccessToken()
 
   }, [])
     const params = useParams()
