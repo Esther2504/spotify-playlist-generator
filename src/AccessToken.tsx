@@ -130,6 +130,7 @@ const getToken = async code => {
 export default function checkAccessToken() {
   const savedAuthToken = localStorage.getItem('authToken')
   const accessToken = localStorage.getItem('accessToken')
+  const refreshToken = localStorage.getItem('refreshToken');
   let accessTokenTime = localStorage.getItem('expirationTime');
   const code = localStorage.getItem('authToken');
   let currentTime = new Date()
@@ -168,7 +169,7 @@ const getRefreshToken = async () => {
     if (response.error === 'invalid_grant') {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      window.location.href = '/spotify-playlist-generator/authenticate';
+      window.location.href = '/spotify-playlist-generator';
       return;
     }
 
