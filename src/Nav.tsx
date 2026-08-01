@@ -10,7 +10,7 @@ export default function Nav() {
 
   useEffect(() => {
     if (getAuthToken) {
-      checkAccessToken()
+      checkAccessToken();
       localStorage.setItem("authToken", getAuthToken)
     }
   }, [getAuthToken])

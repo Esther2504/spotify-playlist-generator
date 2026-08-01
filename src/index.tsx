@@ -11,6 +11,7 @@ import RecentyPlayed from './statistics/RecentyPlayed.tsx';
 import SelectPlaylist from './playlist/playlisttools/SelectPlaylist.tsx'
 import Tool from './playlist/playlisttools/Tool.tsx'
 import PlaylistIndex from './playlist/ToolOptions.tsx';
+import Authenticate from './Authenticate.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,7 +32,7 @@ root.render(
         <Route index element={<Statistics />} />
         <Route path="recent" element={<RecentyPlayed />} />
       </Route>
-      <Route path="spotify-playlist-generator/authenticate" element={<App />} />
+      <Route path="spotify-playlist-generator/authenticate" element={<Authenticate />} />
     </Routes>
   </BrowserRouter>
 );
