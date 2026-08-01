@@ -69,7 +69,7 @@ function getAuthCode() {
         <RemoveArtist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : tool == 'mergeplaylist' && playlistReady && playlistID ?
         <MergePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
-        : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} AUTH_URL_NEW={AUTH_URL} />}
+        : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} AUTH_URL_NEW={AUTH_URL} tool={tool} />}
       </>
       }
         </Container>

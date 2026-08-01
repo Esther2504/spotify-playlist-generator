@@ -8,7 +8,7 @@ import { AUTH_URL } from '../../AuthURL.tsx';
 // import { newAuthURL } from '../../AccessToken.tsx'
 import { authFlow } from '../../AccessToken.tsx'
 
-export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID, AUTH_URL_NEW }) {
+export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, setPlaylistName, setPlaylistID, playlistID, AUTH_URL_NEW, tool }) {
   const [data, setData] = useState()
   const [error, setError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>()
@@ -30,7 +30,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   }, [playlistID])
 
   useEffect(() => {
-    checkAccessToken();
+    checkAccessToken('/spotify-playlist-generator/playlist');
     if (ownPlaylists.length == 0) {
       getOwnPlaylists()
     }
