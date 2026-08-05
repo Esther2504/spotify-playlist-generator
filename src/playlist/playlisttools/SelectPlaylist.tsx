@@ -30,7 +30,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   }, [playlistID])
 
   useEffect(() => {
-    checkAccessToken('/spotify-playlist-generator/playlist');
+    checkAccessToken('/playlist');
     if (ownPlaylists.length == 0) {
       getOwnPlaylists()
     }

@@ -23,16 +23,16 @@ root.render(
     <Nav />
     <Routes>
       <Route path="/spotify-playlist-generator" element={<App />} />
-      <Route path="spotify-playlist-generator/playlist">
+      <Route path="/spotify-playlist-generator/playlist">
         <Route index element={<PlaylistIndex />} />
         <Route path="playlist-mixer" element={<App />} />
         <Route path=":tool" element={<Tool />} />
       </Route>
-      <Route path="spotify-playlist-generator/statistics">
+      <Route path="/spotify-playlist-generator/statistics">
         <Route index element={<Statistics />} />
         <Route path="recent" element={<RecentyPlayed />} />
       </Route>
-      <Route path="spotify-playlist-generator/authenticate" element={<Authenticate />} />
+      <Route path="/spotify-playlist-generator/authenticate" element={<Authenticate />} />
     </Routes>
   </BrowserRouter>
 );
