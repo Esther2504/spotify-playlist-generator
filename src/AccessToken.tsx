@@ -123,26 +123,31 @@ const getToken = async code => {
 
   localStorage.setItem('accessToken', response.access_token);
   localStorage.setItem('refreshToken', response.refresh_token);
-  localStorage.setItem('expiration', currentDate + response.expires_in);
+  const expirationTime = new Date(
+  currentDate.getTime() + response.expires_in * 1000
+);
+
+localStorage.setItem('expirationTime', expirationTime.toISOString());
 }
 
 
-export default function checkAccessToken(redirect) {
-  const savedAuthToken = localStorage.getItem('authToken')
-  const accessToken = localStorage.getItem('accessToken')
-  const refreshToken = localStorage.getItem('refreshToken');
-  let accessTokenTime = localStorage.getItem('expirationTime');
-  const code = localStorage.getItem('authToken');
-  let currentTime = new Date()
-  let expireTime = new Date(accessTokenTime)
 
-  if (accessToken && currentTime < expireTime) {
-    return true;
-  } else {
-    getRefreshToken(redirect);
-    console.log(redirect)
-    console.log('get new token')
+export default async function checkAccessToken(redirect) {
+  const accessToken = localStorage.getItem('accessToken');
+  const accessTokenTime = localStorage.getItem('expirationTime');
+    const savedAuthToken = localStorage.getItem('authToken')
+    const refreshToken = localStorage.getItem('refreshToken');
+
+  if (accessToken && accessTokenTime) {
+    const currentTime = new Date();
+    const expireTime = new Date(accessTokenTime);
+
+    if (currentTime < expireTime) {
+      return true;
+    }
   }
+
+  return await getRefreshToken(redirect);
 }
 
 const getRefreshToken = async (redirect) => {
@@ -172,19 +177,24 @@ const getRefreshToken = async (redirect) => {
     if (response.error === 'invalid_grant') {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      window.location.href = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&grant_type=refresh_token&redirect_uri=https://esther2504.github.io/spotify-playlist-generator${redirect ? redirect : '/'}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`;
+      window.location.href = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=https://esther2504.github.io/spotify-playlist-generator${redirect ? redirect : '/'}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`;
       return;
     }
 
     throw new Error(`Token refresh failed: ${response.error}`);
   }
 
-  const currentDate = new Date();
+localStorage.setItem('accessToken', response.access_token);
 
-  localStorage.setItem('accessToken', response.access_token);
-  localStorage.setItem('expiration', currentDate + response.expires_in);
+const expirationTime = new Date(
+  Date.now() + response.expires_in * 1000
+);
 
-  if (response.refresh_token) {
-    localStorage.setItem('refreshToken', response.refresh_token);
-  }
+localStorage.setItem('expirationTime', expirationTime.toISOString());
+
+if (response.refresh_token) {
+  localStorage.setItem('refreshToken', response.refresh_token);
+}
+
+return true;
 }
