@@ -139,15 +139,31 @@ export default async function checkAccessToken(redirect) {
     const refreshToken = localStorage.getItem('refreshToken');
 
   if (accessToken && accessTokenTime) {
-    const currentTime = new Date();
-    const expireTime = new Date(accessTokenTime);
-
-    if (currentTime < expireTime) {
+    if (Date.now() < new Date(accessTokenTime).getTime()) {
       return true;
     }
   }
 
-  return await getRefreshToken(redirect);
+  const refreshed = await getRefreshToken(redirect);
+
+  if (refreshed) {
+    return true;
+  }
+
+  const authUrl =
+    `https://accounts.spotify.com/authorize` +
+    `?client_id=${process.env.REACT_APP_CLIENT_ID}` +
+    `&response_type=code` +
+    `&redirect_uri=${encodeURIComponent(
+      `https://esther2504.github.io/spotify-playlist-generator${redirect}`
+    )}` +
+    `&scope=${encodeURIComponent(
+      'streaming user-read-email user-read-private user-library-read user-top-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-recently-played'
+    )}`;
+
+  window.location.href = authUrl;
+
+  return false;
 }
 
 const getRefreshToken = async (redirect) => {
@@ -156,7 +172,9 @@ const getRefreshToken = async (redirect) => {
   const url = "https://accounts.spotify.com/api/token";
   const clientId = process.env.REACT_APP_CLIENT_ID;
 
-  console.log(redirect)
+    if (!refreshToken) {
+    return false;
+  }
 
   const payload = {
     method: 'POST',

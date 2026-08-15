@@ -5,6 +5,7 @@ import { NavLink } from 'react-router'
 import SpotifyTrack from './components/SpotifyTrack.tsx';
 import ArtistItem from './components/ArtistItem.tsx';
 import { AUTH_URL } from '../AuthURL.tsx';
+import checkAccessToken from '../AccessToken.tsx';
 
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
@@ -22,6 +23,10 @@ export default function Statistics() {
       getTopTracks();
     }
   }, [periodFilter, typeFilter])
+
+  useEffect(() => {
+  checkAccessToken('/statistics');
+}, []);
 
   function getTopTracks() {
     console.log(accessToken)
@@ -58,7 +63,9 @@ export default function Statistics() {
   return (
     <Container>
       {error ?
-        <ErrorMessage><p>Connect to Spotify to see your statistics</p><NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink></ErrorMessage>
+        <ErrorMessage><p>Connect to Spotify to see your statistics</p>
+        <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
+        </ErrorMessage>
         :
         <>
           <h1>Most listened to</h1>

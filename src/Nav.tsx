@@ -6,15 +6,15 @@ import checkAccessToken from './AccessToken.tsx'
 import { AUTH_URL } from './AuthURL.tsx'
 
 export default function Nav() {
-  
-useEffect(() => {
-  const authToken = new URLSearchParams(window.location.search).get("token");
 
-  if (authToken) {
-    checkAccessToken("/");
-    localStorage.setItem("authToken", authToken);
-  }
-}, []);
+// useEffect(() => {
+//   const authToken = new URLSearchParams(window.location.search).get("token");
+
+//   if (authToken) {
+//     checkAccessToken("/");
+//     localStorage.setItem("authToken", authToken);
+//   }
+// }, []);
 
   return (
     <NavContainer>
