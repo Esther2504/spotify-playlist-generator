@@ -53,21 +53,21 @@ function getAuthCode() {
       </ErrorMessage>
     :  
 <>
-      {tool == "artistplaylist" && playlistReady && playlistID ?
+      {tool === "artistplaylist" && playlistReady && playlistID ?
         <>
           <ArtistPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
-        : tool == "yearplaylist" && playlistReady && playlistID ?
+        : tool === "yearplaylist" && playlistReady && playlistID ?
         <>
           <YearPlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
-         : tool == "deduplicateplaylist" && playlistReady && playlistID ?
+         : tool === "deduplicateplaylist" && playlistReady && playlistID ?
         <>
           <DeduplicatePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         </>
-        : tool == 'removeartist' && playlistReady && playlistID ?
+        : tool === 'removeartist' && playlistReady && playlistID ?
         <RemoveArtist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
-        : tool == 'mergeplaylist' && playlistReady && playlistID ?
+        : tool === 'mergeplaylist' && playlistReady && playlistID ?
         <MergePlaylist playlistID={playlistID} playlistItems={playlistItems} playlistName={playlistName ? playlistName : 'Playlist'} />
         : <SelectPlaylist setPlaylistReady={setPlaylistReady} setPlaylistItems={setPlaylistItems} setPlaylistName={setPlaylistName} setPlaylistID={setPlaylistID} playlistID={playlistID} AUTH_URL_NEW={AUTH_URL} tool={tool} />}
       </>

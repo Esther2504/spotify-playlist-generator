@@ -34,10 +34,10 @@ export default function Start({ accessToken, step, setStep, setError }) {
   let genreseeds = chosenGenre
 
   useEffect(() => {
-    if (step == 6 && recommendations.length == 0) {
+    if (step === 6 && recommendations.length === 0) {
       getRecommendations(accessToken, artistsseeds, tracksseeds, genreseeds, amount, recommendations, setRecommendations, setError);
       getUser(accessToken, setUserID, setError);
-    } else if (step == 7) {
+    } else if (step === 7) {
       createPlaylist(accessToken, userID, PlaylistName, PlaylistDescription, recommendations, newPlaylist, setNewPlayList)
     }
   }, [step])
@@ -63,7 +63,7 @@ export default function Start({ accessToken, step, setStep, setError }) {
           <BarProgress step={step} />
           <Circles>
             <CircleContainer><Circle color={"#148255"} onClick={() => setStep(2)}>1</Circle><br /><span>Artist</span></CircleContainer>
-            {step == 3 || step == 4 || step == 5 ?
+            {step === 3 || step === 4 || step === 5 ?
               <>
                 <CircleContainer><Circle color={"#148255"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
               </>
@@ -71,7 +71,7 @@ export default function Start({ accessToken, step, setStep, setError }) {
               <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(3)}>2</Circle><p>Song</p></CircleContainer>
             }
             <CircleContainer>
-              {step == 4 || step == 5 ?
+              {step === 4 || step === 5 ?
                 <>
                   <CircleContainer><Circle color={"#148255"} onClick={() => setStep(4)}>3</Circle><p>Genre</p></CircleContainer>
                 </>
@@ -80,7 +80,7 @@ export default function Start({ accessToken, step, setStep, setError }) {
               }
             </CircleContainer>
             <CircleContainer>
-              {step == 5 ?
+              {step === 5 ?
                 <CircleContainer><Circle color={"#148255"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
                 :
                 <CircleContainer><Circle color={"#ffffff"} onClick={() => setStep(5)}>4</Circle><p>Amount</p></CircleContainer>
@@ -91,21 +91,21 @@ export default function Start({ accessToken, step, setStep, setError }) {
         : null
       }
       <Container step={step}>
-        {step == 1 ?
+        {step === 1 ?
           <>
           </>
-          : step == 2 ?
+          : step === 2 ?
             <FaveArtists getAccessToken={accessToken} chosenArtist={chosenArtist} setChosenArtist={setChosenArtist} setStep={setStep} setError={setError} />
-            : step == 3 ?
+            : step === 3 ?
               <FaveSongs getAccessToken={accessToken} chosenSong={chosenSong} setChosenSong={setChosenSong} setStep={setStep} setError={setError} />
-              : step == 4 ?
+              : step === 4 ?
                 <FaveGenres chosenGenre={chosenGenre} setChosenGenre={setChosenGenre} getAccessToken={accessToken} setStep={setStep} setError={setError} />
-                : step == 5 ?
+                : step === 5 ?
                   <RecomAmount amount={amount} setAmount={setAmount} chosenArtist={chosenArtist} chosenSong={chosenSong} chosenGenre={chosenGenre} setStep={setStep} />
                   :
-                  step == 6 ?
+                  step === 6 ?
                     <PlaylistNameDescription setPlaylistName={setPlaylistName} setPlaylistDescription={setPlaylistDescription} setStep={setStep} />
-                    : step == 7 ?
+                    : step === 7 ?
                       <Loading />
                       :
                       <Playlist newPlaylist={newPlaylist} startOver={startOver} />
@@ -130,7 +130,7 @@ top: 50px;
 border-radius: 20px;
 `
 const BarProgress = styled.div`
-width: ${props => props.step == 3 ? "260px" : props.step == 4 ? "520px" : props.step == 5 ? "800px" : "0"};
+width: ${props => props.step === 3 ? "260px" : props.step === 4 ? "520px" : props.step === 5 ? "800px" : "0"};
 max-width: 90%;
 height: 10px;
 background-color: #148255;
@@ -140,7 +140,7 @@ border-radius: 20px;
 z-index: 2;
 
 @media screen and (max-width: 850px) {
-  width: ${props => props.step == 3 ? "33%" : props.step == 4 ? "62%" : props.step == 5 ? "100%" : "0"};
+  width: ${props => props.step === 3 ? "33%" : props.step === 4 ? "62%" : props.step === 5 ? "100%" : "0"};
 }
 `
 const Circles = styled.div`
@@ -168,7 +168,7 @@ width: 40px;
 height: 40px;
 background-color: ${props => props.color ? props.color : "#ffffff"};
 border-radius: 20px;
-color: ${props => props.color == "#ffffff" ? "black" : "white"};
+color: ${props => props.color === "#ffffff" ? "black" : "white"};
 cursor: pointer;
 font-size: 1.5rem;
 line-height: 2.5rem;

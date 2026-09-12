@@ -21,7 +21,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
     useEffect(() => {
         const allArtists: Array<string> = []
 
-        if (playlistID == "likedsongs") {
+        if (playlistID === "likedsongs") {
             playlistItems.forEach(element => {
 
                 element?.track?.artists?.forEach(artist => {
@@ -50,10 +50,10 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         const allUris: Array<string> = [];
 
 
-        if (playlistID == "likedsongs") {
+        if (playlistID === "likedsongs") {
             playlistItems.forEach(element => {
                 element?.track?.artists?.forEach(artistitem => {
-                    if (artistitem?.name == artist) {
+                    if (artistitem?.name === artist) {
                         console.log(element.track)
                         allUris.push(element?.track?.uri)
                     }
@@ -68,7 +68,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         } else {
             playlistItems.forEach(element => {
                 element?.item?.artists?.forEach(artistitem => {
-                    if (artistitem?.name == artist) {
+                    if (artistitem?.name === artist) {
                         allUris.push(element?.item?.uri)
                     }
                 })

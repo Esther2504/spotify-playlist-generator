@@ -16,7 +16,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
 
   let trackids = []
   tracks.forEach(element => {
-    if (element.track || element.type == "track") {
+    if (element.track || element.type === "track") {
       if (element.track) {
         trackids.push(element.track.id)
       } else {
@@ -121,7 +121,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Major":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].mode == 1 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].mode === 1 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }
@@ -135,7 +135,7 @@ export default function NewPlaylist({ tracks, songType, playlistName, data, acce
         case "Minor":
           for (let i = 0; i < audioDetails.length; i++) {
             if (audioDetails[i]) {
-              if (audioDetails[i].mode == 0 && !newPlaylistIds.includes(audioDetails[i].uri)) {
+              if (audioDetails[i].mode === 0 && !newPlaylistIds.includes(audioDetails[i].uri)) {
                 newPlaylistIds.push(audioDetails[i].uri)
               }
             }

@@ -71,13 +71,13 @@ export default function Statistics() {
           <h1>Most listened to</h1>
           <Filters>
             <Filter>
-              <Label htmlFor="songs" className={typeFilter == "tracks" ? "fill" : "non-fill"}><input id="songs" type="radio" value="tracks" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Songs</Label>
-              <Label htmlFor="artists" className={typeFilter == "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
+              <Label htmlFor="songs" className={typeFilter === "tracks" ? "fill" : "non-fill"}><input id="songs" type="radio" value="tracks" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Songs</Label>
+              <Label htmlFor="artists" className={typeFilter === "artists" ? "fill" : "non-fill"}><input id="artists" type="radio" value="artists" name="type" onChange={(e) => handleTypeFilter(e.target.value)} />Artists</Label>
             </Filter>
             <Filter>
-              <Label htmlFor="short" className={periodFilter == "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
-              <Label htmlFor="medium" className={periodFilter == "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
-              <Label htmlFor="long" className={periodFilter == "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
+              <Label htmlFor="short" className={periodFilter === "short_term" ? "fill" : "non-fill"}><input id="short" type="radio" value="short_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past month</Label>
+              <Label htmlFor="medium" className={periodFilter === "medium_term" ? "fill" : "non-fill"}><input id="medium" type="radio" value="medium_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past six months</Label>
+              <Label htmlFor="long" className={periodFilter === "long_term" ? "fill" : "non-fill"}><input id="long" type="radio" value="long_term" name="period" onChange={(e) => handleFilter(e.target.value)} />Past year</Label>
             </Filter>
           </Filters>
           {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {

@@ -28,11 +28,11 @@ export default function AllPlaylists({ accessToken, data, setError }) {
   }
 
   function setSlide(p) {
-    if (p == 'next' && lastSlide < data.items.length) {
+    if (p === 'next' && lastSlide < data.items.length) {
       setFirstSlide(firstSlide + 10)
       setLastSlide(lastSlide + 10)
       setHidePrev(false)
-    } else if (p == 'prev' && firstSlide != '0') {
+    } else if (p === 'prev' && firstSlide != '0') {
       setFirstSlide(firstSlide - 10)
       setLastSlide(lastSlide - 10)
     }
@@ -45,7 +45,7 @@ export default function AllPlaylists({ accessToken, data, setError }) {
   useEffect(() => {
     if (lastSlide >= data.items.length) {
       setHideNext(true)
-    } else if (firstSlide == 0) {
+    } else if (firstSlide === 0) {
       setHidePrev(true)
     } else {
       setHideNext(false)

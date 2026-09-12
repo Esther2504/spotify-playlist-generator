@@ -25,7 +25,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
         const allYears: Array<string> = []
         playlistItems.forEach(element => {
             let releaseDate;
-                    if (playlistID == "likedsongs") {
+                    if (playlistID === "likedsongs") {
            releaseDate = new Date(element?.track?.album?.release_date)
         } else {
             releaseDate = new Date(element?.item?.album?.release_date)
@@ -58,7 +58,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
         playlistItems.forEach(element => {
 
                let releaseDate;
-                    if (playlistID == "likedsongs") {
+                    if (playlistID === "likedsongs") {
            releaseDate = new Date(element?.track?.album?.release_date)
         } else {
             releaseDate = new Date(element?.item?.album?.release_date)
@@ -66,7 +66,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
             let releaseYear = releaseDate.getFullYear()
 
 
-            if (releaseYear == year) {
+            if (releaseYear === year) {
                 allUris.push(element?.item?.uri)
             }
         })

@@ -31,7 +31,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
 
   useEffect(() => {
     checkAccessToken('/playlist');
-    if (ownPlaylists.length == 0) {
+    if (ownPlaylists.length === 0) {
       getOwnPlaylists()
     }
   }, [])
@@ -61,7 +61,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
       .catch((err) => {
         console.log(err)
         setError(true)
-        if (err.response.data.error.message == 'Resource not found') {
+        if (err.response.data.error.message === 'Resource not found') {
           setErrorMessage("Sorry, we either can't find or use this playlist")
         } else {
           setErrorMessage(err.response.data.error.message)
@@ -129,11 +129,11 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   }
 
   function setSlide(p) {
-    if (p == 'next' && lastSlide < ownPlaylists.length) {
+    if (p === 'next' && lastSlide < ownPlaylists.length) {
       setFirstSlide(firstSlide + 10)
       setLastSlide(lastSlide + 10)
       setHidePrev(false)
-    } else if (p == 'prev' && firstSlide != 0) {
+    } else if (p === 'prev' && firstSlide != 0) {
       setFirstSlide(firstSlide - 10)
       setLastSlide(lastSlide - 10)
     }

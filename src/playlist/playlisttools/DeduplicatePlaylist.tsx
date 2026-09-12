@@ -38,7 +38,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
         let foundNameArtists = []
         let foundIds = []
         playlistItems.reduce((accumulator, track) => {
-            if (track.track == null) {
+            if (track.track === null) {
                 return;
             }
             const nameArtist = (track?.track?.name + '|' + track?.track?.artists[0]?.name).toLowerCase()
