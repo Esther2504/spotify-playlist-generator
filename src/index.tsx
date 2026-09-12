@@ -12,6 +12,7 @@ import SelectPlaylist from './playlist/playlisttools/SelectPlaylist.tsx'
 import Tool from './playlist/playlisttools/Tool.tsx'
 import PlaylistIndex from './playlist/ToolOptions.tsx';
 import Authenticate from './Authenticate.tsx';
+import ErrorPage from './ErrorPage.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +23,7 @@ root.render(
   <BrowserRouter>
     <Nav />
     <Routes>
+      <Route path="*" element={<ErrorPage />} />
       <Route path="/spotify-playlist-generator" element={<App />} />
       <Route path="/spotify-playlist-generator/playlist">
         <Route index element={<PlaylistIndex />} />
