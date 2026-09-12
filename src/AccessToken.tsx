@@ -7,7 +7,7 @@ export function getAccessToken(authToken: string, redirect_url: string) {
   //     new URLSearchParams({
   //         grant_type: "authorization_code",
   //         code: authToken,
-  //         redirect_uri: "https://esther2504.github.io/spotify-playlist-generator/",
+  //         redirect_uri: "https://spotifyplaylisttools.netlify.app",
   //     }), {
   //     headers: {
   //         'content-type': 'application/x-www-form-urlencoded',
@@ -56,7 +56,7 @@ export async function authFlow() {
   const codeChallenge = base64encode(hashed);
 
   const clientId = process.env.REACT_APP_CLIENT_ID;
-  const redirectUri = 'https://esther2504.github.io/spotify-playlist-generator/';
+  const redirectUri = 'https://spotifyplaylisttools.netlify.app';
 
   const scope = [
     "streaming",
@@ -93,7 +93,7 @@ const getToken = async code => {
 
   const codeVerifier = localStorage.getItem('codeVerifier');
   const clientId = process.env.REACT_APP_CLIENT_ID;
-  const redirectUrl = 'https://esther2504.github.io/spotify-playlist-generator/';
+  const redirectUrl = 'https://spotifyplaylisttools.netlify.app';
 
   console.log(clientId)
   //   const code = localStorage.getItem('authToken');
