@@ -12,6 +12,7 @@ import Tool from './playlist/playlisttools/Tool.tsx'
 import PlaylistIndex from './playlist/ToolOptions.tsx';
 import Authenticate from './Authenticate.tsx';
 import ErrorPage from './ErrorPage.tsx';
+import '/index.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
