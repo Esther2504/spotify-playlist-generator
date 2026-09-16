@@ -23,7 +23,7 @@ root.render(
     <Nav />
     <Routes>
       <Route path="*" element={<ErrorPage />} />
-      <Route path="/spotify-playlist-generator" element={<App />} />
+      <Route path="/" element={<App />} />
       <Route path="/spotify-playlist-generator/playlist">
         <Route index element={<PlaylistIndex />} />
         <Route path="playlist-mixer" element={<App />} />

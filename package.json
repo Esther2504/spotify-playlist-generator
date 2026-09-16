@@ -1,6 +1,6 @@
 {
   "homepage": "http://spotifyplaylisttools.netlify.app",
-  "name": "spotify-playlist-generator",
+  "name": "spotify-playlist-tools",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
