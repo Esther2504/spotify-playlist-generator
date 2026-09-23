@@ -25,7 +25,7 @@ export default function Statistics() {
   }, [periodFilter, typeFilter])
 
   useEffect(() => {
-  checkAccessToken('/statistics');
+  checkAccessToken('statistics');
 }, []);
 
   function getTopTracks() {

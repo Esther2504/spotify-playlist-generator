@@ -23,7 +23,7 @@ export default function Nav() {
         <NavLink to="./playlist">Playlist tools</NavLink>
         <NavLink to="./statistics">Statistics</NavLink>
       </NavLinks>
-      <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
+      <div onClick={() => checkAccessToken('')} className="login-btn">Connect to Spotify</div>
     </NavContainer>
   )
 }
