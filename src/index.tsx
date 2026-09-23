@@ -25,16 +25,16 @@ root.render(
     <Routes>
       <Route path="*" element={<ErrorPage />} />
       <Route path="/" element={<App />} />
-      <Route path="/spotify-playlist-generator/playlist">
+      <Route path="/playlist">
         <Route index element={<PlaylistIndex />} />
         <Route path="playlist-mixer" element={<App />} />
         <Route path=":tool" element={<Tool />} />
       </Route>
-      <Route path="/spotify-playlist-generator/statistics">
+      <Route path="/statistics">
         <Route index element={<Statistics />} />
         <Route path="recent" element={<RecentyPlayed />} />
       </Route>
-      <Route path="/spotify-playlist-generator/authenticate" element={<Authenticate />} />
+      <Route path="/authenticate" element={<Authenticate />} />
     </Routes>
   </BrowserRouter>
 );
