@@ -150,7 +150,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                         <h1>Your playlist is ready!</h1>
                         <p>We already saved the playlist to your Spotify.</p>
                         <Button onClick={() => { setPlaylistReady(false); setUris([]) }}>Add another artist to this playlist</Button>
-                        <NavLink to="/spotify-playlist-generator/playlist"><Button>Go back to the playlist tools</Button></NavLink>
+                        <NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink>
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
