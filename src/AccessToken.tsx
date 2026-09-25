@@ -155,7 +155,7 @@ export default async function checkAccessToken(redirect) {
     `?client_id=${process.env.REACT_APP_CLIENT_ID}` +
     `&response_type=code` +
     `&redirect_uri=https://spotifyplaylisttools.netlify.app/${redirect}`+
-    '&scope=streaming user-read-email user-read-private user-library-read user-top-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-recently-played';
+    `&scope=streaming user-read-email user-read-private user-library-read user-top-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-recently-played`;
 
   window.location.href = authUrl;
 
