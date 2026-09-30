@@ -89,7 +89,7 @@ export async function authFlow(redirect) {
 
 }
 
-const getToken = async code => {
+export const getToken = async code => {
 
   const codeVerifier = localStorage.getItem('codeVerifier');
   const clientId = process.env.REACT_APP_CLIENT_ID;

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import PlaylistOptions from './PlaylistOptions.tsx'
 import { NavLink } from 'react-router'
 import styled from 'styled-components'
+import { getToken } from '../AccessToken.tsx'
 
 type Props = {}
 
@@ -13,6 +14,7 @@ export default function PlaylistIndex({ }: Props) {
 
   if (code) {
     localStorage.setItem('authToken', code);
+    getToken(code);
   }
 
   return (
