@@ -9,7 +9,7 @@ import Artists from './discover/Artists.tsx';
 import RecentyPlayed from './statistics/RecentyPlayed.tsx';
 import SelectPlaylist from './playlist/playlisttools/SelectPlaylist.tsx'
 import Tool from './playlist/playlisttools/Tool.tsx'
-import PlaylistIndex from './playlist/ToolOptions.tsx';
+import PlaylistIndex from './playlist/PlaylistIndex.tsx';
 import Authenticate from './Authenticate.tsx';
 import ErrorPage from './ErrorPage.tsx';
 import './index.css'

@@ -6,9 +6,14 @@ import styled from 'styled-components'
 
 type Props = {}
 
-export default function index({ }: Props) {
-  // const [playlistTool, setPlaylistTool] = useState<string>()
+export default function PlaylistIndex({ }: Props) {
 
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+
+  if (code) {
+    localStorage.setItem('authToken', code);
+  }
 
   return (
     <Container>
