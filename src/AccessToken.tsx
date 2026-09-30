@@ -29,7 +29,7 @@ export function getAccessToken(authToken: string, redirect_url: string) {
 }
 
 
-export async function authFlow() {
+export async function authFlow(redirect) {
 
   const generateRandomString = (length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -56,7 +56,7 @@ export async function authFlow() {
   const codeChallenge = base64encode(hashed);
 
   const clientId = process.env.REACT_APP_CLIENT_ID;
-  const redirectUri = 'https://spotifyplaylisttools.netlify.app';
+  const redirectUri = `https://spotifyplaylisttools.netlify.app/${redirect}`;
 
   const scope = [
     "streaming",
@@ -150,14 +150,16 @@ export default async function checkAccessToken(redirect) {
     return true;
   }
 
-  const authUrl =
-    `https://accounts.spotify.com/authorize` +
-    `?client_id=${process.env.REACT_APP_CLIENT_ID}` +
-    `&response_type=code` +
-    `&redirect_uri=https://spotifyplaylisttools.netlify.app/${redirect}`+
-    `&scope=streaming user-read-email user-read-private user-library-read user-top-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-recently-played`;
+  // const authUrl =
+  //   `https://accounts.spotify.com/authorize` +
+  //   `?client_id=${process.env.REACT_APP_CLIENT_ID}` +
+  //   `&response_type=code` +
+  //   `&redirect_uri=https://spotifyplaylisttools.netlify.app/${redirect}`+
+  //   `&scope=streaming user-read-email user-read-private user-library-read user-top-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-recently-played`;
 
-  window.location.href = authUrl;
+  // window.location.href = authUrl;
+
+  authFlow(redirect);
 
   return false;
 }
