@@ -95,7 +95,7 @@ export const getToken = async code => {
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const redirectUrl = 'https://spotifyplaylisttools.netlify.app';
 
-  console.log(clientId)
+  console.log(redirectUrl)
   //   const code = localStorage.getItem('authToken');
 
   const url = "https://accounts.spotify.com/api/token";
@@ -124,7 +124,7 @@ export const getToken = async code => {
   localStorage.setItem('accessToken', response.access_token);
   localStorage.setItem('refreshToken', response.refresh_token);
   const expirationTime = new Date(
-  currentDate.getTime() + response.expires_in * 1000
+  currentDate.getTime() + Number(response.expires_in) * 1000
 );
 
 localStorage.setItem('expirationTime', expirationTime.toISOString());
