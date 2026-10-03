@@ -14,7 +14,7 @@ export default function PlaylistIndex({ }: Props) {
 
   if (code) {
     localStorage.setItem('authToken', code);
-    getToken(code);
+    getToken(code, 'https://spotifyplaylisttools.netlify.app/playlist');
   }
 
   return (

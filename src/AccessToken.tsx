@@ -89,13 +89,13 @@ export async function authFlow(redirect) {
 
 }
 
-export const getToken = async code => {
+export const getToken = async (code, redirect) => {
 
   const codeVerifier = localStorage.getItem('codeVerifier');
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const redirectUrl = 'https://spotifyplaylisttools.netlify.app';
 
-  console.log(redirectUrl)
+  console.log(redirect)
   //   const code = localStorage.getItem('authToken');
 
   const url = "https://accounts.spotify.com/api/token";
@@ -108,7 +108,7 @@ export const getToken = async code => {
       client_id: clientId,
       grant_type: 'authorization_code',
       code,
-      redirect_uri: redirectUrl,
+      redirect_uri: redirect,
       code_verifier: codeVerifier,
     }),
   }
