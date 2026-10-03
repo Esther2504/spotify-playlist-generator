@@ -6,6 +6,7 @@ import SpotifyTrack from './components/SpotifyTrack.tsx';
 import ArtistItem from './components/ArtistItem.tsx';
 import { AUTH_URL } from '../AuthURL.tsx';
 import checkAccessToken from '../AccessToken.tsx';
+import { getToken } from '../AccessToken.tsx';
 
 export default function Statistics() {
   const [typeFilter, setTypeFilter] = useState<String>("tracks")
@@ -24,16 +25,18 @@ export default function Statistics() {
     }
   }, [periodFilter, typeFilter])
 
-    const params = new URLSearchParams(window.location.search);
-const code = params.get('code');
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
 
-if (code) {
-  localStorage.setItem('authToken', code);
-}
+  if (code) {
+    localStorage.setItem('authToken', code);
+    getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
+  }
+
 
   useEffect(() => {
   checkAccessToken('statistics');
-}, []);
+}, [window.location]);
 
   function getTopTracks() {
     console.log(accessToken)
