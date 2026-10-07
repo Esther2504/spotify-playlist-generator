@@ -18,10 +18,10 @@ export default function Statistics() {
   const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
-    if (!songData) {
+    if (!songData && accessToken) {
       getTopTracks();
     }
-  }, [periodFilter, typeFilter, window.location])
+  }, [periodFilter, typeFilter, window.location, accessToken])
 
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function Statistics() {
       localStorage.setItem('authToken', code);
       getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
     } else {
+      console.log('check token')
       checkAccessToken('statistics');
     }
 
