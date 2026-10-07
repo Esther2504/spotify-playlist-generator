@@ -17,26 +17,25 @@ export default function Statistics() {
 
   const accessToken = localStorage.getItem('accessToken')
 
-  getTopTracks();
-
   useEffect(() => {
     if (!songData) {
       getTopTracks();
     }
-  }, [periodFilter, typeFilter])
-
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-
-  if (code) {
-    localStorage.setItem('authToken', code);
-    getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
-  }
+  }, [periodFilter, typeFilter, window.location])
 
 
   useEffect(() => {
-  checkAccessToken('statistics');
-}, [window.location]);
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+
+    if (code) {
+      localStorage.setItem('authToken', code);
+      getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
+    } else {
+      checkAccessToken('statistics');
+    }
+
+  }, [window.location]);
 
   function getTopTracks() {
     console.log(accessToken)
@@ -48,7 +47,6 @@ export default function Statistics() {
       })
       .then((res) => {
         console.log(res)
-        console.log(res.data.items)
         let dataItems = res.data.items
         if (typeFilter === "artists") {
           setArtistData(dataItems)
@@ -74,7 +72,7 @@ export default function Statistics() {
     <Container>
       {error ?
         <ErrorMessage><p>Connect to Spotify to see your statistics</p>
-        <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
+          <NavLink to={AUTH_URL} className="login-btn">Connect to Spotify</NavLink>
         </ErrorMessage>
         :
         <>
@@ -97,7 +95,7 @@ export default function Statistics() {
           })}
           {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
             return (
-              <ArtistItem item={item} i={i}  />
+              <ArtistItem item={item} i={i} />
             )
           })}
         </>
