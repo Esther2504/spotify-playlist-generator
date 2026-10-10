@@ -183,7 +183,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
             : null}
           <div>
             <h1>Choose one of your playlists</h1>
-            <a href="#enterurl" target="_self">or enter an URL</a>
+            <a href="#enterurl" target="_self">or enter a link</a>
           </div>
           <PlaylistContainer>
           <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /><p>Liked songs</p></Playlist>
@@ -261,7 +261,7 @@ width: 1080px;
 max-width: 90%;
 justify-content: space-evenly;
 display: grid; 
-grid-template-columns: repeat(auto-fill, 200px);
+grid-template-columns: repeat(auto-fill, 220px);
 justify-content: space-evenly;
 gap: 20px;
 
@@ -281,8 +281,8 @@ gap: 20px;
 }
 `
 const Playlist = styled.div`
-width: 200px;
-height: 230px;
+width: 240px;
+height: 270px;
 background-color: #148255;
 padding: 20px;
 font-size: 0.9rem;

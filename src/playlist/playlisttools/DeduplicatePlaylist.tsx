@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { NavLink } from 'react-router'
 
 type Props = {
     playlistID: string;
@@ -94,11 +95,14 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
     return (
         <Container>
             {itemsDeleted ?
-                <div>
-                    <p>The selected duplicates have been deleted from the playlist</p>
-
+                <ReadyContainer>
+                    <div>
+                        <p>The selected duplicates have been deleted from your playlist!</p>
+                        <NavLink to="/playlist/deduplicateplaylist"><Button>Remove duplicates fom another playlist</Button></NavLink>
+                        <NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink>
+                    </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
+                </ReadyContainer>
                 :
                 duplicates.length > 0 ?
                     <>
@@ -124,7 +128,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
                             ))}
                         </DuplicatesContainer>
 
-                    </> : duplicates.length === 0 && ready ? <p>No duplicates found</p> : <p>Loading</p>
+                    </> : duplicates.length === 0 && ready ? <h2>No duplicates found</h2> : <h2>Loading</h2>
             }
         </Container>
     )
@@ -142,6 +146,29 @@ scroll-behavior: smooth;
 
 h1 {
 font-size: 2.6rem;
+}
+`
+
+const ReadyContainer = styled.div` 
+display: flex;
+gap: 50px;
+justify-content: space-evenly;
+width: 100%;
+
+div {
+display: flex;
+flex-direction: column;
+gap: 20px;
+text-align: left;
+}
+
+iframe {
+max-width: 600px;
+min-height: 600px;
+}
+
+@media screen and (max-width: 750px) {
+flex-direction: column;
 }
 `
 
