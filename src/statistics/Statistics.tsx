@@ -33,6 +33,7 @@ export default function Statistics() {
       getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
     } else {
       console.log('check token')
+      // wordt gelogd maar verder niet
       checkAccessToken('statistics');
     }
 

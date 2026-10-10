@@ -31,6 +31,8 @@ export function getAccessToken(authToken: string, redirect_url: string) {
 
 export async function authFlow(redirect) {
 
+  console.log('authflow')
+
   const generateRandomString = (length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const values = crypto.getRandomValues(new Uint8Array(length));
@@ -140,6 +142,7 @@ export default async function checkAccessToken(redirect) {
 
   if (accessToken && accessTokenTime) {
     if (Date.now() < new Date(accessTokenTime).getTime()) {
+      console.log('valid token');
       return true;
     }
   }
@@ -147,6 +150,7 @@ export default async function checkAccessToken(redirect) {
   const refreshed = await getRefreshToken(redirect);
 
   if (refreshed) {
+    console.log('refreshed')
     return true;
   }
 
@@ -171,6 +175,7 @@ const getRefreshToken = async (redirect) => {
   const clientId = process.env.REACT_APP_CLIENT_ID;
 
     if (!refreshToken) {
+      console.log('no token')
     return false;
   }
 
@@ -191,6 +196,7 @@ const getRefreshToken = async (redirect) => {
   if (!result.ok) {
     console.log(response)
     if (response.error === 'invalid_grant') {
+      console.log('invalid grant, get new token')
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       window.location.href = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=https://spotifyplaylisttools.netlify.app${redirect ? redirect : '/'}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-top-read%20user-library-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played`;
