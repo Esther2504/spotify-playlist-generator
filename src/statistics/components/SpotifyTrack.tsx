@@ -13,6 +13,7 @@ export default function SpotifyTrack({ item, i, dateTime }) {
   // const playHour = new Date(dateTime).toLocaleDateString("nl-NL", options2).getHours()
   const playMinute = new Date(dateTime).getMinutes()
 
+  console.log('dateTime')
   console.log(playDate)
 
   return (

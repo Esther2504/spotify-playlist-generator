@@ -18,7 +18,9 @@ export default function Statistics() {
   const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
-    if (!songData && accessToken) {
+console.log('use effect')
+    if (accessToken) {
+          console.log('new tracks')
       getTopTracks();
     }
   }, [periodFilter, typeFilter, window.location, accessToken])
@@ -40,7 +42,7 @@ export default function Statistics() {
   }, [window.location]);
 
   function getTopTracks() {
-    console.log(accessToken)
+    console.log('get tracks')
     axios
       .get(`https://api.spotify.com/v1/me/top/${typeFilter}?limit=50&offset=0&time_range=${periodFilter}`, {
         headers: {
