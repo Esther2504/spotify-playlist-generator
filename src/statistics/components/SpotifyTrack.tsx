@@ -3,19 +3,6 @@ import styled from 'styled-components'
 
 export default function SpotifyTrack({ item, i }) {
 
-  const options = {
-    hour: "2-digit",
-    minute: "2-digit",
-    day: "2-digit",
-    month: "2-digit"
-  };
-  const playDate = new Date(dateTime).toLocaleDateString("nl-NL", options)
-  // const playHour = new Date(dateTime).toLocaleDateString("nl-NL", options2).getHours()
-  const playMinute = new Date(dateTime).getMinutes()
-
-  
-  console.log(playDate)
-
   return (
     <SpotifyItem>
         <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>
@@ -31,7 +18,6 @@ export default function SpotifyTrack({ item, i }) {
     </SpotifyItem>
   )
 }
-
 
 const SpotifyItem = styled.div`
 display: grid;

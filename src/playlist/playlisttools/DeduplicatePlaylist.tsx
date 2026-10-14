@@ -98,7 +98,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
                 <ReadyContainer>
                     <div>
                         <p>The selected duplicates have been deleted from your playlist!</p>
-                        <NavLink to="/playlist/deduplicateplaylist"><Button>Remove duplicates fom another playlist</Button></NavLink>
+                        {/* <NavLink to="/playlist/deduplicateplaylist"><Button>Remove duplicates fom another playlist</Button></NavLink> */}
                         <NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink>
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>

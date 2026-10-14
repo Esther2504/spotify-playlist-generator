@@ -94,7 +94,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
 
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
-                "name": `${artistName} (from ${playlistName})`,
+                "name": `${artistName} (songs from playlist ${playlistName})`,
                 "description": "",
                 "public": false
             }, {
