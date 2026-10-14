@@ -12,7 +12,7 @@ type Props = {
 export default function YearPlaylist({ playlistID, playlistItems, playlistName }: Props) {
     const [playlistYears, setPlaylistYears] = useState([])
     const [uniqueYears, setUniqueYears] = useState([])
-    const [selectedYear, setSelectedYear] = useState()
+    const [selectedYear, setSelectedYear] = useState<number>()
     const [playlistReady, setPlaylistReady] = useState<boolean>(false)
     const [uris, setUris] = useState([])
     const [newPlaylistID, setNewPlaylistID] = useState<string>()
@@ -75,14 +75,14 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
         setUris(allUris)
 
         if (!newPlaylistID && allUris.length > 0) {
-            createPlaylist(selectedYear, allUris)
+            createPlaylist(year, allUris)
+            console.log(year);
         } else if (newPlaylistID && allUris.length > 0) {
             addPlaylistItems(newPlaylistID, allUris)
         }
     }
 
-    function createPlaylist(selectedYear: string, allUris: any) {
-
+    function createPlaylist(selectedYear: number, allUris: any) {
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
                 "name": `${playlistName} - Songs from ${selectedYear}`,
@@ -95,7 +95,6 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
 
             })
             .then((res) => {
-                console.log(res.data.id)
                 setNewPlaylistID(res.data.id)
                 addPlaylistItems(res.data.id, allUris)
             })

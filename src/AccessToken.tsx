@@ -151,6 +151,7 @@ export default async function checkAccessToken(redirect) {
 
   if (refreshed) {
     console.log('refreshed')
+    window.location.reload();
     return true;
   }
 

@@ -18,9 +18,7 @@ export default function Statistics() {
   const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
-console.log('use effect')
     if (accessToken) {
-          console.log('new tracks')
       getTopTracks();
     }
   }, [periodFilter, typeFilter, window.location, accessToken])
@@ -34,15 +32,12 @@ console.log('use effect')
       localStorage.setItem('authToken', code);
       getToken(code, 'https://spotifyplaylisttools.netlify.app/statistics');
     } else {
-      console.log('check token')
-      // wordt gelogd maar verder niet
       checkAccessToken('statistics');
     }
 
   }, [window.location]);
 
   function getTopTracks() {
-    console.log('get tracks')
     axios
       .get(`https://api.spotify.com/v1/me/top/${typeFilter}?limit=50&offset=0&time_range=${periodFilter}`, {
         headers: {
@@ -50,7 +45,6 @@ console.log('use effect')
         },
       })
       .then((res) => {
-        console.log(res)
         let dataItems = res.data.items
         if (typeFilter === "artists") {
           setArtistData(dataItems)

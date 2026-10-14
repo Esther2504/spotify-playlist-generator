@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function SpotifyTrack({ item, i, dateTime }) {
+export default function SpotifyTrack({ item, i }) {
 
   const options = {
     hour: "2-digit",
@@ -13,17 +13,12 @@ export default function SpotifyTrack({ item, i, dateTime }) {
   // const playHour = new Date(dateTime).toLocaleDateString("nl-NL", options2).getHours()
   const playMinute = new Date(dateTime).getMinutes()
 
-  console.log('dateTime')
+  
   console.log(playDate)
 
   return (
     <SpotifyItem>
-      {dateTime ?
-        <TrackNumber $fontSize="0.7rem">{playDate.replace(",", "\n")}</TrackNumber>
-        :
         <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>
-      }
-
       <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
       <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
         <i>{(item.artists).map((artist: any, i: number) => {
