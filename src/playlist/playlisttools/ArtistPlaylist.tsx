@@ -86,8 +86,8 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
         }
     }
 
-    function createPlaylist(playlistURIS, artistName) {
-        console.log(playlistURIS)
+    function createPlaylist(playlistURIS: any, artistName: string) {
+
         if (playlistURIS.length === 0) {
             return;
         }

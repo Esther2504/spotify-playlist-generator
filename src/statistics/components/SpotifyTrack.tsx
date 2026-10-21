@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function SpotifyTrack({ item, i }) {
+export default function SpotifyTrack(item: any, i: number) {
 
   return (
     <SpotifyItem>

@@ -1,40 +1,16 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getPlaylists } from './playlist-creator/APICalls';
-import StartPageMixer from './playlist-creator/StartPage';
-import StartPageSuggestions from './song-suggestions/StartPage';
-import AllPlaylists from './playlist-creator/AllPlaylists';
-import Start from './song-suggestions/Start';
 import ErrorModal from './ErrorModal';
 import styled from 'styled-components';
-import { AUTH_URL } from './AuthURL.tsx';
-import checkAccessToken from './AccessToken.tsx';
 import { NavLink } from 'react-router';
 
 function App() {
-  // const [accessToken, setAccessToken] = useState()
   const [data, setData] = useState()
   const [tool, setTool] = useState()
   const [step, setStep] = useState(1)
   const [error, setError] = useState(false)
   const [showError, setShowError] = useState(false)
-
-  // const getAccessToken = window.location.hash.substring(14).split('&')[0]
-
-  const savedAccessToken = localStorage.getItem('accessToken')
-
-  // useEffect(() => {
-  //   if (window.location.hash.includes("access_token") && !savedAccessToken) {
-  //     setAccessToken(getAccessToken)
-  //   }
-  // }, [window.location])
-
-  // useEffect(() => {
-  //   if (accessToken && !data) {
-  //     getPlaylists(getAccessToken, setData, data, accessToken, setError)
-  //   }
-  // }, [accessToken])
 
   useEffect(() => {
     if (tool) {
@@ -50,25 +26,16 @@ function App() {
     }
   }, [error])
 
-  const accessToken = localStorage.getItem('accessToken')
 
-  useEffect(() => {
-
-
-
-  }, [])
     const params = useParams()
     const authCode = params.code
 
     
   useEffect(() => {
   
-
-
     if (authCode) {
       localStorage.setItem('authToken', authCode)
     }
-
 
   }, [window.location])
 
@@ -100,7 +67,6 @@ function App() {
               </ButtonContainer>
             </TextContainer>
           </HomeContainer>
-        
       </header>
     </div>
   );

@@ -9,8 +9,8 @@ import checkAccessToken from '../AccessToken.tsx';
 import { getToken } from '../AccessToken.tsx';
 
 export default function Statistics() {
-  const [typeFilter, setTypeFilter] = useState<String>("tracks")
-  const [periodFilter, setPeriodFilter] = useState<String>("short_term")
+  const [typeFilter, setTypeFilter] = useState<string>("tracks")
+  const [periodFilter, setPeriodFilter] = useState<string>("short_term")
   const [songData, setSongData] = useState<any>(false)
   const [artistData, setArtistData] = useState<any>(false)
   const [error, setError] = useState<boolean>(false)
@@ -59,10 +59,10 @@ export default function Statistics() {
       })
   }
 
-  function handleFilter(period: String) {
+  function handleFilter(period: string) {
     setPeriodFilter(period)
   }
-  function handleTypeFilter(type: String) {
+  function handleTypeFilter(type: string) {
     setTypeFilter(type)
   }
 

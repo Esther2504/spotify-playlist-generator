@@ -36,9 +36,9 @@ export default function RecentyPlayed() {
 
     return (
         <Container>
-            {tracks && tracks.map((item, i) => {
+            {tracks && tracks.map((item: any, i: number) => {
                 return (
-                    <SpotifyTrack item={item.track} i={i} dateTime={item.played_at} />
+                    <SpotifyTrack item={item.track} i={i}/>
                 )
             })}
         </Container>
