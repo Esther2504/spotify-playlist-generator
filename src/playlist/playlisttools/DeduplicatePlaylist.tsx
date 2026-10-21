@@ -128,7 +128,7 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
                             ))}
                         </DuplicatesContainer>
 
-                    </> : duplicates.length === 0 && ready ? <h2>No duplicates found</h2> : <h2>Loading</h2>
+                    </> : duplicates.length === 0 && ready ? <div><h2>No duplicates found</h2><NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink></div> : <h2>Loading</h2>
             }
         </Container>
     )

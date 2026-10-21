@@ -111,8 +111,6 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
             })
     }
 
-// waarom 2x artist klikken? uitzoeken
-
     function addPlaylistItems(playlist_id: string, uri_items: any) {
         let max_uris = uri_items;
         let leftovers = null;
@@ -158,7 +156,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                 <>
                     <h1>Which artist do you want to create a playlist of?</h1>
                     <ArtistsContainer>
-                        {uniquePlaylistArtists.sort().map((artist) => <Artist onClick={() => artistSelectionHandler(artist)}>{artist}</Artist>)}
+                        {uniquePlaylistArtists.sort().map((artist) => artist ? <Artist onClick={() => artistSelectionHandler(artist)}>{artist}</Artist> : null)}
                     </ArtistsContainer>
                 </>
             }
