@@ -79,13 +79,18 @@ max-width: 95%;
 
 @media screen and (max-width: 850px) {
   flex-direction: column;
+  align-items: center;
+
+  button {
+  width: 100%;
+  }
 }
 `
 const TextContainer = styled.div`
 width: 700px;
 max-width: 100%;
 margin-bottom: 20px;
-font-size: 1.5rem;
+font-size: 1.3rem;
 display: flex;
 flex-direction: column;
 justify-content: center;

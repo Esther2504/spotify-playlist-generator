@@ -65,7 +65,7 @@ color: #fff;
 text-decoration: none;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 350px) {
   display: none;
 }
 `
