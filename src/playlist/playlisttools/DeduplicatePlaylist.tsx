@@ -154,6 +154,7 @@ display: flex;
 gap: 50px;
 justify-content: space-evenly;
 width: 100%;
+flex-wrap: wrap;
 
 div {
 display: flex;

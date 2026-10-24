@@ -72,7 +72,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
 
   function getLikedSongs() {
     setLoading(true);
-        axios
+    axios
       .get(`https://api.spotify.com/v1/me/tracks`, {
         headers: {
           Authorization: "Bearer " + accessToken,
@@ -80,7 +80,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
       })
       .then((res) => {
         console.log(res.data)
-         setData(res.data)
+        setData(res.data)
         setPlaylistName("Liked songs")
         setPlaylistItems(res.data.items)
         if (res.data.items.total > 100) {
@@ -167,10 +167,13 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   return (
     <Container>
       {authError ?
-        <ErrorMessage>
-          <p>Connect to Spotify to use this tool</p>
-          <div onClick={authFlow} className="login-btn">Connect to Spotify</div>
-          </ErrorMessage>
+        {/*<ErrorMessage>
+           <p>Connect to Spotify to use this tool</p>
+          <div onClick={authFlow} className="login-btn">Connect to Spotify</div> */}
+          {/* </ErrorMessage> */}
+            <LoaderContainer>
+              <LoaderDots />
+            </LoaderContainer>
         :
         <>
           {loading ?
@@ -186,7 +189,7 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
             <a href="#enterurl" target="_self">or enter a link</a>
           </div>
           <PlaylistContainer>
-          <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /><p>Liked songs</p></Playlist>
+            <Playlist onClick={() => getLikedSongs()}><Image src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e913f0317b78a75653c17e22" /><p>Liked songs</p></Playlist>
             {ownPlaylists?.slice(firstSlide, lastSlide).map((playlist) =>
               <Playlist id={playlist.id} onClick={() => setPlaylistID(playlist.id)}>
                 {playlist.images ?

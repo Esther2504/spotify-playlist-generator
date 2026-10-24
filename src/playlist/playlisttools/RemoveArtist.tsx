@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
 import axios from 'axios'
+import { NavLink } from 'react-router'
 
 type Props = {
     playlistID: string;
@@ -183,6 +184,7 @@ export default function ArtistPlaylist({ playlistID, playlistItems, playlistName
                         <h1>Your playlist is ready!</h1>
                         <p>Tracks by <i>{selectedArtist}</i> have been removed.</p>
                         <Button onClick={() => { setTracksDeleted(false); setUris([]) }}>Remove another artist from this playlist</Button>
+                    <NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink>
                     </div>
                     {playlistID != 'likedsongs' ?
                         <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${playlistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -219,6 +221,7 @@ display: flex;
 gap: 50px;
 justify-content: space-evenly;
 width: 100%;
+flex-wrap: wrap;
 
 div {
 display: flex;

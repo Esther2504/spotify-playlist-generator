@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { NavLink } from 'react-router'
 
 type Props = {
     playlistID: string;
@@ -149,6 +150,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
                         <p>We already saved the playlist to your Spotify.</p>
                         <Button onClick={() => { setPlaylistReady(false); setUris([])}}>Add another year to this playlist</Button>
                         <Button onClick={() => { setPlaylistReady(false); setUris([]); setNewPlaylistID(undefined)} }>Create new playlist for another year</Button>
+                        <NavLink to="/playlist"><Button>Go back to the playlist tools</Button></NavLink>
                     </div>
                     <iframe data-testid="embed-iframe" src={`https://open.spotify.com/embed/playlist/${newPlaylistID}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </ReadyContainer>
@@ -184,6 +186,7 @@ display: flex;
 gap: 50px;
 justify-content: space-evenly;
 width: 100%;
+flex-wrap: wrap;
 
 div {
 display: flex;
