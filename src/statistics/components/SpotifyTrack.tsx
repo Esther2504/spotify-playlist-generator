@@ -3,10 +3,12 @@ import styled from 'styled-components'
 
 export default function SpotifyTrack(item: any, i: number) {
 
+  console.log(item);
+
   return (
     <SpotifyItem>
         <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>
-      <AlbumCover src={item.album.images[0].url} alt={item.album.name}></AlbumCover>
+      <AlbumCover src={item?.album?.images[0]?.url} alt={item.album.name}></AlbumCover>
       <SongInfo><TrackArtistName><a href={item.external_urls.spotify}>{item.name}</a></TrackArtistName><p className="artists">
         <i>{(item.artists).map((artist: any, i: number) => {
           return (

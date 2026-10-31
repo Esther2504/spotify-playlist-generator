@@ -167,10 +167,6 @@ export default function SelectPlaylist({ setPlaylistReady, setPlaylistItems, set
   return (
     <Container>
       {authError ?
-        {/*<ErrorMessage>
-           <p>Connect to Spotify to use this tool</p>
-          <div onClick={authFlow} className="login-btn">Connect to Spotify</div> */}
-          {/* </ErrorMessage> */}
             <LoaderContainer>
               <LoaderDots />
             </LoaderContainer>
