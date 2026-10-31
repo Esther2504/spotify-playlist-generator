@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 export default function SpotifyTrack(item: any, i: number) {
 
-  console.log(item);
-
   return (
     <SpotifyItem>
         <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>

@@ -66,11 +66,12 @@ export default function DeduplicatePlaylist({ playlistID, playlistItems, playlis
             return
         }
 
-        const uriArray: Array<any> = []
+        let uriArray: Array<any> = []
         selectedUris.forEach(element => {
             uriArray.push({ "uri": element })
-
         });
+
+        uriArray = [...new Set(uriArray)]
 
         console.log(uriArray)
 
