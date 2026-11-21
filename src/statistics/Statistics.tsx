@@ -87,7 +87,6 @@ export default function Statistics() {
             </Filter>
           </Filters>
           {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
-            console.log(item);
             return (
               <SpotifyTrack item={item} i={i} />
             )

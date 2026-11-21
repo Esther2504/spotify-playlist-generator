@@ -8,17 +8,17 @@ export default function SpotifyTrack(item: any, i: number) {
   return (
     <SpotifyItem>
         <TrackNumber $fontSize="1.3rem">{i + 1}</TrackNumber>
-      <AlbumCover src={item?.album?.images[0]?.url} alt={item?.album?.name}></AlbumCover>
-      <SongInfo><TrackArtistName><a href={item?.external_urls?.spotify}>{item?.name}</a></TrackArtistName><p className="artists">
+      <AlbumCover src={item?.item?.album?.images[0]?.url} alt={item?.item?.album?.name}></AlbumCover>
+      <SongInfo><TrackArtistName><a href={item?.item?.external_urls?.spotify}>{item?.item?.name}</a></TrackArtistName><p className="artists">
         <i>{item ? 
-          (item?.artists).map((artist: any, i: number) => {
+          (item?.item?.artists).map((artist: any, i: number) => {
           return (
-            <>{i != (item?.artists).length - 1 ? <TrackArtistName><a href={artist?.external_urls?.spotify} target="_blank">{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify} target="_blank">{artist.name}</a></TrackArtistName>}</>
+            <>{i != (item?.item?.artists).length - 1 ? <TrackArtistName><a href={artist?.external_urls?.spotify} target="_blank">{artist.name}</a>, </TrackArtistName> : <TrackArtistName><a href={artist.external_urls.spotify} target="_blank">{artist.name}</a></TrackArtistName>}</>
           )
         })
         : null}</i>
       </p></SongInfo>
-      <TrackLength>{(item?.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
+      <TrackLength>{(item?.item?.duration_ms / 1000 / 60).toFixed(2).replace(".", ":")}</TrackLength>
     </SpotifyItem>
   )
 }
