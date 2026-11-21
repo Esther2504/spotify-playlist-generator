@@ -84,7 +84,7 @@ export default function YearPlaylist({ playlistID, playlistItems, playlistName }
     }
 
     function createPlaylist(selectedYear: number, allUris: any) {
-x
+
         axios
             .post(`https://api.spotify.com/v1/me/playlists`, {
                 "name": `${playlistName} - Songs from ${selectedYear}`,
