@@ -87,13 +87,14 @@ export default function Statistics() {
             </Filter>
           </Filters>
           {typeFilter != "artists" && songData && songData.map((item: any, i: number) => {
+            console.log(item);
             return (
-              <SpotifyTrack item={item.item} i={i} />
+              <SpotifyTrack item={item} i={i} />
             )
           })}
           {typeFilter === "artists" && artistData && artistData.map((item: any, i: number) => {
             return (
-              <ArtistItem item={item.item} i={i} />
+              <ArtistItem item={item} i={i} />
             )
           })}
         </>
